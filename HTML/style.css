@@ -1,0 +1,48 @@
+/**/
+#Titulo{ /*#nombre sirve para llamar a una id en concreto*/
+    color: tomato;
+}
+p.texto{ /*llamamos a la etiqueta p que contenga el string "texto" En este caso
+    abarca tanto la id "texto" como la id "texto especial" */
+    color: slateblue;
+}
+p.especial{/* En este caso abarca tanto la id "texto especial" 
+    como la id "especial". Dejando en texto especial el formato indicado
+    y sustituyendo cualquier formato previo*/
+    color: mediumseagreen;
+}
+
+div p{/*busca cualquier etiqueta p contenido dentro de una etiqueta div*/
+   color: aquamarine 
+}
+div h2, div h3{/*h2,h3 dentro de div*/
+    color: brown;
+}
+
+/*Todo lo que no tenga un formato ya asignado*/
+/*
+
+*{
+    font-size: 34px;
+    color: green;
+}
+
+*/
+
+.color{
+    /* border: 5px red outset;  */
+    border-style: outset;
+    border-color: red;
+    border-radius: 5px;
+    border-width: 0.35rem;
+
+    /*Tipos de linea 
+        2D: dotted,dashed,solid,double
+        3D: groove, ridge, inset, outset
+        Other: none,hidden
+    */
+}
+#fondo{
+    background-color: rgba(255, 0, 0, 0.75);
+    opacity: .75; /*Transparencia*/
+}
