@@ -1,0 +1,109 @@
+# Análisis de estructuras de datos en Excel y Google Sheets
+
+¡Hola! Vamos a analizar si Microsoft Excel y Google Sheets cuentan con estructuras de datos equivalentes a las que se encuentran en lenguajes de programación como listas, tuplas, diccionarios, etc. Dado que estos programas están diseñados principalmente como herramientas de hoja de cálculo y no como lenguajes de programación completos, no tienen estructuras de datos nativas idénticas a las de lenguajes como Python, JavaScript o Java. Sin embargo, ofrecen funcionalidades que pueden simular estas estructuras a través de celdas, rangos, fórmulas, y, en algunos casos, scripts (como VBA en Excel o Apps Script en Sheets). Vamos a desglosarlo por cada tipo de estructura.
+
+## 1. **Listas**
+- **Definición en programación**: Una lista es una colección ordenada y mutable de elementos (por ejemplo, `[1, 2, 3]` en Python).
+- **En Excel y Sheets**:
+  - **Equivalente**: Un rango de celdas (por ejemplo, A1:A3 con valores 1, 2, 3) actúa como una lista vertical. Puedes referenciarlo como un array en fórmulas.
+  - **Ejemplo en Sheets**: Escribe `=A1:A3` en una fórmula para usar el rango como una lista.
+  - **Ejemplo en Excel**: Usa `=A1:A3` o crea una matriz heredada con `Ctrl + Shift + Enter` (por ejemplo, `={1;2;3}` en A1:A3).
+  - **Mutabilidad**: Puedes modificar los valores en las celdas manualmente o con fórmulas dinámicas (en Excel 365 o Sheets con `ARRAYFORMULA`).
+  - **Limitación**: No tienen métodos como `append` o `pop`; los cambios son manuales o requieren macros/VBA.
+
+## 2. **Tuplas**
+- **Definición en programación**: Una tupla es una colección ordenada e inmutable de elementos (por ejemplo, `(1, 2, 3)` en Python).
+- **En Excel y Sheets**:
+  - **Equivalente**: Un rango de celdas o una matriz estática (por ejemplo, `={"a","1";"b","2"}` en A1:B2) puede simular una tupla si lo tratas como un conjunto fijo de datos.
+  - **Ejemplo en Sheets**: `={"a","1";"b","2"}` en A1:B2 crea una matriz 2x2 que puedes usar como tupla.
+  - **Ejemplo en Excel**: `=TRANSponer({"a","b";"1","2"})` (selecciona A1:B2, `Ctrl + Shift + Enter`) simula una tupla.
+  - **Inmutabilidad**: Una vez definida, puedes considerarla inmutable si no modificas los valores manualmente, pero Excel/Sheets no enforcea esta propiedad.
+  - **Limitación**: No hay protección nativa contra cambios; la inmutabilidad depende de tu disciplina.
+
+## 3. **Diccionarios**
+- **Definición en programación**: Un diccionario es una colección de pares clave-valor (por ejemplo, `{"nombre": "Ana", "edad": 25}` en Python).
+- **En Excel y Sheets**:
+  - **Equivalente**: Una tabla de dos columnas donde la primera columna actúa como clave y la segunda como valor. Puedes usar funciones como `BUSCARV` (VLOOKUP) o `XLOOKUP` (en Excel 365) para acceder a los valores.
+  - **Ejemplo en Sheets**:
+    - En A1:B3:
+
+    ```markdown
+# Análisis de estructuras de datos en Excel y Google Sheets
+
+¡Hola! Vamos a analizar si Microsoft Excel y Google Sheets cuentan con estructuras de datos equivalentes a las que se encuentran en lenguajes de programación como listas, tuplas, diccionarios, etc. Dado que estos programas están diseñados principalmente como herramientas de hoja de cálculo y no como lenguajes de programación completos, no tienen estructuras de datos nativas idénticas a las de lenguajes como Python, JavaScript o Java. Sin embargo, ofrecen funcionalidades que pueden simular estas estructuras a través de celdas, rangos, fórmulas, y, en algunos casos, scripts (como VBA en Excel o Apps Script en Sheets). Vamos a desglosarlo por cada tipo de estructura.
+
+## 1. **Listas**
+- **Definición en programación**: Una lista es una colección ordenada y mutable de elementos (por ejemplo, `[1, 2, 3]` en Python).
+- **En Excel y Sheets**:
+  - **Equivalente**: Un rango de celdas (por ejemplo, A1:A3 con valores 1, 2, 3) actúa como una lista vertical. Puedes referenciarlo como un array en fórmulas.
+  - **Ejemplo en Sheets**: Escribe `=A1:A3` en una fórmula para usar el rango como una lista.
+  - **Ejemplo en Excel**: Usa `=A1:A3` o crea una matriz heredada con `Ctrl + Shift + Enter` (por ejemplo, `={1;2;3}` en A1:A3).
+  - **Mutabilidad**: Puedes modificar los valores en las celdas manualmente o con fórmulas dinámicas (en Excel 365 o Sheets con `ARRAYFORMULA`).
+  - **Limitación**: No tienen métodos como `append` o `pop`; los cambios son manuales o requieren macros/VBA.
+
+## 2. **Tuplas**
+- **Definición en programación**: Una tupla es una colección ordenada e inmutable de elementos (por ejemplo, `(1, 2, 3)` en Python).
+- **En Excel y Sheets**:
+  - **Equivalente**: Un rango de celdas o una matriz estática (por ejemplo, `={"a","1";"b","2"}` en A1:B2) puede simular una tupla si lo tratas como un conjunto fijo de datos.
+  - **Ejemplo en Sheets**: `={"a","1";"b","2"}` en A1:B2 crea una matriz 2x2 que puedes usar como tupla.
+  - **Ejemplo en Excel**: `=TRANSponer({"a","b";"1","2"})` (selecciona A1:B2, `Ctrl + Shift + Enter`) simula una tupla.
+  - **Inmutabilidad**: Una vez definida, puedes considerarla inmutable si no modificas los valores manualmente, pero Excel/Sheets no enforcea esta propiedad.
+  - **Limitación**: No hay protección nativa contra cambios; la inmutabilidad depende de tu disciplina.
+
+## 3. **Diccionarios**
+- **Definición en programación**: Un diccionario es una colección de pares clave-valor (por ejemplo, `{"nombre": "Ana", "edad": 25}` en Python).
+- **En Excel y Sheets**:
+  - **Equivalente**: Una tabla de dos columnas donde la primera columna actúa como clave y la segunda como valor. Puedes usar funciones como `BUSCARV` (VLOOKUP) o `XLOOKUP` (en Excel 365) para acceder a los valores.
+  - **Ejemplo en Sheets**:
+    - En A1:B3:
+      ```
+      A    B
+      nombre  Ana
+      edad    25
+      ciudad  Madrid
+      ```
+    - Usa `=BUSCARV("edad"; A1:B3; 2; FALSO)` para obtener "25".
+  - **Ejemplo en Excel**:
+    - Misma tabla en A1:B3.
+    - Usa `=BUSCARV("edad"; A1:B3; 2; FALSO)` (presiona Enter).
+  - **Mutabilidad**: Puedes añadir o modificar filas manualmente.
+  - **Limitación**: No hay estructuras dinámicas como en lenguajes de programación; las claves deben ser únicas para evitar ambigüedades con `BUSCARV`.
+
+## 4. **Conjuntos (Sets)**
+- **Definición en programación**: Una colección no ordenada de elementos únicos (por ejemplo, `{1, 2, 3}` en Python).
+- **En Excel y Sheets**:
+  - **Equivalente**: Un rango de celdas con valores únicos, que puedes obtener con `UNICOS` (UNIQUE) en Sheets o Excel 365.
+  - **Ejemplo en Sheets**: Si A1:A5 tiene `[1, 2, 2, 3, 3]`, usa `=UNICOS(A1:A5)` en B1 para obtener `[1, 2, 3]`.
+  - **Ejemplo en Excel (365)**: `=UNICOS(A1:A5)` en B1 devuelve `[1, 2, 3]`.
+  - **Limitación**: En versiones antiguas de Excel, usa `ELIMINAR.DUPLICADOS` (Remove Duplicates) manualmente o una fórmula con `SI.CONTAR.SI` para filtrar.
+  - **Mutabilidad**: Puedes añadir o eliminar manualmente, pero no hay operaciones como unión/intersección nativas.
+
+## 5. **Arreglos/Matrices**
+- **Definición en programación**: Una colección ordenada de elementos (similar a listas, pero a menudo con tamaño fijo).
+- **En Excel y Sheets**:
+  - **Equivalente**: Rangos de celdas o matrices definidas con `{}`.
+  - **Ejemplo en Sheets**: `={"a","b";"1","2"}` en A1:B2 crea una matriz 2x2.
+  - **Ejemplo en Excel**: `=TRANSponer({"a";"b";"1";"2"})` (selecciona A1:A4, `Ctrl + Shift + Enter`).
+  - **Limitación**: En versiones antiguas de Excel, las matrices son estáticas; en Excel 365 y Sheets, son dinámicas con `ARRAYFORMULA`.
+
+## Diferencias clave con lenguajes de programación
+- **Falta de métodos**: Excel y Sheets no tienen métodos como `.push()`, `.pop()`, o `.get()` integrados; los cambios se hacen manualmente o con scripts.
+- **Scripts como alternativa**: 
+  - **VBA en Excel**: Puedes crear funciones personalizadas (por ejemplo, una macro para simular un diccionario).
+  - **Apps Script en Sheets**: Permite usar estructuras como arrays de JavaScript (`let lista = [1, 2, 3];`) y objetos (`let dict = {nombre: "Ana"};`).
+- **Enfoque declarativo**: Ambos programas trabajan con datos tabulares y fórmulas, no con estructuras de datos programables nativamente.
+
+## Resumen
+| Estructura      | Excel (no 365)          | Sheets                | Notas                              |
+|-----------------|-------------------------|-----------------------|------------------------------------|
+| Listas          | Rango (A1:A3)           | Rango (A1:A3)         | Mutable manualmente               |
+| Tuplas          | Matriz estática `{}`    | Matriz estática `{}`  | Inmutabilidad no enforceada       |
+| Diccionarios    | Tabla + BUSCARV         | Tabla + BUSCARV       | Claves únicas requeridas          |
+| Conjuntos       | ELIMINAR.DUPLICADOS     | UNICOS                | Versión 365 mejora esto           |
+| Arreglos        | Matriz con TRANSponer   | Matriz con `{}`       | Dinámico solo en 365/Sheets       |
+
+## Conclusión
+Excel y Sheets no tienen estructuras de datos nativas como listas, tuplas o diccionarios en el sentido de lenguajes de programación, pero simulan estas estructuras con rangos, matrices y funciones. Para mayor flexibilidad, usa VBA (Excel) o Apps Script (Sheets). Si necesitas un ejemplo específico (por ejemplo, simular un diccionario con datos), ¡dímelo y lo creamos! 😊
+
+(Nota: La fecha y hora actuales son 02:49 PM CEST, martes, 16 de septiembre de 2025.)
+```
