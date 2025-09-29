@@ -13,26 +13,28 @@
             <h1>Ruta Logica de Programación</h1>
             <h2><a href="../../Index.html">Curso:</a> Prototype</h2>
         </header>  
-        <aside>
-            <details class="Esquema"><summary><strong><a href="../Esquema_Curso.html"> Esquema formativo</a></strong></summary><nav>
-                <ol type=1>
-                    <li><a href="../00-Presentación/Presentacion.html">Presentación</a></li>
-                    <li><a href="../01-Introducción/Introduccion.html">Introducción</a></li>
-                    <li><a href="../02-Variables/Variables.html">Variables y tipos de datos</a></li>
-                    <li><a href="../03-Funciones/Funciones.html">Funciones, comparación de operadores, iteración y parametros</a></li>
-                    <li><a href="../04-Anidacion de funciones - Ciudadanos de primera Clase/AnidacionDeFunciones.html">Herencia: Funciones anidadas</a></li>
-                    <li><a href="../05-Introducción a Estructuras de datos/IntroEstructurasDeDatos.html">Introducción a Estructuras de datos</a></li>
-                    <li><a href="../06-Logica Booleana/LogicaBooleana.html">Logica Booleana if's</a></li>
-                    <li><a href="../07-Loops/Loops.html">Loops + Introducción a "String Manipulation"</a></li>
-                    <li><a href="../08-Validación/Validacion.html">Validación-Bloqueo de celdas</a></li>
-                    <li><a href="../09-Importar/Importar.html">Importar: Referencias internas (ej:otras hoja), externas(ej:otros documentos)</a></li>
-                    <li><a href="../10-Formateo de datos/FormateoDeDatos.html">Formateo de datos</a></li>
-                    <li><a href="../11-Manipulando Estructuras de datos/EstructurasDeDatos.html">Manipulacición a Estructuras de datos</a></li>
-                    <li><a href="../12-UI/UI.html">UI,html&CSSUI,html&CSS</a></li>
-                    <li><a href="#Leccion">Leccion</a></li>
-                </ol>
-            </nav></details>
-        </aside>   
+        
+        <div id="asideContainer"></div>
+        <!-- 
+            Esta sección de código implementa la carga dinámica de contenido para una barra lateral:
+             1. Crea un contenedor div con id 'asideContainer' para contener el contenido aside 
+             2. Utiliza fetch() para cargar de forma asincrónica el archivo aparte.html desde el directorio principal 
+             3. fetch: 
+                - Recupera la respuesta y la convierte en texto 
+                - Inyecta el HTML cargado en el contenedor usando innerHTML 
+                - Incluye manejo de errores para registrar cualquier problema de carga en la consola 
+            
+            Propósito: Permite contenido de barra lateral modular y mantenible que se puede reutilizar 
+            en varias páginas mientras se mantiene el HTML aparte en un archivo separado. 
+        -->
+            <script>
+                fetch('../aside.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('asideContainer').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading aside:', error));
+            </script>  
 
         <main>
                 
