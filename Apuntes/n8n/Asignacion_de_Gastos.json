@@ -1,0 +1,2088 @@
+{
+  "name": "Asignación de Gastos",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1100,
+        -160
+      ],
+      "id": "94df636e-2ee7-4a65-9278-c020199951a9",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "=1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "1963712436",
+          "mode": "id"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "CF in/out"
+            },
+            {
+              "lookupColumn": "Filtro existente n8n",
+              "lookupValue": "1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -600,
+        0
+      ],
+      "id": "dea04ad5-3fbf-4b8c-83be-9c90a021c78d",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hZcBoGBnLwH882Qs",
+          "name": "Google Sheets account Oscar"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.Importe }}",
+                    "rightValue": 0,
+                    "operator": {
+                      "type": "number",
+                      "operation": "gt"
+                    },
+                    "id": "11bcda74-5b1b-4b2b-8451-f982ffd78b24"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Ingresos"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "cb6abd8f-7b41-4870-a708-95648e150ead",
+                    "leftValue": "={{ $json.Importe }}",
+                    "rightValue": 0,
+                    "operator": {
+                      "type": "number",
+                      "operation": "lt"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Gastos"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        120,
+        0
+      ],
+      "id": "6de60736-abcc-48cd-b526-ebd94bdbeb77",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "d229724d-f99b-411e-8893-52fe9ad51e1c",
+                    "leftValue": "={{ $json.Movimiento }}",
+                    "rightValue": "WEB",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Addon"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "dc5c2c92-0222-4dec-abe2-66cb2b8c38a5",
+                    "leftValue": "={{ $json['Más datos'].match(/(?:CHASDEFXXXX-CHECKOUT SAS|Solid Processing Limited|GTWS Tech Limited)/) }}",
+                    "rightValue": "=CHECKOUT",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "SolidGate"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "48086548-15c5-4cfc-9220-7cb9ae44fd58",
+                    "leftValue": "={{ $json.Movimiento }}",
+                    "rightValue": "TRANSFER. EN DIV",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "PayPal"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "3f2044da-4e45-44b2-adc7-4e05ae9ef261",
+                    "leftValue": "={{ $json.Movimiento.match(/(?:COMPRA DIVISAS|COND.CUOTA TARJETA)/) }}",
+                    "rightValue": "LIQ OP",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "LaCaixa"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        360,
+        -600
+      ],
+      "id": "22e3ab22-50e1-4fec-91d4-29b3c9267a09",
+      "name": "Bancos?"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.Movimiento.match(/(?:DEVOLUCION HACIENDA)/) }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    },
+                    "id": "bb365f05-b7d5-4ffd-946d-b22f4ea88ad9"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Hacienda"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "c2a71f81-cd05-4e07-9bc6-f463beba3823",
+                    "leftValue": "={{ $json['Más datos'].match(/DEVOLUCIONES TRIBUTARIAS, AGENCI/) }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "IVA"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "e0b39351-0d62-4da4-9340-a8dcbb8b3a51",
+                    "leftValue": "={{ $json['Más datos'].match(/GONZALEZ VILLODRE DAVID|RAFAEL DE LA CRUZ VELAS/)\n|\n$json.Movimiento.match(/Envato/)}}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "DevolucionesCompras"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        540,
+        -380
+      ],
+      "id": "b12c7473-7b2f-4593-a37f-f082861bf73c",
+      "name": "Gobierno o Devos"
+    },
+    {
+      "parameters": {
+        "numberInputs": 5
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        660,
+        -60
+      ],
+      "id": "641d2f3f-921d-44f7-b12a-d99124cb909f",
+      "name": "Merge CFFO_Bancos"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "d229724d-f99b-411e-8893-52fe9ad51e1c",
+                    "leftValue": "={{ $json.Movimiento.match(/(?:WEB\\d+|C. \\d{9} \\d{4}|MANTENIM. ADDON P|OPERACIÓN ADDON|PRECIO ED. EXTRACTO)/) }}",
+                    "rightValue": "WEB",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Addon"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "dc5c2c92-0222-4dec-abe2-66cb2b8c38a5",
+                    "leftValue": "={{ $json['Más datos'].match(/(?:CHASDEFXXXX-CHECKOUT SAS|Solid Processing Limited|GTWS Tech Limited|GTWS TECH LIMITED  SOLIDGATE)/) }}",
+                    "rightValue": "=CHECKOUT",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "SolidGate"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "48086548-15c5-4cfc-9220-7cb9ae44fd58",
+                    "leftValue": "={{ $json.Movimiento }}",
+                    "rightValue": "TRANSFER. EN DIV",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "PayPal"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "3f2044da-4e45-44b2-adc7-4e05ae9ef261",
+                    "leftValue": "={{ $json.Movimiento.match(/(?:COMPRA DIVISAS|COND.CUOTA TARJETA)/) }}",
+                    "rightValue": "LIQ OP",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "LaCaixa"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "eae8180f-a236-4a94-80a5-917ab3ea67a1",
+                    "leftValue": "={{ $json.Movimiento.match(/(?:ANUL.REGUL.OP.TARJ.|BANKTRACK STARTER|CAJA DE SEG.REUN.|COMERC.GLOBAL PAY|CUOTA T. V.Ele.Ne|MC DISPUTE ADMFEE|PRECIO SERVIC.PAGOS|REGUL.OP.TARJETA|SEGURCAIXA S.A.|SERV. EM. TRANSF.|TRF.INTERNACIONAL)/) }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Bancos?"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        360,
+        -60
+      ],
+      "id": "f30f1638-0e0e-439d-9bfe-5b2b981912db",
+      "name": "Bancos? CFFO"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.Movimiento.match(/(?:ABAC ASSES.S.L.|AHREFS.COM|AMZN Mktp ES|ANSWERTHEPUBLIC P|ASSESSORIA EGAREN|Bright Data Ltd|CANVA\\*|CASA CARMEN GRAN|CLOUDFLARE|CURRENCYAPI.COM|Datatrans Ltd EUR|DIGITALOCEAN.COM|DOMINOS PIZZA|DONDOMINIO-MRDOMA|EB \\*SEOPLUS|ENDESA ENERGIA S.|Envato|FRESHWORKS INC|FIJONOL000000|FIJO932761128.|GITHUB, INC.|GOOGLE\\*CLOUD GVZZ|Google ADS7613673|GOOGLE\\*GSUITE NOR|GOOGLE IRELAND|Google CLOUD KSwF|Google GSUITE_nor|INSTANTLY|LARAVEL FORGE|LinkedInPre|LinkedIn P5860573|MASIA CAN RIBAS|MICRO VALLES SERV|Nestle Espana S.A|NETEGES I MANT.|Nexmo Ltd.|OPENAI|OPENAI \\*CHATGPT S|OPENROUTER, INC|OVHcloud|PADDLE.NET\\* EBNHO|RAPIDAPI|SECURITAS DIRECT|SAONA TERRASSA|SendinBlue|SINCH MAILGUN|SLACK T05PA4VDQL9|SOLUCIONES TECNIC|TERRASSA CICLE|VIA TRIBUT SL|VITALY HEALTH SER|WINE PALACE -TERR|WWW.MAKE.COM|WWW.MARCARIA.COM|WWW.PERPLEXITY.AI)/) }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    },
+                    "id": "1eec1681-a69f-4a62-bf94-9a25f51c5cb4"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Compras"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "261e52c8-c3da-440c-8bbb-3fcea72bb0b5",
+                    "leftValue": "={{ $json['Más datos'].match(/(?:Coremind Ventures SL|Ricardo Alfaro Peropadre)/) }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Compras2"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "4120fb27-e8f6-4c6a-bd8d-6dd8efa63bb5",
+                    "leftValue": "={{ $json.Movimiento.match(/(?:IMPUESTOS AEAT|I.R.P.F. MOD.111|I.R.P.F. MOD. 115|PRECIO ABONO TRF.|TGSS.COTIZACION)/) }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Impuestos"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "048f61ba-7ab7-4049-a414-a3e78c89ac6f",
+                    "leftValue": "={{ $json.Movimiento.match(/(?:PAG NOMINAS)/) }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Nominas"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "d8217215-ec0f-4b49-a080-f1ad600a162b",
+                    "leftValue": "={{ $json['Más datos'].match(/(?:Taxgov SL|TaxGov SL)/) }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Publicidad"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        780,
+        540
+      ],
+      "id": "dad73fdd-348c-4ee8-888a-ebc930e16198",
+      "name": "CFOO"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        1180,
+        180
+      ],
+      "id": "3b9d9224-4875-49cc-81d0-e9663531f637",
+      "name": "Merge CFOO_Facturación"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        1180,
+        -460
+      ],
+      "id": "868d17ac-e100-4626-bbb1-4b99b55be137",
+      "name": "Merge CFFI_Impuestos"
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        660,
+        -560
+      ],
+      "id": "2be65ccf-8bc2-406d-9e84-3710504f5da6",
+      "name": "Merge CFFI_Bancos"
+    },
+    {
+      "parameters": {
+        "sendTo": "oscar@norgenic.com",
+        "subject": "CashFlow In Review",
+        "emailType": "text",
+        "message": "CashFlowIn: https://auto.codegenic.org/workflow/nQyAge8xl3tEL2Mg",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        700,
+        -240
+      ],
+      "id": "ab647eb1-eb51-4376-be7b-e96a14dbbaab",
+      "name": "Gmail CashFlow In Review",
+      "webhookId": "bab47c2b-faf7-4239-880f-253e81c131d0",
+      "executeOnce": true,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "okMcvzXN8cIjwRYs",
+          "name": "Gmail account (Oscar2)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "oscar@norgenic.com",
+        "subject": "CashFlow Out Review",
+        "emailType": "text",
+        "message": "CashFlowOut: https://auto.codegenic.org/workflow/nQyAge8xl3tEL2Mg",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1500,
+        1180
+      ],
+      "id": "0a2f8b3e-56b4-48ac-9906-3476421f7875",
+      "name": "Gmail CashFlow Out Review",
+      "webhookId": "bab47c2b-faf7-4239-880f-253e81c131d0",
+      "executeOnce": true,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "okMcvzXN8cIjwRYs",
+          "name": "Gmail account (Oscar2)"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "1963712436",
+          "mode": "id"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1100,
+        160
+      ],
+      "id": "762c7f84-ebda-410b-98aa-11e4ba8aa0c2",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "qdeS5aTNZVUvpKEA",
+          "name": "Google Sheets Trigger (Oscar)"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "amount": 0
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -880,
+        0
+      ],
+      "id": "a87e10f9-ddc9-45ec-9264-75051a1efe97",
+      "name": "Wait",
+      "webhookId": "5395de3b-7b22-4dbd-b31a-af400c9c46d4"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8e1c3434-2f21-4d78-b544-0240a5a27a6c",
+              "leftValue": "={{ $json['CF in/out'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "5c001a4b-0c02-4f7d-a91e-3b093e89d1d6",
+              "leftValue": "={{ $json.Fecha }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -140,
+        0
+      ],
+      "id": "79a23f6b-e1f4-477b-acaf-1d2fb6f37342",
+      "name": "Filter Not Update"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "1963712436",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $json.row_number }}",
+            "CF in/out": "Revisar"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Fecha",
+              "displayName": "Fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Fecha valor",
+              "displayName": "Fecha valor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Movimiento",
+              "displayName": "Movimiento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Más datos",
+              "displayName": "Más datos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Importe",
+              "displayName": "Importe",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Saldo",
+              "displayName": "Saldo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "NombreFactura",
+              "displayName": "NombreFactura",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CF in/out",
+              "displayName": "CF in/out",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CF category",
+              "displayName": "CF category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1500,
+        980
+      ],
+      "id": "0970697a-ccf4-4e4c-8e9a-5510a95e097c",
+      "name": "Google Sheets CostesNoAsignados",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hZcBoGBnLwH882Qs",
+          "name": "Google Sheets account Oscar"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "84e5fa4f-ff5a-4a7a-ab4c-fdedaace6a96",
+              "leftValue": "={{ $json['CF in/out'] }}",
+              "rightValue": "Revisar",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -380,
+        0
+      ],
+      "id": "24053421-3193-4de7-b1d1-7ee0cecdf29f",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.Movimiento.match(/WEB\\d+/) }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    },
+                    "id": "2ea398e0-612a-4e4e-b0ca-a4ae50ff11b6"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Devoluciones"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {
+          "fallbackOutput": "extra",
+          "renameFallbackOutput": "GastosBancarios"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        960,
+        -20
+      ],
+      "id": "f26c0bc3-d61f-4ec5-8467-3f7a7a936b27",
+      "name": "Switch Devoluciones"
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "5829af8d-1159-43b1-b826-225174d055b3",
+      "typeVersion": 1.1,
+      "name": "When Executed by Another Workflow",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        -1100,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('IDs').item.json['SpreadSheet ID'] }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $('IDs').item.json.SheetBDHistoricoBanco }}",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $json.row_number }}",
+            "CF in/out": "={{ $json.CF_In_Out }}",
+            "CF category": "={{ $json.CF_Category }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Fecha",
+              "displayName": "Fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Fecha valor",
+              "displayName": "Fecha valor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Movimiento",
+              "displayName": "Movimiento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Más datos",
+              "displayName": "Más datos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Importe",
+              "displayName": "Importe",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Saldo",
+              "displayName": "Saldo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "NombreFactura",
+              "displayName": "NombreFactura",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CF in/out",
+              "displayName": "CF in/out",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CF category",
+              "displayName": "CF category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2040,
+        -40
+      ],
+      "id": "5b00375b-1474-488d-be80-6fa67ce78d8c",
+      "name": "Google Sheets CFFI CBancario2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hZcBoGBnLwH882Qs",
+          "name": "Google Sheets account Oscar"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a2a19442-8335-4a19-adf5-75365063d057",
+              "name": "row_number",
+              "value": "={{ $json.row_number }}",
+              "type": "string"
+            },
+            {
+              "id": "f723e9cc-01e2-4700-ac01-be7b04564646",
+              "name": "CF_In_Out",
+              "value": "In_CFO",
+              "type": "string"
+            },
+            {
+              "id": "8dff307d-a39f-412e-b5f6-533e7b21729f",
+              "name": "CF_Category",
+              "value": "Ventas",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1500,
+        -780
+      ],
+      "id": "41ff17f4-799f-4ea0-b3ac-dafa70d870b1",
+      "name": "CFO_Ventas"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a2a19442-8335-4a19-adf5-75365063d057",
+              "name": "row_number",
+              "value": "={{ $json.row_number }}",
+              "type": "string"
+            },
+            {
+              "id": "f723e9cc-01e2-4700-ac01-be7b04564646",
+              "name": "CF_In_Out",
+              "value": "In_CFF",
+              "type": "string"
+            },
+            {
+              "id": "8dff307d-a39f-412e-b5f6-533e7b21729f",
+              "name": "CF_Category",
+              "value": "Bancos",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1500,
+        -620
+      ],
+      "id": "9f4d3e4d-575a-4985-8e5a-af6c993fc084",
+      "name": "CFFI Bancos"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a2a19442-8335-4a19-adf5-75365063d057",
+              "name": "row_number",
+              "value": "={{ $json.row_number }}",
+              "type": "string"
+            },
+            {
+              "id": "f723e9cc-01e2-4700-ac01-be7b04564646",
+              "name": "CF_In_Out",
+              "value": "In_CFF",
+              "type": "string"
+            },
+            {
+              "id": "8dff307d-a39f-412e-b5f6-533e7b21729f",
+              "name": "CF_Category",
+              "value": "Impuestos",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1500,
+        -460
+      ],
+      "id": "ddcb7aa7-1550-4732-9d5b-7be90634136c",
+      "name": "CFF Impuestos"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a2a19442-8335-4a19-adf5-75365063d057",
+              "name": "row_number",
+              "value": "={{ $json.row_number }}",
+              "type": "string"
+            },
+            {
+              "id": "f723e9cc-01e2-4700-ac01-be7b04564646",
+              "name": "CF_In_Out",
+              "value": "In_CFO",
+              "type": "string"
+            },
+            {
+              "id": "8dff307d-a39f-412e-b5f6-533e7b21729f",
+              "name": "CF_Category",
+              "value": "Dev.Compras",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1500,
+        -300
+      ],
+      "id": "8a555eb8-47e5-4412-b56d-82845b21738d",
+      "name": "CFO Devos Compras"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a2a19442-8335-4a19-adf5-75365063d057",
+              "name": "row_number",
+              "value": "={{ $json.row_number }}",
+              "type": "string"
+            },
+            {
+              "id": "f723e9cc-01e2-4700-ac01-be7b04564646",
+              "name": "CF_In_Out",
+              "value": "Out_CFO",
+              "type": "string"
+            },
+            {
+              "id": "8dff307d-a39f-412e-b5f6-533e7b21729f",
+              "name": "CF_Category",
+              "value": "Devoluciones",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1500,
+        -140
+      ],
+      "id": "cf99bc97-ed2c-4c4a-a09b-34db226af0a1",
+      "name": "CFO Devos"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a2a19442-8335-4a19-adf5-75365063d057",
+              "name": "row_number",
+              "value": "={{ $json.row_number }}",
+              "type": "string"
+            },
+            {
+              "id": "f723e9cc-01e2-4700-ac01-be7b04564646",
+              "name": "CF_In_Out",
+              "value": "Out_CFF",
+              "type": "string"
+            },
+            {
+              "id": "8dff307d-a39f-412e-b5f6-533e7b21729f",
+              "name": "CF_Category",
+              "value": "Bancos",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1500,
+        20
+      ],
+      "id": "8a4b7cb2-339c-4944-bf3b-4e5cebdd3279",
+      "name": "CFF Bancos"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a2a19442-8335-4a19-adf5-75365063d057",
+              "name": "row_number",
+              "value": "={{ $json.row_number }}",
+              "type": "string"
+            },
+            {
+              "id": "f723e9cc-01e2-4700-ac01-be7b04564646",
+              "name": "CF_In_Out",
+              "value": "Out_CFO",
+              "type": "string"
+            },
+            {
+              "id": "8dff307d-a39f-412e-b5f6-533e7b21729f",
+              "name": "CF_Category",
+              "value": "Proveedores",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1500,
+        180
+      ],
+      "id": "699047f3-68a1-4379-89f5-b2021ffdf52e",
+      "name": "CFO Proveedores"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a2a19442-8335-4a19-adf5-75365063d057",
+              "name": "row_number",
+              "value": "={{ $json.row_number }}",
+              "type": "string"
+            },
+            {
+              "id": "f723e9cc-01e2-4700-ac01-be7b04564646",
+              "name": "CF_In_Out",
+              "value": "Out_CFO",
+              "type": "string"
+            },
+            {
+              "id": "8dff307d-a39f-412e-b5f6-533e7b21729f",
+              "name": "CF_Category",
+              "value": "Impuestos",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1500,
+        340
+      ],
+      "id": "dbc07962-6658-4050-b78d-c700c1abeb11",
+      "name": "CFO Impuestos"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a2a19442-8335-4a19-adf5-75365063d057",
+              "name": "row_number",
+              "value": "={{ $json.row_number }}",
+              "type": "string"
+            },
+            {
+              "id": "f723e9cc-01e2-4700-ac01-be7b04564646",
+              "name": "CF_In_Out",
+              "value": "Out_CFO",
+              "type": "string"
+            },
+            {
+              "id": "8dff307d-a39f-412e-b5f6-533e7b21729f",
+              "name": "CF_Category",
+              "value": "Salarios",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1500,
+        500
+      ],
+      "id": "49d1e507-70df-48db-9c53-53a83e940489",
+      "name": "CFO Salarios"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a2a19442-8335-4a19-adf5-75365063d057",
+              "name": "row_number",
+              "value": "={{ $json.row_number }}",
+              "type": "string"
+            },
+            {
+              "id": "f723e9cc-01e2-4700-ac01-be7b04564646",
+              "name": "CF_In_Out",
+              "value": "Out_CFO",
+              "type": "string"
+            },
+            {
+              "id": "8dff307d-a39f-412e-b5f6-533e7b21729f",
+              "name": "CF_Category",
+              "value": "Publicidad",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1500,
+        660
+      ],
+      "id": "b4596d13-0753-41d8-9d70-5c8af490ded9",
+      "name": "CFO Publicidad"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a2a19442-8335-4a19-adf5-75365063d057",
+              "name": "row_number",
+              "value": "={{ $json.row_number }}",
+              "type": "string"
+            },
+            {
+              "id": "f723e9cc-01e2-4700-ac01-be7b04564646",
+              "name": "CF_In_Out",
+              "value": "Revisar",
+              "type": "string"
+            },
+            {
+              "id": "8dff307d-a39f-412e-b5f6-533e7b21729f",
+              "name": "CF_Category",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1500,
+        820
+      ],
+      "id": "fdda3f9d-fc2f-4307-b4f4-2fcbdc9f403b",
+      "name": "Revisar"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ba1a37c5-2358-4a22-aa36-d439a9c7afa3",
+              "name": "SpreadSheet ID",
+              "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
+              "type": "string"
+            },
+            {
+              "id": "b14afee8-ff90-403c-b6be-86501def71a2",
+              "name": "SheetBDHistoricoBanco",
+              "value": "1963712436",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -740,
+        0
+      ],
+      "id": "ae20ecff-0c1f-4d66-9b35-7b0d879a273b",
+      "name": "IDs"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Bancos?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Bancos? CFFO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bancos?": {
+      "main": [
+        [
+          {
+            "node": "CFO_Ventas",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Merge CFFI_Bancos",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Merge CFFI_Bancos",
+            "type": "main",
+            "index": 1
+          }
+        ],
+        [
+          {
+            "node": "Merge CFFI_Bancos",
+            "type": "main",
+            "index": 2
+          }
+        ],
+        [
+          {
+            "node": "Gobierno o Devos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bancos? CFFO": {
+      "main": [
+        [
+          {
+            "node": "Merge CFFO_Bancos",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Merge CFFO_Bancos",
+            "type": "main",
+            "index": 1
+          }
+        ],
+        [
+          {
+            "node": "Merge CFFO_Bancos",
+            "type": "main",
+            "index": 2
+          }
+        ],
+        [
+          {
+            "node": "Merge CFFO_Bancos",
+            "type": "main",
+            "index": 3
+          }
+        ],
+        [
+          {
+            "node": "Merge CFFO_Bancos",
+            "type": "main",
+            "index": 4
+          }
+        ],
+        [
+          {
+            "node": "CFOO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CFOO": {
+      "main": [
+        [
+          {
+            "node": "Merge CFOO_Facturación",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Merge CFOO_Facturación",
+            "type": "main",
+            "index": 1
+          }
+        ],
+        [
+          {
+            "node": "CFO Impuestos",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "CFO Salarios",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "CFO Publicidad",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Gmail CashFlow Out Review",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Revisar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge CFFO_Bancos": {
+      "main": [
+        [
+          {
+            "node": "Switch Devoluciones",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge CFOO_Facturación": {
+      "main": [
+        [
+          {
+            "node": "CFO Proveedores",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gobierno o Devos": {
+      "main": [
+        [
+          {
+            "node": "Merge CFFI_Impuestos",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Merge CFFI_Impuestos",
+            "type": "main",
+            "index": 1
+          }
+        ],
+        [
+          {
+            "node": "CFO Devos Compras",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Gmail CashFlow In Review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge CFFI_Impuestos": {
+      "main": [
+        [
+          {
+            "node": "CFF Impuestos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge CFFI_Bancos": {
+      "main": [
+        [
+          {
+            "node": "CFFI Bancos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "IDs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Not Update": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Filter Not Update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch Devoluciones": {
+      "main": [
+        [
+          {
+            "node": "CFO Devos",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "CFF Bancos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CFO_Ventas": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets CFFI CBancario2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CFFI Bancos": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets CFFI CBancario2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CFF Impuestos": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets CFFI CBancario2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CFO Devos Compras": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets CFFI CBancario2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CFO Devos": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets CFFI CBancario2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CFF Bancos": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets CFFI CBancario2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CFO Proveedores": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets CFFI CBancario2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CFO Impuestos": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets CFFI CBancario2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CFO Salarios": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets CFFI CBancario2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CFO Publicidad": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets CFFI CBancario2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IDs": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 60
+  },
+  "versionId": "09b6a307-1634-414a-8918-024bd534d018",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "921b42ac40713cf8e80903373553a75b6a7dc1f7ad27fcbec19d4a8582a592ca"
+  },
+  "id": "nQyAge8xl3tEL2Mg",
+  "tags": [
+    {
+      "createdAt": "2025-03-28T08:09:12.598Z",
+      "updatedAt": "2025-03-28T08:09:12.598Z",
+      "id": "4KqrBzlhcE2xFL6c",
+      "name": "Conciliación Bancaria"
+    }
+  ]
+}

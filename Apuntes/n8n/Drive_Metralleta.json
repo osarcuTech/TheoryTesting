@@ -1,0 +1,3175 @@
+{
+  "name": "Autom.Facturas-Empresas(Drive_Regex) Metralleta",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        -5540,
+        -420
+      ],
+      "id": "530fd772-5525-4a74-aaa2-9e162b9017c2",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "id": "c95cace9-f819-4490-8c85-3efada7d8465",
+      "name": "Google Drive2",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -5700,
+        -420
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "reset": false
+        }
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -5360,
+        -420
+      ],
+      "id": "a0b2cd9c-7484-482a-95d2-6e436b268348",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "aae4c0c7-7aaa-4b4e-b78e-b187e5374636",
+              "name": "Empresa Compradora",
+              "value": "Worldwide Solicitors",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -4120,
+        -260
+      ],
+      "id": "abbf90e3-8515-483b-a6c9-c40dc7970132",
+      "name": "Edit Fields WWS"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "aae4c0c7-7aaa-4b4e-b78e-b187e5374636",
+              "name": "Empresa Compradora",
+              "value": "Global Documents",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -4120,
+        -60
+      ],
+      "id": "4c4c5cbf-d36a-4c6a-980e-fe6d2b8472c7",
+      "name": "Edit Fields GD"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c63ecb15-670e-453a-9fad-de9b4b690097",
+              "name": "Empresa Compradora",
+              "value": "Norgenic",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -4120,
+        100
+      ],
+      "id": "e32cff70-f27d-44b9-95d6-5b6532fa5897",
+      "name": "Edit Fields Norgenic"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c63ecb15-670e-453a-9fad-de9b4b690097",
+              "name": "Empresa Compradora",
+              "value": "Other",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2940,
+        320
+      ],
+      "id": "38dbf1ef-5541-4dcc-bbc3-5dd773491eb8",
+      "name": "Edit Fields Other"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c63ecb15-670e-453a-9fad-de9b4b690097",
+              "name": "Empresa Compradora",
+              "value": "Taxgov",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -4120,
+        -420
+      ],
+      "id": "94812a3a-4617-475f-838b-ddf42e97eea4",
+      "name": "Edit Fields Taxgov"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f4fb9d7d-d3f2-4bef-920b-e3a5be2c93dd",
+              "name": "Empresa Compradora",
+              "value": "={{ $json['Empresa Compradora'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -3460,
+        -420
+      ],
+      "id": "915c7b65-fecc-4600-8e31-4eb7854d2cd5",
+      "name": "Edit Fields EmpresaCompradora"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fe87101f-9e2e-4f57-9769-b01a3617901a",
+              "name": "text",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -5120,
+        -400
+      ],
+      "id": "b03e637e-deb8-44e8-a59f-9325702152ae",
+      "name": "Edit Fields Pre_If's"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "dbec3953-3007-46e6-ad98-e7f96574f893",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "Taxgov",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "b2157181-4b5d-4809-93e8-77d5211bd44a",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "TAXGOV",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -4920,
+        -400
+      ],
+      "id": "7af52c01-d39e-41e0-9927-b913cc59e93b",
+      "name": "If Taxgov"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "3d05e0fc-1f5e-4201-a1ba-a4d85a8fbbc1",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "WORLDWIDE SOLICITORS",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "92b3ae86-f6ec-482a-a0ce-54735feec824",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "WORLDWIDESOLICITORS",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "419d0564-abc5-431d-a40a-865b50f8c4fe",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "WorldwideSolicitors",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "7935e0c7-edbd-4bce-80d1-f8dbf04f98b4",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "Worldwide Solicitors",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -4720,
+        -280
+      ],
+      "id": "bb7d0838-ba26-48b6-bded-3c28b279d8e8",
+      "name": "If WW"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "3d05e0fc-1f5e-4201-a1ba-a4d85a8fbbc1",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "GLOBAL DOCUMENT",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "92b3ae86-f6ec-482a-a0ce-54735feec824",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "GLOBALDOCUMENT",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "419d0564-abc5-431d-a40a-865b50f8c4fe",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "Global document",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "7935e0c7-edbd-4bce-80d1-f8dbf04f98b4",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "Globaldocument",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -4600,
+        -80
+      ],
+      "id": "969fd22f-b373-44d4-aa76-847e861d8bac",
+      "name": "If GD"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "dbec3953-3007-46e6-ad98-e7f96574f893",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "Norgenic",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "51e34814-63d5-4d9e-9b9b-9e74ef169c9e",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "NORGENIC",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "6ef112f7-84a9-4f61-8932-fd634266813c",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "\\nNORGENIC",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "8d78c4e4-f94a-492c-9177-51c416f9adc7",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "\\n NORGENIC",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "43307b1e-2006-457c-bfa1-b3992f30a996",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "norgenic ",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -4480,
+        120
+      ],
+      "id": "c81e6ff6-60fb-4ce5-bdc9-b8c50a2d79cf",
+      "name": "If Norgenic"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "2e908f16-0470-400b-9dd1-ff168d02da56",
+              "leftValue": "{{ $json.WorldwideSolicitor }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "a0771643-577d-4ad8-b497-3228721c2c13",
+              "leftValue": "{{ $json.GlobalDocument }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "7730c026-ed9d-4439-af6a-c5c09c16a8aa",
+              "leftValue": "{{ $json.Taxgov }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "319019e8-4179-4d5a-bee2-92d8b460a20d",
+              "leftValue": "{{ $json.Norgenic }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -3700,
+        -420
+      ],
+      "id": "7960c61a-2b49-4c5c-94f0-101edd6d4246",
+      "name": "If EmpresaCompradora"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b07ec7d0-0cbd-41f6-a422-fd078ec984ec",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "NORGENIC",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            },
+            {
+              "id": "46a198d8-2c65-4aa6-bc8f-70e444631fdc",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "Norgenic",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -4720,
+        -400
+      ],
+      "id": "90cd55e7-99b3-4a1e-aaaa-6e30b03b5493",
+      "name": "If TAXGOV-NORGENIC"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "https://drive.google.com/drive/folders/17WR7hfIet-hcpFrjHW0agwHsC8KnM1Sn",
+          "mode": "url"
+        },
+        "event": "fileCreated",
+        "options": {
+          "fileType": "all"
+        }
+      },
+      "id": "e8eb6d8a-caec-4754-bbba-262291ed7039",
+      "name": "Google Drive Trigger1",
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        -6160,
+        -420
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Google Drive2').item.json.id }}",
+          "mode": "id"
+        },
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "https://drive.google.com/drive/folders/1bTGnOXd4LBDPF3sBWIA6BnG6Rw64MFS6",
+          "mode": "url"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1840,
+        320
+      ],
+      "id": "f8ee73dc-f123-4c8b-85e7-b3a2f77350e6",
+      "name": "Google Drive13",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "oscar@norgenic.com",
+        "subject": "Factura a Revisar",
+        "emailType": "text",
+        "message": "Revisar: https://drive.google.com/drive/folders/1bTGnOXd4LBDPF3sBWIA6BnG6Rw64MFS6",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -1620,
+        320
+      ],
+      "id": "1e4f1108-b86c-4e66-b780-65fd2967bdf5",
+      "name": "Gmail1",
+      "webhookId": "b1358d07-6f39-4458-853d-ba4691ccb0ba",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "okMcvzXN8cIjwRYs",
+          "name": "Gmail account (Oscar2)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Edit Fields EmpresaCompradora').item.json['Empresa Compradora'] }}",
+                    "rightValue": "Norgenic",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Norgenic"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "591e9575-4af7-41c5-b895-9bcdee538bd1",
+                    "leftValue": "={{ $('Edit Fields EmpresaCompradora').item.json['Empresa Compradora'] }}",
+                    "rightValue": "Taxgov",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Taxgov"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "28880fb9-8b85-4d7e-996b-ca98010f6b1b",
+                    "leftValue": "={{ $('Edit Fields EmpresaCompradora').item.json['Empresa Compradora'] }}",
+                    "rightValue": "Global Documents",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Global Documents"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "7fa82ae0-eb93-4511-8a0d-5ee079aa2b15",
+                    "leftValue": "={{ $('Edit Fields EmpresaCompradora').item.json['Empresa Compradora'] }}",
+                    "rightValue": "Worldwide Solicitors",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Worldwide Solicitors"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra",
+          "renameFallbackOutput": "Other"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -3280,
+        -460
+      ],
+      "id": "3468f791-5f6b-4891-903d-fe7e99e92bd3",
+      "name": "Switch Empresa Compradora"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cd0429e7-4804-494d-b0b9-8f422ec3cf7e",
+              "name": "nºFactura",
+              "value": "={{ $('Edit Fields Pre_If\\'s').item.json.text.match(/\\nINVOICE\\n\\[EX\\](.*?)\\n/)[1]}}",
+              "type": "string"
+            },
+            {
+              "id": "c5920399-30b1-430c-b6b9-e6e0a5aa07a2",
+              "name": "Empresa Vendedora",
+              "value": "=Crec",
+              "type": "string"
+            },
+            {
+              "id": "c65df9ef-54d2-4592-a5e0-c6a5527dc7f9",
+              "name": "Fecha Factura",
+              "value": "={{    (new Date($('Edit Fields Pre_If\\'s').item.json.text.match(/\\n([^\\n]+)\\nPeriod/)[1].trim())).toISOString().split('T')[0].replace(/-/g, '/') }}",
+              "type": "string"
+            },
+            {
+              "id": "97a1aba0-e926-4662-864c-eb3c79e9ceae",
+              "name": "ImporteTotal",
+              "value": "={{ $('Edit Fields Pre_If\\'s').item.json.text.match(/\\nDue\\s+([^\\n]+)/)[1] }}",
+              "type": "string"
+            },
+            {
+              "id": "39b42bc2-d757-42d4-8baf-923bd9fe3c9d",
+              "name": "Empresa Compradora",
+              "value": "={{ $('Edit Fields EmpresaCompradora').item.json['Empresa Compradora'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2680,
+        -480
+      ],
+      "id": "123603cf-6ef2-4cbd-8710-c32547272d4e",
+      "name": "Edit Fields GD a Crec"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a54606ad-f81c-4ead-83c1-75fc10999fdf",
+              "name": "nºFactura",
+              "value": "={{ $('Edit Fields Pre_If\\'s').item.json.text.match(/FIS\\d{2}.\\d{3}/)[0].replace(' ', '-') }}",
+              "type": "string"
+            },
+            {
+              "id": "c5920399-30b1-430c-b6b9-e6e0a5aa07a2",
+              "name": "Empresa Vendedora",
+              "value": "=ViaTribut",
+              "type": "string"
+            },
+            {
+              "id": "67e4a818-834d-417a-b601-15da60adebf1",
+              "name": "Fecha Factura",
+              "value": "={{    $('Edit Fields Pre_If\\'s').item.json.text.match(/\\n(\\d{2}-\\d{2}-\\d{4})/)[1].split('-').reverse().join('-') }}",
+              "type": "string"
+            },
+            {
+              "id": "9d8217eb-ae6d-4c33-9da8-c0f7a7c03d4f",
+              "name": "ImporteTotal",
+              "value": "={{$('Edit Fields Pre_If\\'s').item.json.text.match(/\\n([\\d,]+)\\nVencimientoForma de pago/)[1].trim()+'€'}}{{ $('Edit Fields Pre_If\\'s').item.json.text.match(/\\n(.+)\\nForma de pago Vencimiento/)[1] }}",
+              "type": "string"
+            },
+            {
+              "id": "342f65eb-6e90-4890-8e6f-0d466fdcc056",
+              "name": "Empresa Compradora",
+              "value": "={{ $('Edit Fields EmpresaCompradora').item.json['Empresa Compradora'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2680,
+        -300
+      ],
+      "id": "f2ac0f71-8402-4a18-bd85-172550fb687c",
+      "name": "Edit Fields GD-ViaTribut"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.text }}",
+                    "rightValue": "GLOBAL DOCUMENT",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "GLOBAL DOCUMENT"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "16c94cc5-0736-4168-a4ac-9c51e78c75f5",
+                    "leftValue": "={{ $json.text }}",
+                    "rightValue": "GLOBALDOCUMENT",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "GLOBALDOCUMENT"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "99bed08d-8614-42cc-b0ae-c6e0ef28ecaf",
+                    "leftValue": "={{ $json.text }}",
+                    "rightValue": "Global Document",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Global Document"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "9ae43944-1ec4-4288-98ae-bb0a331a86ad",
+                    "leftValue": "={{ $json.text }}",
+                    "rightValue": "GlobalDocument",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "GlobalDocument"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -4340,
+        -80
+      ],
+      "id": "43c1952f-ed89-4e32-a9ac-fe5a8ef1b675",
+      "name": "SwitchGD"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.text }}",
+                    "rightValue": "WORLDWIDE SOLICITOR",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "WORLDWIDE SOLICITOR"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "16c94cc5-0736-4168-a4ac-9c51e78c75f5",
+                    "leftValue": "={{ $json.text }}",
+                    "rightValue": "WORLDWIDESOLICITOR",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "WORLDWIDESOLICITOR"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "99bed08d-8614-42cc-b0ae-c6e0ef28ecaf",
+                    "leftValue": "={{ $json.text }}",
+                    "rightValue": "Worldwide Solicitor",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Worldwide Solicitor"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "9ae43944-1ec4-4288-98ae-bb0a331a86ad",
+                    "leftValue": "={{ $json.text }}",
+                    "rightValue": "WorldwideSolicitor",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "WorldwideSolicitors"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -4340,
+        -280
+      ],
+      "id": "a6ac3516-da8b-457a-9f98-870da826c9d8",
+      "name": "SwitchWW"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "075e403c-b34b-44bc-9b46-a3ef3fdc10e5",
+              "name": "NombreFactura",
+              "value": "={{ $json['nºFactura'] +\"_\"+ $json['Empresa Vendedora'] +\"_\"+ $json['Fecha Factura'] +\"_\"+ $json.ImporteTotal +\"_\"+ $json['Empresa Compradora']}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2020,
+        -400
+      ],
+      "id": "831fa8c8-d65c-4972-b993-0f8f6840cf2b",
+      "name": "Edit Fields Nombre Factura"
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Google Drive2').item.json.id }}",
+          "mode": "id"
+        },
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "https://drive.google.com/drive/folders/1wjSR4Bkk1OV22TW0_cGXj2NI84vGHAMN",
+          "mode": "url"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1840,
+        -200
+      ],
+      "id": "2736569d-7eac-4473-8776-9dae5130cfe7",
+      "name": "Google Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Google Drive2').item.json.id }}",
+          "mode": "id"
+        },
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "https://drive.google.com/drive/folders/1-cAD8dygpOHuXbEKRmvB2XliPp9ltyHd",
+          "mode": "url"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1840,
+        -400
+      ],
+      "id": "0aac4bed-8613-4156-9414-98c4b73976ff",
+      "name": "Google Drive10",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "newUpdatedFileName": "={{ $('Edit Fields Nombre Factura').item.json.NombreFactura }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1620,
+        -400
+      ],
+      "id": "543c2951-507b-4e43-ad0a-f43e0603ae72",
+      "name": "Google Drive11",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      },
+      "notes": "{{ $('If').item.json['nºFactura'] +\"_\"+ $('If').item.json.Proveedor +\"_\"+ $('If').item.json.FechaFactura +\"_\"+ $('If').item.json.ImporteBase +\"_\"+$('OpenAI').item.json.message.content.Comprador }}"
+    },
+    {
+      "parameters": {
+        "sendTo": "oscar@norgenic.com",
+        "subject": "Factura Global Document a Revisar",
+        "emailType": "text",
+        "message": "Información Faltante: https://drive.google.com/drive/folders/1wjSR4Bkk1OV22TW0_cGXj2NI84vGHAMN",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -1620,
+        -200
+      ],
+      "id": "7c28a420-7b44-40c8-97c5-2498dda9987d",
+      "name": "Gmail",
+      "webhookId": "c26a93b2-ff12-41f1-97c3-b3466435b4e3",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "okMcvzXN8cIjwRYs",
+          "name": "Gmail account (Oscar2)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "075e403c-b34b-44bc-9b46-a3ef3fdc10e5",
+              "name": "NombreFactura",
+              "value": "={{ $json['nºFactura'] +\"_\"+ $json['Empresa Vendedora'] +\"_\"+ $json['Fecha Factura'] +\"_\"+ $json.ImporteTotal +\"_\"+ $json['Empresa Compradora']}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2020,
+        -40
+      ],
+      "id": "5c2c2363-da17-4e4c-bb42-b183dde0b5e8",
+      "name": "Edit Fields Nombre Factura1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cd0429e7-4804-494d-b0b9-8f422ec3cf7e",
+              "name": "nºFactura",
+              "value": "={{ $('Edit Fields Pre_If\\'s').item.json.text.match(/FIS\\d{2}.\\d{3}/)[0].replace(' ', '-') }}",
+              "type": "string"
+            },
+            {
+              "id": "c5920399-30b1-430c-b6b9-e6e0a5aa07a2",
+              "name": "Empresa Vendedora",
+              "value": "=Crec",
+              "type": "string"
+            },
+            {
+              "id": "c65df9ef-54d2-4592-a5e0-c6a5527dc7f9",
+              "name": "Fecha Factura",
+              "value": "={{ $('Edit Fields Pre_If\\'s').item.json.text.match(/\\n([^\\n]+)\\nPeriodo/)[1]}}",
+              "type": "string"
+            },
+            {
+              "id": "97a1aba0-e926-4662-864c-eb3c79e9ceae",
+              "name": "ImporteTotal",
+              "value": "={{ $('Edit Fields Pre_If\\'s').item.json.text.match(/\\(.*\\) \\d+,\\d+/)[0] }}",
+              "type": "string"
+            },
+            {
+              "id": "39b42bc2-d757-42d4-8baf-923bd9fe3c9d",
+              "name": "Empresa Compradora",
+              "value": "={{ $('Edit Fields EmpresaCompradora').item.json['Empresa Compradora'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2680,
+        -100
+      ],
+      "id": "306a8340-68e6-4cef-8e41-3c1926b21c80",
+      "name": "Edit Fields WW a Crec1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a54606ad-f81c-4ead-83c1-75fc10999fdf",
+              "name": "nºFactura",
+              "value": "={{ \n  $('Edit Fields Pre_If\\'s').item.json.text.match(/\\n\\d{2}-\\d{2}-\\d{4}([^\\n]+)\\n/)[1].replace(' ', '-')\n}}",
+              "type": "string"
+            },
+            {
+              "id": "c5920399-30b1-430c-b6b9-e6e0a5aa07a2",
+              "name": "Empresa Vendedora",
+              "value": "=ViaTribut",
+              "type": "string"
+            },
+            {
+              "id": "67e4a818-834d-417a-b601-15da60adebf1",
+              "name": "Fecha Factura",
+              "value": "={{    $('Edit Fields Pre_If\\'s').item.json.text.match(/\\n(\\d{2}-\\d{2}-\\d{4})/)[1].split('-').reverse().join('-') }}",
+              "type": "string"
+            },
+            {
+              "id": "9d8217eb-ae6d-4c33-9da8-c0f7a7c03d4f",
+              "name": "ImporteTotal",
+              "value": "={{$('Edit Fields Pre_If\\'s').item.json.text.match(/\\n([\\d,]+)\\nVencimientoForma de pago/)[1].trim()+'€'}}{{ $('Edit Fields Pre_If\\'s').item.json.text.match(/\\n(.+)\\nForma de pago Vencimiento/)[1] }}",
+              "type": "string"
+            },
+            {
+              "id": "342f65eb-6e90-4890-8e6f-0d466fdcc056",
+              "name": "Empresa Compradora",
+              "value": "={{ $('Edit Fields EmpresaCompradora').item.json['Empresa Compradora'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2680,
+        60
+      ],
+      "id": "3c233dd6-09db-4f71-9383-8e2b3ddd71c4",
+      "name": "Edit Fields WW-ViaTribut1"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Edit Fields Pre_If\\'s').item.json.text }}",
+                    "rightValue": "CREC S.L.",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Crec"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "04875df2-50b6-4916-b743-2c51dfa466eb",
+                    "leftValue": "={{ $('Edit Fields Pre_If\\'s').item.json.text }}",
+                    "rightValue": "VIA TRIBUT",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "ViaTribut"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -2940,
+        140
+      ],
+      "id": "7e49ec8d-cf60-4992-a6d9-895a3677789c",
+      "name": "Switch Empresas WW"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Edit Fields Pre_If\\'s').item.json.text }}",
+                    "rightValue": "CREC S.L.",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Crec"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "04875df2-50b6-4916-b743-2c51dfa466eb",
+                    "leftValue": "={{ $('Edit Fields Pre_If\\'s').item.json.text }}",
+                    "rightValue": "VIA TRIBUT",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "ViaTribut"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -2940,
+        -220
+      ],
+      "id": "48c85ba7-ed46-4c43-bcf9-9fa90fa011b4",
+      "name": "Switch Empresas GD"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "44b6501c-2097-4f9b-936c-efbded3c4dfe",
+              "leftValue": "={{ $json['nºFactura'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "2e908f16-0470-400b-9dd1-ff168d02da56",
+              "leftValue": "={{ $json['Empresa Vendedora'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "aff9a6f5-7ae7-4179-a5b8-bfd6df90611c",
+              "leftValue": "={{ $json['Fecha Factura'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "31a01e5b-cb71-48cc-a055-d23f395edb41",
+              "leftValue": "={{ $json.ImporteTotal }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "02393d2c-3dec-49af-b89f-d61736132e0a",
+              "leftValue": "={{ $json['Empresa Compradora'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -2480,
+        -20
+      ],
+      "id": "f00e6002-ee8d-4a2d-98a1-95dd635e89aa",
+      "name": "If  WW not empty"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "44b6501c-2097-4f9b-936c-efbded3c4dfe",
+              "leftValue": "={{ $json['nºFactura'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "2e908f16-0470-400b-9dd1-ff168d02da56",
+              "leftValue": "={{ $json['Empresa Vendedora'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "aff9a6f5-7ae7-4179-a5b8-bfd6df90611c",
+              "leftValue": "={{ $json['Fecha Factura'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "31a01e5b-cb71-48cc-a055-d23f395edb41",
+              "leftValue": "={{ $json.ImporteTotal }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "02393d2c-3dec-49af-b89f-d61736132e0a",
+              "leftValue": "={{ $json['Empresa Compradora'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -2480,
+        -380
+      ],
+      "id": "5a4e8f2c-48c3-4d31-8280-829c403395ac",
+      "name": "If GD not empty"
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Google Drive2').item.json.id }}",
+          "mode": "id"
+        },
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "https://drive.google.com/drive/folders/16123G6ygXK8T9lRpwDI9RUiWpWw3tZBK",
+          "mode": "url"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1840,
+        160
+      ],
+      "id": "43052ae3-1c68-4ba2-aa76-19d9fb219135",
+      "name": "Google Drive12",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Google Drive2').item.json.id }}",
+          "mode": "id"
+        },
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "https://drive.google.com/drive/folders/1gj9lnEKB1d-d963I-yYWidpyB2rACpg6",
+          "mode": "url"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1840,
+        -40
+      ],
+      "id": "64f2fb07-8496-43be-8368-7cd1993ffcfb",
+      "name": "Google Drive14",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "oscar@norgenic.com",
+        "subject": "Factura Worldwide a Revisar",
+        "emailType": "text",
+        "message": "Información Faltante: https://drive.google.com/drive/folders/16123G6ygXK8T9lRpwDI9RUiWpWw3tZBK",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -1620,
+        160
+      ],
+      "id": "28390966-1fce-451c-94ce-c35f9fd93311",
+      "name": "Gmail2",
+      "webhookId": "5f190ebd-31f9-455d-aa26-1c7c46317750",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "okMcvzXN8cIjwRYs",
+          "name": "Gmail account (Oscar2)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "newUpdatedFileName": "={{ $('Edit Fields Nombre Factura1').item.json.NombreFactura }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1620,
+        -40
+      ],
+      "id": "ad151750-5563-40cb-ba23-f265e0dd9e4c",
+      "name": "Google Drive15",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      },
+      "notes": "{{ $('If').item.json['nºFactura'] +\"_\"+ $('If').item.json.Proveedor +\"_\"+ $('If').item.json.FechaFactura +\"_\"+ $('If').item.json.ImporteBase +\"_\"+$('OpenAI').item.json.message.content.Comprador }}"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "075e403c-b34b-44bc-9b46-a3ef3fdc10e5",
+              "name": "NombreFactura",
+              "value": "={{ \n$json['Fecha Factura'] \n+\"_\"+ \n$json['Empresa Vendedora'] \n+\"_\"+ \n$json['nºFactura'] \n+\"_\"+ \n$json.ImporteTotal \n+\"_\"+ \n$json['Empresa Compradora']}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2040,
+        -900
+      ],
+      "id": "b9a2511b-c726-44cb-a825-d3d5465fbf4c",
+      "name": "Edit Fields Nombre Factura2"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "21d1bb63-3a27-4f01-9b45-da3fce863b82",
+                    "leftValue": "={{ $('Edit Fields Pre_If\\'s').item.json.text }}",
+                    "rightValue": "Microsoft Ireland Operations Limited",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Bing"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "3e3091c9-fbe8-4bae-89aa-9badcc5cca79",
+                    "leftValue": "={{ $('Edit Fields Pre_If\\'s').item.json.text }}",
+                    "rightValue": "Google Ireland Limited",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Google"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "04875df2-50b6-4916-b743-2c51dfa466eb",
+                    "leftValue": "={{ $('Edit Fields Pre_If\\'s').item.json.text }}",
+                    "rightValue": "VIA TRIBUT",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "ViaTribut"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "fc67fec1-4141-4a89-acc2-c41788d80e34",
+                    "leftValue": "={{ $('If TAXGOV-NORGENIC').item.json.text.match(/(.+) S\\.L\\.U/)[1].replaceSpecialChars().toLowerCase().toTitleCase().replaceAll(' ','') }}",
+                    "rightValue": "AbacAssessors",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "AbacAssessors"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -2940,
+        -660
+      ],
+      "id": "66caf823-3e29-4802-8c15-123c422159e8",
+      "name": "Switch Empresas TaxG"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a54606ad-f81c-4ead-83c1-75fc10999fdf",
+              "name": "nºFactura",
+              "value": "={{ $('Edit Fields Pre_If\\'s').item.json.text.match(/FIS\\d{2}.\\d{3}/)[0].replace(' ', '-') }}",
+              "type": "string"
+            },
+            {
+              "id": "c5920399-30b1-430c-b6b9-e6e0a5aa07a2",
+              "name": "Empresa Vendedora",
+              "value": "=ViaTribut",
+              "type": "string"
+            },
+            {
+              "id": "67e4a818-834d-417a-b601-15da60adebf1",
+              "name": "Fecha Factura",
+              "value": "={{    $('Edit Fields Pre_If\\'s').item.json.text.match(/\\n(\\d{2}-\\d{2}-\\d{4})/)[1].split('-').reverse().join('-') }}",
+              "type": "string"
+            },
+            {
+              "id": "9d8217eb-ae6d-4c33-9da8-c0f7a7c03d4f",
+              "name": "ImporteTotal",
+              "value": "={{$('Edit Fields Pre_If\\'s').item.json.text.match(/\\n([\\d,]+)\\nVencimientoForma de pago/)[1].trim()+'€'}}{{ $('Edit Fields Pre_If\\'s').item.json.text.match(/\\n(.+)\\nForma de pago Vencimiento/)[1] }}",
+              "type": "string"
+            },
+            {
+              "id": "342f65eb-6e90-4890-8e6f-0d466fdcc056",
+              "name": "Empresa Compradora",
+              "value": "={{ $('Edit Fields EmpresaCompradora').item.json['Empresa Compradora'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2680,
+        -800
+      ],
+      "id": "1b9ceb4a-aa07-4fa9-9e89-5094af5fded6",
+      "name": "Edit Fields TG-ViaTribut"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cd0429e7-4804-494d-b0b9-8f422ec3cf7e",
+              "name": "nºFactura",
+              "value": "={{ $('Edit Fields Pre_If\\'s').item.json.text.match(/Número (\\d+)/)[1] }}",
+              "type": "string"
+            },
+            {
+              "id": "c5920399-30b1-430c-b6b9-e6e0a5aa07a2",
+              "name": "Empresa Vendedora",
+              "value": "=Microsoft Ireland Operations Limited",
+              "type": "string"
+            },
+            {
+              "id": "c65df9ef-54d2-4592-a5e0-c6a5527dc7f9",
+              "name": "Fecha Factura",
+              "value": "={{ $('Edit Fields Pre_If\\'s').item.json.text.match(/Fecha del documento (\\d{2}\\/\\d{2}\\/\\d{4})/)[1] }}",
+              "type": "string"
+            },
+            {
+              "id": "97a1aba0-e926-4662-864c-eb3c79e9ceae",
+              "name": "ImporteTotal",
+              "value": "={{ \n    $('Edit Fields Pre_If\\'s').item.json.text.match(/\\nImporte \\(EUR\\) \\n(.+)\\n(?:Importe ya pagado|Servicio al cliente)/)[1] \n}}_€_",
+              "type": "string"
+            },
+            {
+              "id": "39b42bc2-d757-42d4-8baf-923bd9fe3c9d",
+              "name": "Empresa Compradora",
+              "value": "={{ $('Edit Fields EmpresaCompradora').item.json['Empresa Compradora'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2680,
+        -1120
+      ],
+      "id": "be1789aa-d218-42bf-9783-f6e3a5978516",
+      "name": "Edit Fields TaxG-Bing"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cd0429e7-4804-494d-b0b9-8f422ec3cf7e",
+              "name": "nºFactura",
+              "value": "={{ $('Edit Fields Pre_If\\'s').item.json.text.match(/Invoice number: (\\d+)/)[1] }}",
+              "type": "string"
+            },
+            {
+              "id": "c5920399-30b1-430c-b6b9-e6e0a5aa07a2",
+              "name": "Empresa Vendedora",
+              "value": "=Google Ireland Limited",
+              "type": "string"
+            },
+            {
+              "id": "c65df9ef-54d2-4592-a5e0-c6a5527dc7f9",
+              "name": "Fecha Factura",
+              "value": "={{ $('Edit Fields Pre_If\\'s').item.json.text.match(/\\.(\\d{2} \\w{3} \\d{4})/)[1] }}",
+              "type": "string"
+            },
+            {
+              "id": "97a1aba0-e926-4662-864c-eb3c79e9ceae",
+              "name": "ImporteTotal",
+              "value": "={{ \n    $('Edit Fields Pre_If\\'s').item.json.text.match(/\\nAccount ID\\n(€[\\d,]+\\.\\d{2})/)[1] \n}}",
+              "type": "string"
+            },
+            {
+              "id": "39b42bc2-d757-42d4-8baf-923bd9fe3c9d",
+              "name": "Empresa Compradora",
+              "value": "={{ $('Edit Fields EmpresaCompradora').item.json['Empresa Compradora'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2680,
+        -960
+      ],
+      "id": "aa6d532b-211e-400d-b17e-94a7555326a4",
+      "name": "Edit Fields TaxG-Google"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "44b6501c-2097-4f9b-936c-efbded3c4dfe",
+              "leftValue": "={{ $json['nºFactura'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "2e908f16-0470-400b-9dd1-ff168d02da56",
+              "leftValue": "={{ $json['Empresa Vendedora'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "aff9a6f5-7ae7-4179-a5b8-bfd6df90611c",
+              "leftValue": "={{ $json['Fecha Factura'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "31a01e5b-cb71-48cc-a055-d23f395edb41",
+              "leftValue": "={{ $json.ImporteTotal }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "02393d2c-3dec-49af-b89f-d61736132e0a",
+              "leftValue": "={{ $json['Empresa Compradora'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -2460,
+        -880
+      ],
+      "id": "2ac7b1f5-58a4-45fd-90b2-3b9fe48f18a9",
+      "name": "If TG not empty"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "58572419-b3f3-4ad8-99b8-4f950438e2ad",
+              "leftValue": "={{ $('Edit Fields Pre_If\\'s').item.json.text }}",
+              "rightValue": "Pago rechazado",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -2260,
+        -880
+      ],
+      "id": "88d4d92d-0859-4611-a84c-9d06447e27ed",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Google Drive2').item.json.id }}",
+          "mode": "id"
+        },
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "https://drive.google.com/drive/folders/1QiokouvHtBmH-TtZ5ftQ7-meRTvy1upa",
+          "mode": "url"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1840,
+        -560
+      ],
+      "id": "d3fd1b52-8e96-492d-aa86-649b582d0650",
+      "name": "Google Drive4",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Google Drive2').item.json.id }}",
+          "mode": "id"
+        },
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "https://drive.google.com/drive/folders/1XV7GEcgZ7hvQUKySPVEalwdFSPFuEI4D",
+          "mode": "url"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1840,
+        -900
+      ],
+      "id": "52cff1a3-0ae6-4b81-8205-daac38c4e559",
+      "name": "Google Drive5",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "newUpdatedFileName": "={{ $('Edit Fields Nombre Factura2').item.json.NombreFactura }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1620,
+        -900
+      ],
+      "id": "a1fc8295-4092-4a92-b477-7f60823ffa86",
+      "name": "Google Drive6",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      },
+      "notes": "{{ $('If').item.json['nºFactura'] +\"_\"+ $('If').item.json.Proveedor +\"_\"+ $('If').item.json.FechaFactura +\"_\"+ $('If').item.json.ImporteBase +\"_\"+$('OpenAI').item.json.message.content.Comprador }}"
+    },
+    {
+      "parameters": {
+        "sendTo": "oscar@norgenic.com",
+        "subject": "Factura Taxagov a Revisar",
+        "emailType": "text",
+        "message": "Información Faltante: https://drive.google.com/drive/folders/1QiokouvHtBmH-TtZ5ftQ7-meRTvy1upa",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -1620,
+        -560
+      ],
+      "id": "8e018480-106e-47e2-9aa3-2b0226f833be",
+      "name": "Gmail4",
+      "webhookId": "a14983c7-6fe2-4ba4-986f-a32dddc1711c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "okMcvzXN8cIjwRYs",
+          "name": "Gmail account (Oscar2)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Google Drive2').item.json.id }}",
+          "mode": "id"
+        },
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "https://drive.google.com/drive/folders/1TWAWtb7FC52wXBHsJdB5YHOw4w70rZmu",
+          "mode": "url"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -2680,
+        -1280
+      ],
+      "id": "5c4f5d59-09f6-48eb-bdc7-72473cd56ec9",
+      "name": "Google Drive16",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "5528fc73-76cd-40f5-9cc1-e770650e1535",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "Mailgun Technologies,",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "62eee7b0-c457-4367-9c83-386d711e9139",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "Everapi GmbH",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -4340,
+        300
+      ],
+      "id": "09db1c8c-a6cb-4623-b964-fa6caaa850ed",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "https://drive.google.com/drive/folders/17WR7hfIet-hcpFrjHW0agwHsC8KnM1Sn",
+            "mode": "url"
+          },
+          "whatToSearch": "files"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -5940,
+        -420
+      ],
+      "id": "7f243570-73a8-490d-bea3-72cd4884bb0c",
+      "name": "Google Drive1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "js4u6CDXzyhYBp61",
+          "mode": "id"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        -5940,
+        -260
+      ],
+      "id": "8372e2ef-3bb3-4dbc-8056-62bf09e0315c",
+      "name": "Execute Workflow"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a54606ad-f81c-4ead-83c1-75fc10999fdf",
+              "name": "nºFactura",
+              "value": "={{ \n$('Edit Fields Pre_If\\'s').item.json.text.match(/\\n(.+\\/) (.+)B42759068/)[1].replace(' ', '')+\n$('Edit Fields Pre_If\\'s').item.json.text.match(/\\n(.+\\/) (.+)B42759068/)[2].replace(' ', '')\n}}",
+              "type": "string"
+            },
+            {
+              "id": "c5920399-30b1-430c-b6b9-e6e0a5aa07a2",
+              "name": "Empresa Vendedora",
+              "value": "=AbacAssessors",
+              "type": "string"
+            },
+            {
+              "id": "67e4a818-834d-417a-b601-15da60adebf1",
+              "name": "Fecha Factura",
+              "value": "={{    $('Edit Fields Pre_If\\'s').item.json.text.match(/B42759068(\\d{2}-\\d{2}-\\d{4})/)[1].split('-').reverse().join('-') }}",
+              "type": "string"
+            },
+            {
+              "id": "9d8217eb-ae6d-4c33-9da8-c0f7a7c03d4f",
+              "name": "ImporteTotal",
+              "value": "={{$\n('Edit Fields Pre_If\\'s').item.json.text.match(\n/(\\d+\\,\\d{2})\\d{3}\\,\\d+/\n)[1]\n}}€",
+              "type": "string"
+            },
+            {
+              "id": "342f65eb-6e90-4890-8e6f-0d466fdcc056",
+              "name": "Empresa Compradora",
+              "value": "={{ $('Edit Fields EmpresaCompradora').item.json['Empresa Compradora'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2680,
+        -660
+      ],
+      "id": "6b0460db-f843-403c-a17e-2e4cf95783fc",
+      "name": "Edit Fields TG-AbacAssessors"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive2": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit Fields Pre_If's",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields WWS": {
+      "main": [
+        [
+          {
+            "node": "If EmpresaCompradora",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields GD": {
+      "main": [
+        [
+          {
+            "node": "If EmpresaCompradora",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields Norgenic": {
+      "main": [
+        [
+          {
+            "node": "If EmpresaCompradora",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields Other": {
+      "main": [
+        [
+          {
+            "node": "Google Drive13",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields Taxgov": {
+      "main": [
+        [
+          {
+            "node": "If EmpresaCompradora",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields Pre_If's": {
+      "main": [
+        [
+          {
+            "node": "If Taxgov",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Taxgov": {
+      "main": [
+        [
+          {
+            "node": "If TAXGOV-NORGENIC",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If WW",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If WW": {
+      "main": [
+        [
+          {
+            "node": "SwitchWW",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If GD",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If GD": {
+      "main": [
+        [
+          {
+            "node": "SwitchGD",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If Norgenic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Norgenic": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields Norgenic",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If EmpresaCompradora": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields EmpresaCompradora",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If TAXGOV-NORGENIC": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields Taxgov",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields Other",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Google Drive1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Execute Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields EmpresaCompradora": {
+      "main": [
+        [
+          {
+            "node": "Switch Empresa Compradora",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive13": {
+      "main": [
+        [
+          {
+            "node": "Gmail1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch Empresa Compradora": {
+      "main": [
+        [
+          {
+            "node": "Google Drive16",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch Empresas TaxG",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch Empresas GD",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch Empresas WW",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields Other",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields GD a Crec": {
+      "main": [
+        [
+          {
+            "node": "If GD not empty",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields GD-ViaTribut": {
+      "main": [
+        [
+          {
+            "node": "If GD not empty",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SwitchGD": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields GD",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields GD",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields GD",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields GD",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SwitchWW": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields WWS",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields WWS",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields WWS",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields WWS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive10": {
+      "main": [
+        [
+          {
+            "node": "Google Drive11",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields Nombre Factura": {
+      "main": [
+        [
+          {
+            "node": "Google Drive10",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields WW a Crec1": {
+      "main": [
+        [
+          {
+            "node": "If  WW not empty",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields WW-ViaTribut1": {
+      "main": [
+        [
+          {
+            "node": "If  WW not empty",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch Empresas WW": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields WW a Crec1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields WW-ViaTribut1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Drive12",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch Empresas GD": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields GD a Crec",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields GD-ViaTribut",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If  WW not empty": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields Nombre Factura1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Drive12",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If GD not empty": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields Nombre Factura",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields Nombre Factura1": {
+      "main": [
+        [
+          {
+            "node": "Google Drive14",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive12": {
+      "main": [
+        [
+          {
+            "node": "Gmail2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive14": {
+      "main": [
+        [
+          {
+            "node": "Google Drive15",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch Empresas TaxG": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields TaxG-Bing",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields TaxG-Google",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields TG-ViaTribut",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields TG-AbacAssessors",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Drive4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields TG-ViaTribut": {
+      "main": [
+        [
+          {
+            "node": "If TG not empty",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields TaxG-Bing": {
+      "main": [
+        [
+          {
+            "node": "If TG not empty",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields TaxG-Google": {
+      "main": [
+        [
+          {
+            "node": "If TG not empty",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If TG not empty": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Drive4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields Nombre Factura2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Drive4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive4": {
+      "main": [
+        [
+          {
+            "node": "Gmail4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive5": {
+      "main": [
+        [
+          {
+            "node": "Google Drive6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields Nombre Factura2": {
+      "main": [
+        [
+          {
+            "node": "Google Drive5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields Norgenic",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields Other",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive1": {
+      "main": [
+        [
+          {
+            "node": "Google Drive2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive16": {
+      "main": [
+        []
+      ]
+    },
+    "Edit Fields TG-AbacAssessors": {
+      "main": [
+        [
+          {
+            "node": "If TG not empty",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "228fb47e-cf64-45ed-8056-97d7fb894f7c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "921b42ac40713cf8e80903373553a75b6a7dc1f7ad27fcbec19d4a8582a592ca"
+  },
+  "id": "GwGLQr0FFOYJx6DC",
+  "tags": [
+    {
+      "createdAt": "2025-03-28T08:07:18.535Z",
+      "updatedAt": "2025-03-28T08:07:18.535Z",
+      "id": "0aWqZAAUUxSDgq4m",
+      "name": "Facturación"
+    }
+  ]
+}

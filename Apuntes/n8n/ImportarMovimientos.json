@@ -1,0 +1,852 @@
+{
+  "name": "HistoricoMov.Banc.Norgenic€",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "https://drive.google.com/drive/folders/1QL47EotyHLz4xhEssWw_MWIAvqDKcsg1",
+          "mode": "url"
+        },
+        "event": "fileCreated",
+        "options": {
+          "fileType": "application/vnd.google-apps.spreadsheet"
+        }
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        -20,
+        60
+      ],
+      "id": "175c0a3e-1fdc-4f4d-bc3e-5926345ba790",
+      "name": "Google Drive Trigger",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        200,
+        60
+      ],
+      "id": "55455e7d-6df6-4f00-9616-35447719cb9c",
+      "name": "Google Drive1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ab7ca8b7-de02-4ca3-8f8d-7ad99d61828c",
+              "name": "Fecha",
+              "value": "={{ $json.Fecha }}",
+              "type": "string"
+            },
+            {
+              "id": "cd4f9cec-6550-424d-a4a6-f4ddaed87f81",
+              "name": "Fecha valor",
+              "value": "={{ $json['Fecha valor'] }}",
+              "type": "string"
+            },
+            {
+              "id": "23e63087-64f5-4556-9bd0-f599c756b66b",
+              "name": "Movimiento",
+              "value": "={{ $json.Movimiento }}",
+              "type": "string"
+            },
+            {
+              "id": "2b22d1c0-5947-4c72-af6a-74f382085f3f",
+              "name": "Más datos",
+              "value": "={{ $json['Más datos'] }}",
+              "type": "string"
+            },
+            {
+              "id": "25fd7988-7bfb-4cd4-9697-6bbce21d7d0a",
+              "name": "Importe",
+              "value": "={{ $json.Importe }}",
+              "type": "number"
+            },
+            {
+              "id": "eed331a5-b206-49ed-b382-610063cf353f",
+              "name": "Saldo",
+              "value": "={{ $json.Saldo }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1760,
+        -40
+      ],
+      "id": "4ea6b1cd-f7d0-4a2b-ac9b-44d72f690d89",
+      "name": "Edit FieldsImportados"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "1089991841",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Fecha",
+              "displayName": "Fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Fecha valor",
+              "displayName": "Fecha valor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Movimiento",
+              "displayName": "Movimiento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Más datos",
+              "displayName": "Más datos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Importe",
+              "displayName": "Importe",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Saldo",
+              "displayName": "Saldo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1980,
+        -40
+      ],
+      "id": "5e0f9aab-558b-44d7-8ecb-8e46e875910b",
+      "name": "Google Sheets Historico",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hZcBoGBnLwH882Qs",
+          "name": "Google Sheets account Oscar"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "UID",
+              "field2": "UID"
+            }
+          ]
+        },
+        "resolve": "preferInput1",
+        "fuzzyCompare": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.compareDatasets",
+      "typeVersion": 2.3,
+      "position": [
+        1480,
+        -60
+      ],
+      "id": "a770fc59-6d8b-4b52-a8f1-b594acf950ff",
+      "name": "Compare Datasets"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "1089991841",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        600,
+        60
+      ],
+      "id": "692e09c3-09cb-4484-83c9-72cee2c48cbb",
+      "name": "Google Sheets Historico1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hZcBoGBnLwH882Qs",
+          "name": "Google Sheets account Oscar"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "adefaf18-ffcb-4177-b0f8-460b2ca7e757",
+              "name": "UID",
+              "value": "={{ \n$json.Movimiento+\n$json['Más datos']+\n$json.Importe+\n$json.Saldo}}",
+              "type": "string"
+            },
+            {
+              "id": "5bd3d07e-05f0-4e0b-bbe3-003ec9bf5ace",
+              "name": "Fecha",
+              "value": "={{ $json.Fecha }}",
+              "type": "string"
+            },
+            {
+              "id": "c83f2d6f-2642-452a-ab3c-b81185dac662",
+              "name": "Fecha valor",
+              "value": "={{ $json['Fecha valor'] }}",
+              "type": "string"
+            },
+            {
+              "id": "a1ee998a-ce4b-4e6f-8a73-72f66bd4a725",
+              "name": "Movimiento",
+              "value": "={{ $json.Movimiento }}",
+              "type": "string"
+            },
+            {
+              "id": "e2484f28-aa8a-4051-95be-14709d2c2ae2",
+              "name": "Más datos",
+              "value": "={{ $json['Más datos'] }}",
+              "type": "string"
+            },
+            {
+              "id": "74f43ab4-df28-4bba-bc38-55818c6be06a",
+              "name": "Importe",
+              "value": "={{ $json.Importe}}",
+              "type": "number"
+            },
+            {
+              "id": "dd5cca1e-33b1-404f-9a52-92acc4233141",
+              "name": "Saldo",
+              "value": "={{ $json.Saldo }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1020,
+        -140
+      ],
+      "id": "e32bee81-c56e-444a-a1c4-e8d52c491dd5",
+      "name": "Campos Historico"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "adefaf18-ffcb-4177-b0f8-460b2ca7e757",
+              "name": "UID",
+              "value": "={{ \n$json.Movimiento+\n$json['Más datos']+\n$json.Importe+\n$json.Saldo}}",
+              "type": "string"
+            },
+            {
+              "id": "5bd3d07e-05f0-4e0b-bbe3-003ec9bf5ace",
+              "name": "Fecha",
+              "value": "={{ $json.Fecha }}",
+              "type": "string"
+            },
+            {
+              "id": "c83f2d6f-2642-452a-ab3c-b81185dac662",
+              "name": "Fecha valor",
+              "value": "={{ $json['Fecha valor'] }}",
+              "type": "string"
+            },
+            {
+              "id": "a1ee998a-ce4b-4e6f-8a73-72f66bd4a725",
+              "name": "Movimiento",
+              "value": "={{ $json.Movimiento }}",
+              "type": "string"
+            },
+            {
+              "id": "e2484f28-aa8a-4051-95be-14709d2c2ae2",
+              "name": "Más datos",
+              "value": "={{ $json['Más datos'] }}",
+              "type": "string"
+            },
+            {
+              "id": "74f43ab4-df28-4bba-bc38-55818c6be06a",
+              "name": "Importe",
+              "value": "={{ $json.Importe}}",
+              "type": "number"
+            },
+            {
+              "id": "dd5cca1e-33b1-404f-9a52-92acc4233141",
+              "name": "Saldo",
+              "value": "={{ $json.Saldo }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1020,
+        60
+      ],
+      "id": "87e91baa-2970-44b7-82f5-3c90ce352fd7",
+      "name": "Campos Historico1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// El input 'items' contiene las filas del Google Sheet\nconst reversedItems = items.reverse();\nreturn reversedItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        820,
+        -140
+      ],
+      "id": "d70c810e-f177-4a9e-8c42-443daf3b0a60",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1Cjam3-j8DUqTvt_SDgnUxJSAwc0JeI-tQzut13Ana_I/edit?gid=1963712436#gid=1963712436",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1963712436,
+          "mode": "list",
+          "cachedResultName": "Movimientos_cuenta_0087231",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Cjam3-j8DUqTvt_SDgnUxJSAwc0JeI-tQzut13Ana_I/edit#gid=1963712436"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        260,
+        -460
+      ],
+      "id": "4c4a370c-cece-47f7-8035-8b5bcc222a6e",
+      "name": "Google Sheets Historico2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hZcBoGBnLwH882Qs",
+          "name": "Google Sheets account Oscar"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// El input 'items' contiene las filas del Google Sheet\nconst reversedItems = items.reverse();\nreturn reversedItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        420,
+        -460
+      ],
+      "id": "62fb3f0d-5688-478b-8f5e-b5f65ff1a726",
+      "name": "Code1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw/edit?gid=1963712436#gid=1963712436",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1963712436,
+          "mode": "list",
+          "cachedResultName": "Movimientos_cuenta_0087231",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw/edit#gid=1963712436"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Fecha",
+              "displayName": "Fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Fecha valor",
+              "displayName": "Fecha valor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Movimiento",
+              "displayName": "Movimiento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Más datos",
+              "displayName": "Más datos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Importe",
+              "displayName": "Importe",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Saldo",
+              "displayName": "Saldo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        580,
+        -460
+      ],
+      "id": "c5ec7d3f-29c7-4d5f-836f-5253a2921533",
+      "name": "Google Sheets Historico3",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hZcBoGBnLwH882Qs",
+          "name": "Google Sheets account Oscar"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        60,
+        -460
+      ],
+      "id": "bd6e8a9f-ec06-4db0-90a4-97f8dd4612a0",
+      "name": "When clicking ‘Test workflow’",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "deleteFile",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        600,
+        240
+      ],
+      "id": "2f474b11-7739-43b1-bf7a-21275126dd3a",
+      "name": "Google Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "zzvYSx0zfhl1rHWA",
+          "mode": "id"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        2200,
+        60
+      ],
+      "id": "b0c2b4d7-8772-4c50-a7ee-e939ba39c0a4",
+      "name": "Execute Workflow PuntearFacturas",
+      "retryOnFail": true,
+      "executeOnce": true,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "nQyAge8xl3tEL2Mg",
+          "mode": "id"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        2200,
+        -120
+      ],
+      "id": "1df21585-190c-46f6-95e5-63725cb1ff79",
+      "name": "Execute Workflow AsignaciónDeGastos",
+      "executeOnce": true,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $json.name.match(/(.+)-/)[1] }}",
+          "mode": "name"
+        },
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "specifyRange",
+              "headerRow": 3,
+              "firstDataRow": 4
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        600,
+        -140
+      ],
+      "id": "4ba2dabf-ef45-4626-bb40-7c79883049a7",
+      "name": "Google Sheets Importado",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hZcBoGBnLwH882Qs",
+          "name": "Google Sheets account Oscar"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Drive Trigger": {
+      "main": [
+        [
+          {
+            "node": "Google Drive1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive1": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets Importado",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Google Sheets Historico1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit FieldsImportados": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets Historico",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Historico": {
+      "main": [
+        [
+          {
+            "node": "Execute Workflow PuntearFacturas",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Execute Workflow AsignaciónDeGastos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Historico1": {
+      "main": [
+        [
+          {
+            "node": "Campos Historico1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Campos Historico": {
+      "main": [
+        [
+          {
+            "node": "Compare Datasets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Campos Historico1": {
+      "main": [
+        [
+          {
+            "node": "Compare Datasets",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Compare Datasets": {
+      "main": [
+        [
+          {
+            "node": "Edit FieldsImportados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Campos Historico",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Historico2": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets Historico3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets Historico2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Importado": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 60
+  },
+  "versionId": "ac40d0bf-08a3-427e-849e-133a78722afa",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "921b42ac40713cf8e80903373553a75b6a7dc1f7ad27fcbec19d4a8582a592ca"
+  },
+  "id": "CjHESsnyWNxF0JcW",
+  "tags": [
+    {
+      "createdAt": "2025-03-28T08:09:12.598Z",
+      "updatedAt": "2025-03-28T08:09:12.598Z",
+      "id": "4KqrBzlhcE2xFL6c",
+      "name": "Conciliación Bancaria"
+    }
+  ]
+}
