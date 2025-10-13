@@ -242,7 +242,8 @@ Importe:
 
 La función QUERY (QUERY(limiteFras; textoQuery)) luego ejecuta esta condición compuesta sobre el HistorialFacturas (variable limiteFras), devolviendo todos los UID de facturas que cumplen con el proveedor, el rango de fechas flexible y la coincidencia opcional de importe.
 
-
+Construcción de la Query: La fórmula ensambla dinámicamente la cláusula WHERE para una QUERY que se ejecuta sobre HistorialFacturas :   
+    textoQuery → "select A where " + regexNombre + regexMinfecha + regexMaxfecha + regexImporte
 
 
 #### Paso 3: Gestión de Múltiples Coincidencias y Anti-Duplicidad
@@ -295,7 +296,7 @@ Este framework de conciliación es de alta madurez, combinando la precisión del
 ### III.2. Evaluación de Riesgos y Robustez del Punteo Automatizado
 Aunque ambiciosa, la dependencia de esta lógica presenta vulnerabilidades inherentes. La principal advertencia para cualquier sistema basado en REGEX aplicado a extractos bancarios es su fragilidad y extrema sensibilidad al formato. Si La Caixa, o un procesador de pagos (como Adyen ), modifica ligeramente el descriptor del movimiento bancario (ej., añade un espacio o un código de referencia), la expresión regular falla, resultando en un falso negativo (la fórmula O778 no sugiere punteo).   
 
-!!!
+Vulnerabilidad de la Coincidencia Estricta: Incluso con la opción flexible (V=0), si la coincidencia de importe (V=1) se utiliza para euros, cualquier error de redondeo o comisión no contemplada resultará en un fallo.
 
 La existencia de la Columna G, actúa como la válvula de seguridad del proceso: el algoritmo sugiere, pero el controlador contable valida y asume la responsabilidad final. 
 
