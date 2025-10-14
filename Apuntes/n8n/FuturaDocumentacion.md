@@ -1,0 +1,3 @@
+El SpreadSheet de la Caixa (Norgenic €) necesita documentación de cada uno de sus gastos y sus patrones para poder ofrecer como contexto datos clave como la relación entre empresas/bancos (taxgov) a fin de tener una imagen mas clara de el verdadero flujo de capital.
+
+Necesitamos una documentación del tratamiento de los datos y del flujo de capital para cada banco de cada emrpesa para poder hacer un analisis completo del estado de cada una de las empresas, detectar rentabilidades, detectar riesgos y cambios o incongruencias, ...

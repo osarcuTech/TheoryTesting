@@ -347,4 +347,7 @@ Mejora de la Extracción de Datos (Cebollón): Para aumentar la robustez de la c
 Escalabilidad Tecnológica: Si bien la solución de Google Sheets y n8n es altamente eficiente para el tamaño actual de la entidad, el riesgo de la fragilidad de REGEX se agravará con el aumento del volumen de transacciones y la diversificación bancaria. Para garantizar la escalabilidad a largo plazo, la entidad deberá evaluar la migración a sistemas ERP o TMS (Treasury Management Systems) que integren capacidades nativas de machine learning para la conciliación de extractos, los cuales están diseñados para ser agnósticos al formato bancario y son más resilientes que las expresiones regulares.   
 
 
+Contexto de relación entre esta cuenta bancaria y las otras cuetas/empresas:
 
+TaxGov se encarga de gestionar la publicidad de los productos (TFN, ITIN, ...) Norgenic gestiona el cobro, la contabilidad, ... En lo que concierne a los gastos de Norgenic, Coremid podria considerarse como una subcontratación de CEO + servicios extras.
+Los cobros de las ventas de Norgenic se realizan mayormente en otras cuentas bancarias de distintas divisas. Podríamos considerar este SpreadSheet como la Raíz de la contabilidad de la empresa y el resto de cuentas bancarias de Norgenic como gestores de las operaciones de cobro para las distintas divisas, ...
