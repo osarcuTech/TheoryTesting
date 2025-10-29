@@ -1,0 +1,9 @@
+C0: Crear una formula en la columna G que sustituya la completa entrada manual por un método de aprobación por booleano en una columna. Ejemplo: =if(x=true;x; x=false; z) donde G devuelva x si validamos y "z" en caso que no validemos. "z" estará en blanco a menos que introduzcamos una factura manualmente. Por lo que actuaria así:
+	- si x=0 y z="" g="". 
+	- si x=0 y z= Factura g=Factura. 
+	- si x=1 y z= Factura g=C0.
+
+Por otra parte. Para mejorar el rendimiento del spreadsheet planteo crear una hoja con el "lastColumn" de cada una de las hojas.
+Así, en vez de calcular el rango en cada formula de cada hoja que lo necesite, las formulas la sacaran de esa.
+Con ello, teóricamente, el rendimiento del SpreadSheet debería tener una mejora significativa.
+
