@@ -1,9 +1,8 @@
-C0: Crear una formula en la columna G que sustituya la completa entrada manual por un método de aprobación por booleano en una columna. Ejemplo: =if(x=true;x; x=false; z) donde G devuelva x si validamos y "z" en caso que no validemos. "z" estará en blanco a menos que introduzcamos una factura manualmente. Por lo que actuaria así:
-	- si x=0 y z="" g="". 
-	- si x=0 y z= Factura g=Factura. 
-	- si x=1 y z= Factura g=C0.
+El indicador clave de rendimiento (KPI) para evaluar el éxito de la proposición C0 será el aumento de la tasa de acierto del punteo automático (O) que es validado por el operador. Cuanto más robusto sea el motor de punteo O, mayor será la frecuencia de uso del input booleano P=1, reduciendo la dependencia del input manual de excepción Q=z. La efectividad de C0, por lo tanto, es una medida indirecta de la madurez y precisión del sistema de perfiles de proveedores y la base de datos histórica de facturas.
 
-Por otra parte. Para mejorar el rendimiento del spreadsheet planteo crear una hoja con el "lastColumn" de cada una de las hojas.
-Así, en vez de calcular el rango en cada formula de cada hoja que lo necesite, las formulas la sacaran de esa.
-Con ello, teóricamente, el rendimiento del SpreadSheet debería tener una mejora significativa.
 
+
+El impacto más significativo de la mejora C0 se observa en la calidad de los datos para la contabilidad de costes. La desagregación de costes mediante la clasificación en J (Categoría) y la asignación a un Departamento (Columna I) es fundamental para aplicar metodologías avanzadas, como el "Método de Tasa Múltiple por Departamento". Al acelerar y formalizar el proceso de validación en G mediante la aprobación booleana, se reduce la latencia en la confirmación de la validez de los datos transaccionales, lo que proporciona información más rápida y verificada para los cálculos de costeo avanzado y para métricas financieras críticas como la Tasa de Consumo de Efectivo (Burn Rate).
+
+
+Usa la extensión "Sheetgo" o "Performance Analyzer for Google Sheets" (busca en el marketplace) para identificar qué partes ralentizan más.
