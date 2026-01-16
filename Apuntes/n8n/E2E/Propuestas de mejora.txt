@@ -1,8 +1,36 @@
+C1 y C2 se han modificado para buscar las coincidencias de Movimientos_cuenta!NombresFactura con la UID de la factura y poner la información en este Sheet en vez de en HistorialFacturas. El filtro se hace según el row_number encontrado en la búsqueda de columnas del nodo anterior.
+
+
 El indicador clave de rendimiento (KPI) para evaluar el éxito de la proposición C0 será el aumento de la tasa de acierto del punteo automático (O) que es validado por el operador. Cuanto más robusto sea el motor de punteo O, mayor será la frecuencia de uso del input booleano P=1, reduciendo la dependencia del input manual de excepción Q=z. La efectividad de C0, por lo tanto, es una medida indirecta de la madurez y precisión del sistema de perfiles de proveedores y la base de datos histórica de facturas.
 
 
 
-El impacto más significativo de la mejora C0 se observa en la calidad de los datos para la contabilidad de costes. La desagregación de costes mediante la clasificación en J (Categoría) y la asignación a un Departamento (Columna I) es fundamental para aplicar metodologías avanzadas, como el "Método de Tasa Múltiple por Departamento". Al acelerar y formalizar el proceso de validación en G mediante la aprobación booleana, se reduce la latencia en la confirmación de la validez de los datos transaccionales, lo que proporciona información más rápida y verificada para los cálculos de costeo avanzado y para métricas financieras críticas como la Tasa de Consumo de Efectivo (Burn Rate).
-
 
 Usa la extensión "Sheetgo" o "Performance Analyzer for Google Sheets" (busca en el marketplace) para identificar qué partes ralentizan más.
+
+Generar la UID de movimiento para facilitar el reconocimiento de "únicos" en movimientos y en descripción del movimiento (Movimiento+MasDatos). De este modo
+podemos filtrar los movimientos con descripción única y que no estén en la BD_AsigGastos el objetivo es poder eliminar (o marcar como procesada. Ej: X o Def_UID) filas de BD_Movimientos sin que se modifique nuestro BD_AsigCostes, para que C0 siga funcionando correctamente.
+
+
+
+Copia de seguridad:
+Trigger cuando "Movimientos_cuenta_0087231!V2(Columna: BD)" sea true. Empezaremos poniendola en False para que no pueda volver a ejecutarse hasta que se termine de ejecutar el resto del código.
+
+Copiaremos los valores de la fila que nos interesan (PeriodoCobro; NombreFactura; CF in/out; CF category; PlataformaPago; P.Conable; Validacion (CO); Ubicación VT; ID_Enviada; Carpeta; Def_UID) de "Movimientos_cuenta_0087231" a "BD_Banco!". 
+
+	Al poner en "BD_Banco!" la Def_Uid, eliminara la fila de "Movimientos_cuenta_0087231!" dejando solo las pendientes de aprobar. Esto causara que, 	si había una factura en esa linea quede como no punteada en "HistorialFacturas!" por lo que cogeremos de "NombreFactura" la UID de la factura 	emparejada, la buscaremos en "BD_Facturas!UIDmovimientos" y pegaremos ahí la UID del movimiento bancarios, haciendo que esta factura también 	desaparezca de "HistorialFacturas!".
+
+	Esto dejara los datos entrados manualmente en "Movimientos_cuenta_0087231!" desemparejados. Para arreglarlo tendremos que arrastrar los datos 	manuales siguientes (de la fila siguiente a la que estábamos hasta la última fila con datos [lastRow+1 ya que estos no se habrán desplazado hacia 	abajo con la formula]) una fila para abajo(row2 to lastRow). Esto volverá a alinear correctamente todos los datos y en caso de que la siguiente 	también esté aprobada actuará como trigger para que lo pase a la BD.
+
+
+AppScripts FormAsigCostes:
+1- Trigger --> append: Script que mire los patrones auto-completados y los marque como aprobados.
+2- Trigger --> validate: Cuando una fila sea validada (manualmente o automáticamente).
+	- Copiar valores. 
+	- Sustituir valores de la hoja por "" o equivalentes.
+	- Pegar valores en AsigCostes
+	- El paso anterior "eliminara" la fila validada y, si no hay datos añadidos manualmente en otra fila que no sea la validada, dejará el resto de 	  información en un formato correcto al ser únicamente dependiente de formulas.
+	- Seguridad (En caso de haber añadido info en filas distintas a la validada):  Deberemos arrastrar la información manual, de las filas siguientes 	  a la validada, una fila hacia abajo para dejarla en el sitio correspondiente. 
+		- Condicional: (If fila actual hasta lastRow <>""). If con loop complejo.
+		- Preventivo1: Arrastrarlo sin importar si había o no info.
+		- Preventivo2: Dejar el resto de filas en blanco en paso 2. Solo se puede rellenar una a la vez.
