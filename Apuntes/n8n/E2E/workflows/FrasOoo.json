@@ -1,0 +1,334 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {
+          "binaryPropertyName": "data"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        360,
+        0
+      ],
+      "id": "62575aa3-724c-4af4-a507-c098260570eb",
+      "name": "Google Drive1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "account.move",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "move_type",
+              "fieldValue": "in_invoice"
+            },
+            {
+              "fieldName": "ref",
+              "fieldValue": "={{ $json.name }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        540,
+        0
+      ],
+      "id": "99a8fe69-1c52-434b-a753-598ab7b8dcf7",
+      "name": "Odoo Crear Fra",
+      "credentials": {
+        "odooApi": {
+          "id": "G57spqCzKpz6NCsI",
+          "name": "Odoo account"
+        }
+      },
+      "notes": "Crear asentamiento donde se añadirá la factura."
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "=ir.attachment",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "=name",
+              "fieldValue": "={{ $('Google Drive1').item.json.name }}"
+            },
+            {
+              "fieldName": "type",
+              "fieldValue": "binary"
+            },
+            {
+              "fieldName": "=res_model",
+              "fieldValue": "account.move"
+            },
+            {
+              "fieldName": "=res_id",
+              "fieldValue": "={{ $json.id }}"
+            },
+            {
+              "fieldName": "=datas",
+              "fieldValue": "={{ $('Google Drive1').item.binary.data.data }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        700,
+        0
+      ],
+      "id": "fbfa91a3-d6eb-4fcf-b111-a2c1331f702b",
+      "name": "Odoo Adjuntar PDF",
+      "credentials": {
+        "odooApi": {
+          "id": "G57spqCzKpz6NCsI",
+          "name": "Odoo account"
+        }
+      },
+      "notes": "Adjuntar factura al movimiento."
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "fef92f52-948d-4017-8321-53851d00c60b",
+      "typeVersion": 1.1,
+      "name": "When Executed by Another Workflow",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        180,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Google Drive1": {
+      "main": [
+        [
+          {
+            "node": "Odoo Crear Fra",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Odoo Crear Fra": {
+      "main": [
+        [
+          {
+            "node": "Odoo Adjuntar PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Odoo Adjuntar PDF": {
+      "main": [
+        []
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Google Drive1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "name": "18/02/2026_ComisionesAddon_23,27_€_CES-004280383_Norgenic",
+        "id": "10Mm9DBqXidrqQna08EEar46js-O5olFa"
+      },
+      {
+        "name": "13/05/2026_ComisionesAddon_23,50_€_CES-005151446_Norgenic",
+        "id": "1RMWmON2njJqQKsrxGDbd2H9052cWyLOD"
+      },
+      {
+        "name": "11/01/2026_ComisionesAddon_23,53_€_CES-004102313_Norgenic",
+        "id": "1LJWKoh8U9QPv5RJ9ZQ3GcIUTjoKfNm4-"
+      },
+      {
+        "name": "11/01/2026_ComisionesAddon_23,46_€_CES-004102310_Norgenic",
+        "id": "1FvyP4zaqnyWEpHuR_7wPKs_qUfehxkhD"
+      },
+      {
+        "name": "11/01/2026_ComisionesAddon_23,50_€_CES-004102315_Norgenic",
+        "id": "1blVac0oa6PSzXmlBgWwlTGBjzPUzbl7A"
+      },
+      {
+        "name": "18/02/2026_ComisionesAddon_23,53_€_CES-004280382_Norgenic",
+        "id": "1jCC677eDqp13M1b50YU0rIuZMRsZg4LV"
+      },
+      {
+        "name": "13/05/2026_ComisionesAddon_23,55_€_CES-005151455_Norgenic",
+        "id": "1P1fT6bHTM8E_9YGMo1SyoEvP7nl2yA3w"
+      },
+      {
+        "name": "18/02/2026_ComisionesAddon_23,71_€_CES-004280384_Norgenic",
+        "id": "17jJW05whGt1OG7Eb5brIalHzEFkf2utT"
+      },
+      {
+        "name": "11/03/2026_ComisionesAddon_23,66_€_CES-004582109_Norgenic",
+        "id": "1cLkq2s5IoSB1pWWWkaXN3CQkyduM6q4E"
+      },
+      {
+        "name": "14/06/2026_ComisionesAddon_23,56_€_CES-005437258_Norgenic",
+        "id": "1J4G8d38hdJ5xyeY3nY8iY8_K3Np5WEgW"
+      },
+      {
+        "name": "14/04/2026_ComisionesAddon_23,58_€_CES-004867224_Norgenic",
+        "id": "1qfROkHuRakSs8MKW10eAFvel8h5awHZ_"
+      },
+      {
+        "name": "11/03/2026_ComisionesAddon_23,86_€_CES-004582113_Norgenic",
+        "id": "10t1raxSrRb654G5lOF4wz9Xcoeb29AWp"
+      },
+      {
+        "name": "14/06/2026_ComisionesAddon_23,37_€_CES-005437255_Norgenic",
+        "id": "16oqwR4dLULidKO941n4gAdMB0u7T7530"
+      },
+      {
+        "name": "11/03/2026_ComisionesAddon_23,72_€_CES-004582115_Norgenic",
+        "id": "1FMemp_Uy4f7fRPqHSgycpLKnJEraDuGX"
+      },
+      {
+        "name": "14/04/2026_ComisionesAddon_23,60_€_CES-004867229_Norgenic",
+        "id": "1_5rIhEJW_86PjqoxitLFJ_Swzb-W2FzZ"
+      },
+      {
+        "name": "14/04/2026_ComisionesAddon_23,48_€_CES-004867213_Norgenic",
+        "id": "1RnQgM0vjAPtFCB5HRJGlGeSdOXeehPyJ"
+      },
+      {
+        "name": "11/03/2026_ComisionesAddon_23,54_€_CES-004582111_Norgenic",
+        "id": "1JXXRBFCfAaYJ08Ao7DR3J9aL-ilgL30y"
+      },
+      {
+        "name": "14/06/2026_ComisionesAddon_23,06_€_CES-005437256_Norgenic",
+        "id": "1BfALrzkqKRDQJDUQYgHg-1PTcZ1iaqnJ"
+      },
+      {
+        "name": "11/01/2026_ComisionesAddon_23,61_€_CES-004102311_Norgenic",
+        "id": "1-zcUTTW5cui0I9dT6JRjHtUIPCSJfmZh"
+      },
+      {
+        "name": "18/02/2026_ComisionesAddon_23,61_€_CES-004280388_Norgenic",
+        "id": "1od84XKX54dERkLEwuJWgF-mIQ-5bCitc"
+      },
+      {
+        "name": "11/01/2026_ComisionesAddon_23,61_€_CES-004102308_Norgenic",
+        "id": "19DqgxyRbgAWnydyYz3Rm3xfCnTpdVcBK"
+      },
+      {
+        "name": "13/05/2026_ComisionesAddon_23,42_€_CES-005151451_Norgenic",
+        "id": "1hQVscZ8dUHmwLIQ-pY0rP3C7pkzyJ4qn"
+      },
+      {
+        "name": "11/03/2026_ComisionesAddon_23,64_€_CES-004582103_Norgenic",
+        "id": "1wyD8HF2Inhpd17kWtXM0296ADJRN093v"
+      },
+      {
+        "name": "18/02/2026_ComisionesAddon_23,27_€_CES-004280386_Norgenic",
+        "id": "1gqS7kL3DVwW1_qYvCxm1HQagLgNxi-xE"
+      },
+      {
+        "name": "14/06/2026_ComisionesAddon_24,47_€_CES-005437261_Norgenic",
+        "id": "1dLptFVMeIX2hyBac7UZm5YoijKY2t0Jq"
+      },
+      {
+        "name": "11/01/2026_ComisionesAddon_23,57_€_CES-004102312_Norgenic",
+        "id": "1IrMp9XxqVrBc6kMIGRPrVTCCvrvkwBdW"
+      },
+      {
+        "name": "11/03/2026_ComisionesAddon_23,73_€_CES-004582114_Norgenic",
+        "id": "1QYTbjIAlpnXaI4k-KtMhazo9Y4vzvF8V"
+      },
+      {
+        "name": "18/02/2026_ComisionesAddon_23,63_€_CES-004280387_Norgenic",
+        "id": "11-TjNu78oAlaSF89VzIPKcoGg6isaVF5"
+      },
+      {
+        "name": "14/06/2026_ComisionesAddon_23,54_€_CES-005437257_Norgenic",
+        "id": "1PHCyyVo2Reo0JPDfRao9ZTT9mQZ5Wby1"
+      },
+      {
+        "name": "14/06/2026_ComisionesAddon_23,48_€_CES-005437260_Norgenic",
+        "id": "1NFRZ4bjTl_ni-oiGKWTshuVtSGUtAdRP"
+      },
+      {
+        "name": "14/04/2026_ComisionesAddon_23,19_€_CES-004867230_Norgenic",
+        "id": "1WhQ86r9HFQgDwqkRpjmoBOs2GKDk1cSl"
+      },
+      {
+        "name": "14/04/2026_ComisionesAddon_23,67_€_CES-004867227_Norgenic",
+        "id": "1vYgr4kIfHP4cFKUds_RJ9wzVmtIxJMrQ"
+      },
+      {
+        "name": "11/01/2026_ComisionesAddon_23,81_€_CES-004102309_Norgenic",
+        "id": "1tC113cni4lQvkXZ8oFNb5QVcQPtNxoP-"
+      },
+      {
+        "name": "13/05/2026_ComisionesAddon_23,68_€_CES-005151457_Norgenic",
+        "id": "1TDh20WDaMx23FlQoBG61KCyOZnYIftZQ"
+      },
+      {
+        "name": "13/05/2026_ComisionesAddon_23,54_€_CES-005151448_Norgenic",
+        "id": "1sHRbgls-55EU0w04Ql_1AJOpwdkKPODS"
+      },
+      {
+        "name": "14/04/2026_ComisionesAddon_23,90_€_CES-004867223_Norgenic",
+        "id": "1stqGJeKIfC4Muw07ChS3Zm47HUghgpVi"
+      },
+      {
+        "name": "13/05/2026_ComisionesAddon_23,42_€_CES-005151452_Norgenic",
+        "id": "1fVVQz0DSUpvht0ynmhTvHxqsOLHjxkEj"
+      },
+      {
+        "name": "13/05/2026_ComisionesAddon_23,66_€_CES-005151456_Norgenic",
+        "id": "1rSnxDmWuUPjLa0o96oVrRlBMVK-xpTF-"
+      },
+      {
+        "name": "14/06/2026_ComisionesAddon_23,34_€_CES-005437259_Norgenic",
+        "id": "14K8v8VBK-AQCqPqBBZErxKBk--dRFNGd"
+      },
+      {
+        "name": "11/03/2026_ComisionesAddon_23,71_€_CES-004582110_Norgenic",
+        "id": "1T9XOBBYGmvH0rlegurCZVH3zupOAc-t2"
+      },
+      {
+        "name": "14/04/2026_ComisionesAddon_23,54_€_CES-004867225_Norgenic",
+        "id": "13tzyeesKtvDV7bodAgXxykWVueERzEnC"
+      }
+    ]
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "921b42ac40713cf8e80903373553a75b6a7dc1f7ad27fcbec19d4a8582a592ca"
+  }
+}

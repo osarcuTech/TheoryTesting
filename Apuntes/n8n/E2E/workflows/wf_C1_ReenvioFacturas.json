@@ -1,16 +1,685 @@
 {
-  "name": "RedirectNorgenic",
   "nodes": [
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
+      "parameters": {
+        "amount": 0
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -1460,
+        300
+      ],
+      "id": "93f5ff15-f8f6-4e7a-b206-edb545781fda",
+      "name": "Wait",
+      "webhookId": "29098443-5f01-4c1c-824c-a9abc52a3e3d"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "787cdf29-36e4-48ac-a2ac-0959ccc7199b",
+              "leftValue": "={{ $('Google ArchivosPorCarpeta').all().pluck(\"pairedItem\").length }}",
+              "rightValue": 1,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        960,
+        300
+      ],
+      "id": "a410a054-6b6c-4a42-b373-fe003bc38e91",
+      "name": "If",
+      "executeOnce": false,
+      "notes": "Mira si hay mas de un file/folder (Folder \"EnviadasViaTribut\"=True + Facturas=True/False)"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1600,
+        400
+      ],
+      "id": "fd84bca9-388b-4fe3-8493-01bfcf290ffc",
+      "name": "Schedule Trigger1"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "07wPIDSgwzk4eTkD",
+          "mode": "id"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        -1300,
+        440
+      ],
+      "id": "fc4ac985-ba63-4098-ba6c-13ab50e4b38d",
+      "name": "Execute Workflow1",
+      "executeOnce": false,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b8af1861-0ed1-46be-b81d-ef0573bc4c61",
+              "leftValue": "={{ $json.name.match(/_.+$/)[0] }}",
+              "rightValue": "={{ $('Merge').item.json.name_CarpetaMaestra.match(/_.+$/)[0] }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        2400,
+        280
+      ],
+      "id": "2cd81b0e-8195-414a-8425-de6fc36f9579",
+      "name": "Filter NombresCarpetas NG-VT1",
+      "notes": "Filtra entre la lista de carpetas de ViaTribut la que tenga un nombre similar (regex) a nuestra carpeta en la que tenemos la factura que se esta tratando."
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "4b3928df-777d-4bf8-8cb4-910e0fc71ca5",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -1600,
+        200
+      ],
+      "id": "edaa1def-53f9-49b7-a994-355465e45507",
+      "name": "Webhook1",
+      "webhookId": "4b3928df-777d-4bf8-8cb4-910e0fc71ca5",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "e51c3331-0b0a-4b13-b52e-d24cb50d3fd1",
+              "leftValue": "={{ $json.name }}",
+              "rightValue": "={{ $('Google CarpetaEnviadas').item.json.name }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        2940,
+        280
+      ],
+      "id": "f1fddcae-837e-49f1-895c-9968edf08f15",
+      "name": "Filter1"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "1963712436",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ID_Enviada": "={{ $json.IdFra }}",
+            "Carpeta": "={{ $json.IdCarpetaFra }}",
+            "row_number": "={{ $json.row_number }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "UID",
+              "displayName": "UID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Fecha",
+              "displayName": "Fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Fecha valor",
+              "displayName": "Fecha valor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Movimiento",
+              "displayName": "Movimiento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Más datos",
+              "displayName": "Más datos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Importe",
+              "displayName": "Importe",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Saldo",
+              "displayName": "Saldo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "NombreFactura",
+              "displayName": "NombreFactura",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "PeriodoCobro",
+              "displayName": "PeriodoCobro",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "DescripccionMovimiento",
+              "displayName": "DescripccionMovimiento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CF in/out",
+              "displayName": "CF in/out",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CF category",
+              "displayName": "CF category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "PlataformaPago",
+              "displayName": "PlataformaPago",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Def_UID",
+              "displayName": "Def_UID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Autopunteo",
+              "displayName": "Autopunteo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Validacion (CO)",
+              "displayName": "Validacion (CO)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Fra.Manual",
+              "displayName": "Fra.Manual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "P.Conable",
+              "displayName": "P.Conable",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Ubicación VT",
+              "displayName": "Ubicación VT",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "ID_Enviada",
+              "displayName": "ID_Enviada",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Carpeta",
+              "displayName": "Carpeta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "BD",
+              "displayName": "BD",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        960,
+        0
+      ],
+      "id": "dccb9b26-7986-40c6-ad2e-b7b1ca8763cb",
+      "name": "Google Sheets MovCuentas1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hZcBoGBnLwH882Qs",
+          "name": "Google Sheets account Oscar"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "height": 300,
+        "width": 180
+      },
+      "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -580,
-        -280
+        -160,
+        180
       ],
-      "id": "d4d3d244-323f-42e9-991f-08813871c8ed",
-      "name": "When clicking ‘Test workflow’"
+      "id": "66e261f1-0beb-49f4-89a6-f59daed0ce0c",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "height": 300,
+        "width": 180
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        180
+      ],
+      "id": "a87cf294-0c91-49a2-b15c-52b38592a5d0",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        320,
+        300
+      ],
+      "id": "b435e26b-3db3-4079-9504-f3dedd929924",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "1963712436",
+          "mode": "id"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "CF category",
+              "lookupValue": "Proveedores"
+            },
+            {
+              "lookupColumn": "PlataformaPago",
+              "lookupValue": "CheckOut"
+            },
+            {
+              "lookupColumn": "PlataformaPago",
+              "lookupValue": "SolidProcessing"
+            },
+            {
+              "lookupColumn": "PlataformaPago",
+              "lookupValue": "Adyen"
+            }
+          ]
+        },
+        "combineFilters": "OR",
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "detectAutomatically"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        -900,
+        300
+      ],
+      "id": "44174054-0435-49e9-8f5b-f11f258e6f96",
+      "name": "Google Sheets UID's",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hZcBoGBnLwH882Qs",
+          "name": "Google Sheets account Oscar"
+        }
+      },
+      "notes": "Sin esto solo se copiaría en la primera coincidencia de UID."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "2228b6b6-b63f-40eb-94e5-a1d6b3ef133c",
+              "leftValue": "={{ $json.NombreFactura }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "98d85904-9087-45f2-8ef5-131f9c574c42",
+              "leftValue": "={{ $json.NombreFactura }}",
+              "rightValue": "No Info",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "f1f8bece-2945-4e20-a3ee-fe2bc4e589d7",
+              "leftValue": "={{ $json.NombreFactura }}",
+              "rightValue": "Devos",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "7160b008-8896-49ff-b7c7-8d89d99281ba",
+              "leftValue": "={{ $json.NombreFactura }}",
+              "rightValue": "SinCoincidencias",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -340,
+        300
+      ],
+      "id": "06fcc19d-d337-4899-8849-315bbb8b0499",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -100,
+        300
+      ],
+      "id": "4bdb7ad6-c23b-4946-b82e-c673531ec7ad",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "https://drive.google.com/drive/folders/1fiyCiRwYpjTlYn5VxA2ek0gwVwrp_nFA",
+            "mode": "url"
+          }
+        },
+        "options": {
+          "fields": [
+            "id",
+            "name",
+            "webViewLink"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        100,
+        300
+      ],
+      "id": "a2628168-36ac-4a46-bcf8-f1c7dcb8db69",
+      "name": "Google Search NorgenicFolders",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      },
+      "notes": "Carpeta Norgenic Año actual. Lista subcarpetas y facturas."
+    },
+    {
+      "parameters": {
+        "amount": 0
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -1300,
+        300
+      ],
+      "id": "106e6325-38c3-4d3e-bcd6-bd4e709535e3",
+      "name": "Wait2",
+      "webhookId": "d29d6807-cd4e-4ead-8ca8-4bd79dc59043"
     },
     {
       "parameters": {
@@ -41,73 +710,32 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        420,
-        -280
+        580,
+        300
       ],
-      "id": "7c95cb6a-4737-447a-b22d-2c2f65e87959",
-      "name": "Edit Fields"
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 3,
-      "position": [
-        200,
-        -280
-      ],
-      "id": "585a3d3d-2191-4d13-a1d8-cb424dd410cc",
-      "name": "Loop Over Items"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "b24670a9-9ef0-413c-9e48-e390d3d9be4d",
-              "leftValue": "={{ $json.name }}",
-              "rightValue": "Enviadas a ViaTribut",
-              "operator": {
-                "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        1320,
-        400
-      ],
-      "id": "55e90946-e5e5-408c-be55-7fe5003ba2c6",
-      "name": "If"
+      "id": "6e32171f-dac7-4948-be39-1f6e60f056da",
+      "name": "Edit Fields1"
     },
     {
       "parameters": {
         "assignments": {
           "assignments": [
             {
-              "id": "059271c2-e9e9-4f28-b9ba-2e0ea8e97a99",
-              "name": "id",
+              "id": "57b01102-92c4-4591-b4b3-49379505a8f4",
+              "name": "id_EnviadaViaTribut",
               "value": "={{ $json.id }}",
               "type": "string"
             },
             {
-              "id": "22ea67ab-f748-4807-9900-f699680a44ed",
-              "name": "name",
+              "id": "42753c6b-7209-47f3-a508-9b077bf45dad",
+              "name": "nameEnviadaViaTribut",
               "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "6dc909c1-aa22-44e5-af6c-5fe7cf60d91f",
+              "name": "webViewLinkEnviadaViaTribut",
+              "value": "={{ $json.webViewLink }}",
               "type": "string"
             }
           ]
@@ -117,161 +745,139 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1140,
-        400
+        1420,
+        200
       ],
-      "id": "545b7dd5-5972-4f7f-ace3-120a2fbf2054",
-      "name": "Edit Fields1"
+      "id": "fd1ad51d-adf8-4eb5-8644-f920cdf9119d",
+      "name": "Edit Fields2a",
+      "notes": "Saca la información de la carpeta \"EnviadasViaTribut\" para luego poder usarla para poner las facturas en su interior."
     },
     {
       "parameters": {
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        1540,
-        300
-      ],
-      "id": "f3c5d3d2-2e1e-4993-ae9f-e61d9fe3869d",
-      "name": "Edit FieldsCarpeta"
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        1540,
-        480
-      ],
-      "id": "f2e8e7c7-aa0f-4414-97cd-b4d3eb434326",
-      "name": "Edit FieldsFacturas"
-    },
-    {
-      "parameters": {
-        "amount": 0
-      },
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        -340,
-        -280
-      ],
-      "id": "9851a4e4-c491-4eba-a28d-c906d24a5e51",
-      "name": "Wait2",
-      "webhookId": "d5f78f8a-5f66-43ff-a0cb-bd6bde7472a5"
-    },
-    {
-      "parameters": {
-        "amount": 0
-      },
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        -180,
-        -280
-      ],
-      "id": "53bf7c6c-6369-43e3-b7d9-c3d13306de9d",
-      "name": "Wait3",
-      "webhookId": "f0b5acc4-fd29-4542-bad6-27b4dba5ecf1"
-    },
-    {
-      "parameters": {
-        "resource": "fileFolder",
-        "filter": {
-          "folderId": {
-            "__rl": true,
-            "value": "={{ $json.id }}",
-            "mode": "id"
-          },
-          "whatToSearch": "all"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
-      "position": [
-        940,
-        220
-      ],
-      "id": "7b3f96e7-4954-4156-ab37-41b555163606",
-      "name": "Google Drive",
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "feXVSRveVKgVrnmP",
-          "name": "Google Drive account (Oscar)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "resource": "fileFolder",
-        "filter": {
-          "folderId": {
-            "__rl": true,
-            "value": "={{ $json.id }}",
-            "mode": "id"
-          },
-          "whatToSearch": "all"
-        },
-        "options": {
-          "fields": [
-            "id",
-            "name",
-            "webViewLink"
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
-      "position": [
-        620,
-        -280
-      ],
-      "id": "b654d1b3-36e5-4b30-bc1e-c670c42ba28f",
-      "name": "Google ArchivosPorCarpeta",
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "feXVSRveVKgVrnmP",
-          "name": "Google Drive account (Oscar)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "loose",
-            "version": 2
-          },
-          "conditions": [
+        "assignments": {
+          "assignments": [
             {
-              "id": "787cdf29-36e4-48ac-a2ac-0959ccc7199b",
-              "leftValue": "={{ $('Google ArchivosPorCarpeta').all().pluck(\"pairedItem\").length }}",
-              "rightValue": 1,
-              "operator": {
-                "type": "number",
-                "operation": "gt"
-              }
+              "id": "44d45b6f-c7b8-4804-8cfb-5f41331e10cc",
+              "name": "id_Factura",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "7f24c8e0-c968-4384-a308-6c38399c0ca9",
+              "name": "name_Factura",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "e4352a38-78d4-4a61-a587-acd3df63d4b5",
+              "name": "webViewLink_Factura",
+              "value": "={{ $json.webViewLink }}",
+              "type": "string"
+            },
+            {
+              "id": "3f33daa6-c3f3-423d-b6ad-cb476eef6d78",
+              "name": "id_carpetaMaestra",
+              "value": "={{ $('Edit Fields1').item.json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "10a70bb5-b8eb-4027-9e23-68923c2711b9",
+              "name": "name_CarpetaMaestra",
+              "value": "={{ $('Google Search NorgenicFolders').item.json.name }}",
+              "type": "string"
             }
-          ],
-          "combinator": "and"
+          ]
         },
-        "looseTypeValidation": true,
         "options": {}
       },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
       "position": [
-        800,
-        -280
+        1420,
+        360
       ],
-      "id": "9a26dc49-3e44-4ab7-b6b8-4bbf84c25c2b",
-      "name": "If1"
+      "id": "1d647b7c-223f-4a56-9b06-7ee4a71bed2f",
+      "name": "Edit Fields2b",
+      "notes": "Saca la información de la factura para poderla mover y la información de la factura en la que se encuentra para poder ponerlo en el Sheets."
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $('Filter NombresCarpetas NG-VT1').item.json.id }}",
+            "mode": "id"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2760,
+        280
+      ],
+      "id": "cf8a6d9a-481b-4af8-b019-00cfa48b517b",
+      "name": "Google Drive Google ID_DocCopiado",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      },
+      "notes": "Busca la id de la carpeta en la que hemos copiado la factura, lista las facturas que contiene para que el próximo filtro detecte el UID (por nombre) de la que hemos copiado (la que se encuentra en ViaTribut)."
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.webViewLink_Factura }}",
+          "mode": "url"
+        },
+        "driveId": {
+          "__rl": true,
+          "value": "={{ $json.id_EnviadaViaTribut }}",
+          "mode": "id"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "root",
+          "cachedResultName": "/ (Root folder)"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1960,
+        280
+      ],
+      "id": "e72eb58e-0e5f-4afe-89a5-15700354a08f",
+      "name": "Google CarpetaEnviadas",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      },
+      "notes": "Usa el UID de la factura para moverla a la carpeta de enviadas usando la UID de la carpeta de enviadas."
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        1760,
+        280
+      ],
+      "id": "acae7c5c-0ba9-47b0-a17e-a1c7a9700cd6",
+      "name": "Merge"
     },
     {
       "parameters": {
@@ -338,7 +944,7 @@
                 "conditions": [
                   {
                     "id": "4775a00f-74cb-4dec-9e36-3b698b5479eb",
-                    "leftValue": "={{ $('Edit Fields').item.json }}",
+                    "leftValue": "={{ $('Edit Fields1').item.json }}",
                     "rightValue": "",
                     "operator": {
                       "type": "string",
@@ -360,143 +966,74 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        1020,
-        -280
+        1220,
+        300
       ],
-      "id": "80df2148-9c61-4c7e-992d-7e554c34ae77",
+      "id": "fda4d8fd-ba55-4f53-9024-4f8ffb52c0d4",
       "name": "Switch"
     },
     {
       "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "44d45b6f-c7b8-4804-8cfb-5f41331e10cc",
-              "name": "id_Factura",
-              "value": "={{ $json.id }}",
-              "type": "string"
-            },
-            {
-              "id": "7f24c8e0-c968-4384-a308-6c38399c0ca9",
-              "name": "name_Factura",
-              "value": "={{ $json.name }}",
-              "type": "string"
-            },
-            {
-              "id": "e4352a38-78d4-4a61-a587-acd3df63d4b5",
-              "name": "webViewLink_Factura",
-              "value": "={{ $json.webViewLink }}",
-              "type": "string"
-            },
-            {
-              "id": "3f33daa6-c3f3-423d-b6ad-cb476eef6d78",
-              "name": "id_carpetaMaestra",
-              "value": "={{ $('Edit Fields').item.json.id }}",
-              "type": "string"
-            },
-            {
-              "id": "10a70bb5-b8eb-4027-9e23-68923c2711b9",
-              "name": "name_CarpetaMaestra",
-              "value": "={{ $('Loop Over Items').item.json.name }}",
-              "type": "string"
-            }
+        "resource": "fileFolder",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $json.id }}",
+            "mode": "id"
+          },
+          "whatToSearch": "all"
+        },
+        "options": {
+          "fields": [
+            "id",
+            "name",
+            "webViewLink"
           ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        1360,
-        -240
-      ],
-      "id": "829a0f00-4747-4eca-a804-ea3d8d2db0cf",
-      "name": "Edit Fields2"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "57b01102-92c4-4591-b4b3-49379505a8f4",
-              "name": "id_EnviadaViaTribut",
-              "value": "={{ $json.id }}",
-              "type": "string"
-            },
-            {
-              "id": "42753c6b-7209-47f3-a508-9b077bf45dad",
-              "name": "nameEnviadaViaTribut",
-              "value": "={{ $json.name }}",
-              "type": "string"
-            },
-            {
-              "id": "6dc909c1-aa22-44e5-af6c-5fe7cf60d91f",
-              "name": "webViewLinkEnviadaViaTribut",
-              "value": "={{ $json.webViewLink }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        1360,
-        -400
-      ],
-      "id": "9e5ccb5f-04b8-49c2-906b-6607bb9a51b0",
-      "name": "Edit Fields3"
-    },
-    {
-      "parameters": {
-        "mode": "combine",
-        "combineBy": "combineAll",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3,
-      "position": [
-        1580,
-        -320
-      ],
-      "id": "b2f52a81-8eeb-4579-9905-aed485432e87",
-      "name": "Merge"
-    },
-    {
-      "parameters": {
-        "operation": "move",
-        "fileId": {
-          "__rl": true,
-          "value": "={{ $json.webViewLink_Factura }}",
-          "mode": "url"
-        },
-        "driveId": {
-          "__rl": true,
-          "value": "={{ $json.id_EnviadaViaTribut }}",
-          "mode": "id"
-        },
-        "folderId": {
-          "__rl": true,
-          "mode": "list",
-          "value": "root",
-          "cachedResultName": "/ (Root folder)"
         }
       },
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        1780,
-        -320
+        780,
+        300
       ],
-      "id": "7f77a6a4-1d3f-4734-b528-0967ddadc167",
-      "name": "Google CarpetaEnviadas",
+      "id": "63dc371b-a211-49ad-9d08-2ad8de90a362",
+      "name": "Google ArchivosPorCarpeta",
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "feXVSRveVKgVrnmP",
           "name": "Google Drive account (Oscar)"
         }
       }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "https://drive.google.com/drive/folders/1TNj0wxFIPkvJ3ONKI8Q9WYZwkytSljzf",
+            "mode": "url"
+          },
+          "whatToSearch": "folders"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2180,
+        280
+      ],
+      "id": "4ce19ca0-9c2d-49a2-af03-f5af9b6eef6a",
+      "name": "Google Drive CarpetasVT",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      },
+      "notes": "Carpeta ViaTribut Año actual. Lista las carpetas en su interior."
     },
     {
       "parameters": {
@@ -524,65 +1061,53 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        2400,
-        -320
+        2580,
+        280
       ],
-      "id": "0cb89ac0-4b4c-43d8-9cf8-e8ffbbd3f574",
+      "id": "516a4f5b-1286-4466-bc27-76b37f8c027e",
       "name": "Google VT",
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "feXVSRveVKgVrnmP",
           "name": "Google Drive account (Oscar)"
         }
-      }
+      },
+      "notes": "Hace una copia de nuestra factura en la carpeta de ViaTribut con el mismo nombre de factura."
     },
     {
       "parameters": {
-        "rule": {
-          "interval": [
+        "assignments": {
+          "assignments": [
             {
-              "field": "hours"
+              "id": "07fd513f-7965-4447-9f7a-448b4056d174",
+              "name": "=NombreFra",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "c652a8e4-9cb9-4f53-a9ce-5a62f57edf20",
+              "name": "IdFra",
+              "value": "={{ $('Filter1').item.json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "81746c62-fcdc-48a8-ad30-1530a2ee392f",
+              "name": "IdCarpetaFra",
+              "value": "={{ $('Filter NombresCarpetas NG-VT1').item.json.id }}",
+              "type": "string"
             }
           ]
-        }
-      },
-      "type": "n8n-nodes-base.scheduleTrigger",
-      "typeVersion": 1.2,
-      "position": [
-        -580,
-        -120
-      ],
-      "id": "ae8c1a2f-50e8-4196-8de5-557a400109e6",
-      "name": "Schedule Trigger"
-    },
-    {
-      "parameters": {
-        "workflowId": {
-          "__rl": true,
-          "value": "07wPIDSgwzk4eTkD",
-          "mode": "id"
         },
-        "workflowInputs": {
-          "mappingMode": "defineBelow",
-          "value": {},
-          "matchingColumns": [],
-          "schema": [],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": true
-        },
-        "options": {
-          "waitForSubWorkflow": false
-        }
+        "options": {}
       },
-      "type": "n8n-nodes-base.executeWorkflow",
-      "typeVersion": 1.2,
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
       "position": [
-        -180,
-        -140
+        3160,
+        280
       ],
-      "id": "ac74f09d-7897-4633-92c3-fb02d11803a8",
-      "name": "Execute Workflow",
-      "executeOnce": false
+      "id": "e6f375fd-2726-40e7-bd45-a4d7899c75eb",
+      "name": "Edit Fields2"
     },
     {
       "parameters": {
@@ -595,12 +1120,13 @@
           },
           "conditions": [
             {
-              "id": "b8af1861-0ed1-46be-b81d-ef0573bc4c61",
-              "leftValue": "={{ $json.name.match(/_.+$/)[0] }}",
-              "rightValue": "={{ $('Merge').item.json.name_CarpetaMaestra.match(/_.+$/)[0] }}",
+              "id": "3860abe6-4727-433c-bbbc-879ef1e520fa",
+              "leftValue": "={{ $json.NombreFra }}",
+              "rightValue": "",
               "operator": {
                 "type": "string",
-                "operation": "equals"
+                "operation": "notEmpty",
+                "singleValue": true
               }
             }
           ],
@@ -611,317 +1137,36 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.2,
       "position": [
-        2220,
-        -320
+        580,
+        140
       ],
-      "id": "3412eaa8-1240-4f42-857f-b5d04e9b7f60",
-      "name": "Filter NombresCarpetas NG-VT"
+      "id": "037b424e-2f4d-4ea2-997d-af0a9fa246a3",
+      "name": "FilterSucces"
     },
     {
       "parameters": {
-        "resource": "fileFolder",
-        "filter": {
-          "folderId": {
-            "__rl": true,
-            "value": "https://drive.google.com/drive/folders/16CqiedOEw2i4lgycMMko1ncJNYkDlnCR",
-            "mode": "url"
-          }
+        "mode": "combine",
+        "advanced": true,
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "NombreFactura",
+              "field2": "NombreFra"
+            }
+          ]
         },
         "options": {
-          "fields": [
-            "id",
-            "name",
-            "webViewLink"
-          ]
+          "fuzzyCompare": true
         }
       },
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.1,
       "position": [
-        -20,
-        -280
+        780,
+        0
       ],
-      "id": "cd903223-c9e0-4cb9-9671-c0b171c155c4",
-      "name": "Google Search NorgenicFolders",
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "feXVSRveVKgVrnmP",
-          "name": "Google Drive account (Oscar)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "fe4b372b-c5c8-4cf1-8af8-7fa597742dc3",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        -580,
-        -440
-      ],
-      "id": "dcbeba99-5c8f-4f5f-a4af-7ffbad46a984",
-      "name": "Webhook",
-      "webhookId": "fe4b372b-c5c8-4cf1-8af8-7fa597742dc3",
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "documentId": {
-          "__rl": true,
-          "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
-          "mode": "id"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "1839937135",
-          "mode": "id"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "UID": "={{ $json.name }}",
-            "ID_Enviada": "=\"https://drive.google.com/file/d/{{ $json.id }}/view",
-            "Carpeta": "=\"https://drive.google.com/drive/folders/{{ $('Filter NombresCarpetas NG-VT').item.json.id }}",
-            "Time": "= {{ $now.format('yyyy-MM-dd') }}"
-          },
-          "matchingColumns": [
-            "UID"
-          ],
-          "schema": [
-            {
-              "id": "UID",
-              "displayName": "UID",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Fecha",
-              "displayName": "Fecha",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Proveedor",
-              "displayName": "Proveedor",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Importe",
-              "displayName": "Importe",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "€/$",
-              "displayName": "€/$",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Factura",
-              "displayName": "Factura",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Empresa",
-              "displayName": "Empresa",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Dia",
-              "displayName": "Dia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Mes",
-              "displayName": "Mes",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Año",
-              "displayName": "Año",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Periodo",
-              "displayName": "Periodo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Punteada",
-              "displayName": "Punteada",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "ID_Enviada",
-              "displayName": "ID_Enviada",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Carpeta",
-              "displayName": "Carpeta",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Time",
-              "displayName": "Time",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Ubicación VT",
-              "displayName": "Ubicación VT",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "RegexMovimiento",
-              "displayName": "RegexMovimiento",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "RegexMasDatos",
-              "displayName": "RegexMasDatos",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Regex Call",
-              "displayName": "Regex Call",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Filtro existente n8n",
-              "displayName": "Filtro existente n8n",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "row_number",
-              "displayName": "row_number",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "readOnly": true,
-              "removed": true
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.6,
-      "position": [
-        2940,
-        -320
-      ],
-      "id": "8252b361-70dc-44fb-9a48-7e46cf434ae5",
-      "name": "Google Sheets",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "hZcBoGBnLwH882Qs",
-          "name": "Google Sheets account Oscar"
-        }
-      }
+      "id": "e98197f3-b92b-437a-b60c-52f8d02082f7",
+      "name": "Merge1"
     },
     {
       "parameters": {
@@ -929,125 +1174,265 @@
           "options": {
             "caseSensitive": true,
             "leftValue": "",
-            "typeValidation": "strict",
+            "typeValidation": "loose",
             "version": 2
           },
           "conditions": [
             {
-              "id": "e51c3331-0b0a-4b13-b52e-d24cb50d3fd1",
-              "leftValue": "={{ $json.name }}",
-              "rightValue": "={{ $('Google CarpetaEnviadas').item.json.name }}",
+              "id": "787cdf29-36e4-48ac-a2ac-0959ccc7199b",
+              "leftValue": "={{ $json.NombreFactura }}",
+              "rightValue": 1,
               "operator": {
                 "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "da968311-60b5-4de6-a607-b88ba45a3256",
+              "leftValue": "={{ $json.NombreFactura }}",
+              "rightValue": "No Info",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "a45162cf-cc5b-4369-8146-3ec28b7fd6ba",
+              "leftValue": "={{ $json.NombreFactura }}",
+              "rightValue": "Devos",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "2980779c-da81-4766-803c-7b9977bfb46a",
+              "leftValue": "={{ $json.NombreFactura }}",
+              "rightValue": "SinCoincidencias",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
               }
             }
           ],
           "combinator": "and"
         },
+        "looseTypeValidation": true,
         "options": {}
       },
-      "type": "n8n-nodes-base.filter",
+      "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        2760,
-        -320
+        -540,
+        300
       ],
-      "id": "d7ab72db-71ec-487b-bde8-bb738ca43d20",
-      "name": "Filter"
+      "id": "2f2e4c47-05ce-4a78-9e92-88324b2bb36c",
+      "name": "FilterFras",
+      "executeOnce": false,
+      "notes": "Mira si hay mas de un file/folder (Folder \"EnviadasViaTribut\"=True + Facturas=True/False)"
     },
     {
       "parameters": {
-        "resource": "fileFolder",
-        "filter": {
-          "folderId": {
-            "__rl": true,
-            "value": "={{ $('Filter NombresCarpetas NG-VT').item.json.id }}",
-            "mode": "id"
-          }
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
-      "position": [
-        2580,
-        -320
-      ],
-      "id": "fcbea574-e0d9-4107-afa2-2f788a83865e",
-      "name": "Google Drive Google ID_DocCopiado",
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "feXVSRveVKgVrnmP",
-          "name": "Google Drive account (Oscar)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "resource": "fileFolder",
-        "filter": {
-          "folderId": {
-            "__rl": true,
-            "value": "https://drive.google.com/drive/folders/1HdxF-q5glP2i-95M3oNgbxbsWDAUqMGf",
-            "mode": "url"
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
           },
-          "whatToSearch": "folders"
+          "conditions": [
+            {
+              "id": "787cdf29-36e4-48ac-a2ac-0959ccc7199b",
+              "leftValue": "={{ $json.NombreFactura }}",
+              "rightValue": 1,
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "2980779c-da81-4766-803c-7b9977bfb46a",
+              "leftValue": "={{ $('Google Sheets UID\\'s').item.json.Autopunteo }}",
+              "rightValue": "SinCoincidencias",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "78ae4a0e-4a62-4e64-9b4f-4b39ad6e3d69",
+              "leftValue": "={{ $('Google Sheets UID\\'s').item.json.Autopunteo }}",
+              "rightValue": "SinCoincidencias",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "62cf6262-1969-43b9-90db-8d849ad95b7e",
+              "leftValue": "={{ $('Google Sheets UID\\'s').item.json.Autopunteo }}",
+              "rightValue": "=NoProveedor",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -340,
+        500
+      ],
+      "id": "5cc4f1df-5a98-4e13-a204-08a48a73ad3f",
+      "name": "FilterFrasNoClassificadas",
+      "executeOnce": false,
+      "notes": "Mira si hay mas de un file/folder (Folder \"EnviadasViaTribut\"=True + Facturas=True/False)"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2821a7cc-97f4-4408-ad4f-9640992a8cbb",
+              "name": "row_number",
+              "value": "={{ $json.row_number }}",
+              "type": "number"
+            },
+            {
+              "id": "5f06ac4b-9f76-4584-933c-d9e56c4e87b3",
+              "name": "NombreFactura",
+              "value": "={{ $json.NombreFactura }}",
+              "type": "string"
+            }
+          ]
         },
         "options": {}
       },
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
       "position": [
-        2000,
-        -320
+        -720,
+        300
       ],
-      "id": "7e14a4cd-1409-40c0-a813-e10c71081834",
-      "name": "Google Drive CarpetasVT",
+      "id": "9553ad98-afad-4caa-8220-824b1b2e5609",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "advanced": true,
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "NombreFra",
+              "field2": "NombreFactura"
+            }
+          ]
+        },
+        "options": {
+          "fuzzyCompare": true
+        }
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.1,
+      "position": [
+        780,
+        520
+      ],
+      "id": "149a5d24-c84f-4738-97de-a8a88755cef4",
+      "name": "Merge2"
+    },
+    {
+      "parameters": {
+        "sendTo": "oscar@norgenic.com",
+        "subject": "Fras Enviadas sin puntear",
+        "message": "={{ $json.IdFra }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        960,
+        520
+      ],
+      "id": "209634ad-d2b2-4799-bda2-6b5521ccbe93",
+      "name": "Gmail",
+      "webhookId": "3978104e-1df5-48d2-ba1c-d44fc74ad901",
       "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "feXVSRveVKgVrnmP",
-          "name": "Google Drive account (Oscar)"
+        "gmailOAuth2": {
+          "id": "okMcvzXN8cIjwRYs",
+          "name": "Gmail account (Oscar2)"
         }
       }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5205e717-9391-4f94-808b-a47333b865f8",
+              "name": "ID_GoogleSheets",
+              "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
+              "type": "string"
+            },
+            {
+              "id": "8a9db986-9cec-4e96-80a3-6e32b976f27e",
+              "name": "GID_GoogleSheets_Historico",
+              "value": "1963712436",
+              "type": "string"
+            },
+            {
+              "id": "d6ed9a5d-979d-4b17-9af4-d4ebd8a6cc58",
+              "name": "CarpetaAñoFacturaciónNorgenic",
+              "value": "https://drive.google.com/drive/folders/1fiyCiRwYpjTlYn5VxA2ek0gwVwrp_nFA",
+              "type": "string"
+            },
+            {
+              "id": "04acf6c9-4c9b-433c-b776-82dd13eb9aa1",
+              "name": "GID_GoogleSheets_Movimientos",
+              "value": "1963712436",
+              "type": "string"
+            },
+            {
+              "id": "b5d08d6d-4a7f-48fc-a5ca-24f0516cf2df",
+              "name": "CarpetaAñoFacturaciónViaTribut",
+              "value": "https://drive.google.com/drive/folders/1TNj0wxFIPkvJ3ONKI8Q9WYZwkytSljzf",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1080,
+        300
+      ],
+      "id": "4b278cc7-b5e9-4364-89d4-d8f389443d9f",
+      "name": "VariablesGlobales"
     }
   ],
-  "pinData": {},
   "connections": {
-    "When clicking ‘Test workflow’": {
+    "Wait": {
       "main": [
         [
           {
             "node": "Wait2",
             "type": "main",
             "index": 0
-          }
-        ]
-      ]
-    },
-    "Edit Fields": {
-      "main": [
-        [
-          {
-            "node": "Google ArchivosPorCarpeta",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Loop Over Items": {
-      "main": [
-        [],
-        [
-          {
-            "node": "Loop Over Items",
-            "type": "main",
-            "index": 0
           },
           {
-            "node": "Edit Fields",
+            "node": "Execute Workflow1",
             "type": "main",
             "index": 0
           }
@@ -1058,159 +1443,119 @@
       "main": [
         [
           {
-            "node": "Edit FieldsCarpeta",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Edit FieldsFacturas",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Edit Fields1": {
-      "main": [
-        [
-          {
-            "node": "If",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Wait2": {
-      "main": [
-        [
-          {
-            "node": "Wait3",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Execute Workflow",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Wait3": {
-      "main": [
-        [
-          {
-            "node": "Google Search NorgenicFolders",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Google ArchivosPorCarpeta": {
-      "main": [
-        [
-          {
-            "node": "If1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If1": {
-      "main": [
-        [
-          {
             "node": "Switch",
             "type": "main",
             "index": 0
           }
-        ]
-      ]
-    },
-    "Switch": {
-      "main": [
+        ],
         [
           {
-            "node": "Edit Fields3",
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
-        ],
+        ]
+      ]
+    },
+    "Schedule Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter NombresCarpetas NG-VT1": {
+      "main": [
+        [
+          {
+            "node": "Google VT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter1": {
+      "main": [
         [
           {
             "node": "Edit Fields2",
             "type": "main",
             "index": 0
           }
-        ],
+        ]
+      ]
+    },
+    "Google Sheets MovCuentas1": {
+      "main": [
         []
       ]
     },
-    "Edit Fields2": {
+    "Loop Over Items": {
       "main": [
         [
           {
-            "node": "Merge",
+            "node": "FilterSucces",
             "type": "main",
-            "index": 1
+            "index": 0
           }
-        ]
-      ]
-    },
-    "Edit Fields3": {
-      "main": [
+        ],
         [
           {
-            "node": "Merge",
+            "node": "Edit Fields1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Merge": {
+    "Google Sheets UID's": {
       "main": [
         [
           {
-            "node": "Google CarpetaEnviadas",
+            "node": "Edit Fields",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Google CarpetaEnviadas": {
+    "Filter": {
       "main": [
         [
           {
-            "node": "Google Drive CarpetasVT",
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Schedule Trigger": {
+    "Aggregate": {
       "main": [
         [
           {
-            "node": "Wait2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Filter NombresCarpetas NG-VT": {
-      "main": [
-        [
-          {
-            "node": "Google VT",
+            "node": "Google Search NorgenicFolders",
             "type": "main",
             "index": 0
           }
@@ -1228,11 +1573,117 @@
         ]
       ]
     },
-    "Webhook": {
+    "Wait2": {
       "main": [
         [
           {
-            "node": "Wait2",
+            "node": "VariablesGlobales",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Google ArchivosPorCarpeta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2a": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2b": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Google Drive Google ID_DocCopiado": {
+      "main": [
+        [
+          {
+            "node": "Filter1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google CarpetaEnviadas": {
+      "main": [
+        [
+          {
+            "node": "Google Drive CarpetasVT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Google CarpetaEnviadas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2a",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields2b",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google ArchivosPorCarpeta": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive CarpetasVT": {
+      "main": [
+        [
+          {
+            "node": "Filter NombresCarpetas NG-VT1",
             "type": "main",
             "index": 0
           }
@@ -1250,18 +1701,45 @@
         ]
       ]
     },
-    "Filter": {
+    "Edit Fields2": {
       "main": [
         [
           {
-            "node": "Google Sheets",
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Google Drive Google ID_DocCopiado": {
+    "FilterSucces": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          },
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets MovCuentas1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FilterFras": {
       "main": [
         [
           {
@@ -1269,14 +1747,55 @@
             "type": "main",
             "index": 0
           }
+        ],
+        [
+          {
+            "node": "FilterFrasNoClassificadas",
+            "type": "main",
+            "index": 0
+          }
         ]
       ]
     },
-    "Google Drive CarpetasVT": {
+    "FilterFrasNoClassificadas": {
       "main": [
         [
           {
-            "node": "Filter NombresCarpetas NG-VT",
+            "node": "Merge2",
+            "type": "main",
+            "index": 1
+          }
+        ],
+        []
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "FilterFras",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge2": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "VariablesGlobales": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets UID's",
             "type": "main",
             "index": 0
           }
@@ -1284,30 +1803,9 @@
       ]
     }
   },
-  "active": true,
-  "settings": {
-    "executionOrder": "v1",
-    "callerPolicy": "workflowsFromSameOwner",
-    "executionTimeout": 60
-  },
-  "versionId": "282eca11-da49-4a2a-aad1-aa8c587eefd1",
+  "pinData": {},
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "921b42ac40713cf8e80903373553a75b6a7dc1f7ad27fcbec19d4a8582a592ca"
-  },
-  "id": "PytzGBYC6AungQHE",
-  "tags": [
-    {
-      "createdAt": "2025-03-28T08:07:18.535Z",
-      "updatedAt": "2025-03-28T08:07:18.535Z",
-      "id": "0aWqZAAUUxSDgq4m",
-      "name": "Facturación"
-    },
-    {
-      "createdAt": "2025-05-14T08:02:56.711Z",
-      "updatedAt": "2025-05-14T08:02:56.711Z",
-      "id": "bfHvH6eBq9Ekm5pt",
-      "name": "Archivos"
-    }
-  ]
+  }
 }

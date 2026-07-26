@@ -1,13 +1,12 @@
 {
-  "name": "ComprobaciónFras",
   "nodes": [
     {
       "parameters": {},
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -140,
-        -60
+        120,
+        -420
       ],
       "id": "93b3709c-764f-49d4-9a4f-71e0b9c574ef",
       "name": "When clicking ‘Test workflow’"
@@ -19,8 +18,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        280,
-        -60
+        1340,
+        -420
       ],
       "id": "2b4a19f8-5ca8-4a1e-a1a0-93996ce1b2a6",
       "name": "Wait",
@@ -33,8 +32,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        80,
-        -60
+        280,
+        -420
       ],
       "id": "7ba88782-cbe1-4adb-9079-8f09c2bf1a05",
       "name": "Wait1",
@@ -56,8 +55,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        560,
-        40
+        1520,
+        -240
       ],
       "id": "aedfe41f-f9bc-427f-9dc8-0d3cebcedf89",
       "name": "Google Drive VT Contabilizadas Marzo",
@@ -86,8 +85,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        780,
-        -140
+        1700,
+        -420
       ],
       "id": "c04f4d0c-641c-4c0e-ae69-af9a7b40f6d7",
       "name": "Edit Fields"
@@ -109,248 +108,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1640,
-        -440
-      ],
-      "id": "855cbde8-9bf8-4773-939d-0cb4bfdb97dd",
-      "name": "Edit Fields1"
-    },
-    {
-      "parameters": {
-        "mergeByFields": {
-          "values": [
-            {
-              "field1": "name",
-              "field2": "name"
-            }
-          ]
-        },
-        "fuzzyCompare": true,
-        "options": {}
-      },
-      "type": "n8n-nodes-base.compareDatasets",
-      "typeVersion": 2.3,
-      "position": [
-        1860,
-        -380
-      ],
-      "id": "1d4ef6ee-2890-429f-ba45-a3960a81a9d6",
-      "name": "Compare Datasets Norgenic vs Contabilidad"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "documentId": {
-          "__rl": true,
-          "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
-          "mode": "id"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "1839937135",
-          "mode": "id"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "UID": "={{ $json.name }}",
-            "Ubicación VT": "Buscar"
-          },
-          "matchingColumns": [
-            "UID"
-          ],
-          "schema": [
-            {
-              "id": "UID",
-              "displayName": "UID",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Fecha",
-              "displayName": "Fecha",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Proveedor",
-              "displayName": "Proveedor",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Importe",
-              "displayName": "Importe",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "€/$",
-              "displayName": "€/$",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Factura",
-              "displayName": "Factura",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Empresa",
-              "displayName": "Empresa",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Dia",
-              "displayName": "Dia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Mes",
-              "displayName": "Mes",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Año",
-              "displayName": "Año",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Periodo",
-              "displayName": "Periodo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Punteada",
-              "displayName": "Punteada",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Ubicación VT",
-              "displayName": "Ubicación VT",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Filtro existente n8n",
-              "displayName": "Filtro existente n8n",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "row_number",
-              "displayName": "row_number",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "readOnly": true,
-              "removed": true
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.5,
-      "position": [
-        2140,
-        -260
-      ],
-      "id": "912dd941-88bc-4eaf-a708-bc89a6c7d96e",
-      "name": "Google Norgenic+NoCont.",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "hZcBoGBnLwH882Qs",
-          "name": "Google Sheets account Oscar"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "c2182743-f052-483a-8bb7-6a4c70836c79",
-              "name": "name",
-              "value": "={{ $json.name.match(/(?:Copia de )?(.+)/)[1] }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        1640,
-        -100
+        2120,
+        -460
       ],
       "id": "4468d7a5-fdb1-4bae-b097-193a60e01610",
       "name": "Edit Fields2"
@@ -371,206 +130,11 @@
       "type": "n8n-nodes-base.compareDatasets",
       "typeVersion": 2.3,
       "position": [
-        1860,
-        80
+        2300,
+        -460
       ],
       "id": "f7d904da-a8fb-46c1-a00b-2fe0e3642ce5",
       "name": "Compare Datasets Norgenic vs Enviadas"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "documentId": {
-          "__rl": true,
-          "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
-          "mode": "id"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "1839937135",
-          "mode": "id"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "UID": "={{ $json.name }}",
-            "Ubicación VT": "Buscar"
-          },
-          "matchingColumns": [
-            "UID"
-          ],
-          "schema": [
-            {
-              "id": "UID",
-              "displayName": "UID",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Fecha",
-              "displayName": "Fecha",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Proveedor",
-              "displayName": "Proveedor",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Importe",
-              "displayName": "Importe",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "€/$",
-              "displayName": "€/$",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Factura",
-              "displayName": "Factura",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Empresa",
-              "displayName": "Empresa",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Dia",
-              "displayName": "Dia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Mes",
-              "displayName": "Mes",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Año",
-              "displayName": "Año",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Periodo",
-              "displayName": "Periodo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Punteada",
-              "displayName": "Punteada",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Ubicación VT",
-              "displayName": "Ubicación VT",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Filtro existente n8n",
-              "displayName": "Filtro existente n8n",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "row_number",
-              "displayName": "row_number",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "readOnly": true,
-              "removed": true
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.5,
-      "position": [
-        2140,
-        280
-      ],
-      "id": "a827d6b2-45aa-473f-9f97-32f54cec8e25",
-      "name": "Google Norgenic+NoEnviadas",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "hZcBoGBnLwH882Qs",
-          "name": "Google Sheets account Oscar"
-        }
-      },
-      "disabled": true
     },
     {
       "parameters": {
@@ -583,8 +147,8 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
-        -140,
-        -200
+        120,
+        -560
       ],
       "id": "b4f90bb3-80f6-4c3f-981c-12c87f3272e1",
       "name": "Schedule Trigger"
@@ -598,42 +162,12 @@
       "name": "When Executed by Another Workflow",
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "position": [
-        -140,
-        100
+        120,
+        -260
       ]
     },
     {
       "parameters": {
-        "resource": "fileFolder",
-        "queryString": "={{ $json.name }}",
-        "filter": {
-          "folderId": {
-            "__rl": true,
-            "value": "https://drive.google.com/drive/folders/1_sUfGFZViXn0bXYiruQ9SmMEFqxGz_fk",
-            "mode": "url"
-          },
-          "whatToSearch": "files"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
-      "position": [
-        1440,
-        -100
-      ],
-      "id": "c3c2dd53-d61a-4e54-816a-71c67505a3e0",
-      "name": "Google Drive VT Enviadas 09-2025",
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "feXVSRveVKgVrnmP",
-          "name": "Google Drive account (Oscar)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "update",
         "documentId": {
           "__rl": true,
           "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
@@ -641,564 +175,1071 @@
         },
         "sheetName": {
           "__rl": true,
-          "value": "1839937135",
+          "value": "1963712436",
           "mode": "id"
         },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "UID": "={{ $json.name }}",
-            "Ubicación VT": "Enviadas 09-2025"
-          },
-          "matchingColumns": [
-            "UID"
-          ],
-          "schema": [
-            {
-              "id": "UID",
-              "displayName": "UID",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Fecha",
-              "displayName": "Fecha",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Proveedor",
-              "displayName": "Proveedor",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Importe",
-              "displayName": "Importe",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "€/$",
-              "displayName": "€/$",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Factura",
-              "displayName": "Factura",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Empresa",
-              "displayName": "Empresa",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Dia",
-              "displayName": "Dia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Mes",
-              "displayName": "Mes",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Año",
-              "displayName": "Año",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Periodo",
-              "displayName": "Periodo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Punteada",
-              "displayName": "Punteada",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "ID_Enviada",
-              "displayName": "ID_Enviada",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Carpeta",
-              "displayName": "Carpeta",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Time",
-              "displayName": "Time",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Ubicación VT",
-              "displayName": "Ubicación VT",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "RegexMovimiento",
-              "displayName": "RegexMovimiento",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "RegexMasDatos",
-              "displayName": "RegexMasDatos",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Regex Call",
-              "displayName": "Regex Call",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Filtro existente n8n",
-              "displayName": "Filtro existente n8n",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "row_number",
-              "displayName": "row_number",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "readOnly": true,
-              "removed": true
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "specifyRangeA1",
+              "range": "H1:H"
             }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
+          }
+        }
       },
       "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.5,
+      "typeVersion": 4.6,
       "position": [
-        2140,
-        60
-      ],
-      "id": "61f6f3a0-0c40-4261-9ef9-a3345b390065",
-      "name": "Google Sheets Enviadas 09-2025",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "hZcBoGBnLwH882Qs",
-          "name": "Google Sheets account Oscar"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "resource": "fileFolder",
-        "limit": 500,
-        "filter": {
-          "folderId": {
-            "__rl": true,
-            "value": "https://drive.google.com/drive/folders/14oj4-1sZ556Rb1a36o57ZpT7ZqEA8WiT",
-            "mode": "url"
-          },
-          "whatToSearch": "files"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
-      "position": [
-        560,
-        -140
-      ],
-      "id": "b2eb6dac-916b-4aa6-9819-c27475b20f7b",
-      "name": "Google Drive Norgenic Enviadas 09-2025",
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "feXVSRveVKgVrnmP",
-          "name": "Google Drive account (Oscar)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "resource": "fileFolder",
-        "queryString": "={{ $json.name }}",
-        "filter": {
-          "folderId": {
-            "__rl": true,
-            "value": "https://drive.google.com/drive/folders/1BzchZrdpHpLtQZnH97mRngXxb8SHTF71",
-            "mode": "url"
-          },
-          "whatToSearch": "files"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
-      "position": [
-        1440,
-        -440
-      ],
-      "id": "1ecafa2d-9608-4794-a297-15a9fea6eac4",
-      "name": "Google Drive VT Contabilizadas 09-2025",
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "feXVSRveVKgVrnmP",
-          "name": "Google Drive account (Oscar)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "documentId": {
-          "__rl": true,
-          "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
-          "mode": "id"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "1839937135",
-          "mode": "id"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "UID": "={{ $json.name }}",
-            "Ubicación VT": "Contabilizada Septiembre"
-          },
-          "matchingColumns": [
-            "UID"
-          ],
-          "schema": [
-            {
-              "id": "UID",
-              "displayName": "UID",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Fecha",
-              "displayName": "Fecha",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Proveedor",
-              "displayName": "Proveedor",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Importe",
-              "displayName": "Importe",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "€/$",
-              "displayName": "€/$",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Factura",
-              "displayName": "Factura",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Empresa",
-              "displayName": "Empresa",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Dia",
-              "displayName": "Dia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Mes",
-              "displayName": "Mes",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Año",
-              "displayName": "Año",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Periodo",
-              "displayName": "Periodo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Punteada",
-              "displayName": "Punteada",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "ID_Enviada",
-              "displayName": "ID_Enviada",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Carpeta",
-              "displayName": "Carpeta",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Time",
-              "displayName": "Time",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Ubicación VT",
-              "displayName": "Ubicación VT",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "RegexMovimiento",
-              "displayName": "RegexMovimiento",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "RegexMasDatos",
-              "displayName": "RegexMasDatos",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Regex Call",
-              "displayName": "Regex Call",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Filtro existente n8n",
-              "displayName": "Filtro existente n8n",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "row_number",
-              "displayName": "row_number",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "readOnly": true,
-              "removed": true
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.5,
-      "position": [
-        2140,
+        600,
         -420
       ],
-      "id": "28498213-427e-4c14-a55e-cc2e7c8c8883",
-      "name": "Google Sheets Contabilizadas 09-2025",
+      "id": "31d34997-34b8-4126-a1bf-9573dfc82484",
+      "name": "Google Sheets UID's0",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hZcBoGBnLwH882Qs",
+          "name": "Google Sheets account Oscar"
+        }
+      },
+      "notes": "Sin esto solo se copiaría en la primera coincidencia de UID."
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c2182743-f052-483a-8bb7-6a4c70836c79",
+              "name": "row",
+              "value": "={{ $json.row_number }}",
+              "type": "string"
+            },
+            {
+              "id": "3f747e97-eafc-4d4a-a0a1-894668121c3d",
+              "name": "NombreFactura",
+              "value": "={{ $json.NombreFactura }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        800,
+        -420
+      ],
+      "id": "b5487426-282c-40d9-9f34-95b4b57ec863",
+      "name": "Edit Fields NombreFra"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "2228b6b6-b63f-40eb-94e5-a1d6b3ef133c",
+              "leftValue": "={{ $json.NombreFactura }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "98d85904-9087-45f2-8ef5-131f9c574c42",
+              "leftValue": "={{ $json.NombreFactura }}",
+              "rightValue": "No Info",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "f1f8bece-2945-4e20-a3ee-fe2bc4e589d7",
+              "leftValue": "={{ $json.NombreFactura }}",
+              "rightValue": "Devos",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "7160b008-8896-49ff-b7c7-8d89d99281ba",
+              "leftValue": "={{ $json.NombreFactura }}",
+              "rightValue": "SinCoincidencias",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        980,
+        -420
+      ],
+      "id": "a6fc4071-9292-4b81-90ac-39b247dd8c61",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1180,
+        -420
+      ],
+      "id": "d7508636-933b-4228-95b2-4905a5faa642",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "include": "allOtherFields",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        2860,
+        -460
+      ],
+      "id": "e7eec6f0-cdeb-450e-8fe2-73486e153629",
+      "name": "Split Out1",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "97b227cc-6c07-40fd-9296-8bec90e04b22",
+              "name": "data",
+              "value": "={{ $('Aggregate').item.json.data }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2700,
+        -460
+      ],
+      "id": "f4a140ae-f226-4886-aa31-e9a5c4de6c7d",
+      "name": "Edit Fields6"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6e7458c6-60fc-49fc-ae25-c746e79543f7",
+              "name": "row",
+              "value": "={{ $json.data.row }}",
+              "type": "string"
+            },
+            {
+              "id": "1777d3ff-2f10-4c83-bd7f-bd993bf01d30",
+              "name": "NombreFactura",
+              "value": "={{ $json.data.NombreFactura }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3040,
+        -460
+      ],
+      "id": "232c54d7-6a8a-4c92-815a-511c4f768b68",
+      "name": "Edit Fields7"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8e4e01e7-793a-4855-ae15-9d40e84d2b75",
+              "leftValue": "={{ $('Compare Datasets Norgenic vs Enviadas').all().toJsonString() }}",
+              "rightValue": "={{ $json.NombreFactura }}",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        3240,
+        -460
+      ],
+      "id": "ad1bea4b-43e8-48f5-a1cc-5117e2935088",
+      "name": "Filter2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c2182743-f052-483a-8bb7-6a4c70836c79",
+              "name": "name",
+              "value": "={{ $json.name.match(/(?:Copia de )?(.+)/)[1] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2120,
+        -640
+      ],
+      "id": "3a678b57-baba-4f4c-9eba-6384ce0007fc",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "name",
+              "field2": "name"
+            }
+          ]
+        },
+        "fuzzyCompare": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.compareDatasets",
+      "typeVersion": 2.3,
+      "position": [
+        2460,
+        -640
+      ],
+      "id": "055354cb-5a75-4e3d-88e8-7b05c7199bdf",
+      "name": "Compare Datasets Norgenic vs Contabilidad1"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "include": "allOtherFields",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        2860,
+        -640
+      ],
+      "id": "c0e6cb3b-7e95-4ef4-a4b6-be63f1419530",
+      "name": "Split Out2",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "97b227cc-6c07-40fd-9296-8bec90e04b22",
+              "name": "data",
+              "value": "={{ $('Aggregate').item.json.data }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2700,
+        -640
+      ],
+      "id": "caac043e-179a-44c2-a953-63c34d91928f",
+      "name": "Edit Fields8"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6e7458c6-60fc-49fc-ae25-c746e79543f7",
+              "name": "row",
+              "value": "={{ $json.data.row }}",
+              "type": "string"
+            },
+            {
+              "id": "1777d3ff-2f10-4c83-bd7f-bd993bf01d30",
+              "name": "NombreFactura",
+              "value": "={{ $json.data.NombreFactura }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3040,
+        -640
+      ],
+      "id": "c23e249b-931e-4d1e-8790-f3ee21bc1f18",
+      "name": "Edit Fields9"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8e4e01e7-793a-4855-ae15-9d40e84d2b75",
+              "leftValue": "={{ $('Compare Datasets Norgenic vs Contabilidad1').all().toJsonString() }}",
+              "rightValue": "={{ $json.NombreFactura }}",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        3240,
+        -640
+      ],
+      "id": "04d4540d-34b7-4a44-8c69-3dd95ca3bcb9",
+      "name": "Filter3"
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "https://drive.google.com/drive/folders/1YXX1aGvDsDqT8J5mDVVOMfOVQ0ID0M14",
+            "mode": "url"
+          },
+          "whatToSearch": "files"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1520,
+        -420
+      ],
+      "id": "b2eb6dac-916b-4aa6-9819-c27475b20f7b",
+      "name": "Google Drive Norgenic Enviadas 07-2026",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "={{ $json.name }}",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "https://drive.google.com/drive/folders/1pE9MkNd3e-nxhOoiTOS5cDMmCBJOD1Bc",
+            "mode": "url"
+          },
+          "whatToSearch": "files"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1920,
+        -460
+      ],
+      "id": "c3c2dd53-d61a-4e54-816a-71c67505a3e0",
+      "name": "Google Drive VT Enviadas 07-2026",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "={{ $json.name }}",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "https://drive.google.com/drive/folders/109jpKQY9wDQAM7tSG6GuJebtZeLhrPrp",
+            "mode": "url"
+          },
+          "whatToSearch": "files"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1920,
+        -640
+      ],
+      "id": "388a2a5b-ca58-4fce-bb66-55546be9677b",
+      "name": "Google Drive VT Contabilizadas 07-",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "1963712436",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Ubicación VT": "Contabilizada 07-2026",
+            "row_number": "={{ $json.row }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "UID",
+              "displayName": "UID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Fecha",
+              "displayName": "Fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Fecha valor",
+              "displayName": "Fecha valor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Movimiento",
+              "displayName": "Movimiento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Más datos",
+              "displayName": "Más datos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Importe",
+              "displayName": "Importe",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Saldo",
+              "displayName": "Saldo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "NombreFactura",
+              "displayName": "NombreFactura",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "PeriodoCobro",
+              "displayName": "PeriodoCobro",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "DescripccionMovimiento",
+              "displayName": "DescripccionMovimiento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CF in/out",
+              "displayName": "CF in/out",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CF category",
+              "displayName": "CF category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "PlataformaPago",
+              "displayName": "PlataformaPago",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Def_UID",
+              "displayName": "Def_UID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Autopunteo",
+              "displayName": "Autopunteo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Validacion (CO)",
+              "displayName": "Validacion (CO)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Fra.Manual",
+              "displayName": "Fra.Manual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "P.Conable",
+              "displayName": "P.Conable",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Ubicación VT",
+              "displayName": "Ubicación VT",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ID_Enviada",
+              "displayName": "ID_Enviada",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Carpeta",
+              "displayName": "Carpeta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "BD",
+              "displayName": "BD",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        3420,
+        -640
+      ],
+      "id": "408574d2-3184-4824-9381-b50ac6d23f91",
+      "name": "Google Sheets Movimientos Contabilizadas 07-2027",
       "credentials": {
         "googleSheetsOAuth2Api": {
           "id": "hZcBoGBnLwH882Qs",
           "name": "Google Sheets account Oscar"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "1963712436",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Ubicación VT": "Enviadas 07-2026",
+            "row_number": "={{ $json.row }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "UID",
+              "displayName": "UID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Fecha",
+              "displayName": "Fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Fecha valor",
+              "displayName": "Fecha valor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Movimiento",
+              "displayName": "Movimiento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Más datos",
+              "displayName": "Más datos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Importe",
+              "displayName": "Importe",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Saldo",
+              "displayName": "Saldo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "NombreFactura",
+              "displayName": "NombreFactura",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "PeriodoCobro",
+              "displayName": "PeriodoCobro",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "DescripccionMovimiento",
+              "displayName": "DescripccionMovimiento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CF in/out",
+              "displayName": "CF in/out",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CF category",
+              "displayName": "CF category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "PlataformaPago",
+              "displayName": "PlataformaPago",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Def_UID",
+              "displayName": "Def_UID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Autopunteo",
+              "displayName": "Autopunteo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Validacion (CO)",
+              "displayName": "Validacion (CO)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Fra.Manual",
+              "displayName": "Fra.Manual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "P.Conable",
+              "displayName": "P.Conable",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Ubicación VT",
+              "displayName": "Ubicación VT",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ID_Enviada",
+              "displayName": "ID_Enviada",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Carpeta",
+              "displayName": "Carpeta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "BD",
+              "displayName": "BD",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        3420,
+        -460
+      ],
+      "id": "f0c2cb82-294f-4749-8ef2-a877ea7c1868",
+      "name": "Google Sheets Movimientos Contabilizadas 07-",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hZcBoGBnLwH882Qs",
+          "name": "Google Sheets account Oscar"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5205e717-9391-4f94-808b-a47333b865f8",
+              "name": "ID_GoogleSheets",
+              "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
+              "type": "string"
+            },
+            {
+              "id": "04acf6c9-4c9b-433c-b776-82dd13eb9aa1",
+              "name": "GID_GoogleSheets_Movimientos",
+              "value": "1963712436",
+              "type": "string"
+            },
+            {
+              "id": "f821e6cf-03ea-4534-b9b7-7187fc199996",
+              "name": "CarpetaMesFacturasEnviar_Norgenic",
+              "value": "https://drive.google.com/drive/folders/1YXX1aGvDsDqT8J5mDVVOMfOVQ0ID0M14",
+              "type": "string"
+            },
+            {
+              "id": "245479d1-6a6e-4f95-b8d0-b33eb62698ff",
+              "name": "CarpetaMesFacturasEnviadas_Viatribut",
+              "value": "https://drive.google.com/drive/folders/1pE9MkNd3e-nxhOoiTOS5cDMmCBJOD1Bc",
+              "type": "string"
+            },
+            {
+              "id": "a4aeff34-0f32-4d0e-ab99-0eb37f08cb69",
+              "name": "CarpetaMesFacturasContabilizadas_Viatribut",
+              "value": "https://drive.google.com/drive/folders/109jpKQY9wDQAM7tSG6GuJebtZeLhrPrp",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        440,
+        -420
+      ],
+      "id": "8cf1958f-ab83-45f3-8ebe-0a344b19c99c",
+      "name": "VariablesGlobales"
     }
   ],
-  "pinData": {},
   "connections": {
     "When clicking ‘Test workflow’": {
       "main": [
@@ -1215,7 +1256,7 @@
       "main": [
         [
           {
-            "node": "Google Drive Norgenic Enviadas 09-2025",
+            "node": "Google Drive Norgenic Enviadas 07-2026",
             "type": "main",
             "index": 0
           },
@@ -1231,7 +1272,7 @@
       "main": [
         [
           {
-            "node": "Wait",
+            "node": "VariablesGlobales",
             "type": "main",
             "index": 0
           }
@@ -1242,53 +1283,17 @@
       "main": [
         [
           {
-            "node": "Google Drive VT Contabilizadas 09-2025",
+            "node": "Google Drive VT Enviadas 07-2026",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "Google Drive VT Enviadas 09-2025",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Compare Datasets Norgenic vs Contabilidad",
-            "type": "main",
-            "index": 1
           },
           {
             "node": "Compare Datasets Norgenic vs Enviadas",
             "type": "main",
             "index": 1
-          }
-        ]
-      ]
-    },
-    "Edit Fields1": {
-      "main": [
-        [
+          },
           {
-            "node": "Compare Datasets Norgenic vs Contabilidad",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Compare Datasets Norgenic vs Contabilidad": {
-      "main": [
-        [],
-        [
-          {
-            "node": "Google Sheets Contabilizadas 09-2025",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [],
-        [
-          {
-            "node": "Google Norgenic+NoCont.",
+            "node": "Google Drive VT Contabilizadas 07-",
             "type": "main",
             "index": 0
           }
@@ -1311,7 +1316,7 @@
         [],
         [
           {
-            "node": "Google Sheets Enviadas 09-2025",
+            "node": "Edit Fields6",
             "type": "main",
             "index": 0
           }
@@ -1319,9 +1324,9 @@
         [],
         [
           {
-            "node": "Google Norgenic+NoEnviadas",
+            "node": "Compare Datasets Norgenic vs Contabilidad1",
             "type": "main",
-            "index": 0
+            "index": 1
           }
         ]
       ]
@@ -1348,18 +1353,162 @@
         ]
       ]
     },
-    "Google Drive VT Enviadas 09-2025": {
+    "Google Sheets UID's0": {
       "main": [
         [
           {
-            "node": "Edit Fields2",
+            "node": "Edit Fields NombreFra",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Google Drive Norgenic Enviadas 09-2025": {
+    "Edit Fields NombreFra": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields6": {
+      "main": [
+        [
+          {
+            "node": "Split Out1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields7": {
+      "main": [
+        [
+          {
+            "node": "Filter2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter2": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets Movimientos Contabilizadas 07-",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "Compare Datasets Norgenic vs Contabilidad1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compare Datasets Norgenic vs Contabilidad1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Edit Fields8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out2": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields9",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields8": {
+      "main": [
+        [
+          {
+            "node": "Split Out2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields9": {
+      "main": [
+        [
+          {
+            "node": "Filter3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter3": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets Movimientos Contabilizadas 07-2027",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Norgenic Enviadas 07-2026": {
       "main": [
         [
           {
@@ -1370,11 +1519,33 @@
         ]
       ]
     },
-    "Google Drive VT Contabilizadas 09-2025": {
+    "Google Drive VT Enviadas 07-2026": {
       "main": [
         [
           {
-            "node": "Edit Fields1",
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive VT Contabilizadas 07-": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "VariablesGlobales": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets UID's0",
             "type": "main",
             "index": 0
           }
@@ -1382,36 +1553,9 @@
       ]
     }
   },
-  "active": true,
-  "settings": {
-    "executionOrder": "v1",
-    "callerPolicy": "workflowsFromSameOwner",
-    "executionTimeout": 60
-  },
-  "versionId": "c49b6335-9098-46e6-8b87-5d255d5035ea",
+  "pinData": {},
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "921b42ac40713cf8e80903373553a75b6a7dc1f7ad27fcbec19d4a8582a592ca"
-  },
-  "id": "07wPIDSgwzk4eTkD",
-  "tags": [
-    {
-      "createdAt": "2025-03-28T08:07:18.535Z",
-      "updatedAt": "2025-03-28T08:07:18.535Z",
-      "id": "0aWqZAAUUxSDgq4m",
-      "name": "Facturación"
-    },
-    {
-      "createdAt": "2025-05-14T08:02:56.711Z",
-      "updatedAt": "2025-05-14T08:02:56.711Z",
-      "id": "bfHvH6eBq9Ekm5pt",
-      "name": "Archivos"
-    },
-    {
-      "createdAt": "2025-05-13T11:18:32.229Z",
-      "updatedAt": "2025-05-13T11:18:32.229Z",
-      "id": "rrlrQsgnb7NQM2ZP",
-      "name": "Comprobaciones"
-    }
-  ]
+  }
 }
