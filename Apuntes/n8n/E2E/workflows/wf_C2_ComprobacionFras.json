@@ -170,12 +170,12 @@
       "parameters": {
         "documentId": {
           "__rl": true,
-          "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
+          "value": "={{ $json.ID_GoogleSheets }}",
           "mode": "id"
         },
         "sheetName": {
           "__rl": true,
-          "value": "1963712436",
+          "value": "={{ $json.GID_GoogleSheets_Movimientos }}",
           "mode": "id"
         },
         "options": {
@@ -562,7 +562,7 @@
         "filter": {
           "folderId": {
             "__rl": true,
-            "value": "https://drive.google.com/drive/folders/1YXX1aGvDsDqT8J5mDVVOMfOVQ0ID0M14",
+            "value": "={{ $('VariablesGlobales').item.json.CarpetaMesFacturasEnviar_Norgenic }}",
             "mode": "url"
           },
           "whatToSearch": "files"
@@ -592,7 +592,7 @@
         "filter": {
           "folderId": {
             "__rl": true,
-            "value": "https://drive.google.com/drive/folders/1pE9MkNd3e-nxhOoiTOS5cDMmCBJOD1Bc",
+            "value": "={{ $('VariablesGlobales').item.json.CarpetaMesFacturasEnviadas_Viatribut }}",
             "mode": "url"
           },
           "whatToSearch": "files"
@@ -622,7 +622,7 @@
         "filter": {
           "folderId": {
             "__rl": true,
-            "value": "https://drive.google.com/drive/folders/109jpKQY9wDQAM7tSG6GuJebtZeLhrPrp",
+            "value": "={{ $('VariablesGlobales').item.json.CarpetaMesFacturasContabilizadas_Viatribut }}",
             "mode": "url"
           },
           "whatToSearch": "files"
@@ -649,18 +649,18 @@
         "operation": "update",
         "documentId": {
           "__rl": true,
-          "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
+          "value": "={{ $('VariablesGlobales').item.json.ID_GoogleSheets }}",
           "mode": "id"
         },
         "sheetName": {
           "__rl": true,
-          "value": "1963712436",
+          "value": "={{ $('VariablesGlobales').item.json.GID_GoogleSheets_Movimientos }}",
           "mode": "id"
         },
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "Ubicación VT": "Contabilizada 07-2026",
+            "Ubicación VT": "={{ $('VariablesGlobales').item.json.MesContabilizadas }}",
             "row_number": "={{ $json.row }}"
           },
           "matchingColumns": [
@@ -923,18 +923,18 @@
         "operation": "update",
         "documentId": {
           "__rl": true,
-          "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
+          "value": "={{ $('VariablesGlobales').item.json.ID_GoogleSheets }}",
           "mode": "id"
         },
         "sheetName": {
           "__rl": true,
-          "value": "1963712436",
+          "value": "={{ $('VariablesGlobales').item.json.GID_GoogleSheets_Movimientos }}",
           "mode": "id"
         },
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "Ubicación VT": "Enviadas 07-2026",
+            "Ubicación VT": "={{ $('VariablesGlobales').item.json.MesEnviadas }}",
             "row_number": "={{ $json.row }}"
           },
           "matchingColumns": [
@@ -1224,6 +1224,18 @@
               "id": "a4aeff34-0f32-4d0e-ab99-0eb37f08cb69",
               "name": "CarpetaMesFacturasContabilizadas_Viatribut",
               "value": "https://drive.google.com/drive/folders/109jpKQY9wDQAM7tSG6GuJebtZeLhrPrp",
+              "type": "string"
+            },
+            {
+              "id": "f10fa06f-37b8-4f5c-8159-015b66c67b49",
+              "name": "MesEnviadas",
+              "value": "Enviadas 07-2026",
+              "type": "string"
+            },
+            {
+              "id": "bccb1e20-5f32-485f-8723-ecad367108de",
+              "name": "MesContabilizadas",
+              "value": "Contabilizada 07-2026",
               "type": "string"
             }
           ]
