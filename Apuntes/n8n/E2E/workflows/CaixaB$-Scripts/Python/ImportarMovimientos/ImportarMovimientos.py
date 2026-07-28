@@ -9,7 +9,7 @@ from pathlib import Path
 #    (equivalente al "formulario de variables" del script original)
 # ====================================================================
 
-CONFIG = {
+CONFIG = { #Diccionario con las variables globales
     # Archivo histórico donde se acumulan todos los movimientos ya importados
     # (equivalente a idSpreadSheet + gidHojaHistorico)
     "ruta_historico": Path("C:/Users/Oscar Ardevol/Documents/MovimientosBancarios/Norgenic/€/Historico_py.xlsx"),
@@ -120,12 +120,12 @@ def leer_movimientos_bancarios(config: dict) -> list:
         archivo,
         header=None,
         skiprows=config["fila_inicio_datos"] - 1,
-        engine=engine,
+        engine=engine, #Le dice a pandas como (que libreria se usa) y bajo que condiciones abrir el excel
     )
 
     # Nos quedamos solo con las columnas que nos interesan (A:F),
     # por si el banco añade columnas extra a la derecha.
-    df = df.iloc[:, :config["num_columnas_origen"]]
+    df = df.iloc[:, :config["num_columnas_origen"]] #Sacamos con iloc rango de filas, columnas ej: [0:4 , 0:6]
 
     # Filtramos filas totalmente vacías / sin fecha en la columna A
     # (equivalente a: inverseBD.filter(row => row[0] !== ""))
@@ -137,7 +137,7 @@ def leer_movimientos_bancarios(config: dict) -> list:
     # al más antiguo; queremos guardar en orden cronológico ascendente)
     filas.reverse()
 
-    # Generamos el UID y lo anteponemos a cada fila
+    # Usamos un bulce para recorer cada fila, generar el UID y lo anteponemos a cada fila
     filas_con_uid = [[generar_uid(fila)] + fila for fila in filas]
 
     return filas_con_uid
@@ -154,7 +154,7 @@ def leer_uids_existentes(config: dict) -> set:
     wb = load_workbook(config["ruta_historico"], read_only=True, data_only=True)
     ws = wb[config["hoja_historico"]]
 
-    uids = set()
+    uids = set() # Hace una lista de los UID del historico (BD_Banco) para tratarlas en memoria sin tocar el archivo
     for fila in ws.iter_rows(min_row=2, max_col=1, values_only=True):  # min_row=2 salta cabecera
         if fila[0] is not None:
             uids.add(str(fila[0]).strip())
@@ -162,7 +162,7 @@ def leer_uids_existentes(config: dict) -> set:
     wb.close()
     return uids
 
-
+# Esta función se  podra sustituir por "lastRow_BDB= len(uids)" cuando no haya posibilidad de UID's duplicadas.
 def encontrar_siguiente_fila(ws) -> int:
     """Devuelve la fila siguiente a la última fila con contenido."""
     for row_idx in range(ws.max_row, 0, -1):
@@ -175,17 +175,18 @@ def encontrar_siguiente_fila(ws) -> int:
             return row_idx + 1
     return 1
 
-
-def escribir_fila_con_formato(ws, valores: list) -> None:
+#Ese valores viene de la llamada: escribir_fila_con_formato(sheet_BDB, fila) y fila es cada elemento de filas_a_importar.
+def escribir_fila_con_formato(ws, valores: list) -> None: 
     """Escribe una fila en la siguiente línea libre y copia el formato de la fila anterior."""
     fila_destino = encontrar_siguiente_fila(ws)
     fila_origen = fila_destino - 1 if fila_destino > 1 else 1
 
-    for col_idx, valor in enumerate(valores, start=1):
-        celda_destino = ws.cell(row=fila_destino, column=col_idx)
-        celda_destino.value = valor
-
+    for col_idx, valor in enumerate(valores, start=1): # Itera cada columna y fila para pegarle los valores importados
+        celda_destino = ws.cell(row=fila_destino, column=col_idx) # LastRow=i; columna = i
+        celda_destino.value = valor # La linia anterior recorre cada fila y linia esta escribe el valor correspondiente.
         celda_origen = ws.cell(row=fila_origen, column=col_idx)
+
+        #Copia los formatos de la última linia en las linias importadas
         celda_destino.number_format = celda_origen.number_format
         celda_destino.font = copy(celda_origen.font)
         celda_destino.alignment = copy(celda_origen.alignment)
