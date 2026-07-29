@@ -111,7 +111,7 @@ def leer_movimientos_bancarios(config: dict) -> list:
     Devuelve una lista de filas: [UID, Fecha, FechaValor, Movimiento, MasDatos, Importe, Saldo]
     """
     archivo = obtener_primer_excel(config["carpeta_importar"])
-    print(f"Leyendo archivo: {archivo.name}")
+    print(f"Leyendo archivo: {archivo.name}")  # muestra el archivo que se está leyendo (solo presentación)
 
     # header=None: no confiamos en que la fila de cabecera del banco sea fiable,
     # igual que el original que empieza a leer directamente en filaInicioDatosImportados.
@@ -222,6 +222,15 @@ def anadir_movimientos_al_historico(config: dict, filas_nuevas: list) -> int:
     # wb_debug.close()
     # print(f"[DEBUG] UID en BD_Banco A2260: {uid_a2260!r}")
 
+    # --- Detectar la primera fila nueva comparando UIDs ---
+    # Recorremos las filas importadas (en orden cronológico ascendente) y
+    # comparamos cada UID con el conjunto `uids_existentes` leído del
+    # histórico. Cuando encontramos el primer UID que NO está en el
+    # histórico, guardamos su índice y detenemos la búsqueda.
+    #
+    # Resultado:
+    # - `primer_nuevo_idx` será la posición dentro de `filas_nuevas` donde
+    #   empiezan los movimientos que deben importarse.
     primer_nuevo_idx = None
     for idx, fila in enumerate(filas_nuevas):
         uid = str(fila[0]).strip()
@@ -229,19 +238,22 @@ def anadir_movimientos_al_historico(config: dict, filas_nuevas: list) -> int:
             primer_nuevo_idx = idx
             break
 
+    # Si no se encontró ningún UID nuevo, salimos. 
     if primer_nuevo_idx is None:
-        print("No hay movimientos nuevos que importar.")
+        print("No hay movimientos nuevos que importar.")  # mensaje informativo (solo presentación)
         return 0
 
+    # Construimos la lista de filas que realmente importaremos a partir de el mensaje de debug posterior.
     filas_a_importar = filas_nuevas[primer_nuevo_idx:]
-    total_filas_importado = len(filas_nuevas)
+    total_filas_importado = len(filas_nuevas)    # la primera UID nueva detectada. `total_filas_importado` es solo para
+
     start = "\033[1;33m"
     end = "\033[0m"
     # Nota: en algunos PowerShell/terminales de Windows no se renderizan
     # las secuencias ANSI; en ese caso el contenido visible será el texto
     # con los marcadores >>> y <<<.
-    print(start + "[DEBUG] >>> PRIMERA UID NUEVA: " + end + str(filas_a_importar[0][0]))
-    print(start + "[DEBUG] >>> SE IMPORTARÁN {} de {} filas".format(len(filas_a_importar), total_filas_importado) + end + "  del archivo importado.")
+    print(start + "[DEBUG] >>> PRIMERA UID NUEVA: " + end + str(filas_a_importar[0][0]))  # debug visual: informa la primera UID nueva (solo presentación)
+    print(start + "[DEBUG] >>> SE IMPORTARÁN {} de {} filas".format(len(filas_a_importar), total_filas_importado) + end + "  del archivo importado.")  # debug visual: resumen de filas a importar (solo presentación)
 
     wb = load_workbook(config["ruta_historico"])
     sheet_BDB = wb[config["hoja_historico"]]
@@ -260,8 +272,8 @@ def anadir_movimientos_al_historico(config: dict, filas_nuevas: list) -> int:
         fecha_formateada = pd.to_datetime(ultima_fecha_bdb).strftime('%d/%m/%Y')
     start = "\033[1;33m"
     end = "\033[0m"
-    print(start +f"[DEBUG] >>> ÚLTIMA FECHA AÑADIDA"+ end +f" EN {config['hoja_historico']}"+ start + f" --> {fecha_formateada}" + end)
-    print(f"Se han importado {len(filas_a_importar)} movimientos nuevos.")
+    print(start +f"[DEBUG] >>> ÚLTIMA FECHA AÑADIDA"+ end +f" EN {config['hoja_historico']}"+ start + f" --> {fecha_formateada}" + end)  # debug visual: muestra la última fecha añadida (solo presentación)
+    print(f"Se han importado {len(filas_a_importar)} movimientos nuevos.")  # mensaje de resultado: número de movimientos importados (solo presentación)
     return len(filas_a_importar)
 
 
