@@ -26,7 +26,7 @@
       "typeVersion": 1,
       "position": [
         -3540,
-        4940
+        4760
       ],
       "credentials": {
         "googleDriveOAuth2Api": {
@@ -209,7 +209,7 @@
         },
         "folderId": {
           "__rl": true,
-          "value": "https://drive.google.com/drive/folders/1nzTB7wdzOGMQp9y29Xla9ov2di8WvLBm",
+          "value": "={{ $('VariablesGlobales').item.json.CarpetaInfoFaltante }}",
           "mode": "url"
         }
       },
@@ -243,7 +243,7 @@
         },
         "folderId": {
           "__rl": true,
-          "value": "https://drive.google.com/drive/folders/1XQ-zoNbAz910MdC_zrb5hjUc-zl8UtuX",
+          "value": "={{ $('VariablesGlobales').item.json.CarpetaCuadrar }}",
           "mode": "url"
         }
       },
@@ -4905,7 +4905,7 @@
         "filter": {
           "folderId": {
             "__rl": true,
-            "value": "https://drive.google.com/drive/folders/1TWAWtb7FC52wXBHsJdB5YHOw4w70rZmu",
+            "value": "={{ $json['CarpetaFacturación'] }}",
             "mode": "url"
           },
           "whatToSearch": "files"
@@ -5089,8 +5089,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
       "position": [
-        -1920,
-        4640
+        -1900,
+        4820
       ],
       "id": "cceac0ba-69ba-4d2f-81ce-c08891434732",
       "name": "Google Sheets",
@@ -6532,12 +6532,12 @@
       "parameters": {
         "documentId": {
           "__rl": true,
-          "value": "=1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
+          "value": "={{ $json.ID_GoogleSheets }}",
           "mode": "id"
         },
         "sheetName": {
           "__rl": true,
-          "value": "1422409426",
+          "value": "={{ $json.GID_GoogleSheets_B_Facturas }}",
           "mode": "id"
         },
         "options": {
@@ -6638,8 +6638,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.2,
       "position": [
-        -1920,
-        4800
+        -1900,
+        4640
       ],
       "id": "844031f9-2cf4-40db-8fe2-1b9187019b12",
       "name": "Execute Workflow FrasOdoo"
@@ -6719,8 +6719,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -3240,
-        4600
+        -3320,
+        4760
       ],
       "id": "0bd877cf-e8af-4a42-8940-38067e9ca5d4",
       "name": "VariablesGlobales"
@@ -6730,16 +6730,6 @@
     "Google Drive Trigger1": {
       "main": [
         [
-          {
-            "node": "Google Drive",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Google Sheets4",
-            "type": "main",
-            "index": 0
-          },
           {
             "node": "VariablesGlobales",
             "type": "main",
@@ -8456,7 +8446,18 @@
     },
     "VariablesGlobales": {
       "main": [
-        []
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Google Sheets4",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
