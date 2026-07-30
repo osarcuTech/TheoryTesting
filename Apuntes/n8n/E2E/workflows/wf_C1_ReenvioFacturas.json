@@ -7,7 +7,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        -1460,
+        -1500,
         300
       ],
       "id": "93f5ff15-f8f6-4e7a-b206-edb545781fda",
@@ -63,7 +63,7 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
-        -1600,
+        -1640,
         400
       ],
       "id": "fd84bca9-388b-4fe3-8493-01bfcf290ffc",
@@ -91,7 +91,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.2,
       "position": [
-        -1300,
+        -1340,
         440
       ],
       "id": "fc4ac985-ba63-4098-ba6c-13ab50e4b38d",
@@ -142,7 +142,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        -1600,
+        -1640,
         200
       ],
       "id": "edaa1def-53f9-49b7-a994-355465e45507",
@@ -189,12 +189,12 @@
         "operation": "update",
         "documentId": {
           "__rl": true,
-          "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
+          "value": "={{ $('VariablesGlobales').item.json.ID_GoogleSheets }}",
           "mode": "id"
         },
         "sheetName": {
           "__rl": true,
-          "value": "1963712436",
+          "value": "={{ $('VariablesGlobales').item.json.GID_GoogleSheets_Historico }}",
           "mode": "id"
         },
         "columns": {
@@ -504,39 +504,20 @@
       "parameters": {
         "documentId": {
           "__rl": true,
-          "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
+          "value": "={{ $json.ID_GoogleSheets }}",
           "mode": "id"
         },
         "sheetName": {
           "__rl": true,
-          "value": "1963712436",
+          "value": "={{ $json.GID_GoogleSheets_Movimientos }}",
           "mode": "id"
-        },
-        "filtersUI": {
-          "values": [
-            {
-              "lookupColumn": "CF category",
-              "lookupValue": "Proveedores"
-            },
-            {
-              "lookupColumn": "PlataformaPago",
-              "lookupValue": "CheckOut"
-            },
-            {
-              "lookupColumn": "PlataformaPago",
-              "lookupValue": "SolidProcessing"
-            },
-            {
-              "lookupColumn": "PlataformaPago",
-              "lookupValue": "Adyen"
-            }
-          ]
         },
         "combineFilters": "OR",
         "options": {
           "dataLocationOnSheet": {
             "values": {
-              "rangeDefinition": "detectAutomatically"
+              "rangeDefinition": "specifyRangeA1",
+              "range": "H:H"
             }
           }
         }
@@ -544,7 +525,7 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.6,
       "position": [
-        -900,
+        -940,
         300
       ],
       "id": "44174054-0435-49e9-8f5b-f11f258e6f96",
@@ -569,7 +550,7 @@
           "conditions": [
             {
               "id": "2228b6b6-b63f-40eb-94e5-a1d6b3ef133c",
-              "leftValue": "={{ $json.NombreFactura }}",
+              "leftValue": "={{ $json.NombreFactura.trim() }}",
               "rightValue": "",
               "operator": {
                 "type": "string",
@@ -579,7 +560,7 @@
             },
             {
               "id": "98d85904-9087-45f2-8ef5-131f9c574c42",
-              "leftValue": "={{ $json.NombreFactura }}",
+              "leftValue": "={{ $json.NombreFactura.trim() }}",
               "rightValue": "No Info",
               "operator": {
                 "type": "string",
@@ -588,7 +569,7 @@
             },
             {
               "id": "f1f8bece-2945-4e20-a3ee-fe2bc4e589d7",
-              "leftValue": "={{ $json.NombreFactura }}",
+              "leftValue": "={{ $json.NombreFactura.trim() }}",
               "rightValue": "Devos",
               "operator": {
                 "type": "string",
@@ -597,7 +578,7 @@
             },
             {
               "id": "7160b008-8896-49ff-b7c7-8d89d99281ba",
-              "leftValue": "={{ $json.NombreFactura }}",
+              "leftValue": "={{ $json.NombreFactura.trim() }}",
               "rightValue": "SinCoincidencias",
               "operator": {
                 "type": "string",
@@ -639,7 +620,7 @@
         "filter": {
           "folderId": {
             "__rl": true,
-            "value": "https://drive.google.com/drive/folders/1fiyCiRwYpjTlYn5VxA2ek0gwVwrp_nFA",
+            "value": "={{ $('VariablesGlobales').item.json['CarpetaAñoFacturaciónNorgenic'] }}",
             "mode": "url"
           }
         },
@@ -674,7 +655,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        -1300,
+        -1340,
         300
       ],
       "id": "106e6325-38c3-4d3e-bcd6-bd4e709535e3",
@@ -1012,7 +993,7 @@
         "filter": {
           "folderId": {
             "__rl": true,
-            "value": "https://drive.google.com/drive/folders/1TNj0wxFIPkvJ3ONKI8Q9WYZwkytSljzf",
+            "value": "={{ $('VariablesGlobales').item.json['CarpetaAñoFacturaciónViaTribut'] }}",
             "mode": "url"
           },
           "whatToSearch": "folders"
@@ -1080,7 +1061,7 @@
           "assignments": [
             {
               "id": "07fd513f-7965-4447-9f7a-448b4056d174",
-              "name": "=NombreFra",
+              "name": "=NombreFactura",
               "value": "={{ $json.name }}",
               "type": "string"
             },
@@ -1121,7 +1102,7 @@
           "conditions": [
             {
               "id": "3860abe6-4727-433c-bbbc-879ef1e520fa",
-              "leftValue": "={{ $json.NombreFra }}",
+              "leftValue": "={{ $json.NombreFactura.trim() }}",
               "rightValue": "",
               "operator": {
                 "type": "string",
@@ -1146,17 +1127,11 @@
     {
       "parameters": {
         "mode": "combine",
-        "advanced": true,
-        "mergeByFields": {
-          "values": [
-            {
-              "field1": "NombreFactura",
-              "field2": "NombreFra"
-            }
-          ]
-        },
+        "fieldsToMatchString": "NombreFactura, NombreFactura",
         "options": {
-          "fuzzyCompare": true
+          "disableDotNotation": true,
+          "fuzzyCompare": false,
+          "multipleMatches": "all"
         }
       },
       "type": "n8n-nodes-base.merge",
@@ -1415,7 +1390,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1080,
+        -1120,
         300
       ],
       "id": "4b278cc7-b5e9-4364-89d4-d8f389443d9f",
