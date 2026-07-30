@@ -1,4 +1,4 @@
-
+# Codigo generado por CLaude a partir de comentarios + ImportarMovimientos.py
 import pandas as pd
 from openpyxl import load_workbook
 from copy import copy
@@ -9,19 +9,12 @@ from pathlib import Path
 #    (equivalente al "formulario de variables" del script original)
 # ====================================================================
 
-CONFIG = { #Diccionario con las variables globales
+CONFIG = {
     # Archivo histórico donde se acumulan todos los movimientos ya importados
     # (equivalente a idSpreadSheet + gidHojaHistorico)
-    "ruta_historico": Path("C:/Users/Oscar Ardevol/Documents/MovimientosBancarios/Norgenic/€/Historico_py.xlsx"),
+    "ruta_historico": Path("C:/Users/Oscar Ardevol/Documents/MovimientosBancarios/Norgenic/Historico_py.xlsx"),
     "hoja_historico": "BD_Banco",
     "hoja_movimientos_cuenta": "Movimientos_cuenta_0087231",
-
-    '''
-    --------------CAMBIO !!!------------
-    Aquí iría el cambio de ruta del histórico:
-    - "ruta_historico": Path("C:/Users/Oscar Ardevol/Documents/MovimientosBancarios/Norgenic/Historico_py.xlsx"),
-    --------------Fin CAMBIO !!!------------
-    '''
 
     # Carpeta donde dejamos el Excel bruto exportado por el banco
     # (equivalente a idCarpetaDrive)
@@ -118,7 +111,7 @@ def leer_movimientos_bancarios(config: dict) -> list:
     Devuelve una lista de filas: [UID, Fecha, FechaValor, Movimiento, MasDatos, Importe, Saldo]
     """
     archivo = obtener_primer_excel(config["carpeta_importar"])
-    print(f"Leyendo archivo: {archivo.name}")  # muestra el archivo que se está leyendo (solo presentación)
+    print(f"Leyendo archivo: {archivo.name}")
 
     # header=None: no confiamos en que la fila de cabecera del banco sea fiable,
     # igual que el original que empieza a leer directamente en filaInicioDatosImportados.
@@ -127,12 +120,12 @@ def leer_movimientos_bancarios(config: dict) -> list:
         archivo,
         header=None,
         skiprows=config["fila_inicio_datos"] - 1,
-        engine=engine, #Le dice a pandas como (que libreria se usa) y bajo que condiciones abrir el excel
+        engine=engine,
     )
 
     # Nos quedamos solo con las columnas que nos interesan (A:F),
     # por si el banco añade columnas extra a la derecha.
-    df = df.iloc[:, :config["num_columnas_origen"]] #Sacamos con iloc rango de filas, columnas ej: [0:4 , 0:6]
+    df = df.iloc[:, :config["num_columnas_origen"]]
 
     # Filtramos filas totalmente vacías / sin fecha en la columna A
     # (equivalente a: inverseBD.filter(row => row[0] !== ""))
@@ -144,20 +137,78 @@ def leer_movimientos_bancarios(config: dict) -> list:
     # al más antiguo; queremos guardar en orden cronológico ascendente)
     filas.reverse()
 
-    # Usamos un bulce para recorer cada fila, generar el UID y lo anteponemos a cada fila
+    # Generamos el UID y lo anteponemos a cada fila
     filas_con_uid = [[generar_uid(fila)] + fila for fila in filas]
 
     return filas_con_uid
 
-'''
---------------CAMBIO !!!------------
-Aquí iría el bloque nuevo de validación de solape y renombrado de UIDs repetidos:
-- obtener_primer_dia_importados(...)
-- obtener_ultimo_dia_historico(...)
-- validar_solape_suficiente(...)
-- renombrar_uids_repetidos(...)
---------------Fin CAMBIO !!!------------
-'''
+
+# ====================================================================
+# 3b. ESCENARIO 5: RENOMBRADO DE UID's REPETIDAS + VALIDACIÓN DE SOLAPE
+#
+#   si( firstDayImportados < LastDayHistorico;
+#       ( Renombrar UID's repetidas en Importados as UID_i
+#         & ejecutar función python actual );
+#       ( print("La fecha de inicio de los importados debe ser anterior a la
+#                fecha final del histórico para evitar errores")
+#         & break )
+#   )
+# ====================================================================
+
+def renombrar_uids_repetidos(filas: list) -> list:
+    """Si dentro del PROPIO lote importado hay UID's idénticas (ej: dos cargos
+    del mismo proveedor, mismo día, mismo importe), les añade un sufijo "_i"
+    según el orden de aparición para que no se traten como si fueran la misma
+    transacción (Escenario 0/2).
+    Ej: 'A', 'A' -> 'A', 'A_2'
+    Nota: si más adelante se necesita una columna separada para este sufijo
+    (para no romper el SPLIT por "'_'" en otras hojas), esa columna se añade
+    manualmente en Excel/Sheets; no es responsabilidad de este script.
+    """
+    contador = {}
+    filas_renombradas = []
+    for fila in filas:
+        uid_base = fila[0]
+        contador[uid_base] = contador.get(uid_base, 0) + 1
+        ocurrencia = contador[uid_base]
+        uid_final = uid_base if ocurrencia == 1 else f"{uid_base}_{ocurrencia}"
+        filas_renombradas.append([uid_final] + fila[1:])
+    return filas_renombradas
+
+
+def obtener_primer_dia_importados(filas: list):
+    """Fecha (datetime) del primer movimiento importado (el más antiguo,
+    tras haber invertido el orden en leer_movimientos_bancarios)."""
+    fecha_texto = filas[0][1]  # columna Fecha, formato DD/MM/YYYY
+    return pd.to_datetime(fecha_texto, dayfirst=True)
+
+
+def obtener_ultimo_dia_historico(config: dict):
+    """Fecha (datetime) del último movimiento registrado en BD_Banco."""
+    wb = load_workbook(config["ruta_historico"], read_only=True, data_only=True)
+    ws = wb[config["hoja_historico"]]
+    fecha_valor = ws.cell(row=ws.max_row, column=2).value  # columna B = Fecha
+    wb.close()
+    if isinstance(fecha_valor, str):
+        return pd.to_datetime(fecha_valor, dayfirst=True)
+    return pd.to_datetime(fecha_valor)
+
+
+def validar_solape_suficiente(config: dict, filas_nuevas: list) -> bool:
+    """Comprueba que el primer día importado sea ANTERIOR (estrictamente) al
+    último día del histórico. Sin ese margen no hay solape que permita
+    detectar duplicados de forma fiable, así que se aborta la importación
+    en vez de arriesgarse a perder o duplicar movimientos."""
+    primer_dia_importados = obtener_primer_dia_importados(filas_nuevas)
+    ultimo_dia_historico = obtener_ultimo_dia_historico(config)
+
+    if primer_dia_importados < ultimo_dia_historico:
+        return True
+
+    print("La fecha de inicio de los importados debe ser anterior a la fecha "
+          "final del histórico para evitar errores.")
+    return False
+
 
 # ====================================================================
 # 4. COMPARACIÓN CON EL HISTÓRICO Y CARGA DE MOVIMIENTOS NUEVOS
@@ -170,7 +221,7 @@ def leer_uids_existentes(config: dict) -> set:
     wb = load_workbook(config["ruta_historico"], read_only=True, data_only=True)
     ws = wb[config["hoja_historico"]]
 
-    uids = set() # Hace una lista de los UID del historico (BD_Banco) para tratarlas en memoria sin tocar el archivo
+    uids = set()
     for fila in ws.iter_rows(min_row=2, max_col=1, values_only=True):  # min_row=2 salta cabecera
         if fila[0] is not None:
             uids.add(str(fila[0]).strip())
@@ -178,7 +229,7 @@ def leer_uids_existentes(config: dict) -> set:
     wb.close()
     return uids
 
-# Esta función se  podra sustituir por "lastRow_BDB= len(uids)" cuando no haya posibilidad de UID's duplicadas.
+
 def encontrar_siguiente_fila(ws) -> int:
     """Devuelve la fila siguiente a la última fila con contenido."""
     for row_idx in range(ws.max_row, 0, -1):
@@ -191,18 +242,17 @@ def encontrar_siguiente_fila(ws) -> int:
             return row_idx + 1
     return 1
 
-#Ese valores viene de la llamada: escribir_fila_con_formato(sheet_BDB, fila) y fila es cada elemento de filas_a_importar.
-def escribir_fila_con_formato(ws, valores: list) -> None: 
+
+def escribir_fila_con_formato(ws, valores: list) -> None:
     """Escribe una fila en la siguiente línea libre y copia el formato de la fila anterior."""
     fila_destino = encontrar_siguiente_fila(ws)
     fila_origen = fila_destino - 1 if fila_destino > 1 else 1
 
-    for col_idx, valor in enumerate(valores, start=1): # Itera cada columna y fila para pegarle los valores importados
-        celda_destino = ws.cell(row=fila_destino, column=col_idx) # LastRow=i; columna = i
-        celda_destino.value = valor # La linia anterior recorre cada fila y linia esta escribe el valor correspondiente.
-        celda_origen = ws.cell(row=fila_origen, column=col_idx)
+    for col_idx, valor in enumerate(valores, start=1):
+        celda_destino = ws.cell(row=fila_destino, column=col_idx)
+        celda_destino.value = valor
 
-        #Copia los formatos de la última linia en las linias importadas
+        celda_origen = ws.cell(row=fila_origen, column=col_idx)
         celda_destino.number_format = celda_origen.number_format
         celda_destino.font = copy(celda_origen.font)
         celda_destino.alignment = copy(celda_origen.alignment)
@@ -238,15 +288,6 @@ def anadir_movimientos_al_historico(config: dict, filas_nuevas: list) -> int:
     # wb_debug.close()
     # print(f"[DEBUG] UID en BD_Banco A2260: {uid_a2260!r}")
 
-    # --- Detectar la primera fila nueva comparando UIDs ---
-    # Recorremos las filas importadas (en orden cronológico ascendente) y
-    # comparamos cada UID con el conjunto `uids_existentes` leído del
-    # histórico. Cuando encontramos el primer UID que NO está en el
-    # histórico, guardamos su índice y detenemos la búsqueda.
-    #
-    # Resultado:
-    # - `primer_nuevo_idx` será la posición dentro de `filas_nuevas` donde
-    #   empiezan los movimientos que deben importarse.
     primer_nuevo_idx = None
     for idx, fila in enumerate(filas_nuevas):
         uid = str(fila[0]).strip()
@@ -254,22 +295,19 @@ def anadir_movimientos_al_historico(config: dict, filas_nuevas: list) -> int:
             primer_nuevo_idx = idx
             break
 
-    # Si no se encontró ningún UID nuevo, salimos. 
     if primer_nuevo_idx is None:
-        print("No hay movimientos nuevos que importar.")  # mensaje informativo (solo presentación)
+        print("No hay movimientos nuevos que importar.")
         return 0
 
-    # Construimos la lista de filas que realmente importaremos a partir de el mensaje de debug posterior.
     filas_a_importar = filas_nuevas[primer_nuevo_idx:]
-    total_filas_importado = len(filas_nuevas)    # la primera UID nueva detectada. `total_filas_importado` es solo para
-
+    total_filas_importado = len(filas_nuevas)
     start = "\033[1;33m"
     end = "\033[0m"
     # Nota: en algunos PowerShell/terminales de Windows no se renderizan
     # las secuencias ANSI; en ese caso el contenido visible será el texto
     # con los marcadores >>> y <<<.
-    print(start + "[DEBUG] >>> PRIMERA UID NUEVA: " + end + str(filas_a_importar[0][0]))  # debug visual: informa la primera UID nueva (solo presentación)
-    print(start + "[DEBUG] >>> SE IMPORTARÁN {} de {} filas".format(len(filas_a_importar), total_filas_importado) + end + "  del archivo importado.")  # debug visual: resumen de filas a importar (solo presentación)
+    print(start + "[DEBUG] >>> PRIMERA UID NUEVA: " + end + str(filas_a_importar[0][0]))
+    print(start + "[DEBUG] >>> SE IMPORTARÁN {} de {} filas".format(len(filas_a_importar), total_filas_importado) + end + "  del archivo importado.")
 
     wb = load_workbook(config["ruta_historico"])
     sheet_BDB = wb[config["hoja_historico"]]
@@ -288,8 +326,8 @@ def anadir_movimientos_al_historico(config: dict, filas_nuevas: list) -> int:
         fecha_formateada = pd.to_datetime(ultima_fecha_bdb).strftime('%d/%m/%Y')
     start = "\033[1;33m"
     end = "\033[0m"
-    print(start +f"[DEBUG] >>> ÚLTIMA FECHA AÑADIDA"+ end +f" EN {config['hoja_historico']}"+ start + f" --> {fecha_formateada}" + end)  # debug visual: muestra la última fecha añadida (solo presentación)
-    print(f"Se han importado {len(filas_a_importar)} movimientos nuevos.")  # mensaje de resultado: número de movimientos importados (solo presentación)
+    print(start +f"[DEBUG] >>> ÚLTIMA FECHA AÑADIDA"+ end +f" EN {config['hoja_historico']}"+ start + f" --> {fecha_formateada}" + end)
+    print(f"Se han importado {len(filas_a_importar)} movimientos nuevos.")
     return len(filas_a_importar)
 
 
@@ -300,17 +338,16 @@ def anadir_movimientos_al_historico(config: dict, filas_nuevas: list) -> int:
 def main():
     archivo = obtener_primer_excel(CONFIG["carpeta_importar"])
     filas_nuevas = leer_movimientos_bancarios(CONFIG)
+
+    # Escenario 5: sin solape suficiente no seguimos (evita duplicar o
+    # perder movimientos por no poder desambiguar correctamente).
+    if not validar_solape_suficiente(CONFIG, filas_nuevas):
+        return
+
+    filas_nuevas = renombrar_uids_repetidos(filas_nuevas)
+
     anadir_movimientos_al_historico(CONFIG, filas_nuevas)
     archivar_archivo_importado(archivo, CONFIG["carpeta_archivados"])
-
-'''
---------------CAMBIO !!!------------
-Aquí iría el cambio del flujo principal:
-- validar_solape_suficiente(CONFIG, filas_nuevas)
-- filas_nuevas = renombrar_uids_repetidos(filas_nuevas)
-- anadir_movimientos_al_historico(CONFIG, filas_nuevas)
---------------Fin CAMBIO !!!------------
-'''
 
 
 if __name__ == "__main__":
