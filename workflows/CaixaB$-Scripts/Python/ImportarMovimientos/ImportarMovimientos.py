@@ -9,19 +9,15 @@ from pathlib import Path
 #    (equivalente al "formulario de variables" del script original)
 # ====================================================================
 
-CONFIG = { #Diccionario con las variables globales
+CONFIG = {  # Diccionario con las variables globales
     # Archivo histórico donde se acumulan todos los movimientos ya importados
     # (equivalente a idSpreadSheet + gidHojaHistorico)
     "ruta_historico": Path("C:/Users/Oscar Ardevol/Documents/MovimientosBancarios/Norgenic/€/Historico_py.xlsx"),
     "hoja_historico": "BD_Banco",
     "hoja_movimientos_cuenta": "Movimientos_cuenta_0087231",
 
-    '''
-    --------------CAMBIO !!!------------
-    Aquí iría el cambio de ruta del histórico:
-    - "ruta_historico": Path("C:/Users/Oscar Ardevol/Documents/MovimientosBancarios/Norgenic/Historico_py.xlsx"),
-    --------------Fin CAMBIO !!!------------
-    '''
+    # Cambio opcional de ruta del histórico:
+    # "ruta_historico": Path("C:/Users/Oscar Ardevol/Documents/MovimientosBancarios/Norgenic/Historico_py.xlsx"),
 
     # Carpeta donde dejamos el Excel bruto exportado por el banco
     # (equivalente a idCarpetaDrive)
@@ -298,7 +294,16 @@ def anadir_movimientos_al_historico(config: dict, filas_nuevas: list) -> int:
 # ====================================================================
 
 def main():
-    archivo = obtener_primer_excel(CONFIG["carpeta_importar"])
+    if "carpeta_importar" not in CONFIG:
+        raise KeyError("CONFIG no contiene la clave 'carpeta_importar'.")
+    if "carpeta_archivados" not in CONFIG:
+        raise KeyError("CONFIG no contiene la clave 'carpeta_archivados'.")
+
+    carpeta_importar = CONFIG["carpeta_importar"]
+    if not carpeta_importar.exists():
+        raise FileNotFoundError(f"No existe la carpeta de importación: {carpeta_importar}")
+
+    archivo = obtener_primer_excel(carpeta_importar)
     filas_nuevas = leer_movimientos_bancarios(CONFIG)
     anadir_movimientos_al_historico(CONFIG, filas_nuevas)
     archivar_archivo_importado(archivo, CONFIG["carpeta_archivados"])
