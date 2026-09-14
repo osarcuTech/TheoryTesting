@@ -2,7 +2,7 @@
 title: A2 — Asignación de Gastos
 tags: [A2, clasificación, gastos, n8n]
 component: A2
-related: [[01_Arquitectura_General]], [[wf_A2_AsignacionDeGastos]], [[A1_ImportarMovimientos]], [[C0_PunteoFacturas]], [[Metricas_Asignacion]]
+related: [[01_Arquitectura_General]], [[wf_A2_AsignacionDeGastos]], [[A1_ImportarMovimientos_WF(deprecado)]], [[C0_PunteoFacturas]], [[Metricas_Asignacion]]
 ---
 
 # A2 — Asignación de Gastos
@@ -22,7 +22,7 @@ usando reglas de matching basadas en patrones de texto del movimiento.
 
 ### Entrada
 - **Fuente**: Movimientos nuevos en BD_Banco (trigger desde A1)
-- **Datos base**: Tabla `AsigCostes` con reglas de clasificación
+- **Datos base**: Tabla `Form_AsigCostes` con reglas de clasificación
 - **Formato**: Movimiento + Más Datos
 
 ### Procesamiento
@@ -134,7 +134,7 @@ FOR cada movimiento en BD_Banco {
 ## ⚙️ Configuración
 
 ### Workflow n8n
-- **Trigger**: Cambio en BD_Banco o ejecución manual desde [[A1_ImportarMovimientos|A1]]
+- **Trigger**: Cambio en BD_Banco o ejecución manual desde [[A1_ImportarMovimientos_WF(deprecado)|A1]]
 - **Rango procesado**: Últimas N filas sin clasificar
 - **Destino**: Escritura en Movimientos_cuenta columnas I-M
 
@@ -178,7 +178,7 @@ Ver: [[Metricas_Asignacion]]
 
 ## 🔗 Notas Relacionadas
 
-- **Anterior**: [[A1_ImportarMovimientos]] (importación)
+- **Anterior**: [[A1_ImportarMovimientos_WF(deprecado)]] (importación)
 - **Siguiente**: [[C0_PunteoFacturas]] (matching factura-movimiento)
 - **Control**: [[H0_ControlHumano]] (intervención manual)
 - **Datos base**: [[03_BDs_Principales#AsigCostes]]

@@ -2,7 +2,7 @@
 title: A1 — Importar Movimientos Bancarios
 tags: [A1, importación, banco, n8n]
 component: A1
-related: [[01_Arquitectura_General]], [[wf_A1_ImportarMovimientos]], [[A2_AsignacionDeGastos]], [[Metricas_Detalladas]], [[03_BDs_Principales]], [[A1_ImportarMovimientos_Implementacion]]
+related: [[01_Arquitectura_General]], [[wf_A1_ImportarMovimientos]], [[A2_AsignacionDeGastos]], [[Metricas_Detalladas]], [[03_BDs_Principales]], [[A1_ImportarMovimientos_GS]]
 ---
 
 # A1 — Importar Movimientos Bancarios
@@ -25,14 +25,14 @@ Importar de forma automática movimientos bancarios descargados en formato Excel
 1. **Descarga** del archivo desde Google Drive
 2. **Lectura** de datos comenzando en fila 4 (asumiendo headers en fila 3)
 3. **Inversión de orden** para alinear con histórico existente
-4. **Generación de UID** único (ver [[A1_ImportarMovimientos_Implementacion#🔐-generación-de-uid-deduplicación]])
+4. **Generación de UID** único (ver [[A1_ImportarMovimientos_GS#🔐-generación-de-uid-deduplicación]])
 5. **Comparación** con BD_Banco usando UID (fuzzy compare activado)
 6. **Deduplicación**: Solo se agregan movimientos nuevos
 7. **Limpieza**: Asignación de tipos de datos finales
 8. **Almacenamiento** en BD_Banco
 9. **Eliminación** del archivo original de Drive
 
-> 📌 **Detalles técnicos**: Consulta [[A1_ImportarMovimientos_Implementacion]] para ver cómo se implementa en Google Apps Script
+> 📌 **Detalles técnicos**: Consulta [[A1_ImportarMovimientos_GS]] para ver cómo se implementa en Google Apps Script
 
 ### Salida
 - Movimientos nuevos agregados a BD_Banco

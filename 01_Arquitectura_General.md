@@ -29,14 +29,16 @@ Los datos fluyen a través de **Google Sheets** como base de datos central, con 
 
 ### Flujo A: Bancario
 [[A1_ImportarMovimientos|A1 → ImportarMovimientos]]
-- Importa movimientos del banco en BD_Banco
-- Workflow: [[wf_A1_ImportarMovimientos]]
+- Importa movimientos del banco en BD_Banco. El appscript importa tambien en Movimientos_cuenta_0087231.
+- Workflow: [[A1_ImportarMovimientos_GS]], [[wf_A1_ImportarMovimientos]] (Deprecado: falta UID e Importación a Movimientos_cuenta_0087231)
 - KPIs: [[Metricas_Importacion]]
+- Hojas relacionadas: BD_Banco; Movimientos_cuenta_0087231.
 
 [[A2_AsignacionDeGastos|A2 → AsignacionDeGastos]]
 - Clasifica gastos por Departamento/Naturaleza/Categoría
 - Workflow: [[wf_A2_AsignacionDeGastos]]
 - KPIs: [[Metricas_Asignacion]]
+- Hojas relacionadas: Form_AsigCostes; AsigCostes; PProveedores
 
 ### Flujo B: Facturación
 [[B1_RecepcionFacturas|B1 → RecepcionFacturas]]

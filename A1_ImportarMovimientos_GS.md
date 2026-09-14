@@ -2,7 +2,7 @@
 title: A1 — Implementación Técnica en Google Apps Script
 tags: [A1, implementación, google-apps-script, deduplicación, UID, importación]
 component: A1
-related: [[A1_ImportarMovimientos]], [[Formulas_Google_Sheets]], [[03_BDs_Principales]], [[ConstantesGlobales]]
+related: [[01_Arquitectura_General]],[[A1_ImportarMovimientos_WF(Deprecado)]], [[Formulas_Google_Sheets]], [[03_BDs_Principales]], [[ConstantesGlobales]]
 source: workflows/CaixaB$-Scripts/AppScripts/ImportarMovimientos/
 ---
 
@@ -10,7 +10,7 @@ source: workflows/CaixaB$-Scripts/AppScripts/ImportarMovimientos/
 
 ## 🎯 Propósito
 
-Este documento detalla cómo se implementa el componente A1 (Importar Movimientos Bancarios) usando Google Apps Script (GAS). Vincula el código con la documentación conceptual de [[A1_ImportarMovimientos]].
+Este documento detalla cómo se implementa el componente A1 (Importar Movimientos Bancarios) usando Google Apps Script (GAS). 
 
 ---
 
@@ -358,7 +358,7 @@ Logger.log("UIDs a importar: " + noCoincidencia.length);
 
 ## 🔗 Notas Relacionadas
 
-- [[A1_ImportarMovimientos]] → Descripción conceptual de A1
+- [[A1_ImportarMovimientos_WF(Deprecado)]] → Descripción conceptual de A1
 - [[Formulas_Google_Sheets]] → Fórmulas de Google Sheets relacionadas
 - [[03_BDs_Principales]] → Estructura de BD_Banco
 - [[ConstantesGlobales]] → Variables compartidas
