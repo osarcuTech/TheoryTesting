@@ -18,7 +18,7 @@ El resultado es una columna "O" (Sugerencia) y "P" (Validación) que [[H0_Contro
 ## 📋 Descripción del Proceso
 
 ### Entrada
-1. **Movimientos clasificados**: Hoja `Movimientos_cuenta` (desde A2)
+1. **Movimientos clasificados**: Hoja `Movimientos_cuenta_0087231` (desde A2.1)
    - Campos: Fecha, Movimiento, Más Datos, Importe, Departamento, etc.
 2. **Facturas procesadas**: `HistorialFacturas` (desde B2)
    - Campos: Fecha Factura, Proveedor, Importe, Descripción, UID
@@ -27,19 +27,14 @@ El resultado es una columna "O" (Sugerencia) y "P" (Validación) que [[H0_Contro
 Para cada movimiento bancario, C0 busca facturas coincidentes basándose en:
 
 1. **Proveedor** (PerfilProveedores)
-   - Tabla que mapea "Movimiento" bancario → "Proveedor" esperado
+   - Tabla que mapea "Movimiento"/"Más datos" bancario → "Proveedor" esperado
    - Ejemplo: "TELEFONICA" → Proveedor "TELEFONICA"
 
 2. **Importe** (tolerancia)
-   - Coincidencia exacta O dentro de rango % (ej. ±5%)
-   - Maneja diferencias por decimales, redondeos
+   - Coincidencia exacta O no en función de lo establecido en [[N€Caixa-PProveedores]]
 
 3. **Fecha** (ventana temporal)
-   - Factura debe estar dentro de X días del movimiento
-   - Default: ±30 días
-
-4. **Descripción** (opcional)
-   - Búsqueda de keywords comunes
+   - Factura debe estar dentro de X días del movimiento en función de lo establecido en [[N€Caixa-PProveedores]]
 
 ### Salida
 - **Columna O (Sugerencia)**: Nombre factura sugerida (o vacío)
@@ -48,151 +43,14 @@ Para cada movimiento bancario, C0 busca facturas coincidentes basándose en:
 
 ---
 
-## 🔄 Fórmula en Google Sheets
+## 🔄 Fórmulas en Google Sheets
 
-Ubicación: [[Formulas_Google_Sheets#C0_PunteoFacturas]]
+Ubicación: [[N€Caixa-Movimientos_cuenta_0087231|H]], [[N€Caixa-Movimientos_cuenta_0087231|O]], [[N€Caixa-Movimientos_cuenta_0087231|P]], [[N€Caixa-Movimientos_cuenta_0087231|Q]]
 
-### Estructura Simplificada
-
-```
-COLUMNA O (Sugerencia automática):
-=LET(
-  movimiento, C2,
-  masDatos, D2,
-  importe, E2,
-  fecha, A2,
-  
-  perfilProv, INDIRECTO("PerfilProveedores!A:D"),
-  historialFras, INDIRECTO("HistorialFacturas!A:F"),
-  
-  proveedorEsperado, VLOOKUP(movimiento, perfilProv, 2, FALSE),
-  
-  candidatas, FILTER(
-    historialFras,
-    (historialFras[Proveedor] = proveedorEsperado) AND
-    (ABS(historialFras[Importe] - importe) / importe < 0.05) AND
-    (ABS(DAY(fecha, historialFras[Fecha])) <= 30)
-  ),
-  
-  mejorCoincidencia, INDEX(candidatas, 1, 0),
-  
-  SI(ISNA(mejorCoincidencia), "", mejorCoincidencia)
-)
-
-COLUMNA P (Validación manual):
-=SI(O2<>"", FALSE(), NA())
-// H0 cambia a TRUE si acepta la sugerencia, deja vacío si rechaza
-
-COLUMNA Q (Override manual):
-=SI(P2=TRUE, O2, SI(Q2<>"", Q2, ""))
-// Si P=TRUE usa O, si no usa override manual en Q
-```
-
----
-
-## 📊 Tabla de Soporte: PerfilProveedores
-
-Esta tabla es la **base del matching**. Define para cada patrón de movimiento:
-
-```
-| Movimiento    | Proveedor    | Tolerancia % | Ventana Días |
-|---------------|--------------|--------------|--------------|
-| TELEFONICA    | TELEFONICA   | 5%           | 30           |
-| AMAZON        | AMAZON       | 10%          | 45           |
-| SALARY        | RRHH INTERNO | 0%           | 0            |
-| FACTURA-*     | VARIED       | 5%           | 60           |
-| TRANSFER      | UNKNOWN      | N/A          | N/A          |
-```
-
----
-
-## 🔧 Algoritmo de Matching Detallado
-
-### Paso 1: Identificar Proveedor Esperado
-```javascript
-// Buscar en PerfilProveedores usando Movimiento como clave
-expectedProvider = VLOOKUP(movimiento, PerfilProveedores, 2, FALSE)
-
-// Si no hay coincidencia exacta:
-//   → Buscar con patrón (REGEX)
-//   → Si sigue sin haber → "UNKNOWN"
-```
-
-### Paso 2: Buscar Candidatas
-```javascript
-// Filtrar historialFacturas por:
-candidates = FILTER(
-  HistorialFacturas,
-  
-  // 1. Proveedor coincide
-  [Proveedor] = expectedProvider,
-  
-  // 2. Importe dentro de tolerancia
-  ABS([Importe] - movimientoImporte) <= (movimientoImporte * tolerancia%),
-  
-  // 3. Fecha dentro de ventana
-  ABS(DAYS(movimientoFecha, [FechaFactura])) <= ventanaDías,
-  
-  // 4. Estado no duplicado/archivado
-  [Estado] <> "ARCHIVADO"
-)
-```
-
-### Paso 3: Seleccionar Mejor Coincidencia
-```javascript
-// Ranking por precisión:
-// 1. Coincidencia exacta de importe (score +100)
-// 2. Proximidad de fechas (score = 50 - abs(días_dif) * 2)
-// 3. Coincidencia en descripción (score +20)
-
-bestMatch = MAX(scores)
-
-// Retornar nombre de factura del mejor match
-// Si score < umbral mínimo (ej. 30) → vacío (sin sugerencia)
-```
-
-### Paso 4: Registrar Confianza
-```
-Confianza = Score / ScoreMáximo
-
-HIGH (>80%): Sugerencia muy probable
-MEDIUM (50-80%): Revisar
-LOW (<50%): Rechazar sugerencia, requerir manual
-```
-
----
-
-## 📊 Métricas de Desempeño
-
-Ver: [[Metricas_Punteo]]
-
-| Métrica | Target | Actual |
-|---------|--------|--------|
-| **Tasa de sugerencias aceptadas** | >85% | ~70% |
-| **Tasa de falsos positivos** | <5% | ~8% |
-| **Movimientos sin sugerencia** | <15% | ~20% |
-| **Tiempo de cálculo (por lote)** | <30s | ~45s |
-
----
 
 ## 🐛 Desafíos & Mejoras
 
-### Challenge 1: Perfiles de Proveedores Incompletos
-- **Problema**: No hay regla para ~15% de movimientos
-- **Impacto**: Sin sugerencia automática
-- **Solución**: Enriquecer PerfilProveedores iterativamente (ver [[H0_ControlHumano]])
-
-### Challenge 2: Variaciones de Importe
-- **Problema**: Factura €100 vs Movimiento €95 (descuentos, retenciones)
-- **Actual**: Tolerancia ±5%, cubre mayoría
-- **Mejora**: Análisis histórico por proveedor para ajustar tolerancia
-
-### Challenge 3: Movimientos Duplicados
-- **Problema**: Mismo movimiento 2x en BD_Banco por error de banco
-- **Impacto**: Puede sugerir misma factura 2x
-- **Solución**: Detección de duplicados en A1, flag en BD_Banco
-
-### Challenge 4: Rendimiento con Volumen
+### Challenge 1: Rendimiento con Volumen
 - **Problema**: Fórmulas se lentifican con >10,000 filas
 - **Actual**: ~45 segundos por cálculo
 - **Futuro**: [[Propuestas_Mejora#C0_Optimización_Rendimiento]]

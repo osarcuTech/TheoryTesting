@@ -16,21 +16,21 @@ Procesar facturas descargadas por [[B1_RecepcionFacturas|B1]]: normalizar nombre
 ## 📋 Descripción del Proceso
 
 ### Entrada
-- **Fuente**: Facturas en Google Drive descargadas por B1
-- **Formato**: PDF, Excel, Imágenes
-- **Metadatos iniciales**: Proveedor, fecha recepción, nombre archivo
+- **Fuente**: Facturas en Google Drive descargadas por B1 o por carpeta de drive https://drive.google.com/drive/u/0/folders/1TWAWtb7FC52wXBHsJdB5YHOw4w70rZmu
+- **Formato**: PDF.
 
 ### Procesamiento
 1. **Lectura** de facturas nuevas en carpeta Drive
-2. **OCR/Extracción** de datos (si es PDF/imagen):
-   - Número de factura
+2. **Extracción** de datos:
+   - Fecha de factura
    - Proveedor
    - Importe
-   - Fecha de factura
+   - Divisa
+   - Número de factura
    - Descripción/concepto
 3. **Normalización** de nombre de archivo:
-   - Formato: `YYYYMMDD_Proveedor_NumFactura.pdf`
-   - Ejemplo: `20251001_TELEFONICA_F-2025-001.pdf`
+   - Formato: `YYYY/MM/DD_Proveedor_Importe_Divisa_NumFactura.pdf`
+   - Ejemplo: `31/08/2026_Google_278,58_€_5664396173_Norgenic.pdf`
 4. **Generación de UID** único
 5. **Validación** de completitud de datos
 6. **Registro** en BD_Facturas
@@ -57,7 +57,7 @@ Workflow: [[wf_B2_Cebollon]]
 | **Drive Trigger** | Trigger | Detecta facturas nuevas en carpeta entrada |
 | **Google Drive** | API | Lee metadatos del archivo |
 | **Download File** | Code | Descarga para procesamiento local |
-| **Extract Metadata** | Code/AI | OCR y extracción de datos (Google Docs API) |
+| **Extract Metadata** | Code/AI | OCR y extracción de datos (Google Docs API) |    <--ERRONEO
 | **Parse & Normalize** | Code | Extrae y valida: Proveedor, Importe, Fecha, Num Factura |
 | **Generate UID** | Code | Crea UID: Proveedor + NumFactura + Importe |
 | **Validate Data** | Conditional | ¿Datos completos? SI → continuar, NO → reportar |
@@ -73,41 +73,26 @@ Workflow: [[wf_B2_Cebollon]]
 ### Entrada (desde B1)
 ```
 Archivo: "Factura_F-2025-001.pdf"
-Ubicación Drive: /FacturasNorgenic/2025-10/
-Metadata: 
-  Proveedor: proveedor@example.com
-  Fecha Recepción: 2025-10-01
-  Tamaño: 245 KB
+Ubicación Drive: https://drive.google.com/drive/u/0/folders/1TWAWtb7FC52wXBHsJdB5YHOw4w70rZmu
 ```
 
-### Extracción de Datos (por OCR)
+### Extracción de Datos
 ```
 Número Factura: "F-2025-001"
-Proveedor: "TELEFONICA"
-Importe: 1500.00 EUR
 Fecha Factura: "2025-10-01"
-Descripción: "Servicios telefónicos octubre"
-IBAN (opcional): "ES91..."
-Concepto: "Teléfono - Línea Principal"
+Proveedor: "TELEFONICA"
+Importe: 1500.00 EUR  <--INCOMPLETO
 ```
 
 ### Registro en BD_Facturas
 ```
-Columna A: Fecha Recepción (2025-10-01)
-Columna B: Fecha Factura (2025-10-01)
-Columna C: Proveedor (TELEFONICA)
-Columna D: Número Factura (F-2025-001)
-Columna E: Importe (1500.00)
-Columna F: Moneda (EUR)
-Columna G: UID (TELEFONICA|F-2025-001|1500.00)
-Columna H: Estado (Procesado)
-Columna I: Descripción (Servicios telefónicos octubre)
+Columna A: UID factura (nombre pdf)
 ```
 
 ### Salida (Almacenamiento)
 ```
-/FacturasArchivadas/2025-10/TELEFONICA/
-  └── 20251001_TELEFONICA_F-2025-001.pdf
+https://drive.google.com/drive/u/0/folders/1XQ-zoNbAz910MdC_zrb5hjUc-zl8UtuX
+  └── 31/08/2026_Google_278,58_€_5664396173_Norgenic.pdf
 ```
 
 ---
@@ -117,9 +102,8 @@ Columna I: Descripción (Servicios telefónicos octubre)
 ### Método 1: Google Docs API (PDF→Google Docs→Extracción)
 ```
 1. Convertir PDF a Google Docs
-2. Usar DocumentAI o OCR built-in
-3. Parsear texto plano para patrones
-4. Extraer campos con regex
+2. Parsear texto plano para patrones
+3. Extraer campos con regex
 ```
 
 ### Método 2: Regex Patterns
@@ -173,11 +157,6 @@ Campos **opcionales**:
 
 ## 🐛 Desafíos & Consideraciones
 
-### OCR Imperfecto
-- **Problema**: Facturas escaneadas, imágenes de baja calidad
-- **Actual**: Requiere validación manual en [[H0_ControlHumano|H0]]
-- **Futuro**: Integración con Google Document AI (ver [[Propuestas_Mejora#Document_AI]])
-
 ### Variabilidad de Formatos
 - **Problema**: Cada proveedor tiene formato diferente
 - **Solución**: Machine Learning o reglas específicas por proveedor
@@ -189,21 +168,9 @@ Campos **opcionales**:
 - **Mejora**: Flag de duplicada en BD_Facturas
 
 ### Errores Silenciosos
-- **Riesgo**: OCR extrae datos parciales sin alerta
+- **Riesgo**: Extrae datos parciales sin alerta
 - **Solución**: Validar completitud, registrar confianza de extracción
 - **Threshold**: Si confianza < 80%, marcar para revisión manual
-
----
-
-## 📊 Métricas & KPIs
-
-Ver: [[Metricas_Facturas]]
-
-- **Tasa de facturas procesadas correctamente**: % sin intervención manual
-- **Tasa de metadatos incompletos**: % facturas sin proveedor/importe/fecha
-- **Tiempo medio de procesamiento**: Segundos por factura
-- **Tasa de OCR confiable**: % confianza de extracción >80%
-- **Tasa de duplicados detectados**: % UIDs duplicadas
 
 ---
 

@@ -37,73 +37,33 @@ Es el **corazón de calidad** del sistema: decide qué se archiva, qué requiere
 #### 2️⃣ Revisar Incidencias
 **Tipos de Incidencias**:
 - Factura faltante (movimiento sin sugerencia)
-- Movimiento duplicado
-- Importe inconsistente (retención, impuesto)
-- Proveedor no reconocido
+- Movimiento faltante (pedir movimientos actualizados)
+- Importe inconsistente (revisar si es la factura correcta y en caso negativo conseguir la correcta o modificar cebollón para que la saque de forma correcta)
+- Movimiento no reconocido (preguntar por la correcta asignación de este para poder ponerla en A2.1)
 
 **Acciones por Tipo**:
 | Incidencia | Acción | Responsable |
 |-----------|--------|------------|
 | Factura faltante | Buscar manual en BD_Facturas o pedir a proveedor | H0 |
-| Duplicado bancario | Marcar como duplicado, eliminar de BD_Banco | H0 + A1 review |
 | Importe inconsistente | Registrar diferencia (retención/impuesto/descuento) en nota | H0 |
 | Proveedor nuevo | Agregar a PerfilProveedores para futuro | H0 + [[A2_AsignacionDeGastos]] |
-| Factura ilegible (OCR fallido) | Contactar B2, solicitar re-OCR o input manual | H0 + B2 |
+| Movimiento no reconocido | Contactar H0 | H0 + B2 |
 
 #### 3️⃣ Actualizar Bases de Datos
 Según incidencias, H0 actualiza:
 
-- **PerfilProveedores**: Agregar nuevos proveedores/patrones
-- **AsigCostes**: Correcciones de clasificación (Depto/Categoría)
+- **Form_AsigCostes**: Correcciones de clasificación.
+- **AsigCostes**: Correcciones de clasificación.
+- **PProveedores**: Agregar nuevos proveedores/patrones
 - **HistorialFacturas**: Correcciones de importe/fecha/proveedor
 - **Notas de Auditoría**: Registrar cambios y razón
 
 #### 4️⃣ Autorizar Archivo
 Una vez validados todos los punteos:
-- Generar lista de facturas a archivar
+- Generar lista de facturas pendientes a recibir.
 - Verificar completitud (todas con factura asignada)
 - Marcar como "Listo para H1"
 - Trigger automático de [[H1_ArchivoRegistro|H1]]
-
----
-
-## 🖥️ Interface de Trabajo
-
-### Hoja de Control (Movimientos_cuenta)
-
-```
-Columnas A-M: Datos bancarios + clasificación (de A1/A2)
-├─ A-C: Fecha, Movimiento, Más Datos
-├─ D-E: Importe, Saldo
-├─ F-H: Departamento, Naturaleza, Categoría
-├─ I-K: Cashflow, etc.
-
-Columnas N-R: Trabajo de H0
-├─ N: Búsqueda (nota de búsqueda manual)
-├─ O: Sugerencia (de C0)
-├─ P: ✓ Aceptar (checkbox)
-├─ Q: Override manual (nombre factura correcta)
-├─ R: Nota / Incidencia (comentarios)
-```
-
-### Daily Workflow de H0
-
-**Mañana (30 min)**:
-1. Abrir `Movimientos_cuenta`
-2. Filtrar P = vacío O Q = vacío (sin validar)
-3. Revisar sugerencias
-4. Marcar P = TRUE o ingresar en Q
-
-**Mediodía (20 min)**:
-1. Buscar incidencias (movimientos sin O)
-2. Investigar en BD_Facturas
-3. Contactar proveedor si falta factura
-4. Actualizar PerfilProveedores
-
-**Tarde (10 min)**:
-1. Verificar correcciones de la mañana
-2. Autorizar lista para H1
-3. Registrar KPIs diarios
 
 ---
 
@@ -115,9 +75,9 @@ Columnas N-R: Trabajo de H0
 Si Sugerencia O ≠ vacío:
   Si coincide (95%+ de confianza):
     → P = TRUE (aceptar)
-  Si parcialmente coincide (50-95%):
-    → Revisar manual → Si OK: P=TRUE, Si NO: Q=correcta
-  Si no coincide (<50%):
+  Si parcialmente coincide (-95%):
+    → Revisar manual/ ajustado A2.1 si hace falta → Si OK: P=TRUE, Si NO: Q=correcta
+  Si no lo detecta C0:
     → Q = factura correcta (o vacío si no encontrada)
 
 Si Sugerencia O = vacío (sin sugerencia):
@@ -140,21 +100,12 @@ Si Importe inconsistente (O=X pero importe diferente):
 
 ### Casos que requieren Escalada a Manager
 
-1. **Factura muy antigua** (>90 días)
-   - Riesgo: Pasivo de período anterior
-   - Acción: Contactar Finance Manager
-
-2. **Importe muy grande** (>€10,000)
-   - Riesgo: Requiere aprobación adicional
-   - Acción: Validación con Finance
-
-3. **Proveedor sancionado o bajo análisis**
-   - Riesgo: Compliance/Auditoría
-   - Acción: Bloquear, notificar Legal
-
-4. **Movimiento sospechoso** (patrón anómalo)
+1. **Movimiento desconocido** (patrón anómalo)
    - Riesgo: Fraude potencial
-   - Acción: Reportar a Auditoría Interna
+   - Acción: Reportar a Manager
+2. **Movimientos/Facturas faltantes**
+   - Acción: Pedir a Manager
+
 
 ---
 
@@ -202,18 +153,12 @@ Ver: [[Metricas_Control]]
 
 ### SOP: Buscar Factura Manualmente
 
-**Tiempo estimado**: 5-10 minutos
+**Tiempo estimado**: 1-5 minutos
 
 ```
 1. Leer movimiento (proveedor, importe, fecha aproximada)
 
-2. Buscar en HistorialFacturas:
-   FILTER(HistorialFacturas,
-     [Proveedor] = proveedor_del_mov AND
-     ABS([Importe] - importe_mov) / importe_mov < 0.1 AND
-     ABS(DAYS([FechaFact], fecha_mov)) <= 60
-   )
-
+2. Buscar en HistorialFacturas o en carpeta:
 3. Si encontrada factura coincidente:
    → Ingresar nombre en Q2
    → Marcar P2 = ✓
@@ -221,31 +166,7 @@ Ver: [[Metricas_Control]]
 4. Si no encontrada:
    → Registrar en R2: "Factura no encontrada"
    → Marcar como "Incidencia" para seguimiento
-   → Contactar proveedor
-```
-
----
-
-## 🔄 Integración con otros componentes
-
-```
-INPUT de H0:
-├─ C0 (sugerencias)
-├─ Nuevas facturas de B2
-├─ Incidencias de workflows
-
-ACCIONES de H0:
-├─ Actualiza PerfilProveedores
-├─ Actualiza AsigCostes
-├─ Actualiza HistorialFacturas
-├─ Marca validaciones en P
-└─ Autoriza lista para H1
-
-OUTPUT de H0:
-├─ Lista de facturas validadas → H1
-├─ Incidencias registradas → Backlog
-├─ Mejoras de bases de datos → A2/C0
-└─ Auditoría de cambios → Compliance
+   → Contactar Manager
 ```
 
 ---

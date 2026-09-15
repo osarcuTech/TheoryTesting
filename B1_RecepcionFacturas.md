@@ -9,32 +9,30 @@ related: [[01_Arquitectura_General]], [[wf_B1_GmailMetralleta]], [[B2_Cebollón]
 
 ## 🎯 Objetivo
 
-Monitorear una cuenta de correo compartida (Gmail), extraer facturas adjuntas automáticamente y preparar la base de datos para procesamiento en [[B2_Cebollón|B2]].
+Monitorear una cuenta de correo (Gmail), extraer facturas adjuntas automáticamente y preparar la base de datos para procesamiento en [[B2_Cebollón|B2]]. Revisar el procesamiento de B1, es erroneo, tiene gran parte de B2.
 
 ---
 
 ## 📋 Descripción del Proceso
 
 ### Entrada
-- **Fuente**: Correo compartido norgenic@empresa.com
-- **Contenido**: Facturas PDF, Excel, o imágenes adjuntas
+- **Fuente A**: Correo compartido norgenic@empresa.com.
+- **Fuente B**: Carpeta de drive https://drive.google.com/drive/u/0/folders/17WR7hfIet-hcpFrjHW0agwHsC8KnM1Sn con ID [17WR7hfIet-hcpFrjHW0agwHsC8KnM1Sn].
+- **Contenido**: Facturas PDF.
 - **Trigger**: Nuevo correo sin procesar
 - **Metadatos extraídos**: De, Asunto, Fecha, Adjuntos
 
 ### Procesamiento
-1. **Lectura** de correos no procesados en Gmail
+1. **Lectura** de correos no procesados en Gmail y facturas en carpeta Drive [17WR7hfIet-hcpFrjHW0agwHsC8KnM1Sn].
 2. **Filtrado** por asunto/remitente (opcionales)
 3. **Descarga** de adjuntos a carpeta temporal en Google Drive
-4. **Extracción** de metadatos:
-   - Proveedor (desde remitente)
-   - Fecha de recepción
-   - Cantidad de adjuntos
-5. **Registro inicial** en tabla temporal o BD_Facturas
-6. **Marcado** de correo como procesado (etiqueta)
+4. **Extracción** de metadatos
+5. **Clasificación por empresa adquiriente** en [[N€Caixa-BD_Facturas]].
+6. **Reenvio a la carpeta correspondiete para C0** 
+6. **Marcado como leido** de correo como procesado (etiqueta)
 
 ### Salida
-- Facturas almacenadas en Google Drive (carpeta por mes)
-- Metadatos registrados en BD_Facturas
+- Facturas almacenadas en Google Drive (carpeta por Empresa) Taxgov/Norgenic/Worldwide/GlobalDocument
 - Correo etiquetado "procesado" o archivado
 - Trigger automático de [[B2_Cebollón|B2]]
 
@@ -52,8 +50,7 @@ Workflow: [[wf_B1_GmailMetralleta]]
 | **Gmail** | API | Lee metadatos y contenido del correo |
 | **Extract Attachments** | Code | Extrae nombres y IDs de adjuntos |
 | **Google Drive** | API | Descarga adjuntos a carpeta temporal |
-| **Parse Metadata** | Code | Extrae proveedor, fecha, importe (si está visible) |
-| **Google Sheets** | API | Registra en tabla temporal o BD_Facturas |
+| **Parse Metadata** | Code | Extrae proveedor, cliente |
 | **Gmail Attachment** | API | Descarga cada adjunto |
 | **Google Drive Upload** | API | Guarda en carpeta destino (Drive) |
 | **Mark as Processed** | Gmail | Etiqueta correo como procesado |
