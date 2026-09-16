@@ -12,20 +12,20 @@ Listar las formulas de [[N€Caixa-Movimientos_cuenta_0087231]]
 ## 📋 F1
 =let(
 rangoValidación;INDIRECTO("P2:P"&LastRow_Movim_Banco);
-rangoSugerencias;INDIRECTO("O2:O"&LastRow_Movim_Banco);
+N€Caixa-Rangosugerencias;INDIRECTO("O2:O"&LastRow_Movim_Banco);
 rangoFrasManuales;INDIRECTO("Q2:Q"&LastRow_Movim_Banco);
-formula;ARRAYFORMULA(SI(rangoValidación=VERDADERO;rangoSugerencias;rangoFrasManuales));
+formula;ARRAYFORMULA(SI(rangoValidación=VERDADERO;N€Caixa-Rangosugerencias;rangoFrasManuales));
 eFormula;"Si damos tick en la columna P devuelve la sugerencia de CO de la columna O, en caso contrario devuelve lo que hayamos introducido manualmente en la columna Q";
 
 formula
 )
-[[Rangos]];
+[[N€Caixa-Rangos]];
 
 ## 📋 F2
 =let(
 lastRow;LastRow_Movim_Banco;
 ArrayFormula(DERECHA($B2:INDICE(B:B;lastRow);7)))
-[[Rangos]]
+[[N€Caixa-Rangos]]
 
 
 ## 📋 F3
@@ -74,13 +74,13 @@ MAP(fecha; fechaValor; rangoMovimientos; rangoMasDatos; importe; saldo;factura; 
 ## 📋 F7
 =SI($L2<>"Proveedores";"";
 Let(
-rangos;;
-ref_Rangos_PProveedores_Descripcion;INDIRECTO("PProveedores!$A$1:$A"&lr_PProveedores);
+N€Caixa-Rangos;;
+ref_N€Caixa-Rangos_PProveedores_Descripcion;INDIRECTO("PProveedores!$A$1:$A"&lr_PProveedores);
 limiteFras;INDIRECTO("HistorialFacturas!$A$2:$D"& LastRow_Hist_Fras);
 
 encontrarFila;
 let(
- filaCoincidente;COINCIDIR($J2;ref_Rangos_PProveedores_Descripcion;0);
+ filaCoincidente;COINCIDIR($J2;ref_N€Caixa-Rangos_PProveedores_Descripcion;0);
 filaCoincidente);
 eEncontrarFila;"Buscamos el valore del texto en la columna I (que contiene la concatenación de Movimientos y MasDatos) en la Hoja PProveedores y sacamos con coincidir la fila de coincidencia";
 
@@ -132,7 +132,7 @@ primeraCoincidencia;INDICE(formulaQuery;1);
 rangoPuntear;$O$1:$O1;
 rangoPuntear_archivado; INDIRECTO("BD_Banco!K$2:K"&lr_BdBanco);
 rangoPuntear_total; VSTACK(rangoPuntear;rangoPuntear_archivado);
-eRangoPuntear_total;"Concatena los rangos donde aparecen los nombres de las facturas punteadas con exito de ambas hojas";
+eRangoPuntear_total;"Concatena los N€Caixa-Rangos donde aparecen los nombres de las facturas punteadas con exito de ambas hojas";
 
 valoresNoPunteados;FILTER(formulaQuery;ESNOD(COINCIDIR(formulaQuery; rangoPuntear_total; 0)));
 primeraNoPunteada;INDICE(valoresNoPunteados;1);

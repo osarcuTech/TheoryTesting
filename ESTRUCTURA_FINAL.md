@@ -48,12 +48,11 @@ He reorganizado todo el contenido del directorio `TheoryTesting` usando el **mé
 
 ### 📊 Referencias & Métricas
 
-| Archivo | Propósito | Contenido |
-|---------|-----------|-----------|
-| **KPIs_Sistema.md** | Métricas todos | Targets + Tendencias |
-| **Formulas_Google_Sheets.md** | Referencia técnica | LET, QUERY, UID |
-| **Workflows_n8n_Referencia.md** | Procesos técnicos | A1-H2 workflows |
-| **Propuestas_Mejora.md** | Roadmap futuro | Iniciativas priorizadas |
+| Archivo                         | Propósito          | Contenido               |
+| ------------------------------- | ------------------ | ----------------------- |
+| **Formulas_Google_Sheets.md**   | Referencia técnica | LET, QUERY, UID         |
+| **Workflows_n8n_Referencia.md** | Procesos técnicos  | A1-H2 workflows         |
+| **Propuestas_Mejora.md**        | Roadmap futuro     | Iniciativas priorizadas |
 
 ---
 
@@ -74,8 +73,6 @@ He reorganizado todo el contenido del directorio `TheoryTesting` usando el **mé
 │  └─ Flujo H: [[H0_ControlHumano]], [[H1_ArchivoRegistro]], [[H2_ComprobacionCierre]]
 ├─ Sección: Workflows n8n
 │  └─ [[Workflows_n8n_Referencia]]
-├─ Sección: Datos & Métricas
-│  └─ [[KPIs_Sistema]], [[Formulas_Google_Sheets]], [[Propuestas_Mejora]]
 ```
 
 ### ✅ 2. Notas Atómicas
@@ -84,14 +81,12 @@ Cada componente tiene:
 - **Una idea central clara** (🎯 Objetivo)
 - **Descripción del proceso** completa
 - **Estructura de datos** explícita
-- **KPIs y métricas** asociadas
 - **Links a notas relacionadas** en sección 🔗
 
 **Ejemplo**: [[C0_PunteoFacturas]] es completamente autónomo pero linkea a:
-- Entrada: [[A2_AsignacionDeGastos]], [[B2_Cebollón]]
+- Entrada: [[A2_AsignacionDeGastos_Sheets_Arquitectura]], [[B2_Cebollón]]
 - Procesamiento: [[Formulas_Google_Sheets]]
 - Control: [[H0_ControlHumano]]
-- Métricas: [[Metricas_Punteo]] (desde [[KPIs_Sistema]])
 
 ### ✅ 3. Conexiones Bidireccionales
 
@@ -248,7 +243,7 @@ TheoryTesting/
 ### Para Devops
 
 1. Bookmark [[Workflows_n8n_Referencia]]
-2. Consulta componente específico (ej: [[A1_ImportarMovimientos]])
+2. Consulta componente específico (ej: [[A1_ImportarMovimientos_GS]])
 3. Ver [[Formulas_Google_Sheets]] para detalles técnicos
 
 ### Para Mejora Continua
@@ -264,8 +259,8 @@ TheoryTesting/
 ### Mejoras Futuras al Vault
 
 1. **Crear notas de KPIs individuales**
-   - [[Metricas_Importacion.md]], [[Metricas_Asignacion.md]], etc.
-   - Referenciadas desde [[KPIs_Sistema]]
+   - Metricas_Importacion.md, Metricas_Asignacion.md, etc.
+   - Referenciadas desde KPIs_Sistema
 
 2. **Agregar diagramas Excalidraw**
    - Flowcharts dibujados para cada componente

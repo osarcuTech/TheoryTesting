@@ -2,7 +2,7 @@
 title: A2 — Asignación de Gastos
 tags: [A2, clasificación, gastos, n8n]
 component: A2
-related: [[01_Arquitectura_General]], [[wf_A2_AsignacionDeGastos]], [[A1_ImportarMovimientos_WF(deprecado)]], [[C0_PunteoFacturas]], [[Metricas_Asignacion]]
+related: [[01_Arquitectura_General]], [[wf_A2_AsignacionDeGastos_Context]], [[A1_ImportarMovimientos_WF(deprecado)]], [[C0_PunteoFacturas]]
 ---
 
 # A2 — Asignación de Gastos
@@ -46,7 +46,7 @@ usando reglas de matching basadas en patrones de texto del movimiento.
 
 ## 🔄 Flujo en n8n
 
-Workflow: [[wf_A2_AsignacionDeGastos]]
+Workflow: [[wf_A2_AsignacionDeGastos_Context]]
 
 ### Datos de Entrada
 
@@ -163,16 +163,6 @@ FOR cada movimiento en BD_Banco {
 - **Objetivo**: Reducir a <5%
 - **Estrategia**: Enriquecer tabla AsigCostes y usar [[Propuestas_Mejora#Machine_Learning|ML]]
 
----
-
-## 📊 Métricas & KPIs
-
-Ver: [[Metricas_Asignacion]]
-
-- **Cobertura de asignación automática**: % movimientos clasificados sin intervención
-- **Tasa de intervención manual**: % movimientos requieren H0
-- **Tasa de excepciones por proveedor**: ¿Qué proveedores generan más errores?
-- **Tiempo de proceso**: Segundos por lote de movimientos
 
 ---
 
@@ -182,7 +172,7 @@ Ver: [[Metricas_Asignacion]]
 - **Siguiente**: [[C0_PunteoFacturas]] (matching factura-movimiento)
 - **Control**: [[H0_ControlHumano]] (intervención manual)
 - **Datos base**: [[03_BDs_Principales#AsigCostes]]
-- **Workflow**: [[wf_A2_AsignacionDeGastos]] (detalles n8n)
+- **Workflow**: [[wf_A2_AsignacionDeGastos_Context]] (detalles n8n)
 - **Mejoras**: [[Propuestas_Mejora#A2_Optimizaciones]]
 
 ---

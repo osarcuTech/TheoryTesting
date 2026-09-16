@@ -114,7 +114,7 @@ const BDB_Validacion = 15;    // O  (CO)
 | I | `BDB_DEF_UID` | UID definitiva (después de archivado) |
 | J-O | Resto | Datos de clasificación y validación |
 
-**Crítico**: `BDB_DEFINITIVO` se escribe SIEMPRE al final (ver [[H1_ArchivoRegistro_Implementacion#paso-4-volcado-idempotente]])
+**Crítico**: `BDB_DEFINITIVO` se escribe SIEMPRE al final 
 
 ### Sección 4: Metadatos de Procesamiento
 
@@ -262,8 +262,8 @@ Total: ~2 segundos fijos + tiempo procesamiento (45x más rápido)
 
 ## 🔗 Notas Relacionadas
 
-- [[A1_ImportarMovimientos_Implementacion]] → Usa ConstantesGlobales
-- [[H1_ArchivoRegistro_Implementacion]] → Usa ConstantesGlobales
+- [[A1_ImportarMovimientos_GS]] → Usa ConstantesGlobales
+- [[H1_Contabilizacion]] → Usa ConstantesGlobales
 - [[Scripts_GoogleAppsScript_Referencia]] → Referencia de scripts
 - [[Informes_Sesiones_Tecnicas]] → Problemas de rendimiento documentados
 - [[Trazabilidad_Codigo_Documentacion]] → Mapeo código ↔ doc

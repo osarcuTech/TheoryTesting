@@ -238,7 +238,7 @@ HistorialFacturas (Query):
 
 ## 🔗 Notas Relacionadas
 
-- [[A1_ImportarMovimientos]] - Cómo se completa BD_Banco
+- [[A1_ImportarMovimientos_GS]] - Cómo se completa BD_Banco
 - [[B2_Cebollón]] - Cómo se completa BD_Facturas
 - [[C0_PunteoFacturas]] - Cómo usa estas BDs
 - [[H0_ControlHumano]] - Cómo actualiza estas BDs

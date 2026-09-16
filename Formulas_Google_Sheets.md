@@ -1,7 +1,7 @@
 ---
 title: Fórmulas Google Sheets — Referencia
 tags: [fórmulas, google-sheets, LET, QUERY, ARRAYFORMULA, UID]
-related: [[C0_PunteoFacturas]], [[A2_AsignacionDeGastos]], [[03_BDs_Principales]], [[A1_ImportarMovimientos_Implementacion]]
+related: [[C0_PunteoFacturas]], [[A2_AsignacionDeGastos_Sheets_Arquitectura]], [[03_BDs_Principales]], [[A1_ImportarMovimientos_GS]]
 ---
 
 # Fórmulas Google Sheets — Referencia
@@ -355,7 +355,7 @@ IF(ABS(DAYS(A2, fecha_factura)) <= 30, "OK", "RECHAZAR")
 ## 🔗 Referencias
 
 - [[C0_PunteoFacturas]] - Uso de fórmula C0 (matching)
-- [[A2_AsignacionDeGastos]] - Uso de fórmula A2 (clasificación)
+- [[A2_AsignacionDeGastos_Sheets_Arquitectura]] - Uso de fórmula A2 (clasificación)
 - [[03_BDs_Principales]] - Estructura de datos para fórmulas
 - [Google Sheets Function List](https://support.google.com/docs/table/25273) - Documentación oficial
 

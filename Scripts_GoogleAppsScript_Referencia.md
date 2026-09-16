@@ -30,12 +30,12 @@ workflows/
 
 ## 🔗 Vincular Script → Componente
 
-| Script | Componente | Propósito | Referencia |
-|--------|-----------|----------|-----------|
-| `ConstantesGlobales.gs` | **Global** | Variables globales compartidas | [[ConstantesGlobales]] |
-| `importarMovimientos.gs` | **A1** | Importar movimientos bancarios | [[A1_ImportarMovimientos_Implementacion]] |
-| `importarMovimientosV2.gs` | **A1** | Versión optimizada de A1 | [[A1_ImportarMovimientos_Implementacion]] |
-| `ArxivarMovimientos.gs` | **H1** | Archivar y organizar facturas | [[H1_ArchivoRegistro_Implementacion]] |
+| Script                     | Componente | Propósito                      | Referencia             |
+| -------------------------- | ---------- | ------------------------------ | ---------------------- |
+| `ConstantesGlobales.gs`    | **Global** | Variables globales compartidas | [[ConstantesGlobales]] |
+| `importarMovimientos.gs`   | **A1**     | Importar movimientos bancarios |                        |
+| `importarMovimientosV2.gs` | **A1**     | Versión optimizada de A1       |                        |
+| `ArxivarMovimientos.gs`    | **H1**     | Archivar y organizar facturas  | [[H1_Contabilizacion]] |
 
 ---
 
@@ -47,7 +47,6 @@ workflows/CaixaB$-Scripts/AppScripts/ImportarMovimientos/importarMovimientos.gs
 ```
 
 ### Componente Relacionado
-→ [[A1_ImportarMovimientos_Implementacion]]
 
 ### Funciones Principales
 
@@ -69,7 +68,7 @@ let filaInicioDatosImportados = 4
 
 ### Integración con Workflows n8n
 
-**Trigger**: [[wf_A1_ImportarMovimientos]]
+**Trigger**: [[wf_A1_ImportarMovimientos_context]]
 - n8n detecta archivos nuevos en Drive cada minuto
 - Ejecuta esta función Google Apps Script
 - A1 agrega movimientos a BD_Banco
@@ -185,7 +184,7 @@ Según [[Metricas_Detalladas]] sección 1:
 **Dónde ver**:
 - Google Sheets: Columna de UID en BD_Banco
 - Logs: Google Apps Script Execution panel
-- Dashboard: [[KPIs_Sistema]] (actualización mensual)
+
 
 ---
 
@@ -208,12 +207,12 @@ Según [[Metricas_Detalladas]] sección 1:
 
 ## 🔗 Notas Relacionadas
 
-- [[A1_ImportarMovimientos]] → Descripción funcional de A1
-- [[A1_ImportarMovimientos_Implementacion]] → Detalles técnicos profundos
+- [[A1_ImportarMovimientos_GS]] → Descripción funcional de A1
+- [[A1_ImportarMovimientos_GS]] → Detalles técnicos profundos
 - [[Formulas_Google_Sheets]] → Fórmulas con UIDs
 - [[Metricas_Detalladas]] → KPIs de A1
 - [[03_BDs_Principales]] → Estructura de BD_Banco
-- [[wf_A1_ImportarMovimientos]] → Flujo n8n que dispara A1
+- [[wf_A1_ImportarMovimientos_context]] → Flujo n8n que dispara A1
 
 ---
 

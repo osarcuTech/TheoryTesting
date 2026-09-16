@@ -48,7 +48,7 @@ Procesar facturas descargadas por [[B1_RecepcionFacturas|B1]]: normalizar nombre
 
 ## 🔄 Flujo en n8n
 
-Workflow: [[wf_B2_Cebollon]]
+Workflow: [[wf_B2_Cebollon_Context]]
 
 ### Nodos Principales
 
@@ -179,7 +179,7 @@ Campos **opcionales**:
 - **Anterior**: [[B1_RecepcionFacturas]] (recepción)
 - **Siguiente**: [[C0_PunteoFacturas]] (matching)
 - **Control**: [[H0_ControlHumano]] (validación)
-- **Workflow**: [[wf_B2_Cebollon]] (detalles técnicos)
+- **Workflow**: [[wf_B2_Cebollon_Context]] (detalles técnicos)
 - **Mejoras**: [[Propuestas_Mejora#B2_OCR_ML]]
 - **Fórmulas**: [[Formulas_Google_Sheets#UID_Factura]]
 

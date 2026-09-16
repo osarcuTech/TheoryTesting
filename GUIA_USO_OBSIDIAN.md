@@ -46,16 +46,13 @@ tags: [guía, obsidian, navegación]
 → [[01_Arquitectura_General]] → [[02_Flujo_Datos_Diagrama]]
 
 **¿Quiero profundizar en un componente (ej: A1)?**
-→ [[A1_ImportarMovimientos]]
+→ [[A1_ImportarMovimientos_GS]]
 
 **¿Quiero ver un diagrama visual?**
 → [[02_Flujo_Datos_Diagrama]]
 
 **¿Quiero entender cómo funciona el matching?**
 → [[C0_PunteoFacturas]]
-
-**¿Quiero saber qué KPIs medir?**
-→ [[KPIs_Sistema]]
 
 **¿Quiero ver cómo se escriben las fórmulas?**
 → [[Formulas_Google_Sheets]]
@@ -103,9 +100,8 @@ Haz click en un tag (ej: `#architecture`, `#workflow`) para ver todas las notas 
 ### Para Gerentes/Finance
 
 1. Lee [[01_Arquitectura_General]] para entender el sistema
-2. Ve a [[KPIs_Sistema]] para ver métricas clave
-3. Consulta [[Propuestas_Mejora]] para roadmap
-4. Usa Search para encontrar referencias a problemas específicos
+2. Consulta [[Propuestas_Mejora]] para roadmap
+3. Usa Search para encontrar referencias a problemas específicos
 
 ### Para Operadores (H0)
 
@@ -116,7 +112,7 @@ Haz click en un tag (ej: `#architecture`, `#workflow`) para ver todas las notas 
 ### Para Desarrolladores (Devops/n8n)
 
 1. Lee [[01_Arquitectura_General]] para contexto
-2. Ve a componente específico (ej: [[A1_ImportarMovimientos]])
+2. Ve a componente específico (ej: [[A1_ImportarMovimientos_GS]])
 3. Consulta [[Workflows_n8n_Referencia]] para detalles técnicos
 4. Revisa [[Formulas_Google_Sheets]] para fórmulas
 

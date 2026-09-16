@@ -2,7 +2,7 @@
 title: H0 — Control Humano (Validación)
 tags: [H0, control, validación, manual]
 component: H0
-related: [[01_Arquitectura_General]], [[C0_PunteoFacturas]], [[H1_ArchivoRegistro]], [[H2_ComprobacionCierre]], [[03_BDs_Principales]]
+related: [[01_Arquitectura_General]], [[C0_PunteoFacturas]], [[H1_Contabilizacion]], [[H2_ComprobacionCierre]], [[03_BDs_Principales]]
 ---
 
 # H0 — Control Humano (Validación)
@@ -11,7 +11,7 @@ related: [[01_Arquitectura_General]], [[C0_PunteoFacturas]], [[H1_ArchivoRegistr
 
 - **H0.A2**: Supervisión manual de [[A2_AsignacionDeGastos_Sheets_Arquitectura]] 
 - **H0.C0**: Supervisión manual de [[C0_PunteoFacturas|C0]]. Toma la decision si validar cada punteo propuesto, entrar-lo manualmente y/o toma decisiones sobre incidencias.
-- **H0.C1**: Una vez considera que todo lo que podia hacer se ha hecho autoriza el paso a [[H1_ArchivoRegistro|H1]].
+- **H0.C1**: Una vez considera que todo lo que podia hacer se ha hecho autoriza el paso a [[H1_Contabilizacion|H1]].
 
 Es el **corazón de calidad** del sistema: decide qué se archiva, qué requiere corrección, y qué es excepción.
 
@@ -70,7 +70,7 @@ Una vez validados todos los punteos:
 - Generar lista de facturas pendientes a recibir.
 - Verificar completitud (todas con factura asignada)
 - Marcar como "Listo para H1"
-- Trigger automático de [[H1_ArchivoRegistro|H1]]
+- Trigger automático de [[H1_Contabilizacion|H1]]
 
 ---
 
@@ -93,9 +93,8 @@ Una vez validados todos los punteos:
 ## 🔗 Notas Relacionadas
 
 - **Entrada**: [[A2_AsignacionDeGastos_Sheets_Arquitectura]] (Movimientos classificados), [[C0_PunteoFacturas]] (sugerencias), [[B2_Cebollón]] (facturas)
-- **Salida**: [[H1_ArchivoRegistro]] (archivado), [[H2_ComprobacionCierre]] (verificación)
+- **Salida**: [[H1_Contabilizacion]] (archivado), [[H2_ComprobacionCierre]] (verificación)
 - **Datos**: [[03_BDs_Principales]] (bases modificadas)
-- **KPIs**: [[Metricas_Control]]
 - **Escaladas**: [[Propuestas_Mejora#H0_Automatización]]
 
 ---

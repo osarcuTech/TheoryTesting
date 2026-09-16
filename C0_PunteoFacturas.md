@@ -9,7 +9,7 @@ related: [[01_Arquitectura_General]], [[wf_C0_PuntearFacturas]], [[A2_Asignacion
 
 ## 🎯 Objetivo
 
-Generar sugerencias automáticas de emparejamiento entre movimientos bancarios ([[A2_AsignacionDeGastos|clasificados en A2]]) y facturas ([[B2_Cebollón|procesadas en B2]]) utilizando lógica de matching inteligente.
+Generar sugerencias automáticas de emparejamiento entre movimientos bancarios ([[A2_AsignacionDeGastos_Sheets_Arquitectura|clasificados en A2]]) y facturas ([[B2_Cebollón|procesadas en B2]]) utilizando lógica de matching inteligente.
 
 El resultado es una columna "O" (Sugerencia) y "P" (Validación) que [[H0_ControlHumano|H0]] usa para conciliación.
 
@@ -90,12 +90,11 @@ Ubicación: [[N€Caixa-Movimientos_cuenta_0087231|H]], [[N€Caixa-Movimientos_
 
 ## 🔗 Notas Relacionadas
 
-- **Datos entrada**: [[A2_AsignacionDeGastos]] (movimientos), [[B2_Cebollón]] (facturas)
+- **Datos entrada**: [[A2_AsignacionDeGastos_Sheets_Arquitectura]] (movimientos), [[B2_Cebollón]] (facturas)
 - **Control**: [[H0_ControlHumano]] (validación y correcciones)
 - **Fórmulas**: [[Formulas_Google_Sheets#C0_Punteo]] (implementación)
-- **Workflow**: [[wf_C0_PuntearFacturas]] (orquestación n8n)
+- **Workflow**: [[wf_C0_PuntearFacturas_context]] (orquestación n8n)
 - **Mejoras**: [[Propuestas_Mejora#C0_Matching_IA]]
-- **KPIs**: [[Metricas_Punteo]]
 
 ---
 

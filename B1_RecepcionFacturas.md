@@ -2,7 +2,7 @@
 title: B1 — Recepción de Facturas
 tags: [B1, facturas, correo, n8n]
 component: B1
-related: [[01_Arquitectura_General]], [[wf_B1_GmailMetralleta]], [[B2_Cebollón]], [[C0_PunteoFacturas]]
+related: [[01_Arquitectura_General]], [[wf_B1_GmailMetralleta_Context]], [[B2_Cebollón]], [[C0_PunteoFacturas]]
 ---
 
 # B1 — Recepción de Facturas
@@ -40,7 +40,7 @@ Monitorear una cuenta de correo (Gmail), extraer facturas adjuntas automáticame
 
 ## 🔄 Flujo en n8n
 
-Workflow: [[wf_B1_GmailMetralleta]]
+Workflow: [[wf_B1_GmailMetralleta_Context]]
 
 ### Nodos Principales
 
@@ -133,23 +133,12 @@ Formato: PDF
 
 ---
 
-## 📊 Métricas & KPIs
-
-Ver: [[Metricas_Facturas]]
-
-- **Tasa de procesamiento sin intervención**: % correos descargados exitosamente
-- **Tiempo medio de procesamiento**: Segundos desde recepción a guardado en Drive
-- **Tasa de fallos de descarga**: % adjuntos no descargados
-- **Cobertura de extracción de metadatos**: % campos obtenidos vs esperados
-
----
-
 ## 🔗 Notas Relacionadas
 
 - **Siguiente**: [[B2_Cebollón]] (nombrado y registro)
 - **Matching**: [[C0_PunteoFacturas]] (emparejamiento con movimientos)
 - **Revisión**: [[H0_ControlHumano]] (control manual)
-- **Workflow**: [[wf_B1_GmailMetralleta]] (detalles técnicos)
+- **Workflow**: [[wf_B1_GmailMetralleta_Context]] (detalles técnicos)
 - **Mejoras**: [[Propuestas_Mejora#B1_OCR_Automático]]
 
 ---

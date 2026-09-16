@@ -2,7 +2,7 @@
 title: A1 — Importar Movimientos Bancarios
 tags: [A1, importación, banco, n8n]
 component: A1
-related: [[01_Arquitectura_General]], [[wf_A1_ImportarMovimientos]], [[A2_AsignacionDeGastos]], [[Metricas_Detalladas]], [[03_BDs_Principales]], [[A1_ImportarMovimientos_GS]]
+related: [[01_Arquitectura_General]], [[wf_A1_ImportarMovimientos_context]], [[A2_AsignacionDeGastos_Sheets_Arquitectura]], [[Metricas_Detalladas]], [[03_BDs_Principales]], [[A1_ImportarMovimientos_GS]]
 ---
 
 # A1 — Importar Movimientos Bancarios
@@ -36,14 +36,14 @@ Importar de forma automática movimientos bancarios descargados en formato Excel
 
 ### Salida
 - Movimientos nuevos agregados a BD_Banco
-- Trigger automático de [[A2_AsignacionDeGastos|A2]] (si está habilitado)
-- Trigger automático de [[wf_C0_PuntearFacturas|C0]] (si está habilitado)
+- Trigger automático de [[wf_A2_AsignacionDeGastos_Context|A2]] (si está habilitado)
+- Trigger automático de [[wf_C0_PuntearFacturas_context|C0]] (si está habilitado)
 
 ---
 
 ## 🔄 Flujo en n8n
 
-Workflow: [[wf_A1_ImportarMovimientos]]
+Workflow: [[wf_A1_ImportarMovimientos_context]]
 
 ### Nodos Principales
 
@@ -123,22 +123,11 @@ Salida (BD_Banco):
 
 ---
 
-## 📊 Métricas & KPIs
-
-Ver: [[Metricas_Importacion]]
-
-- **Tasa de importación correcta**: % movimientos cargados sin error
-- **Tasa de duplicados detectados**: % movimientos filtrados por UID
-- **Tiempo de proceso**: Segundos desde trigger hasta append
-- **Tasa de fallos**: % ejecuciones con error
-
----
-
 ## 🔗 Notas Relacionadas
 
-- **Siguiente**: [[A2_AsignacionDeGastos]] (clasificación de gastos)
+- **Siguiente**: [[A2_AsignacionDeGastos_Sheets_Arquitectura]] (clasificación de gastos)
 - **Datos**: [[03_BDs_Principales#BD_Banco]] (estructura BD)
-- **Workflow**: [[wf_A1_ImportarMovimientos]] (detalles técnicos n8n)
+- **Workflow**: [[wf_A1_ImportarMovimientos_context]] (detalles técnicos n8n)
 - **Mejoras**: [[Propuestas_Mejora#A1_Optimizaciones]]
 - **Fórmulas**: [[Formulas_Google_Sheets#LastRow_Movimientos]]
 

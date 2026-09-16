@@ -28,53 +28,47 @@ Los datos fluyen a través de **Google Sheets** como base de datos central, con 
 - **J0**: Peticiones/disparadores manuales
 
 ### Flujo A: Bancario
-[[A1_ImportarMovimientos|A1 → ImportarMovimientos]]
+[[A1_ImportarMovimientos_GS|A1 → ImportarMovimientos]]
 - Importa movimientos del banco en BD_Banco. El appscript importa tambien en Movimientos_cuenta_0087231.
-- Workflow: [[A1_ImportarMovimientos_GS]], [[wf_A1_ImportarMovimientos]] (Deprecado: falta UID e Importación a Movimientos_cuenta_0087231)
-- KPIs: [[Metricas_Importacion]]
+- Workflow: [[A1_ImportarMovimientos_GS]], [[wf_A1_ImportarMovimientos_context]] (Deprecado: falta UID e Importación a Movimientos_cuenta_0087231)
 - Hojas relacionadas: BD_Banco; Movimientos_cuenta_0087231.
 
-[[A2_AsignacionDeGastos|A2 → AsignacionDeGastos]]
+[[A2_AsignacionDeGastos_Sheets_Arquitectura|A2 → AsignacionDeGastos]]
 - Clasifica gastos por Departamento/Naturaleza/Categoría
-- Workflow: [[wf_A2_AsignacionDeGastos]]
-- KPIs: [[Metricas_Asignacion]]
+- Workflow: [[wf_A2_AsignacionDeGastos_Context]]
 - Hojas relacionadas: Form_AsigCostes; AsigCostes; PProveedores
 
 ### Flujo B: Facturación
 [[B1_RecepcionFacturas|B1 → RecepcionFacturas]]
 - Recibe facturas por correo
-- Workflow: [[wf_B1_GmailMetralleta]]
-- KPIs: [[Metricas_Facturas]]
+- Workflow: [[wf_B1_GmailMetralleta_Context]]
 
 [[B2_Cebollón|B2 → Cebollón]]
 - Nombra, registra en BD_Facturas y pre-archiva
-- Workflow: [[wf_B2_Cebollon]]
+- Workflow: [[wf_B2_Cebollon_Context]]
 
 ### Flujo C: Conciliación
 [[C0_PunteoFacturas|C0 → PunteoFacturas]]
 - Fórmula que sugiere matching automático entre movimientos y facturas
 - Trigger suave (soft-trigger) de recálculos
-- Workflow: [[wf_C0_PuntearFacturas]]
-- KPIs: [[Metricas_Punteo]]
+- Workflow: [[wf_C0_PuntearFacturas_context]]
 
 ### Flujo H: Control Humano
 [[H0_ControlHumano|H0 → ControlHumano]]
 - Valida punteos
 - Revisa incidencias
 - Autoriza archivo de facturas
-- KPIs: [[Metricas_Control]]
 
-[[H1_ArchivoRegistro|H1 → ArchivoRegistro]]
+[[H1_Contabilizacion]]
 - Archiva facturas validadas
 - Registra localización y estado
-- Workflows: [[wf_C1_ReenvioFacturas]]
+- Workflows: [[wf_C1_ReenvioFras_context]]
 
 [[H2_ComprobacionCierre|H2 → ComprobacionCierre]]
 - Verifica completitud de archivado
 - Prepara cierre de mes
 - Detecta incidencias pendientes
-- Workflow: [[wf_C2_ComprobacionFacturas]]
-- KPIs: [[Metricas_Globales]]
+- Workflow: [[wf_C2_ComprobFras_Context]]
 
 ---
 
@@ -152,7 +146,6 @@ MovimientosClasificados + FacturasNombradas → [[C0_PunteoFacturas|C0: Puntear]
 
 - [[02_Flujo_Datos_Diagrama]] - Diagramas Mermaid del flujo
 - [[03_BDs_Principales]] - Detalles de bases de datos
-- [[KPIs_Sistema]] - Métricas de cada componente
 - [[Propuestas_Mejora]] - Optimizaciones en progreso
 
 ---

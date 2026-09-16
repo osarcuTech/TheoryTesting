@@ -44,7 +44,7 @@ Este documento expande el análisis de KPIs del sistema financiero Norgenic. Pro
 
 ### Análisis Profundo
 
-**🔍 Deduplicación mediante UID**: El sistema A1 genera un UID único combinando Fecha Valor + Fecha Operación + Proveedor + Más Datos + Importe. Ver detalles técnicos en [[A1_ImportarMovimientos_Implementacion#🔐-generación-de-uid-deduplicación]].
+**🔍 Deduplicación mediante UID**: El sistema A1 genera un UID único combinando Fecha Valor + Fecha Operación + Proveedor + Más Datos + Importe. Ver detalles técnicos en .
 
 ```
 Si tasa de incidencias > 5%:
@@ -376,7 +376,7 @@ Preguntarse:
 
 **Qué significa**: Cuánto tarda desde que H0 valida hasta que factura está en Drive final
 
-> 🔧 **Implementación técnica**: Consultar [[H1_ArchivoRegistro_Implementacion]] para detalles de optimización (arquitectura atómica, idempotencia)
+> 🔧 **Implementación técnica**: Consultar [[H1_Contabilizacion]] para detalles de optimización (arquitectura atómica, idempotencia)
 >
 > ⚡ **Problema de performance identificado**: [[Informes_Sesiones_Tecnicas]] documenta que el overhead actual es ~90 seg por ejecución, optimizable a ~2 seg con lazy loading
 
@@ -520,9 +520,8 @@ Fórmula: (Horas ahorradas × €50/hora - Costo impl) / Costo impl
 
 ## 🔗 Notas Relacionadas
 
-- [[KPIs_Sistema]] - Resumen ejecutivo de KPIs
 - [[Propuestas_Mejora]] - Iniciativas para mejorar KPIs
-- [[A1_ImportarMovimientos]] hasta [[H2_ComprobacionCierre]] - Detalle de componentes
+- [[A1_ImportarMovimientos_GS]] hasta [[H2_ComprobacionCierre]] - Detalle de componentes
 - [[00_MOC_Norgenic_Financiera]] - Índice general
 
 ---

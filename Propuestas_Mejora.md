@@ -308,9 +308,8 @@ PRIORIDAD:
 
 - [[C0_PunteoFacturas]] - Mejoras C0
 - [[H0_ControlHumano]] - Mejoras H0
-- [[H1_ArchivoRegistro]] - Mejoras H1
-- [[KPIs_Sistema]] - Métricas para medir éxito
-- [[A2_AsignacionDeGastos]] - Mejoras clasificación
+- [[H1_Contabilizacion]] - Mejoras H1
+- [[A2_AsignacionDeGastos_Sheets_Arquitectura]] - Mejoras clasificación
 
 ---
 

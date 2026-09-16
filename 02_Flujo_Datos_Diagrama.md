@@ -232,11 +232,11 @@ flowchart TD
 ## 🔗 Notas Relacionadas
 
 - [[01_Arquitectura_General]] - Overview arquitectura
-- [[A1_ImportarMovimientos]] - Detalle Flujo A inicial
+- [[A1_ImportarMovimientos_GS]] - Detalle Flujo A inicial
 - [[B1_RecepcionFacturas]] - Detalle Flujo B inicial
 - [[C0_PunteoFacturas]] - Detalle Flujo C matching
 - [[H0_ControlHumano]] - Detalle control y decisiones
-- [[H1_ArchivoRegistro]] - Detalle archivo
+- [[H1_Contabilizacion]] - Detalle archivo
 - [[H2_ComprobacionCierre]] - Detalle cierre
 
 ---

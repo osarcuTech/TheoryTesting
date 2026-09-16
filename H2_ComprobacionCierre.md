@@ -2,7 +2,7 @@
 title: H2 — Comprobación y Cierre
 tags: [H2, comprobación, cierre, mes]
 component: H2
-related: [[01_Arquitectura_General]], [[wf_C2_ComprobacionFacturas]], [[H1_ArchivoRegistro]], [[H0_ControlHumano]], [[Metricas_Globales]]
+related: [[01_Arquitectura_General]], [[wf_C2_ComprobacionFacturas]], [[H1_ArchivoRegistro]], [[H0_ControlHumano]],
 ---
 
 # H2 — Comprobación y Cierre
@@ -100,7 +100,7 @@ Detectar:
 
 ## 🔄 Flujo en n8n
 
-Workflow: [[wf_C2_ComprobacionFacturas]]
+Workflow: [[wf_C2_ComprobFras_Context]]
 
 ### Nodos Principales
 
@@ -328,25 +328,12 @@ CIERRE CONDICIONAL: SI A,B,C OK pero advertencias menores
 ```
 
 ---
-
-## 📊 Métricas & KPIs
-
-Ver: [[Metricas_Globales]]
-
-Principal KPI de cierre:
-- **Tasa de cierre exitoso**: % meses cerrados sin incidencias
-- **Días hasta cierre**: Días desde fin de mes hasta autorización
-- **Incidencias por cierre**: Promedio de incidencias encontradas
-
----
-
 ## 🔗 Notas Relacionadas
 
-- **Entrada**: [[H1_ArchivoRegistro]] (archivado)
+- **Entrada**: [[H1_Contabilizacion]] (archivado)
 - **Escaladas**: [[H0_ControlHumano]] (revisión manual)
 - **Datos**: [[03_BDs_Principales]] (fuente de datos)
-- **Workflow**: [[wf_C2_ComprobacionFacturas]] (detalles técnicos)
-- **KPIs**: [[Metricas_Globales]]
+- **Workflow**: [[wf_C2_ComprobFras_Context]] (detalles técnicos)
 
 ---
 

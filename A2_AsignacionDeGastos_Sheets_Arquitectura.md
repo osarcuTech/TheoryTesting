@@ -2,7 +2,7 @@
 title: A2 — Asignación de Gastos
 tags: [A2, clasificación, gastos, n8n]
 component: A2
-related: [[01_Arquitectura_General]], [[wf_A2_AsignacionDeGastos]], [[A1_ImportarMovimientos_WF(deprecado)]], [[C0_PunteoFacturas]], [[Metricas_Asignacion]]
+related: [[01_Arquitectura_General]], [[wf_A2_AsignacionDeGastos_Context]], [[A1_ImportarMovimientos_WF(deprecado)]], [[C0_PunteoFacturas]], [[Metricas_Asignacion]]
 ---
 
 # A2 — Asignación de Gastos
@@ -23,8 +23,8 @@ Clasificar automáticamente cada movimiento bancario según usando reglas de mat
 1. **A2.0.0: Lectura** de [[N€Caixa-Movimientos_cuenta_0087231|J]] `DescripccionMovimiento` 
 2. **A2.0.1: Búsqueda** de patrones en tabla `AsigCostes` por parte de 
 3. **A2.0.2: Matching automatico/AsignaciónManual** : [[N€Caixa-Form_AsigCostes]]
-4. **A2.1: Actualización** [[N€Caixa-_AsigCostes]], [[N€Caixa-Movimientos_cuenta_0087231]]
-4. **A2.2: Actualización** [[N€Caixa-PProveedores]]
+4. **A2.1: Actualización** [[N€Caixa-AsigCostes]], [[N€Caixa-Movimientos_cuenta_0087231]]
+5. **A2.2: Actualización** [[N€Caixa-PProveedores]]
 
 ### Salida
 - Movimientos clasificados según `Cashflow in/out`  y `Cashflow category`
@@ -82,7 +82,7 @@ L: CF category (Descriptor Extra)
 - **Siguiente**: [[C0_PunteoFacturas]] (matching factura-movimiento)
 - **Control**: [[H0_ControlHumano]] (intervención manual)
 - **Datos base**: [[03_BDs_Principales#AsigCostes]]
-- **Workflow**: [[wf_A2_AsignacionDeGastos]] (detalles n8n)
+- **Workflow**: [[wf_A2_AsignacionDeGastos_Context]] (detalles n8n)
 - **Mejoras**: [[Propuestas_Mejora#A2_Optimizaciones]]
 
 ---

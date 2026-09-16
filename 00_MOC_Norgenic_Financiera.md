@@ -33,8 +33,8 @@ El sistema de gestión financiera de Norgenic automatiza la conciliación bancar
 ### 🔧 2. Componentes del Sistema
 
 **Flujo A — Importación y Clasificación Bancaria**
-- [[A1_ImportarMovimientos]] → Importación de movimientos bancarios
-- [[A2_AsignacionDeGastos]] → Clasificación y asignación de costes
+- [[A1_ImportarMovimientos_GS]] → Importación de movimientos bancarios
+- [[A2_AsignacionDeGastos_Sheets_Arquitectura]] → Clasificación y asignación de costes
 
 **Flujo B — Procesamiento de Facturas**
 - [[B1_RecepcionFacturas]] → Recepción y nombrado de facturas
@@ -45,32 +45,19 @@ El sistema de gestión financiera de Norgenic automatiza la conciliación bancar
 
 **Flujo H — Control Humano**
 - [[H0_ControlHumano]] → Validación y supervisión
-- [[H1_ArchivoRegistro]] → Archivo y registro de facturas
 - [[H2_ComprobacionCierre]] → Verificación y cierre
 
 ### 🤖 3. Workflows n8n
 
-| Workflow | Component | Estado |
-|----------|-----------|--------|
-| [[wf_A1_ImportarMovimientos]] | A1 | Activo |
-| [[wf_A2_AsignacionDeGastos]] | A2 | Activo |
-| [[wf_B1_GmailMetralleta]] | B1 | Activo |
-| [[wf_B2_Cebollon]] | B2 | Activo |
-| [[wf_C0_PuntearFacturas]] | C0 | Activo |
-| [[wf_C1_ReenvioFacturas]] | H1 | Activo |
-| [[wf_C2_ComprobacionFacturas]] | H2 | Activo |
-
-### 📊 4. Datos & Métricas
-
-- [[KPIs_Sistema]] → Indicadores clave de rendimiento para cada componente
-- [[Metricas_Detalladas]] → Análisis profundo de cómo medir cada KPI
-- [[Metricas_Importacion]] → KPIs de A1
-- [[Metricas_Asignacion]] → KPIs de A2
-- [[Metricas_Facturas]] → KPIs de B1/B2
-- [[Metricas_Punteo]] → KPIs de C0
-- [[Metricas_Control]] → KPIs de H0/H2
-- [[Metricas_Archivado]] → KPIs de H1
-- [[Metricas_Globales]] → Ciclo completo
+| Workflow                              | Component | Estado |
+| ------------------------------------- | --------- | ------ |
+| [[wf_A1_ImportarMovimientos_context]] | A1        | Activo |
+| [[wf_A2_AsignacionDeGastos_Context]]  | A2        | Activo |
+| [[wf_B1_GmailMetralleta_Context]]     | B1        | Activo |
+| [[wf_B2_Cebollon_Context]]            | B2        | Activo |
+| [[wf_C0_PuntearFacturas_context]]     | C0        | Activo |
+| [[wf_C1_ReenvioFras_context]]]        | H1        | Activo |
+| [[wf_C2_ComprobFras_Context]]         | H2        | Activo |
 
 ### 🔢 5. Fórmulas & Código
 
@@ -82,10 +69,9 @@ El sistema de gestión financiera de Norgenic automatiza la conciliación bancar
 ### 🛠️ 5.1 Documentación Técnica de Componentes
 
 - [[ConstantesGlobales]] → Variables globales compartidas (detalles y optimización)
-- [[A1_ImportarMovimientos_Implementacion]] → Detalles GAS de A1 (UID, deduplicación, flujo)
-- [[H1_ArchivoRegistro_Implementacion]] → Detalles GAS de H1 (archivado, idempotencia)
-- [[A2_AsignacionDeGastos_Implementacion]] → [Próximo]
-- [[C0_PunteoFacturas_Implementacion]] → [Próximo]
+- [[A1_ImportarMovimientos_GS]] → Detalles GAS de A1 (UID, deduplicación, flujo)
+- [[A2_AsignacionDeGastos_Sheets_Arquitectura]] → [Próximo]
+- [[C0_PunteoFacturas]] → [Próximo]
 
 ### 🔗 5.2 Trazabilidad & Referencias
 
@@ -96,7 +82,6 @@ El sistema de gestión financiera de Norgenic automatiza la conciliación bancar
 ### 💡 6. Mejoras & Roadmap
 
 - [[Propuestas_Mejora]] → Sugerencias y mejoras pendientes
-- [[Roadmap_Desarrollo]] → Próximos pasos y evolución del sistema
 
 ---
 
@@ -119,7 +104,6 @@ graph TB
     
     subgraph Control["🔍 SUPERVISIÓN"]
         H0["[[H0_ControlHumano|H0: Control Humano]]"]
-        H1["[[H1_ArchivoRegistro|H1: Archivar/Enviar]]"]
         H2["[[H2_ComprobacionCierre|H2: Comprobación]]"]
     end
     
@@ -142,8 +126,7 @@ graph TB
 2. **Para profundizar en un componente específico**: Navega a través de la sección "Componentes del Sistema"
 3. **Para ver flujos específicos**: Consulta [[02_Flujo_Datos_Diagrama]]
 4. **Para entender un workflow n8n**: Busca en la sección "Workflows n8n"
-5. **Para metricas y KPIs**: Ve a [[KPIs_Sistema]]
-6. **Para mejoras y optimizaciones**: Consulta [[Propuestas_Mejora]]
+5. **Para mejoras y optimizaciones**: Consulta [[Propuestas_Mejora]]
 
 ---
 
@@ -160,5 +143,4 @@ graph TB
 ## 🔗 Enlaces Rápidos
 
 - [[01_Arquitectura_General|→ Ir a Arquitectura General]]
-- [[KPIs_Sistema|→ Ir a KPIs]]
 - [[Formulas_Google_Sheets|→ Ir a Fórmulas]]

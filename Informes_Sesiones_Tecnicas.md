@@ -194,7 +194,6 @@ Tiempo de procesamiento: Variable (igual)
 
 - [ ] **Paso 4**: Validar mejora
   - [ ] Medir overhead antes/después
-  - [ ] Actualizar [[KPIs_Sistema]] con nuevos benchmarks
   - [ ] Documentar en [[Propuestas_Mejora]] como ✅ Completado
 
 ---
@@ -203,12 +202,12 @@ Tiempo de procesamiento: Variable (igual)
 
 ### Problemas Identificados → Soluciones Documentadas
 
-| Problema | Ubicado en | Solución | Referencia |
-|----------|-----------|----------|-----------|
-| Triple openById | ConstantesGlobales.gs | Lazy loading | [[ConstantesGlobales#solución-lazy-loading]] |
-| Código muerto A1 | appendBD.gs | Mover dentro función | [[A1_ImportarMovimientos_Implementacion]] |
-| Scripts sin optimizar | ArchivarMovimientos.gs | Completar BORRADOR | [[H1_ArchivoRegistro_Implementacion]] |
-| Rendimiento bajo | Todos | Aplicar cambios | [[Metricas_Detalladas#kpi-de-rendimiento-global]] |
+| Problema              | Ubicado en             | Solución             | Referencia                                        |
+| --------------------- | ---------------------- | -------------------- | ------------------------------------------------- |
+| Triple openById       | ConstantesGlobales.gs  | Lazy loading         | [[ConstantesGlobales#solución-lazy-loading]]      |
+| Código muerto A1      | appendBD.gs            | Mover dentro función | [[A1_ImportarMovimientos_GS]]                     |
+| Scripts sin optimizar | ArchivarMovimientos.gs | Completar BORRADOR   |                                                   |
+| Rendimiento bajo      | Todos                  | Aplicar cambios      | [[Metricas_Detalladas#kpi-de-rendimiento-global]] |
 
 ---
 
@@ -269,8 +268,7 @@ workflows/CaixaB$-Scripts/AppScripts/
 ### Documentación Obsidian Relacionada
 
 - [[ConstantesGlobales]] → Documentación de variables globales (incluye solución lazy loading)
-- [[A1_ImportarMovimientos_Implementacion]] → Rendimiento de A1
-- [[H1_ArchivoRegistro_Implementacion]] → Rendimiento de H1
+- [[A1_ImportarMovimientos_GS]] → Rendimiento de A1
 - [[Scripts_GoogleAppsScript_Referencia]] → Índice de scripts
 - [[Metricas_Detalladas]] → KPIs de performance
 - [[Propuestas_Mejora]] → Roadmap de optimizaciones

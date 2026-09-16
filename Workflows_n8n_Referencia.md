@@ -8,21 +8,21 @@ related: [[00_MOC_Norgenic_Financiera]], [[01_Arquitectura_General]]
 
 ## 📌 Tabla de Workflows
 
-| ID | Nombre | Component | Trigger | Estado | Descripción |
-|-----|--------|-----------|---------|--------|-------------|
-| [[wf_A1_ImportarMovimientos|A1]] | ImportarMovimientos | [[A1_ImportarMovimientos]] | Gmail cada 5 min | ✅ Activo | Importa movimientos bancarios, deduplica por UID |
-| [[wf_A2_AsignacionDeGastos|A2]] | AsignacionDeGastos | [[A2_AsignacionDeGastos]] | Cambio en BD_Banco | ✅ Activo | Clasifica movimientos por Depto/Naturaleza |
-| [[wf_B1_GmailMetralleta|B1]] | GmailMetralleta | [[B1_RecepcionFacturas]] | Correo nuevo | ✅ Activo | Descarga facturas desde Gmail |
-| [[wf_B2_Cebollon|B2]] | Cebollón | [[B2_Cebollón]] | Archivo en Drive | ✅ Activo | Procesa facturas: OCR, normaliza, registra |
-| [[wf_C0_PuntearFacturas|C0]] | PuntearFacturas | [[C0_PunteoFacturas]] | Soft-trigger (C0) | ✅ Activo | Ejecuta fórmula de matching (si aplica) |
-| [[wf_C1_ReenvioFacturas|C1]] | ReenvioFacturas | [[H1_ArchivoRegistro]] | H0 autoriza | ✅ Activo | Archiva facturas validadas en Drive |
-| [[wf_C2_ComprobacionFacturas|C2]] | ComprobacionFacturas | [[H2_ComprobacionCierre]] | Fin de mes | ✅ Activo | Verifica cierre y genera reporte |
+| ID                                    | Nombre | Component            | Trigger                                  | Estado             | Descripción |                                                  |
+| ------------------------------------- | ------ | -------------------- | ---------------------------------------- | ------------------ | ----------- | ------------------------------------------------ |
+| [[wf_A1_ImportarMovimientos_context]] | A1]]   | ImportarMovimientos  | [[A1_ImportarMovimientos_WF(Deprecado)]] | Gmail cada 5 min   | ✅ Activo    | Importa movimientos bancarios, deduplica por UID |
+| [[wf_A2_AsignacionDeGastos_Context]]  | A2]]   | AsignacionDeGastos   | [[A2_AsignacionDeGastos_WF(deprecado)]]  | Cambio en BD_Banco | ✅ Activo    | Clasifica movimientos por Depto/Naturaleza       |
+| [[wf_B1_GmailMetralleta_Context]]     | B1]]   | GmailMetralleta      | [[B1_RecepcionFacturas]]                 | Correo nuevo       | ✅ Activo    | Descarga facturas desde Gmail                    |
+| [[wf_B2_Cebollon_Context]]            | B2]]   | Cebollón             | [[B2_Cebollón]]                          | Archivo en Drive   | ✅ Activo    | Procesa facturas: OCR, normaliza, registra       |
+| [[wf_C0_PuntearFacturas_context]]     | C0]]   | PuntearFacturas      | [[C0_PunteoFacturas]]                    | Soft-trigger (C0)  | ✅ Activo    | Ejecuta fórmula de matching (si aplica)          |
+| [[wf_C1_ReenvioFras_context]]         | C1]]   | ReenvioFacturas      | [[H1_Contabilizacion]]                   | H0 autoriza        | ✅ Activo    | Archiva facturas validadas en Drive              |
+| [[wf_C2_ComprobFras_Context]]         | C2]]   | ComprobacionFacturas | [[H2_ComprobacionCierre]]                | Fin de mes         | ✅ Activo    | Verifica cierre y genera reporte                 |
 
 ---
 
 ## 🔍 Detalle por Workflow
 
-### [[wf_A1_ImportarMovimientos|A1 — Importar Movimientos Bancarios]]
+### [[wf_A1_ImportarMovimientos_context|A1 — Importar Movimientos Bancarios]]
 
 **Propósito**: Cargar movimientos del banco a BD_Banco
 
@@ -48,7 +48,7 @@ related: [[00_MOC_Norgenic_Financiera]], [[01_Arquitectura_General]]
 
 ---
 
-### [[wf_A2_AsignacionDeGastos|A2 — Clasificación de Gastos]]
+### [[wf_A2_AsignacionDeGastos_Context|A2 — Clasificación de Gastos]]
 
 **Propósito**: Clasificar movimientos (Depto/Naturaleza/Categoría)
 
@@ -68,7 +68,7 @@ related: [[00_MOC_Norgenic_Financiera]], [[01_Arquitectura_General]]
 
 ---
 
-### [[wf_B1_GmailMetralleta|B1 — Recepción de Facturas (Gmail)]]
+### [[wf_B1_GmailMetralleta_Context|B1 — Recepción de Facturas (Gmail)]]
 
 **Propósito**: Descargar facturas de correo compartido
 
@@ -89,7 +89,7 @@ related: [[00_MOC_Norgenic_Financiera]], [[01_Arquitectura_General]]
 
 ---
 
-### [[wf_B2_Cebollon|B2 — Procesamiento de Facturas]]
+### [[wf_B2_Cebollon_Context|B2 — Procesamiento de Facturas]]
 
 **Propósito**: OCR, nombra, registra en BD_Facturas
 
@@ -113,7 +113,7 @@ related: [[00_MOC_Norgenic_Financiera]], [[01_Arquitectura_General]]
 
 ---
 
-### [[wf_C0_PuntearFacturas|C0 — Punteo (Matching)]]
+### [[wf_C0_PuntearFacturas_context|C0 — Punteo (Matching)]]
 
 **Propósito**: Ejecutar fórmula de matching C0
 
@@ -135,7 +135,7 @@ related: [[00_MOC_Norgenic_Financiera]], [[01_Arquitectura_General]]
 
 ---
 
-### [[wf_C1_ReenvioFacturas|C1 — Archivo y Registro]]
+### [[wf_C1_ReenvioFras_context|C1 — Archivo y Registro]]
 
 **Propósito**: Archivar facturas validadas, registrar en BD
 
@@ -161,7 +161,7 @@ related: [[00_MOC_Norgenic_Financiera]], [[01_Arquitectura_General]]
 
 ---
 
-### [[wf_C2_ComprobacionFacturas|C2 — Comprobación y Cierre]]
+### [[wf_C2_ComprobFras_Context|C2 — Comprobación y Cierre]]
 
 **Propósito**: Verificar completitud del mes, generar reporte
 
@@ -229,7 +229,7 @@ Algunos workflows pueden activarse por webhook:
 ## 🔗 Notas Relacionadas
 
 - [[01_Arquitectura_General]] - Flujo integrado
-- [[A1_ImportarMovimientos]] a [[H2_ComprobacionCierre]] - Detalle de cada componente
+- [[A1_ImportarMovimientos_WF(Deprecado)]] a [[H2_ComprobacionCierre]] - Detalle de cada componente
 - [n8n Documentación](https://docs.n8n.io/) - Referencia oficial
 
 ---

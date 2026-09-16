@@ -1,7 +1,7 @@
 ---
 title: Trazabilidad Código ↔ Documentación
 tags: [trazabilidad, arquitectura, referencia-cruzada, mapeo]
-related: [[A1_ImportarMovimientos_Implementacion]], [[Scripts_GoogleAppsScript_Referencia]], [[Metricas_Detalladas]], [[00_MOC_Norgenic_Financiera]]
+related: [[A1_ImportarMovimientos_GS]], [[Scripts_GoogleAppsScript_Referencia]], [[Metricas_Detalladas]], [[00_MOC_Norgenic_Financiera]]
 ---
 
 # Trazabilidad: Código ↔ Documentación
@@ -37,7 +37,7 @@ importarMovimientos.gs
 
 ### 2️⃣ Documentación Conceptual
 
-**Componente**: [[A1_ImportarMovimientos]]
+**Componente**: [[A1_ImportarMovimientos_GS]]
 - 🎯 Objetivo
 - 📋 Descripción del proceso
 - 🔄 Flujo en n8n
@@ -47,7 +47,7 @@ importarMovimientos.gs
 
 ### 3️⃣ Documentación Técnica
 
-**Implementación**: [[A1_ImportarMovimientos_Implementacion]]
+**Implementación**: [[A1_ImportarMovimientos_GS]]
 - ⚙️ Variables globales
 - 🔐 Algoritmo de UID
 - 🗂️ Deduplicación con Set
@@ -74,7 +74,7 @@ importarMovimientos.gs
 
 ### 6️⃣ Workflows n8n
 
-**Orquestación**: [[wf_A1_ImportarMovimientos]]
+**Orquestación**: [[wf_A1_ImportarMovimientos_context]]
 - Trigger: Detectar archivo nuevo en Drive
 - Ejecuta: `importarMovimientos.gs` → `appendBD()`
 - Resultado: Movimientos en BD_Banco
@@ -177,17 +177,17 @@ importarMovimientos.gs
 
 ### A1 — Importar Movimientos Bancarios
 
-| Elemento | Ubicación | Tipo | Relación |
-|----------|-----------|------|----------|
-| **Código** | `importarMovimientos.gs` | Script GAS | Implementación |
-| **Función principal** | `appendBD()` | Código | ← Ejecuta |
-| **Componente** | [[A1_ImportarMovimientos]] | Doc | ← Describe |
-| **Implementación** | [[A1_ImportarMovimientos_Implementacion]] | Doc técnica | ← Detalla |
-| **Fórmula UID** | [[Formulas_Google_Sheets]] | Fórmulas | ← Referencia |
-| **KPIs** | [[Metricas_Detalladas#1]] | Métricas | ← Mide |
-| **Workflow** | [[wf_A1_ImportarMovimientos]] | n8n | ← Orquesta |
-| **Referencia scripts** | [[Scripts_GoogleAppsScript_Referencia]] | Índice | ← Mapea |
-| **Mejoras** | [[Propuestas_Mejora]] | Roadmap | ← Evoluciona |
+| Elemento               | Ubicación                               | Tipo        | Relación       |
+| ---------------------- | --------------------------------------- | ----------- | -------------- |
+| **Código**             | `importarMovimientos.gs`                | Script GAS  | Implementación |
+| **Función principal**  | `appendBD()`                            | Código      | ← Ejecuta      |
+| **Componente**         | [[A1_ImportarMovimientos_GS]]           | Doc         | ← Describe     |
+| **Implementación**     | [[A1_ImportarMovimientos_GS]]           | Doc técnica | ← Detalla      |
+| **Fórmula UID**        | [[Formulas_Google_Sheets]]              | Fórmulas    | ← Referencia   |
+| **KPIs**               | [[Metricas_Detalladas#1]]               | Métricas    | ← Mide         |
+| **Workflow**           | [[wf_A1_ImportarMovimientos_context]]   | n8n         | ← Orquesta     |
+| **Referencia scripts** | [[Scripts_GoogleAppsScript_Referencia]] | Índice      | ← Mapea        |
+| **Mejoras**            | [[Propuestas_Mejora]]                   | Roadmap     | ← Evoluciona   |
 
 ---
 
@@ -224,22 +224,13 @@ graph TB
 ### Si tengo un ERROR en logs
 
 1. Toma el error: `"RangeError: Rango fuera de límites"`
-2. Busca en [[A1_ImportarMovimientos_Implementacion#🐛-errores-potenciales]]
-3. Encuentra la solución → Aplica fix
-4. Verifica en [[Metricas_Detalladas]] que KPI se recuperó
-
-### Si tengo un KPI bajo
-
-1. Toma métrica: `"Tasa duplicados = 3%"`
-2. Ve a [[Metricas_Detalladas#tasa-de-incidencias-por-formato]]
-3. Sigue análisis profundo → Identifica causa en código
-4. Abre [[A1_ImportarMovimientos_Implementacion]] → Busca bug
-5. Implementa fix en `importarMovimientos.gs`
+2. Encuentra la solución → Aplica fix
+3. Verifica en [[Metricas_Detalladas]] que KPI se recuperó
 
 ### Si veo un BOTTLENECK
 
 1. Identifica en [[Metricas_Detalladas]] qué es lento
-2. Ve a [[A1_ImportarMovimientos_Implementacion#rendimiento]]
+2. Ve a [[A1_ImportarMovimientos_GS]]
 3. Propón mejora en [[Propuestas_Mejora]]
 4. Abre issue en código: `importarMovimientos.gs`
 5. Documenta en `importarMovimientosV3.gs`
@@ -248,10 +239,10 @@ graph TB
 
 1. Lee [[Propuestas_Mejora#iniciativas-críticas]]
 2. Selecciona iniciativa (ej: "Multi-banco")
-3. Ve a [[A1_ImportarMovimientos_Implementacion]] para contexto técnico
+3. Ve a [[A1_ImportarMovimientos_GS]] para contexto técnico
 4. Diseña cambio
 5. Documenta en versión nueva (`importarMovimientosV3.gs`)
-6. Actualiza [[A1_ImportarMovimientos]] con nueva descripción
+6. Actualiza [[A1_ImportarMovimientos_GS]] con nueva descripción
 7. Mide impacto en [[Metricas_Detalladas]]
 
 ---
@@ -261,11 +252,11 @@ graph TB
 Cuando modificas código de un componente:
 
 - [ ] **Actualizar código**: `importarMovimientos.gs` (o V3)
-- [ ] **Documentar técnicamente**: [[A1_ImportarMovimientos_Implementacion]]
-- [ ] **Actualizar componente**: [[A1_ImportarMovimientos]]
+- [ ] **Documentar técnicamente**: [[A1_ImportarMovimientos_GS]]
+- [ ] **Actualizar componente**: [[A1_ImportarMovimientos_GS]]
 - [ ] **Revisar fórmulas**: [[Formulas_Google_Sheets]] si aplica
 - [ ] **Actualizar métricas**: [[Metricas_Detalladas]]
-- [ ] **Revisar workflow**: [[wf_A1_ImportarMovimientos]]
+- [ ] **Revisar workflow**: [[wf_A1_ImportarMovimientos_context]]
 - [ ] **Validar referencias**: [[Scripts_GoogleAppsScript_Referencia]]
 - [ ] **Roadmap**: ✅ Marcar como completado en [[Propuestas_Mejora]]
 
@@ -273,7 +264,7 @@ Cuando modificas código de un componente:
 
 ## 🔗 Notas Relacionadas
 
-- [[A1_ImportarMovimientos_Implementacion]] → Detalles técnicos de A1
+- [[A1_ImportarMovimientos_GS]] → Detalles técnicos de A1
 - [[Scripts_GoogleAppsScript_Referencia]] → Índice de todos los scripts
 - [[Metricas_Detalladas]] → Cómo medir el éxito de A1
 - [[Propuestas_Mejora]] → Qué mejoras se planean
