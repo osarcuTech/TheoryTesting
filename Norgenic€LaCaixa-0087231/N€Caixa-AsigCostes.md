@@ -9,68 +9,106 @@ related: [[01_Arquitectura_General]], [[wf_A2_AsignacionDeGastos]], [[A1_Importa
 
 ## 🎯 Objetivo
 
-Transferencia manual de los datos de [[Form_AsigCostes_Formulas]] para crear una base de datos permanente de patrones de movimiento, su significado, implicaciones y formas de tratarlos.
+Transferencia manual de los datos de [[N€Caixa-Form_AsigCostes_Formulas]] para crear una base de datos permanente de patrones de movimiento, su significado, implicaciones y forma# de tratarlos.
 ---
 
 ## 📋 Descripción de las columnas
 
-- **Fuente**: Movimientos nuevos en `Movimientos_cuenta_0087231` (trigger desde A1)
+- **Fuente**: Movimientos nuevos en [[N€Caixa-Movimientos_cuenta_0087231]] (trigger desde celda A1)
 - **GID Hoja**: 313952240
-- **Columnas**:
-  - **A: Descripcion**:
-    - **Contenido**: [[Form_AsigCostes_Formulas|A]].
-    - **Formula/s**: NULL
-    - **Referencias**: 
-  - **B: Movimientos**:
-    - **Contenido**: [[Form_AsigCostes_Formulas|B]].
-    - **Formula/s**: NULL
-    - **Referencias**: 
-  - **C: Más datos**:
-    - **Contenido**: [[Form_AsigCostes_Formulas|C]].
-    - **Formula/s**: NULL
-    - **Referencias**: 
-  - **D: CF in/out**:
-    - **Contenido**: [[Form_AsigCostes_Formulas|D]].
-    - **Formula/s**: NULL
-    - **Referencias**: 
-  - **E : Patron_CF category**:
-    - **Contenido**: [[Form_AsigCostes_Formulas|E]].
-    - **Formula/s**: NULL
-    - **Referencias**: 
-  - **F: Concepto**:
-    - **Contenido**: [[Form_AsigCostes_Formulas|F]].
-    - **Formula/s**: NULL
-    - **Referencias**: 
-  - **G: RegexNombre**:
-    - **Contenido**: [[Form_AsigCostes_Formulas|G]].
-    - **Formula/s**: NULL
-    - **Referencias**: 
-  - **H: 'Regex Fecha1A'**:
-    - **Contenido**: [[Form_AsigCostes_Formulas|H]].
-    - **Formula/s**: NULL
-    - **Referencias**: 
-  - **I: 'Regex Fecha1B'**:
-    - **Contenido**: [[Form_AsigCostes_Formulas|I]].
-    - **Formula/s**: NULL
-    - **Referencias**: 
-  - **J: 'Regex Fecha2A'**:
-    - **Contenido**: [[Form_AsigCostes_Formulas|J]].
-    - **Formula/s**: NULL
-    - **Referencias**: 
-  - **K: 'Regex Fecha2B'**:
-    - **Contenido**: [[Form_AsigCostes_Formulas|K]].
-    - **Formula/s**: NULL
-    - **Referencias**: 
-  - **L: 'Importe'**:
-    - **Contenido**: [[Form_AsigCostes_Formulas|L]].
-    - **Formula/s**: NULL
-    - **Referencias**:  
-  - **M: 'Observaciones'**:
-    - **Contenido**: [[Form_AsigCostes_Formulas|M]].
-    - **Formula/s**: NULL
-    - **Referencias**:  
 
----
+### **A
+  - **Nombre**: Descripcion
+  - **Contenido**: .
+  - **Formula/s**: NULL
+  - **Referencias**:
+  - **Fuente**: [[N€Caixa-Form_AsigCostes_Formulas#A]], [[H0_ControlHumano]].
+ 
+### **B
+  - **Nombre**: Movimientos
+  - **Contenido**: 
+  - **Formula/s**: NULL
+  - **Referencias**:
+  - **Fuente**: [[N€Caixa-Form_AsigCostes_Formulas#B]], [[H0_ControlHumano]].
+ 
+### **C
+  - **Nombre**: Más datos
+  - **Contenido**: 
+  - **Formula/s**: NULL
+  - **Referencias**:
+  - **Fuente**: [[N€Caixa-Form_AsigCostes_Formulas#C]], [[H0_ControlHumano]].
+ 
+### **D
+  - **Nombre**: CF in/out
+  - **Contenido**: 
+  - **Formula/s**: NULL
+  - **Referencias**:
+  - **Fuente**: [[N€Caixa-Form_AsigCostes_Formulas#D]], [[H0_ControlHumano]].
+ 
+### **E
+  - **Nombre**:  Patron_CF category
+  - **Contenido**: 
+  - **Formula/s**: NULL
+  - **Referencias**:
+  - **Fuente**: [[N€Caixa-Form_AsigCostes_Formulas#E]], [[H0_ControlHumano]].
+ 
+### **F
+  - **Nombre**: Concepto
+  - **Contenido**: 
+  - **Formula/s**: NULL
+  - **Referencias**:
+  - **Fuente**: [[N€Caixa-Form_AsigCostes_Formulas#F]], [[H0_ControlHumano]].
+ 
+### **G
+  - **Nombre**: RegexNombre
+  - **Contenido**: 
+  - **Formula/s**: NULL
+  - **Referencias**:
+  - **Fuente**: [[N€Caixa-Form_AsigCostes_Formulas#G]], [[H0_ControlHumano]].
+ 
+### **H
+  - **Nombre**: 'Regex Fecha1A'
+  - **Contenido**: 
+  - **Formula/s**: NULL
+  - **Referencias**:
+  - **Fuente**: [[N€Caixa-Form_AsigCostes_Formulas#H]], [[H0_ControlHumano]].
+ 
+### **I
+  - **Nombre**: 'Regex Fecha1B'
+  - **Contenido**: 
+  - **Formula/s**: NULL
+  - **Referencias**:
+  - **Fuente**: [[N€Caixa-Form_AsigCostes_Formulas#I]], [[H0_ControlHumano]].
+ 
+### **J
+  - **Nombre**: 'Regex Fecha2A'
+  - **Contenido**: .
+  - **Formula/s**: NULL
+  - **Referencias**:
+  - **Fuente**: [[N€Caixa-Form_AsigCostes_Formulas#J]], [[H0_ControlHumano]].
+ 
+### **K
+  - **Nombre**: 'Regex Fecha2B'
+  - **Contenido**: .
+  - **Formula/s**: NULL
+  - **Referencias**:
+  - **Fuente**: [[N€Caixa-Form_AsigCostes_Formulas#K]], [[H0_ControlHumano]].
+ 
+### **L
+  - **Nombre**: 'Importe'
+  - **Contenido**: 
+  - **Formula/s**: NULL
+  - **Referencias**:
+  - **Fuente**: [[N€Caixa-Form_AsigCostes_Formulas#L]], [[H0_ControlHumano]].
+  
+### **M
+  - **Nombre**: 'Observaciones'
+  - **Contenido**: 
+  - **Formula/s**: NULL
+  - **Referencias**:
+  - **Fuente**: [[N€Caixa-Form_AsigCostes_Formulas#M]], [[H0_ControlHumano]].
+  
+--
 
 **Última actualización**: 2026-09-10
 **Estado**: Activo

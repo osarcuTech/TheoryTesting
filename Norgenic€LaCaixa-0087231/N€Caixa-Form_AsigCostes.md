@@ -9,95 +9,156 @@ related: [[01_Arquitectura_General]], [[wf_A2_AsignacionDeGastos]], [[A1_Importa
 
 ## 🎯 Objetivo
 
-Clasificar automáticamente cada nuevo movimiento bancario usando reglas de matching basadas en patrones de texto del movimiento para añadirlo a `AsigCostes` y crear una query utilizable por `C0` para seleccionar las facturas coincidentes.
+Clasificar automáticamente cada nuevo movimiento bancario usando reglas de matching basadas en patrones de texto del movimiento para añadirlo a [[N€Caixa-AsigCostes]] y crear una query utilizable por [[C0_PunteoFacturas|C0]] para seleccionar las facturas coincidentes.
 
 ---
 
 ## 📋 Descripción de las columnas
 
-- **Fuente**: Movimientos nuevos en `Movimientos_cuenta_0087231` (trigger desde A1)
+- **Fuente**: Movimientos nuevos en [[N€Caixa-Movimientos_cuenta_0087231]] (trigger desde cleda A1)
 - **GID Hoja**: 760684095
 - **Columnas**:
-  - **A: Descripcion**:
-    - **Contenido**: Saca de `Movimientos_cuenta_0087231` columna J la descripción del movimiento. Hace lo mismo para la base de datos que contiene los patrones de movimientos `AsigCostes`. Identifica las descripciónes de `Movimientos_cuenta_0087231` que aún no se encuentran en `AsigCostes`.
-    - **Formula/s**: [[Form_AsigCostes_Formulas]](Formula 1)
-    - **Referencias**: Hojas : `Movimientos_cuenta_0087231`;`Rangos`;`AsigCostes`
-  - **B: Movimientos**:
-    - **Contenido**: Divide el descriptor en el texto de las dos columnas que lo formaron para poder formar patrones mas precisos con ellos. Esta columna se queda com "Movimientos"
-    - **Formula/s**: [[Form_AsigCostes_Formulas]](Formula 2)
-    - **Referencias**: `Form_AsigCostes`; `Rangos`
-  - **C: Más datos**:
-    - **Contenido**: Heredado de [[Form_AsigCostes_Formulas]](Formula 2). Contiene "Más datos".
-    - **Formula/s**: NULL
-    - **Referencias**: 
-  - **D: CF in/out**:
-    - **Contenido**: Clasifiica el tipo de gasto para el CashFlow.
-    - **Formula/s**: [[Form_AsigCostes_Formulas]](Formula 3)
-    - **Referencias**: `Rangos`; `Movimientos_cuenta_0087231`; `AsigCostes`; `PreCashFlow2`
-  - **E : Patron_CF category**:
-    - **Contenido**: Formula que intenta establecer el valor de "CF_Category" de forma automàtica para aquellos movimientos recurrentes que entran con diferencias en la escritura de su texto. Si la formula no es capaz de producirlo lo saca de lo introducido manualmente en la columna N 'M_Category'.
-    - **Formula/s**: [[Form_AsigCostes_Formulas]](Formula 4)
-    - **Referencias**: [[Form_AsigCostes|N: 'M_Category']]
-  - **F: Concepto**:
-    - **Contenido**: Heredado de [[Form_AsigCostes_Formulas]](Formula 4).
-    - **Formula/s**: NULL
-    - **Referencias**: [[Form_AsigCostes|O]]
-  - **G: RegexNombre**:
-    - **Contenido**: Heredado de [[Form_AsigCostes_Formulas]](Formula 4).
-    - **Formula/s**: NULL
-    - **Referencias**: [[Form_AsigCostes|O]]
-  - **H: 'Regex Fecha1A'**:
-    - **Contenido**: Heredado de [[Form_AsigCostes_Formulas]](Formula 4).
-    - **Formula/s**: NULL
-    - **Referencias**: [[Form_AsigCostes|P]]
-  - **I: 'Regex Fecha1B'**:
-    - **Contenido**: Heredado de [[Form_AsigCostes_Formulas]](Formula 4).
-    - **Formula/s**: NULL
-    - **Referencias**: [[Form_AsigCostes|Q]]
-  - **J: 'Regex Fecha2A'**:
-    - **Contenido**: Heredado de [[Form_AsigCostes_Formulas]](Formula 4).
-    - **Formula/s**: NULL
-    - **Referencias**: [[Form_AsigCostes|P]]
-  - **K: 'Regex Fecha2B'**:
-    - **Contenido**: Heredado de [[Form_AsigCostes_Formulas]](Formula 4).
-    - **Formula/s**: NULL
-    - **Referencias**: [[Form_AsigCostes|R]]
-  - **L: 'Importe'**:
-    - **Contenido**: Heredado de [[Form_AsigCostes_Formulas]](Formula 4).
-    - **Formula/s**: NULL
-    - **Referencias**: [[Form_AsigCostes|S]] 
-  - **M: 'Observaciones'**:
-    - **Contenido**: Heredado de [[Form_AsigCostes_Formulas]](Formula 4).
-    - **Formula/s**: NULL
-    - **Referencias**: [[Form_AsigCostes|T]] 
-  - **N: 'M_Category'**:
-    - **Contenido**: Categoria del gasto.
-    - **Formula/s**:
-    - **Referencias**: [[Form_AsigCostes_Formulas]](Formula 4)
-  - **O: 'NombresFras/Conceptos'**:
-    - **Contenido**: Nombre/Descripción del causante.
-    - **Formula/s**: NULL
-    - **Referencias**: [[Form_AsigCostes_Formulas]](Formula 4)
-  - **P: 'Sincrona'**:
-    - **Contenido**: Boolean que indica si el pago y la factura coinciden en fecha.
-    - **Formula/s**: NULL
-    - **Referencias**: [[Form_AsigCostes_Formulas]](Formula 4)
-  - **Q: 'Min Date'**:
-    - **Contenido**: Integer, dias de desvio permitido respecto a la fecha de la factura.
-    - **Formula/s**: NULL
-    - **Referencias**: [[Form_AsigCostes_Formulas]](Formula 4)
-  - **R: 'Max Date'**:
-    - **Contenido**: Integer, dias de desvio permitido respecto a la fecha de la factura.
-    - **Formula/s**: NULL
-    - **Referencias**: 
-  - **S: 'Mismo Importe'**:
-    - **Contenido**:Boolean que indica si el pago y la factura coinciden en importe.
-    - **Formula/s**: NULL
-    - **Referencias**: [[Form_AsigCostes_Formulas]](Formula 4)
-  - **T: 'M_Observaciones'**:
-    - **Contenido**: String con observaciónes sobre el movimiento.
-    - **Formula/s**: NULL
-    - **Referencias**: [[Form_AsigCostes_Formulas]](Formula 4)
+
+### **A**
+  - **Nombre**: Descripcion
+  - **Contenido**: Identifica y saca las descripciónes de [[N€Caixa-Movimientos_cuenta_0087231#J]] que aún no se encuentran en [[N€Caixa-AsigCostes#A]].
+  - **Formula/s**: [[N€Caixa-Form_AsigCostes_Formulas#F1]]
+  - **Referencias**: [[N€Caixa-Rangos]]
+  - **Fuentes**: [[N€Caixa-Movimientos_cuenta_0087231#J]],[[N€Caixa-AsigCostes#A]]
+
+### **B**
+  - **Nombre**: Movimientos
+  - **Contenido**: Divide el descriptor en dos columnas. Se queda el equivalente de [[N€Caixa-Movimientos_cuenta_0087231#D|"Movimiento"]].
+  - **Formula/s**: [[N€Caixa-Form_AsigCostes_Formulas#F2]]
+  - **Referencias**:
+  - **Fuentes**: 
+
+### **C**
+  - **Nombre**: Más datos
+  - **Contenido**: Contiene el equivalente de [[N€Caixa-Movimientos_cuenta_0087231#E|"MásDatos"]].
+  - **Formula/s**: NULL
+  - **Referencias**: 
+  - **Fuentes**: [[N€Caixa-Form_AsigCostes#B]], [[N€Caixa-Form_AsigCostes_Formulas#F2]]
+
+### **D**
+  - **Nombre**: CF in/out
+  - **Contenido**: Clasifiica el tipo de gasto para el CashFlow.
+  - **Formula/s**: [[N€Caixa-Form_AsigCostes_Formulas#F3]]
+  - **Referencias**: 
+  - **Fuentes**: 
+
+### **E**
+  - **Nombre** : Patron_CF category
+  - **Contenido**: Intenta establecer el valor de "CF_Category" de forma automàtica para aquellos movimientos recurrentes que entran con diferencias en la escritura de su texto. Si la formula no es capaz de producirlo lo saca de lo introducido manualmente en la columna N 'M_Category'.
+  - **Formula/s**: [[N€Caixa-Form_AsigCostes_Formulas#F4]]
+  - **Referencias**: 
+  - **Fuentes**: [[N€Caixa-Form_AsigCostes#N|'M_Category']]
+
+### **F**
+  - **Nombre**: Concepto
+  - **Contenido**: 
+  - **Formula/s**: NULL
+  - **Referencias**: [[N€Caixa-Form_AsigCostes_Formulas#F4]].
+  - **Fuentes**: [[N€Caixa-Form_AsigCostes#E]], [[N€Caixa-Form_AsigCostes#O|'M_Concepto']]
+
+### **G**
+  - **Nombre**: RegexNombre
+  - **Contenido**: 
+  - **Formula/s**: NULL
+  - **Referencias**: [[N€Caixa-Form_AsigCostes_Formulas#F4]].
+  - **Fuentes**: [[N€Caixa-Form_AsigCostes#E]], [[N€Caixa-Form_AsigCostes#O|'M_Concepto']]
+
+### **H**
+  - **Nombre**: 'Regex Fecha1A'
+  - **Contenido**: 
+  - **Formula/s**: NULL
+  - **Referencias**: [[N€Caixa-Form_AsigCostes_Formulas#F4]].
+  - **Fuentes**: [[N€Caixa-Form_AsigCostes#E]], [[N€Caixa-Form_AsigCostes#P]]
+
+### **I**
+  - **Nombre**: 'Regex Fecha1B'
+  - **Contenido**: 
+  - **Formula/s**: NULL
+  - **Referencias**: [[N€Caixa-Form_AsigCostes_Formulas#F4]].
+  - **Fuentes**: [[N€Caixa-Form_AsigCostes#E]], [[N€Caixa-Form_AsigCostes#Q]]
+
+### **J**
+  - **Nombre**: 'Regex Fecha2A'
+  - **Contenido**: 
+  - **Formula/s**: NULL
+  - **Referencias**: [[N€Caixa-Form_AsigCostes_Formulas#F4]].
+  - **Fuentes**: [[N€Caixa-Form_AsigCostes#E]], [[N€Caixa-Form_AsigCostes#P]]
+
+### **K**
+  - **Nombre**: 'Regex Fecha2B'
+  - **Contenido**: 
+  - **Formula/s**: NULL
+  - **Referencias**: [[N€Caixa-Form_AsigCostes_Formulas#F4]].
+  - **Fuentes**: [[N€Caixa-Form_AsigCostes#E]], [[N€Caixa-Form_AsigCostes#R]]
+
+### **L**
+  - **Nombre**: 'Importe'
+  - **Contenido**: 
+  - **Formula/s**: NULL
+  - **Referencias**: [[N€Caixa-Form_AsigCostes_Formulas#F4]]. 
+  - **Fuentes**: [[N€Caixa-Form_AsigCostes#E]], [[N€Caixa-Form_AsigCostes#S]]
+
+### **M**
+  - **Nombre**: 'Observaciones'
+  - **Contenido**: 
+  - **Formula/s**: NULL
+  - **Referencias**: [[N€Caixa-Form_AsigCostes_Formulas#F4]].
+  - **Fuentes**: [[N€Caixa-Form_AsigCostes#E]], [[N€Caixa-Form_AsigCostes#T]]
+
+### **N**
+  - **Nombre**: 'M_Category'
+  - **Contenido**: Categoria del gasto.
+  - **Formula/s**:
+  - **Referencias**: 
+  - **Fuentes**: [[H0_ControlHumano]]
+
+### **O**
+  - **Nombre**: 'NombresFras/Conceptos'
+  - **Contenido**: Nombre/Descripción del causante.
+  - **Formula/s**: NULL
+  - **Referencias**: 
+  - **Fuentes**: [[H0_ControlHumano]]
+
+### **P**
+  - **Nombre**: 'Sincrona'
+  - **Contenido**: Boolean que indica si el pago y la factura coinciden en fecha.
+  - **Formula/s**: NULL
+  - **Referencias**: 
+  - **Fuentes**: [[H0_ControlHumano]]
+
+### **Q**
+  - **Nombre**: 'Min Date'
+  - **Contenido**: Integer, dias de desvio permitido respecto a la fecha de la factura.
+  - **Formula/s**: NULL
+  - **Referencias**: 
+  - **Fuentes**: [[H0_ControlHumano]]
+
+### **R**
+  - **Nombre**: 'Max Date'
+  - **Contenido**: Integer, dias de desvio permitido respecto a la fecha de la factura.
+  - **Formula/s**: NULL
+  - **Referencias**: 
+  - **Fuentes**: [[H0_ControlHumano]]
+
+### **S**
+  - **Nombre**: 'Mismo Importe'
+  - **Contenido**:Boolean que indica si el pago y la factura coinciden en importe.
+  - **Formula/s**: NULL
+  - **Referencias**: 
+  - **Fuentes**: [[H0_ControlHumano]]
+
+### **T**
+  - **Nombre**: 'M_Observaciones'
+  - **Contenido**: String con observaciónes sobre el movimiento.
+  - **Formula/s**: NULL
+  - **Referencias**: 
+  - **Fuentes**: [[H0_ControlHumano]]
+
 
 ---
 

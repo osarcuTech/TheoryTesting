@@ -9,10 +9,10 @@ related: [[01_Arquitectura_General]], [[wf_A2_AsignacionDeGastos]], [[A1_Importa
 
 ## 🎯 Objetivo
 
-Clasificar automáticamente cada movimiento bancario usando reglas de matching basadas en patrones de texto del movimiento.
+Listar las formulas de [[N€Caixa-Form_AsigCostes]]
 
 ---
-## 📋 Descripción de la Formula 1
+## 📋 F1
 =let(
     rangoBanco;INDIRECTO("Movimientos_cuenta_0087231!J2:J"& LastRow_Movim_Banco);
     rangoBDcostes;INDIRECTO("AsigCostes!A2:A"& lr_AsigCostes);
@@ -20,14 +20,14 @@ Clasificar automáticamente cada movimiento bancario usando reglas de matching b
     nuevosCostesUnicos;unique(nuevosCostes);
     nuevosCostesUnicos)
 
-## 📋 Descripción de la Formula 2
+## 📋 F2
 =let(
     rango;INDIRECTO("A2:A"&lr_FormAsigCostes);
     splitDescripciones;arrayformula(split(rango;"'_'";0;0));
     splitDescripciones)
 
 
-## 📋 Descripción de la Formula 3
+## 📋 F3
 =let(
                           rango;INDIRECTO("E2:E"&lr_FormAsigCostes);
                           arrayformula(
@@ -45,7 +45,7 @@ Clasificar automáticamente cada movimiento bancario usando reglas de matching b
                                       ))
 
 
-## 📋 Descripción de la Formula 4
+## 📋 F4
 =ARRAYFORMULA(
     let(
     formulaAutomatica;"Aquí inicia la fórmula que permitirá indicar la información que tendrán los proveedores cuyos valores de 'Movimientos' o 'Mas Datos' tiendan a variar. Estos hacen imposible una asignación de valores única ya que cada entrada es nueva y la vinculamos con el concepto que le corresponde utilizando regex";
@@ -121,7 +121,7 @@ Clasificar automáticamente cada movimiento bancario usando reglas de matching b
     rangoImporte;INDIRECTO("$S2:S"&lr_FormAsigCostes);
     
     
-    explicacionRegexNombre;"Hacemos un split de los nombres introducidos manualmente para poder usarlos individualmente para crear un texto utilizable en la formula Query. Para hacerlo divide el texto con un split; cuenta el nº de elementos y utiliza una plantilla de creación de texto u otra en función del número de nombres";
+    explicacionRegexNombre;"Hacemos un split de los nombres introducidos manualmente para poder usarlos individualmente para crear un texto utilizable en la fQuery. Para hacerlo divide el texto con un split; cuenta el nº de elementos y utiliza una plantilla de creación de texto u otra en función del número de nombres";
     explicacionRegexNombre2;"El problema radica en cómo se procesa rangoNombresConceptYregexNombre (tu concept). Funciones como SPLIT, TRANSPONER, CONTARA e INDICE no se aplican automáticamente fila por fila en un contexto de array dentro de LET; en su lugar, tratan el rango entero como un bloque único, lo que hace que b, length y conditionText (y por ende regexNombre) se calculen solo basado en el primer valor (o en un agregado de todo el rango), ignorando las variaciones en filas subsiguientes. Esto causa el 'arrastre' del regexNombre de la primera línea.
     Recomendación para solucionarlo
     Envuelve el procesamiento de regexNombre en una función que itere fila por fila, como MAP combinada con LAMBDA. Esto fuerza una evaluación individual para cada elemento de rangoNombresConceptYregexNombre, generando un array de regexNombre correcto.";
@@ -163,4 +163,4 @@ Clasificar automáticamente cada movimiento bancario usando reglas de matching b
     
     fPadre))
 
-## 📋 Descripción de la Formula 5
+## 📋 F5

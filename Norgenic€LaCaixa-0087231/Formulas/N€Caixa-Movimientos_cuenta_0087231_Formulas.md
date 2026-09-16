@@ -6,10 +6,10 @@
 
 ## 🎯 Objetivo
 
-x
+Listar las formulas de [[N€Caixa-Movimientos_cuenta_0087231]]
 
 ---
-## 📋 Descripción de la Formula 1
+## 📋 F1
 =let(
 rangoValidación;INDIRECTO("P2:P"&LastRow_Movim_Banco);
 rangoSugerencias;INDIRECTO("O2:O"&LastRow_Movim_Banco);
@@ -21,14 +21,14 @@ formula
 )
 [[Rangos]];
 
-## 📋 Descripción de la Formula 2
+## 📋 F2
 =let(
 lastRow;LastRow_Movim_Banco;
 ArrayFormula(DERECHA($B2:INDICE(B:B;lastRow);7)))
 [[Rangos]]
 
 
-## 📋 Descripción de la Formula 3
+## 📋 F3
 =let(
 rangoMovimientos;INDIRECTO("D2:D"&LastRow_Movim_Banco);
 rangoMasDatos;INDIRECTO("E2:E"&LastRow_Movim_Banco);
@@ -36,7 +36,7 @@ MAP(rangoMovimientos; rangoMasDatos; LAMBDA(mov; mas; TEXTJOIN("'_'"; 0; mov; ma
 )
 
 
-## 📋 Descripción de la Formula 4
+## 📋 F4
 =ARRAYFORMULA(
   LET(
     rangoDescripcion; INDIRECTO("AsigCostes!A2:E" & lr_AsigCostes);
@@ -49,7 +49,7 @@ explicacion;"Busca una coincidencia de 'DescripciónMovimiento' mediante buscarV
   )
 )
 
-## 📋 Descripción de la Formula 5
+## 📋 F5
 =let(
 lastRow;LastRow_Movim_Banco;
 limiteFras; INDIRECTO("$E2:$E"& lastRow);
@@ -57,7 +57,7 @@ limiteCategory; INDIRECTO("$L2:$L"& lastRow);
 ArrayFormula(SI(limiteCategory="Bancos";IFNA(IFS(limiteFras="Solid Processing Limited";"SolidProcessing";limiteFras="GTWS Tech Limited";"Adyen";limiteFras="CHASDEFXXXX-CHECKOUT SAS";"CheckOut";limiteFras="GTWS TECH LIMITED  SOLIDGATE";"SOLIDGATE");"OtherBancs");""))
 )
 
-## 📋 Descripción de la Formula 6
+## 📋 F6
 =let(
 fecha;INDIRECTO("B2:B"&LastRow_Movim_Banco);
 fechaValor;INDIRECTO("C2:C"&LastRow_Movim_Banco);
@@ -71,7 +71,7 @@ formulaEjemplo;TEXTJOIN("'_'";0;$B3;$C3;$D3;$E3;$F3;$G3;$H3);
 MAP(fecha; fechaValor; rangoMovimientos; rangoMasDatos; importe; saldo;factura; LAMBDA(f; fV; mov; mas; i; s; fra; TEXTJOIN("'_'"; 0; f; fV; mov; mas; i; s; fra)))
 )
 
-## 📋 Descripción de la Formula 7
+## 📋 F7
 =SI($L2<>"Proveedores";"";
 Let(
 rangos;;
@@ -121,7 +121,7 @@ regexMaxfecha; SI((buscarTextoMaxFecha<>""); (buscarTextoMaxFecha & maxFechaBanc
 
 regexImporte;SI(VALOR(buscarTextoImporte)=1; " and D = "&SUSTITUIR(SUSTITUIR(SUSTITUIR(TEXTO(ABS(-$F2);"0.00");".";";");",";".");";";"");"");
 textoQuery;"select A where " & ESPACIOS(buscarTextoNombre&regexMinfecha&regexMaxfecha&regexImporte);
-eTextoQuery;"Devuelve un texto utilizable por la formula query para buscar entre las facturas. Ejemplo: select A where (C= 'Everapi' or C= 'CURRENCYAPI.COM' ) and B = date '2024-11-28'";
+eTextoQuery;"Devuelve un texto utilizable por la fquery para buscar entre las facturas. Ejemplo: select A where (C= 'Everapi' or C= 'CURRENCYAPI.COM' ) and B = date '2024-11-28'";
 
 ejecucionQuery;"Usamos la query en el rango de nuestro historial de facturas (limiteFras) usando el texto de selección previo (textoQuery)";
 formulaQuery;QUERY(limiteFras;textoQuery);
@@ -150,7 +150,7 @@ letOutput)
 )
 
 
-## 📋 Descripción de la Formula 5
-## 📋 Descripción de la Formula 5
-## 📋 Descripción de la Formula 5
-## 📋 Descripción de la Formula 5
+## 📋 F5
+## 📋 F5
+## 📋 F5
+## 📋 F5

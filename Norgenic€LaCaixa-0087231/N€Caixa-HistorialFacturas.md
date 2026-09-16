@@ -15,66 +15,103 @@ Registro de facturas con información accesible para C0.
 
 ## 📋 Descripción de las columnas
 
-- **Fuente**: [[BD_Facturas]]
+- **Fuente**: [[N€Caixa-BD_Facturas]]
 - **GID Hoja**: 1839937135
 - **Columnas**:
-  - **A: UID**:
-    - **Contenido**: UID de las facturas. Heredado de `BD_Facturas`. 
-    - **Formula/s**: =QUERY(BD_Facturas!A2:B;"select A where B='' LIMIT "&CONTARA(BD_Facturas!A2:A)) [[BD_Facturas]]
-    - **Referencias**: 
-  - **B: 'Fecha'**:
-    - **Contenido**: Fecha completa de la factura.
-    - **Formula/s**: =ArrayFormula(SPLIT($A2:INDICE(A:A;LastRow_Hist_Fras);"_")) [[BD_Facturas]], [[Rangos]]
-    - **Referencias**:  
-  - **C: 'Proveedor'**:
-    - **Contenido**: [[N€Caixa-HistorialFacturas|B]]. Nombre del Proveedor que emite la factura.
-    - **Formula/s**: NULL
-    - **Referencias**: 
-  - **D: 'Importe'**:
-    - **Contenido**: [[N€Caixa-HistorialFacturas|B]]. Importe de la factura.
-    - **Formula/s**: NULL
-    - **Referencias**: 
-  - **E: 'Moneda'**:
-    - **Contenido**: [[N€Caixa-HistorialFacturas|B]]. Divisa de la factura.
-    - **Formula/s**: NULL
-    - **Referencias**: 
-  - **F: 'Factura'**:
-    - **Contenido**: [[N€Caixa-HistorialFacturas|B]]. ID de la factura según Proveedor.
-    - **Formula/s**: NULL
-    - **Referencias**: 
-  - **G: 'Empresa'**:
-    - **Contenido**: [[N€Caixa-HistorialFacturas|B]]. Norgenic.
-    - **Formula/s**: NULL
-    - **Referencias**: 
-  - **H: 'Dia'**:
-    - **Contenido**: nº de Dia del mes de la factura.
-    - **Formula/s**: =ArrayFormula(SPLIT($B2:INDICE(B:B;LastRow_Hist_Fras);"/"))
-    - **Referencias**: 
-  - **I: 'Mes'**:
-    - **Contenido**: [[N€Caixa-HistorialFacturas|H]]. Mes de la factura.
-    - **Formula/s**: NULL
-    - **Referencias**: 
-  - **J: 'Año'**:
-    - **Contenido**: [[N€Caixa-HistorialFacturas|H]]. Año de la factura.
-    - **Formula/s**: NULL
-    - **Referencias**: 
-  - **K: 'Periodo'**:
-    - **Contenido**: Mes/Año de la factura.
-    - **Formula/s**: =ArrayFormula(DERECHA($B2:INDICE(B:B;LastRow_Hist_Fras);7))
-    - **Referencias**: 
-  - **L: 'Punteada'**:
-    - **Contenido**: Indica si la factura ha sido ya punteada o no.
-    - **Formula/s**: =ARRAYFORMULA(
-                                    let(
-                                    limiteFras;LastRow_Hist_Fras;
-                                    limiteBanco; LastRow_Movim_Banco;
-                                    facturas;INDIRECTO("$A$2:$A"& limiteFras);
-                                    columnaPunteo; INDIRECTO("Movimientos_cuenta_0087231!$H$2:$H"& limiteBanco);
 
-                                    SI(BUSCARV(facturas; columnaPunteo;1;0)<>"";"Si"; "")
-                                    )
-                                    )
-    - **Referencias**: [[N€Caixa-Rangos]],[[N€Caixa-Movimientos_cuenta_0087231]]
+### **A**
+  - **Nombre**: 'UID'
+  - **Contenido**: UID de las facturas.
+  - **Formula/s**: =QUERY(BD_Facturas!A2:B;"select A where B='' LIMIT "&CONTARA(BD_Facturas!A2:A))
+  - **Referencias**: 
+  - **Fuentes**: [[N€Caixa-BD_Facturas#A]]
+
+### **B**
+  - **Nombre**: 'Fecha'
+  - **Contenido**: Fecha completa de la factura.
+  - **Formula/s**: =ArrayFormula(SPLIT($A2:INDICE(A:A;LastRow_Hist_Fras);"_")) 
+  - **Referencias**:  [[N€Caixa-Rangos#C]]
+  - **Fuentes**: [[N€Caixa-HistorialFacturas#A]] 
+
+### **C**
+  - **Nombre**: 'Proveedor'
+  - **Contenido**: Nombre del Proveedor que emite la factura
+  - **Formula/s**: NULL
+  - **Referencias**: 
+  - **Fuentes**: [[N€Caixa-HistorialFacturas#B]]. 
+
+### **D**
+  - **Nombre**: 'Importe'
+  - **Contenido**: Importe de la factura.
+  - **Formula/s**: NULL
+  - **Referencias**: 
+  - **Fuentes**: [[N€Caixa-HistorialFacturas#B]]. 
+
+### **E**
+  - **Nombre**: 'Moneda'
+  - **Contenido**: Divisa de la factura.
+  - **Formula/s**: NULL
+  - **Referencias**: 
+  - **Fuentes**: [[N€Caixa-HistorialFacturas#B]]. 
+
+### **F**
+  - **Nombre**: 'Factura'
+  - **Contenido**: ID de la factura según Proveedor.
+  - **Formula/s**: NULL
+  - **Referencias**: 
+  - **Fuentes**: [[N€Caixa-HistorialFacturas#B]]. 
+
+### **G**
+  - **Nombre**: 'Empresa'
+  - **Contenido**: Norgenic.
+  - **Formula/s**: NULL
+  - **Referencias**: 
+  - **Fuentes**: [[N€Caixa-HistorialFacturas#B]]. 
+
+### **H**
+  - **Nombre**: 'Dia'
+  - **Contenido**: nº de Dia del mes de la factura.
+  - **Formula/s**: =ArrayFormula(SPLIT($B2:INDICE(B:B;LastRow_Hist_Fras);"/"))
+  - **Referencias**: [[N€Caixa-Rangos#C]]
+  - **Fuentes**: [[N€Caixa-HistorialFacturas#B]]
+
+### **I**
+  - **Nombre**: 'Mes'
+  - **Contenido**: Mes de la factura.
+  - **Formula/s**: NULL
+  - **Referencias**: 
+  - **Fuentes**: [[N€Caixa-HistorialFacturas#H]]. 
+
+### **J**
+  - **Nombre**: 'Año'
+  - **Contenido**: Año de la factura.
+  - **Formula/s**: NULL
+  - **Referencias**: 
+  - **Fuentes**: [[N€Caixa-HistorialFacturas#H]]. 
+
+### **K**
+  - **Nombre**: 'Periodo'
+  - **Contenido**: Mes/Año de la factura.
+  - **Formula/s**: =ArrayFormula(DERECHA($B2:INDICE(B:B;LastRow_Hist_Fras);7))
+  - **Referencias**: [[N€Caixa-Rangos#C]]
+  - **Fuentes**: [[N€Caixa-HistorialFacturas#B]]
+
+### **L**
+  - **Nombre**: 'Punteada'
+  - **Contenido**: Indica si la factura ha sido ya punteada o no.
+  - **Formula/s**: =ARRAYFORMULA(
+                                  let(
+                                  limiteFras;LastRow_Hist_Fras;
+                                  limiteBanco; LastRow_Movim_Banco;
+                                  facturas;INDIRECTO("$A$2:$A"& limiteFras);
+                                  columnaPunteo; INDIRECTO("Movimientos_cuenta_0087231!$H$2:$H"& limiteBanco);
+
+                                  SI(BUSCARV(facturas; columnaPunteo;1;0)<>"";"Si"; "")
+                                  )
+                                  )
+  - **Referencias**: [[N€Caixa-Rangos#C]],[[N€Caixa-Movimientos_cuenta_0087231#H]]
+  - **Fuentes**: [[N€Caixa-HistorialFacturas#A]]
+
 
 ---
 

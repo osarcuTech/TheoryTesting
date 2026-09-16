@@ -10,7 +10,7 @@ related: [[01_Arquitectura_General]], [[wf_C2_ComprobacionFacturas]], [[H1_Archi
 ## 🎯 Objetivo
 
 Verificar la completitud y consistencia del ciclo mensual antes de cerrarlo:
-- ¿Todas las facturas fueron archivadas?
+- ¿Todas las facturas fueron enviadas?
 - ¿Todos los movimientos tienen factura coincidente?
 - ¿Hay inconsistencias o pendientes?
 
@@ -22,16 +22,18 @@ Es el **último control de calidad** antes de considerar el mes cerrado.
 
 ### Entrada
 - **Fuente**: Todo lo procesado en el mes
-  - BD_Banco con A1/A2 completados
-  - BD_Facturas con B1/B2 completados
-  - Movimientos validados por H0
-  - Facturas archivadas por H1
+  - [[N€Caixa-Movimientos_cuenta_0087231]] con [[A1_ImportarMovimientos_GS]]/[[A2_AsignacionDeGastos_Sheets_Arquitectura]] completados
+  - [[N€Caixa-BD_Facturas]] con [[B1_RecepcionFacturas]]/[[B2_Cebollón]] completados
+  - Facturas enviadas por H1
+
+¡¡¡El resto esta desactualizado, por revisar y/o incorrecto.!!!
+
 
 ### Verificaciones
 
 #### 1. Completitud de Matching
 ```
-Para cada movimiento en BD_Banco (mes actual):
+Para cada movimiento en [[N€Caixa-Movimientos_cuenta_0087231]] (mes actual):
   ¿Tiene factura coincidente validada?
     → SÍ: OK
     → NO: Incidencia "Factura Faltante"
@@ -105,7 +107,7 @@ Workflow: [[wf_C2_ComprobacionFacturas]]
 | Nodo | Tipo | Descripción |
 |------|------|-------------|
 | **Trigger H1** | n8n Workflow | Inicia después de H1 |
-| **Read Month Data** | Sheets API | Lee datos del mes en BD_Banco y BD_Facturas |
+| **Read Month Data** | Sheets API | Lee datos del mes en [[N€Caixa-Movimientos_cuenta_0087231]] y BD_Facturas |
 | **Check Matching** | Code | Valida completitud de matches |
 | **Verify Consistency** | Code | Verifica valores (importe, fecha, proveedor) |
 | **Detect Anomalies** | Code | Identifica inconsistencias y duplicados |
@@ -224,17 +226,17 @@ Workflow: [[wf_C2_ComprobacionFacturas]]
 
 8. KPIs MENSUALES
    
-   Importación (A1):
+   Importación ([[A1_ImportarMovimientos_GS]]):
      ├─ Tasa de éxito: 99.5%
      ├─ Duplicados detectados: 15
      └─ Tiempo promedio: 2.3 min
    
-   Clasificación (A2):
+   Clasificación ([[A2_AsignacionDeGastos_Sheets_Arquitectura]]):
      ├─ Cobertura automática: 96%
      ├─ Intervención manual: 4%
      └─ Excepciones por proveedor: 5%
    
-   Recepción Facturas (B1):
+   Recepción Facturas ([[B1_RecepcionFacturas]]):
      ├─ Tasa de procesamiento: 98%
      ├─ Facturas sin metadatos: 2
      └─ Tiempo promedio: 1.5 min
