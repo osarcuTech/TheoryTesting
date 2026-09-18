@@ -1,0 +1,120 @@
+---
+title: 
+tags: 
+component: 
+related: [[N_Caixa_€-BD_Facturas#A]], [[N_Caixa_€-Movimientos_cuenta_0087231#H]]
+---
+
+# A2 — Asignación de Gastos
+
+## 🎯 Objetivo
+
+Registro de facturas con información accesible para C0.
+
+---
+
+## 📋 Descripción de las columnas
+
+- **Fuente**: [[N_Caixa_€-BD_Facturas]]
+- **GID Hoja**: 1839937135
+- **Columnas**:
+
+### **A**
+  - **Nombre**: 'UID'
+  - **Contenido**: UID de las facturas.
+  - **Formula/s**: =QUERY(BD_Facturas!A2:B;"select A where B='' LIMIT "&CONTARA(BD_Facturas!A2:A))
+  - **Referencias**: 
+  - **Fuentes**: [[N_Caixa_€-BD_Facturas#A]]
+
+### **B**
+  - **Nombre**: 'Fecha'
+  - **Contenido**: Fecha completa de la factura.
+  - **Formula/s**: =ArrayFormula(SPLIT($A2:INDICE(A:A;LastRow_Hist_Fras);"_")) 
+  - **Referencias**:  [[N_Caixa_€-Rangos#C]]
+  - **Fuentes**: [[N_Caixa_€-HistorialFacturas#A]] 
+
+### **C**
+  - **Nombre**: 'Proveedor'
+  - **Contenido**: Nombre del Proveedor que emite la factura
+  - **Formula/s**: NULL
+  - **Referencias**: 
+  - **Fuentes**: [[N_Caixa_€-HistorialFacturas#B]]. 
+
+### **D**
+  - **Nombre**: 'Importe'
+  - **Contenido**: Importe de la factura.
+  - **Formula/s**: NULL
+  - **Referencias**: 
+  - **Fuentes**: [[N_Caixa_€-HistorialFacturas#B]]. 
+
+### **E**
+  - **Nombre**: 'Moneda'
+  - **Contenido**: Divisa de la factura.
+  - **Formula/s**: NULL
+  - **Referencias**: 
+  - **Fuentes**: [[N_Caixa_€-HistorialFacturas#B]]. 
+
+### **F**
+  - **Nombre**: 'Factura'
+  - **Contenido**: ID de la factura según Proveedor.
+  - **Formula/s**: NULL
+  - **Referencias**: 
+  - **Fuentes**: [[N_Caixa_€-HistorialFacturas#B]]. 
+
+### **G**
+  - **Nombre**: 'Empresa'
+  - **Contenido**: Norgenic.
+  - **Formula/s**: NULL
+  - **Referencias**: 
+  - **Fuentes**: [[N_Caixa_€-HistorialFacturas#B]]. 
+
+### **H**
+  - **Nombre**: 'Dia'
+  - **Contenido**: nº de Dia del mes de la factura.
+  - **Formula/s**: =ArrayFormula(SPLIT($B2:INDICE(B:B;LastRow_Hist_Fras);"/"))
+  - **Referencias**: [[N_Caixa_€-Rangos#C]]
+  - **Fuentes**: [[N_Caixa_€-HistorialFacturas#B]]
+
+### **I**
+  - **Nombre**: 'Mes'
+  - **Contenido**: Mes de la factura.
+  - **Formula/s**: NULL
+  - **Referencias**: 
+  - **Fuentes**: [[N_Caixa_€-HistorialFacturas#H]]. 
+
+### **J**
+  - **Nombre**: 'Año'
+  - **Contenido**: Año de la factura.
+  - **Formula/s**: NULL
+  - **Referencias**: 
+  - **Fuentes**: [[N_Caixa_€-HistorialFacturas#H]]. 
+
+### **K**
+  - **Nombre**: 'Periodo'
+  - **Contenido**: Mes/Año de la factura.
+  - **Formula/s**: =ArrayFormula(DERECHA($B2:INDICE(B:B;LastRow_Hist_Fras);7))
+  - **Referencias**: [[N_Caixa_€-Rangos#C]]
+  - **Fuentes**: [[N_Caixa_€-HistorialFacturas#B]]
+
+### **L**
+  - **Nombre**: 'Punteada'
+  - **Contenido**: Indica si la factura ha sido ya punteada o no.
+  - **Formula/s**: =ARRAYFORMULA(
+                                  let(
+                                  limiteFras;LastRow_Hist_Fras;
+                                  limiteBanco; LastRow_Movim_Banco;
+                                  facturas;INDIRECTO("$A$2:$A"& limiteFras);
+                                  columnaPunteo; INDIRECTO("Movimientos_cuenta_0087231!$H$2:$H"& limiteBanco);
+
+                                  SI(BUSCARV(facturas; columnaPunteo;1;0)<>"";"Si"; "")
+                                  )
+                                  )
+  - **Referencias**: [[N_Caixa_€-Rangos#C]],[[N_Caixa_€-Movimientos_cuenta_0087231#H]]
+  - **Fuentes**: [[N_Caixa_€-HistorialFacturas#A]]
+
+
+---
+
+**Última actualización**: 2026-09-10
+**Estado**: Activo
+**Impacto**: ⭐⭐⭐ (Alto)
