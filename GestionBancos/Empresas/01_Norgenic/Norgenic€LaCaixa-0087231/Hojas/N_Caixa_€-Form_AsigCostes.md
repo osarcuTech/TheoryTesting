@@ -12,12 +12,12 @@ related: [[A2_AsignacionDeGastos_Sheets_Arquitectura]], [[N_Caixa_€-Movimiento
 Clasificar automáticamente cada nuevo movimiento bancario usando reglas de matching basadas en patrones de texto del movimiento para añadirlo a [[N_Caixa_€-AsigCostes]] y crear una query utilizable por [[C0_PunteoFacturas|C0]] para seleccionar las facturas coincidentes.
 
 ---
+## **Gid**
+760684095
 
 ## 📋 Descripción de las columnas
 
 - **Fuente**: Movimientos nuevos en [[N_Caixa_€-Movimientos_cuenta_0087231]] (trigger desde cleda A1)
-- **GID Hoja**: 760684095
-- **Columnas**:
 
 ### **A**
   - **Nombre**: Descripcion

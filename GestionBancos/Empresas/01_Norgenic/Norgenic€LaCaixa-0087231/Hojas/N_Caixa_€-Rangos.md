@@ -12,11 +12,11 @@ related: [[01_Arquitectura_General]],
 El objetivo de esta hoja es poner el "LasRow" de cada una de las hojas con formulas como "Intervalo con nombre" para su uso en el resto de hojas.
 
 ---
+## **Gid**
+81356225
 
 ## 📋 Descripción de las columnas
 
-- **GID Hoja**: 81356225
-- **Columnas**:
 
 ### **A**
   - **Nombre**: Sheet's.

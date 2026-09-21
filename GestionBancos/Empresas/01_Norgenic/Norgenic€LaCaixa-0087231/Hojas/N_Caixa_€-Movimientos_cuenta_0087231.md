@@ -12,10 +12,11 @@ related: [[N_Caixa_€-Pipeline#A1]], [[N_Caixa_€-Pipeline#A2]] [[C0_PunteoFac
 x.
 
 ---
+## **Gid**
+1963712436
 
 ## 📋 Descripción de las columnas
 
-- **GID Hoja**: 1963712436
 
 ### **A**
   - **Nombre**: UID.

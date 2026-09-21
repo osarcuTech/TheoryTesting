@@ -12,10 +12,11 @@ related: [[N_Caixa_€-Pipeline#B2]], [[wf_B2_Cebollon_Context]], [[N_Caixa_€-
 Base de datos de las Facturas.
 
 ---
+## **Gid**
+1422409426
 
 ## 📋 Descripción de las columnas
 
-- **GID Hoja**: 1422409426
 
 ### **A**
   - **Nombre**: UID

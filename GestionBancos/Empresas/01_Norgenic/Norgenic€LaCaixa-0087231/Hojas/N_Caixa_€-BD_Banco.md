@@ -12,10 +12,11 @@ related: [[N_Caixa_€-Pipeline#A1]], [[N_Caixa_€-Movimientos_cuenta_0087231]]
 Base de datos que contiene todos los movimientos bancarios en estado puro y, al terminar el pipeline, tambien los datos de las facturas relacionadas con ellos, ...
 
 ---
+## **Gid**
+1089991841
 
 ## 📋 Descripción de las columnas
 
-- **GID Hoja**: 1089991841
 
 ### **A**
 - **Nombre**: UID

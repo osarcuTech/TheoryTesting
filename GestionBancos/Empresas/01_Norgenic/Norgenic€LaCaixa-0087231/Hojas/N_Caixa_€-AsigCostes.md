@@ -11,10 +11,11 @@ related: [[N_Caixa_€-Form_AsigCostes_Formulas]], [[H0_ControlHumano]], [[N_Cai
 
 Transferencia manual de los datos de [[N_Caixa_€-Form_AsigCostes_Formulas]] para crear una base de datos permanente de patrones de movimiento, su significado, implicaciones y forma# de tratarlos.
 ---
+## **Gid**
+313952240
 
 ## 📋 Descripción de las columnas
 
-- **GID Hoja**: 313952240
 
 ### **A
   - **Nombre**: Descripcion

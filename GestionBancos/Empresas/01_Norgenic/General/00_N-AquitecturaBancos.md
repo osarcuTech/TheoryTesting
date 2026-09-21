@@ -10,7 +10,7 @@ Bancos:
     - **CAD**: [[N_Caixa_CAD-Aquitectura]]
     - **CHF**: [[N_Caixa_CHF-Aquitectura]]
     - **DKK**: [[N_Caixa_DKK-Aquitectura]]
-    - **GBP**: [[N_Caixa_GBP-Aquitectura]]
+    - **GBP**: [[N_Caixa_£-Aquitectura]]
     - **NOK**: [[N_Caixa_NOK-Aquitectura]]
     - **NZD**: [[N_Caixa_NZD-Aquitectura]]
     - **PLN**: [[N_Caixa_PLN-Aquitectura]]

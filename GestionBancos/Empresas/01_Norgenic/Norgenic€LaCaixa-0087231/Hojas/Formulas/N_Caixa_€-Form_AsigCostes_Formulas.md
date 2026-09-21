@@ -9,7 +9,7 @@ related: [[wf_A2_AsignacionDeGastos]], [[A1_ImportarMovimientos_GS]], [[A1_Impor
 
 ## 🎯 Objetivo
 
-Listar las formulas de [[N€Caixa-Form_AsigCostes]]
+Listar las formulas de [[N_Caixa_€-Form_AsigCostes]]
 
 ---
 ## 📋 F1

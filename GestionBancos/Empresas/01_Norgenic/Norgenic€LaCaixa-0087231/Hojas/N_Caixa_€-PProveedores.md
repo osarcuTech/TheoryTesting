@@ -11,10 +11,11 @@ related: [[N_Caixa_€-AsigCostes]], [[N_Caixa_€-Movimientos_cuenta_0087231#O]
 
 Crear una base de datos permanente de patrones de movimiento, su significado, implicaciones y formas de tratarlos.
 ---
+## **Gid**
+223389945
 
 ## 📋 Descripción de las columnas
 
-- **GID Hoja**: 223389945
 
 
 ### **A**

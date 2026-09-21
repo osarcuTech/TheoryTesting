@@ -12,12 +12,12 @@ related: [[N_Caixa_€-BD_Facturas#A]], [[N_Caixa_€-Movimientos_cuenta_0087231
 Registro de facturas con información accesible para C0.
 
 ---
+## **Gid**
+1839937135
 
 ## 📋 Descripción de las columnas
 
 - **Fuente**: [[N_Caixa_€-BD_Facturas]]
-- **GID Hoja**: 1839937135
-- **Columnas**:
 
 ### **A**
   - **Nombre**: 'UID'
