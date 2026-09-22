@@ -2,7 +2,7 @@
 title: 
 tags: 
 component: 
-related: [[N_Caixa_€-Pipeline#A1]], [[N_Caixa_€-Movimientos_cuenta_0087231]]
+related: [[N_Caixa_$-Pipeline#A1]], [[N_Caixa_$-BD_Movimientos]]
 ---
 
 # A2 — Asignación de Gastos

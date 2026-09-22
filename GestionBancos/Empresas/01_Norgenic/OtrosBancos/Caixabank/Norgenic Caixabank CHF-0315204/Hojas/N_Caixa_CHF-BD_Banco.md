@@ -2,7 +2,7 @@
 title: 
 tags: 
 component: 
-related: [[N_Caixa_AUD-Pipeline#A1]], [[N_Caixa_AUD-Movimientos_cuenta_0087231]]
+related: [[N_Caixa_CHF-Pipeline#A1]], [[N_Caixa_CHF-BD_Movimientos]]
 ---
 
 # A2 — Asignación de Gastos
@@ -22,43 +22,43 @@ Base de datos que contiene todos los movimientos bancarios en estado puro y, al 
 - **Nombre**: 'Fecha'
 - **Contenido**: 
 - **Formula/s**: NULL
-- **Referencias**: [[N_Caixa_AUD-Pipeline#A1]] 
-- **Fuente**: [[N_Caixa_AUD-Pipeline#A1]].
+- **Referencias**: [[N_Caixa_CHF-Pipeline#A1]] 
+- **Fuente**: [[N_Caixa_CHF-Pipeline#A1]].
 
 ### **B**
 - **Nombre**: 'Fecha valor'
 - **Contenido**: 
 - **Formula/s**: NULL
 - **Referencias**: 
-- **Fuente**: [[N_Caixa_AUD-Pipeline#A1]].
+- **Fuente**: [[N_Caixa_CHF-Pipeline#A1]].
 
 ### **C**
 - **Nombre**: 'Movimiento'
 - **Contenido**: 
 - **Formula/s**: 
 - **Referencias**: 
-- **Fuente**: [[N_Caixa_AUD-Pipeline#A1]].
+- **Fuente**: [[N_Caixa_CHF-Pipeline#A1]].
 
 ### **D**
 - **Nombre** : 'Más datos'
 - **Contenido**: 
 - **Formula/s**: 
 - **Referencias**: 
-- **Fuente**: [[N_Caixa_AUD-Pipeline#A1]].
+- **Fuente**: [[N_Caixa_CHF-Pipeline#A1]].
 
 ### **E**
 - **Nombre**: 'Importe'
 - **Contenido**: 
 - **Formula/s**: 
 - **Referencias**: 
-- **Fuente**: [[N_Caixa_AUD-Pipeline#A1]].
+- **Fuente**: [[N_Caixa_CHF-Pipeline#A1]].
 
 ### **F**
 - **Nombre**: 'Saldo'
 - **Contenido**: 
 - **Formula/s**: 
 - **Referencias**: 
-- **Fuente**:  [[N_Caixa_AUD-Pipeline#A1]].
+- **Fuente**:  [[N_Caixa_CHF-Pipeline#A1]].
 
 
 

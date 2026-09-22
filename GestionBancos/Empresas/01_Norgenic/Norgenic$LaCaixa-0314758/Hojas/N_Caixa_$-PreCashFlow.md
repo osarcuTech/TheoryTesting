@@ -22,7 +22,7 @@ Base de datos que contiene todos los movimientos bancarios en estado puro y, al 
 ### **A**
 - **Nombre**: 'Periodo'
 - **Contenido**: UID formado mediante la concatenación de las distintas columnas del movimiento.
-- **Formula/s**: =QUERY(BD_Movimientos!A2:O;"select K,L,M,sum(F),sum(O) where A is not null group by K,L,M label K 'Periodo', L 'CF in/out', M 'Concepto', sum(F) 'ImporteUSD', sum(O) 'Importe €'";0)
+- **Formula/s**: =QUERY(BD_Movimientos!A2:O;"select K,L,M,sum(F),sum(O) where A is not null group by K,L,M label K 'Periodo', L 'CF in/out', M 'CF category', sum(F) 'Importe', sum(O) 'Importe €'";0)
 - **Referencias**: 
 - **Fuente**: [[N_Caixa_$-BD_Movimientos]]
 
@@ -34,14 +34,14 @@ Base de datos que contiene todos los movimientos bancarios en estado puro y, al 
 - **Fuente**: [[N_Caixa_$-PreCashFlow#A]].
 
 ### **C**
-- **Nombre**: 'Concepto' ('CF category')
+- **Nombre**: 'CF category'
 - **Contenido**: 
 - **Formula/s**: NULL
 - **Referencias**: 
 - **Fuente**: [[N_Caixa_$-PreCashFlow#A]].
 
 ### **D**
-- **Nombre**: 'ImporteUSD'
+- **Nombre**: 'Importe'
 - **Contenido**: 
 - **Formula/s**: NULL
 - **Referencias**: 

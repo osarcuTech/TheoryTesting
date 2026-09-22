@@ -62,7 +62,7 @@
 
 ### **Generales**
 
-#### **N€Caixa-Rangos**
+#### **Rangos**
 **Nombre**: 
 **Objetivo**: Almacena el valor de last row de todas la hojas para que puedan extraerlo sin necesidad de tantos calculos.
 **Relaciones Pipeline**: 
@@ -78,7 +78,7 @@
 
 ### **A2**
 
-#### **N$Caixa-Form_AsigCostes **
+#### **Form_AsigCostes **
 **Nombre**: 
 **Objetivo**: Soporte en el append a la "BD_PatronesMovimientos".
 **Relaciones Pipeline**: 
@@ -86,7 +86,7 @@
 **Gid**: NULL
 
 ### **C0**
-#### **N€Caixa-PProveedores **
+#### **PProveedores **
 **Nombre**: 
 **Objetivo**: Simplificación de "BD_PatronesMovimientos" con solo aquello que puede contener facturas. (Potencialmente eliminable modificando C0)
 **Relaciones Pipeline**: 

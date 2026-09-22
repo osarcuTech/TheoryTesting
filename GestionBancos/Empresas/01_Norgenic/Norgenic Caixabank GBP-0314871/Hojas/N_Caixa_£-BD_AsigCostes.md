@@ -12,7 +12,8 @@ related:
 Base de datos que contiene todos los movimientos bancarios en estado puro y, al terminar el pipeline, tambien los datos de las facturas relacionadas con ellos, ...
 
 ---
-## **Gid**: 596224007
+## **Gid**: 
+596224007
 
 ## 📋 Descripción de las columnas
 

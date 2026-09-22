@@ -78,7 +78,7 @@
 
 ### **A2**
 
-#### **N€Caixa-Form_AsigCostes **
+#### **Form_AsigCostes **
 **Nombre**: 'Form_AsigCostes'
 **Objetivo**: Soporte en el append a la "BD_PatronesMovimientos".
 **Relaciones Pipeline**: 
