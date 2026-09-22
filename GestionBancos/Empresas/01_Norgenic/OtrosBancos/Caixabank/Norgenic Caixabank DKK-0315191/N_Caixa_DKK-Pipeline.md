@@ -2,7 +2,7 @@
 # Plantilla Pipeline.
 **Objetivo**: Mostrar el flujo tipico de datos de la gestión de todo banco de este grupo de empresas. 
 **Aviso**: Cada empresa y banco variara ligeramente su arquitectura y su pipeline por lo que, tras aberiguar la empresa y banco que estamos gestionando, consultaremos su versión particular para adaptar el proceso a sus herramientas. [[00_Empresas&Bancos]] [[00_AquitecturaBancos]].
-    - Ejemplo: Si es **Norgenic** **Caixabank** **EUR** usaremos la arquitectura de [[N_Caixa_CAD-Aquitectura]] con sus **Scripts** y **Workflows** correspondientes.
+    - Ejemplo: Si es **Norgenic** **Caixabank** **EUR** usaremos la arquitectura de [[N_Caixa_DKK-Aquitectura]] con sus **Scripts** y **Workflows** correspondientes.
 **Herramientas prioritarias**: La prioridad de ejcución es **AppScripts**-->**n8n**-->**Python**-->**Manual** (Si no hay uno saltamos al siguiente).
 
 
@@ -57,7 +57,7 @@ Condición: "Opcional" = Solo obligatorio para los bancos con facturas de provee
 ### C0
 **TLDR**:  Asociación de Movimientos y Facturas
 **Objetivo**: Que cada factura este asociada a los movimientos bancarios que le correspondan.
-**Processo**: Formulas en Google Sheets (ej: [[N_Caixa_CAD-BD_Movimientos#H]] en su momento usamo el actualmente deprecado [[wf_C0_PuntearFacturas_context]] pero actualmente no hay ningún worklow n8n funcional) o manualmente [[H0_ControlHumano]]. 
+**Processo**: Formulas en Google Sheets (ej: [[N_Caixa_DKK-BD_Movimientos#H]] en su momento usamo el actualmente deprecado [[wf_C0_PuntearFacturas_context]] pero actualmente no hay ningún worklow n8n funcional) o manualmente [[H0_ControlHumano]]. 
 
 
 ### C1

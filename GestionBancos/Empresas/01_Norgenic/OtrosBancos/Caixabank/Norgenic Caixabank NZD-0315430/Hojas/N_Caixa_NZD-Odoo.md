@@ -2,7 +2,7 @@
 title: 
 tags: 
 component: 
-related: [[N_Caixa_€-Pipeline#A1]], [[N_Caixa_€-BD_Movimientos]]
+related: [[N_Caixa_NZD-Pipeline#A1]], [[N_Caixa_NZD-BD_Movimientos]]
 ---
 
 # A2 — Asignación de Gastos
@@ -13,7 +13,7 @@ Base de datos que contiene todos los movimientos bancarios en estado puro y, al 
 
 ---
 ## **Gid**
-138661482
+880567240
 
 ## 📋 Descripción de las columnas
 
@@ -23,21 +23,21 @@ Base de datos que contiene todos los movimientos bancarios en estado puro y, al 
 - **Contenido**: 
 - **Formula/s**: =QUERY(BD_Movimientos!A:H;"select A,H,E where A >= date '"&TEXTO(D2;"yyyy-mm-dd")&"' and A<= date '"&TEXTO(E2;"yyyy-mm-dd")&"'";1)
 - **Referencias**: 
-- **Fuente**: [[N_Caixa_CAD-BD_Movimientos]], [[N_Caixa_CAD-Odoo#D]], [[N_Caixa_CAD-Odoo#E]]
+- **Fuente**: [[N_Caixa_NZD-BD_Movimientos]], [[N_Caixa_NZD-Odoo#D]], [[N_Caixa_NZD-Odoo#E]]
 
 ### **B**
 - **Nombre**: 'Descriptor'
 - **Contenido**: 
 - **Formula/s**: NULL
 - **Referencias**:  
-- **Fuente**: [[N_Caixa_CAD-Odoo#A]].
+- **Fuente**: [[N_Caixa_NZD-Odoo#A]].
 
 ### **C**
 - **Nombre**: 'Importe'
 - **Contenido**: 
 - **Formula/s**: NULL
 - **Referencias**:  
-- **Fuente**: [[N_Caixa_CAD-Odoo#A]].
+- **Fuente**: [[N_Caixa_NZD-Odoo#A]].
 
 ### **D**
 - **Nombre**: 'LastUpdated'
@@ -51,7 +51,7 @@ Base de datos que contiene todos los movimientos bancarios en estado puro y, al 
 - **Contenido**: 
 - **Formula/s**:  =max(BD_Movimientos!B2:B)-1.
 - **Referencias**:
-- **Fuente**: [[N_Caixa_CAD-BD_Movimientos#B]]
+- **Fuente**: [[N_Caixa_NZD-BD_Movimientos#B]]
 
 
 

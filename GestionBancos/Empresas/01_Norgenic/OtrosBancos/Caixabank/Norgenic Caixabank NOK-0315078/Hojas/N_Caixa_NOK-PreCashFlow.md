@@ -13,7 +13,7 @@ Base de datos que contiene todos los movimientos bancarios en estado puro y, al 
 
 ---
 ## **Gid**
-1626582603
+471356051
 
 ## 📋 Descripción de las columnas
 
@@ -24,35 +24,35 @@ Base de datos que contiene todos los movimientos bancarios en estado puro y, al 
 - **Contenido**: UID formado mediante la concatenación de las distintas columnas del movimiento.
 - **Formula/s**: =QUERY(BD_Movimientos!A:M;"select I,J,K,sum(E),sum(M) where E is not null group by I,J,K label I 'Periodo', J 'CF in/out', K 'CF category', sum(E) 'Importe', sum(M) 'Importe €'";0)
 - **Referencias**: 
-- **Fuente**: [[N_Caixa_CAD-BD_Movimientos]]
+- **Fuente**: [[N_Caixa_NOK-BD_Movimientos]]
 
 ### **B**
 - **Nombre**: 'CF in/out'
 - **Contenido**: 
 - **Formula/s**: NULL
 - **Referencias**:  
-- **Fuente**: [[N_Caixa_CAD-PreCashFlow#A]].
+- **Fuente**: [[N_Caixa_NOK-PreCashFlow#A]].
 
 ### **C**
 - **Nombre**: 'CF category'
 - **Contenido**: 
 - **Formula/s**: NULL
 - **Referencias**: 
-- **Fuente**: [[N_Caixa_CAD-PreCashFlow#A]].
+- **Fuente**: [[N_Caixa_NOK-PreCashFlow#A]].
 
 ### **D**
 - **Nombre**: 'Importe'
 - **Contenido**: 
 - **Formula/s**: NULL
 - **Referencias**: 
-- **Fuente**: [[N_Caixa_CAD-PreCashFlow#A]].
+- **Fuente**: [[N_Caixa_NOK-PreCashFlow#A]].
 
 ### **E**
 - **Nombre**: 'Importe€'
 - **Contenido**: 
 - **Formula/s**: NULL
 - **Referencias**: 
-- **Fuente**: [[N_Caixa_CAD-PreCashFlow#A]].
+- **Fuente**: [[N_Caixa_NOK-PreCashFlow#A]].
 
 
 ---

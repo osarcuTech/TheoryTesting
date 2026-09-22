@@ -1,59 +1,59 @@
 ## **BD's**
 
-**NombreSpreadSheet**: Norgenic Caixabank GBP-0314871
-**SpreadSheet ID**: 1P1ULeZE04Eeu1Q4RvIKVgclEyjpSDooGVibiUukO9oU
+**NombreSpreadSheet**: Norgenic Caixabank NZD-0315430
+**SpreadSheet ID**: 1JnLMnSgzV_gcAqSD0NjWRF-77-Mq55iuJDIHDhbO4iQ
 **UbicaciónDrive**: https://drive.google.com/drive/folders/1Pkw1zaLo6Mi1gSK0TXw5o84IaOTZsEem
 
-[[N_Caixa_AUD-Pipeline]]
+[[N_Caixa_NZD-Pipeline]]
 
 ### **BDB**
 **Nombre**: 'BD_Banco'
 **Objetivo**: (DataLake?) Bases de datos que almacenan los movimientos bancarios y (opcionalmente) su relación con facturas.
 **Relaciones Pipeline**: 
 **Fuentes**: [[A1_ImportarMovimientos_GS]] y opcionalmente **ArchivadoDeMovimientos**
-**Gid**: ![[N_Caixa_AUD-BD_Banco#Gid]]
+**Gid**: ![[N_Caixa_NZD-BD_Banco#Gid]]
 
 ### **BD_Movimientos**
 **Nombre**: 'BD_Movimientos'
 **Objetivo**: (DataMart?) Funciona como GUI para [[H0_ControlHumano]] para la conciliación entre Movimientos y Facturas. Tambien funcióna como fuente de datos temporal para el Cashflow.
-**Relaciones Pipeline**: [[H0_ControlHumano]], [[N_Caixa_AUD-Pipeline#A1]], [[N_Caixa_AUD-Pipeline#A2]], [[N_Caixa_AUD-Pipeline#C0]] (Opcional)
-**Fuentes**: [[N_Caixa_AUD-Pipeline#A1]], y opcionalmente **ArchivadoDeMovimientos**
-**Gid**: ![[N_Caixa_AUD-BD_Movimientos#Gid]]
+**Relaciones Pipeline**: [[H0_ControlHumano]], [[N_Caixa_NZD-Pipeline#A1]], [[N_Caixa_NZD-Pipeline#A2]], [[N_Caixa_NZD-Pipeline#C0]] (Opcional)
+**Fuentes**: [[N_Caixa_NZD-Pipeline#A1]], y opcionalmente **ArchivadoDeMovimientos**
+**Gid**: ![[N_Caixa_NZD-BD_Movimientos#Gid]]
 
 ### **BD_AsigCostes**
 **Nombre**: 'AsigCostes'
-**Objetivo**: Clasificar los gastos para el Cashflow y para [[N_Caixa_AUD-Pipeline#C0]] (Opcional)
+**Objetivo**: Clasificar los gastos para el Cashflow y para [[N_Caixa_NZD-Pipeline#C0]] (Opcional)
 **Relaciones Pipeline**: 
 **Fuentes**:
-**Gid**: ![[N_Caixa_AUD-BD_AsigCostes#Gid]]
+**Gid**: ![[N_Caixa_NZD-BD_AsigCostes#Gid]]
 
 ### **BD_Facturas** (Opcional)
 **Nombre**: 'BD_Facturas'
 **Objetivo**: (DataLake?) Bases de datos que almacenan las facturas existentes.
-**Relaciones Pipeline**: [[N_Caixa_AUD-Pipeline#B2]]  (Opcional)
+**Relaciones Pipeline**: [[N_Caixa_NZD-Pipeline#B2]]  (Opcional)
 **Fuentes**:
-**Gid**: ![[N_Caixa_AUD-BD_Facturas#Gid]]
+**Gid**: ![[N_Caixa_NZD-BD_Facturas#Gid]]
 
 ### **BD_HistorialFacturas** (Opcional)
 **Nombre**: 'BD_HistorialFacturas'
 **Objetivo**: (DataMart?) Hoja de control del estado de las facturas.
 **Relaciones Pipeline**: 
 **Fuentes**:
-**Gid**: ![[N_Caixa_AUD-BD_HistorialFacturas#Gid]]
+**Gid**: ![[N_Caixa_NZD-BD_HistorialFacturas#Gid]]
 
 ### **PreCashflow**
 **Nombre**: 'PreCashflow2'
 **Objetivo**: (DataMart?) Hoja que agrupa la información relevante para el Cashflow.
-**Relaciones Pipeline**: [[N_Caixa_AUD-Pipeline#E1]]
+**Relaciones Pipeline**: [[N_Caixa_NZD-Pipeline#E1]]
 **Fuentes**:
-**Gid**: ![[N_Caixa_AUD-PreCashflow2#Gid]]
+**Gid**: ![[N_Caixa_NZD-PreCashflow2#Gid]]
 
 ### **Odoo**
 **Nombre**: 'Odoo'
 **Objetivo**: (DataMart?) Hoja con los movimientos pendientes de añadir a Odoo.
-**Relaciones Pipeline**: [[N_Caixa_AUD-Pipeline#D1]]
+**Relaciones Pipeline**: [[N_Caixa_NZD-Pipeline#D1]]
 **Fuentes**:
-**Gid**: ![[N_Caixa_AUD-Odoo#Gid]]
+**Gid**: ![[N_Caixa_NZD-Odoo#Gid]]
 
 
 
@@ -67,14 +67,14 @@
 **Objetivo**: Almacena el valor de last row de todas la hojas para que puedan extraerlo sin necesidad de tantos calculos.
 **Relaciones Pipeline**: 
 **Fuentes**:
-**Gid**: ![[N_Caixa_AUD-Rangos#Gid]]
+**Gid**: ![[N_Caixa_NZD-Rangos#Gid]]
 
 #### **ContextoHoja**
 **Nombre**: 'ContextoHoja'
 **Objetivo**: Base de datos con las formulas y/o ejemplos de datos de las 5 primeras filas (la primera es el header) de todas las hojas del SpreadSheet. Funciona a modo de repositorio de formulas para un LLM o para el usuario.
 **Relaciones Pipeline**: 
 **Fuentes**:
-**Gid**: ![[N_Caixa_AUD-ContextoHoja#Gid]]
+**Gid**: ![[N_Caixa_NZD-ContextoHoja#Gid]]
 
 ### **A2**
 
@@ -83,7 +83,7 @@
 **Objetivo**: Soporte en el append a la "BD_PatronesMovimientos".
 **Relaciones Pipeline**: 
 **Fuentes**:
-**Gid**: ![[N_Caixa_AUD-Form_AsigCostes#Gid]]
+**Gid**: ![[N_Caixa_NZD-Form_AsigCostes#Gid]]
 
 ### **C0**
 #### **PProveedores **
@@ -91,7 +91,7 @@
 **Objetivo**: Simplificación de "BD_PatronesMovimientos" con solo aquello que puede contener facturas. (Potencialmente eliminable modificando C0)
 **Relaciones Pipeline**: 
 **Fuentes**:
-**Gid**: ![[N_Caixa_AUD-PProveedores#Gid]]
+**Gid**: ![[N_Caixa_NZD-PProveedores#Gid]]
 
 ### **H0**
 
@@ -100,21 +100,21 @@
 **Objetivo**: Soporte visual para detectar las facturas pendientes de recibir/puntear.
 **Relaciones Pipeline**: 
 **Fuentes**:
-**Gid**: ![[N_Caixa_AUD-FacturasFaltantes#Gid]]
+**Gid**: ![[N_Caixa_NZD-FacturasFaltantes#Gid]]
 
 #### **Compr.Fras.Manual **
 **Nombre**: 'Compr.Fras.Manual'
 **Objetivo**: Funcionaba para comprobar que todas las facturas hubiesen sido correctamente enviadas a ViaTribut antes de tener **C1** que lo realiza indicando donde se encuentra cada una.
 **Relaciones Pipeline**: 
 **Fuentes**:
-**Gid**: ![[N_Caixa_AUD-Compr.Fras.Manual#Gid]]
+**Gid**: ![[N_Caixa_NZD-Compr.Fras.Manual#Gid]]
 
 ### **D0**
 
 #### **PreOdoo**
 **Nombre**: 
 **Objetivo**: Modifica la información relacionada a los movimientos para hacerlos exportables a **Odoo** mediante .
-**Relaciones Pipeline**: [[N_Caixa_AUD-Pipeline#D0]]
+**Relaciones Pipeline**: [[N_Caixa_NZD-Pipeline#D0]]
 **Fuentes**:
 **Gid**: NULL
 
@@ -127,18 +127,18 @@
 **Objetivo**: Control de los ingresos declarado por las distintas plataformas de pago.
 **Relaciones Pipeline**: 
 **Fuentes**:
-**Gid**: ![[N_Caixa_AUD-ResumenPlataformas#Gid]]
+**Gid**: ![[N_Caixa_NZD-ResumenPlataformas#Gid]]
 
 #### **Google **
 **Nombre**: 'Google'
 **Objetivo**: Control de las diferencias entre pagos y facturas de Google.
 **Relaciones Pipeline**: 
 **Fuentes**:
-**Gid**: ![[N_Caixa_AUD-Google#Gid]]
+**Gid**: ![[N_Caixa_NZD-Google#Gid]]
 
 #### **Nexmo **
 **Nombre**: 'Nexmo'
 **Objetivo**: Control de las diferencias entre pagos y facturas de Nexmo.
 **Relaciones Pipeline**: 
 **Fuentes**:
-**Gid**: ![[N_Caixa_AUD-Nexmo#Gid]]
+**Gid**: ![[N_Caixa_NZD-Nexmo#Gid]]

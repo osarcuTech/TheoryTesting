@@ -9,7 +9,7 @@ related:
 
 ## 🎯 Objetivo
 
-Listar las formulas de [[N_Caixa_AUD-BD_Movimientos]]
+Listar las formulas de [[N_Caixa_NOK-BD_Movimientos]]
 
 ---
 ## 📋 F1
@@ -28,7 +28,7 @@ Listar las formulas de [[N_Caixa_AUD-BD_Movimientos]]
 =ArrayFormula(BUSCARV($H$2:$H;BD_AsigCostes!$A$2:$C;3;0)) 
 
 ## 📋 F6
-=IFNA(INDICE(GOOGLEFINANCE("CURRENCY:AUDEUR";"price";B23);2;2);L22)
+=IFNA(INDICE(GOOGLEFINANCE("CURRENCY:NOKEUR";"price";B23);2;2);L22)
 
 ## 📋 F7
 Primera fila:

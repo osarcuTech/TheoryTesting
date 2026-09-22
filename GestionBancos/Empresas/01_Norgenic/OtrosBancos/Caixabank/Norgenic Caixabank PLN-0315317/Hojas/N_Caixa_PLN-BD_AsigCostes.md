@@ -13,7 +13,7 @@ Base de datos que contiene todos los movimientos bancarios en estado puro y, al 
 
 ---
 ## **Gid**
-1210763414
+1904402174
 
 ## 📋 Descripción de las columnas
 
@@ -23,7 +23,7 @@ Base de datos que contiene todos los movimientos bancarios en estado puro y, al 
 - **Contenido**: UID formado mediante la concatenación de las distintas columnas del movimiento.
 - **Formula/s**: =UNIQUE(BD_Movimientos!H:H)
 - **Referencias**: 
-- **Fuente**: [[N_Caixa_CAD-BD_Banco#H]]
+- **Fuente**: [[N_Caixa_PLN-BD_Banco#H]]
 
 ### **B**
 - **Nombre**: 'CF in/out'
