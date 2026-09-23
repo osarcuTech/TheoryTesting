@@ -1,10 +1,15 @@
-## **BD's**
+
+## Introducción
 
 **NombreSpreadSheet**: Norgenic Caixabank DKK-0315191
-**SpreadSheet ID**: 1wzX6YHW_RANujF1SGCgXWyfUxI-ImHozzJnra9H3bIU
 **UbicaciónDrive**: https://drive.google.com/drive/folders/1Pkw1zaLo6Mi1gSK0TXw5o84IaOTZsEem
 
+### **SS_ID**: 
+1wzX6YHW_RANujF1SGCgXWyfUxI-ImHozzJnra9H3bIU
+
 [[N_Caixa_DKK-Pipeline]]
+
+## **BD's**
 
 ### **BDB**
 **Nombre**: 'BD_Banco'

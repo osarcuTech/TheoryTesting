@@ -1,10 +1,15 @@
-## **BD's**
 
-**NombreSpreadSheet**: 'Norgenic Caixabank NOK-0315078'
-**SpreadSheet ID**: 11jy-BneAPEP2QXOZxRQPWVcoWniincG1Xmul4-Z9iiM
+## Introducción
+
+**NombreSpreadSheet**: Norgenic Caixabank AUD-0315656
 **UbicaciónDrive**: https://drive.google.com/drive/folders/1Pkw1zaLo6Mi1gSK0TXw5o84IaOTZsEem
 
-[[N_Caixa_NOK-Pipeline]]
+### **SS_ID**: 
+1us-02j4RbkchrZa4e7JTicsavz5ZeEE35zc3S9R5CrU
+
+[[N_Caixa_AUD-Pipeline]]
+
+## **BD's**
 
 ### **BDB**
 **Nombre**: 'BD_Banco'

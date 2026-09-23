@@ -1,10 +1,15 @@
-## **BD's**
+## Introducción
 
-**NombreSpreadSheet**: 'Norgenic Caixabank CAD-0315543'
-**SpreadSheet ID**: 1SdzMwKaGxpyywSKgUb4MSHulzMHWriRQaQUcll2yZ-I
+**NombreSpreadSheet**: Norgenic Caixabank CAD-0315543
 **UbicaciónDrive**: https://drive.google.com/drive/folders/1Pkw1zaLo6Mi1gSK0TXw5o84IaOTZsEem
 
+### **SS_ID**: 
+1SdzMwKaGxpyywSKgUb4MSHulzMHWriRQaQUcll2yZ-I
+
+
 [[N_Caixa_CAD-Pipeline]]
+
+## **BD's**
 
 ### **BDB**
 **Nombre**: 'BD_Banco'

@@ -1,10 +1,8 @@
 ## Introducción.
-El script se encuentra en la siguiente URL: https://script.google.com/u/0/home/projects/1FWzVALMtGyTiymSod7A6_axz6Q-UNK_xCs9KEkAB-z3_v0np92a_as0F/edit
+ScriptURL: : https://script.google.com/u/0/home/projects/1FWzVALMtGyTiymSod7A6_axz6Q-UNK_xCs9KEkAB-z3_v0np92a_as0F/edit
 
-let spreadsheet = ![[N_Caixa_AUD-AquitecturaBanco#SS_ID]];
-let idCarpetaDrive = "1pthVS8-nZHBeZwlvrMPXmwfHlaK2M6Ep"
-let filaInicioDatosImportados = 4
-let bdsheet = spreadsheet.getSheetById(![[N_Caixa_AUD-BD_Banco#Gid]]);
+- spreadsheet = ![[N_Caixa_AUD-AquitecturaBanco#SS_ID]];
+- bdsheet = spreadsheet.getSheetById(![[N_Caixa_AUD-BD_Banco#Gid]]);
 
 ## InputsVariables
 ```js

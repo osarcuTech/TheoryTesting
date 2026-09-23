@@ -1,10 +1,15 @@
+
+## Introducción
+
+**NombreSpreadSheet**: Norgenic Caixabank AUD-0315656
+**UbicaciónDrive**: https://drive.google.com/drive/folders/1Pkw1zaLo6Mi1gSK0TXw5o84IaOTZsEem
+
+### **SS_ID**: 
+1us-02j4RbkchrZa4e7JTicsavz5ZeEE35zc3S9R5CrU
+
+[[N_Caixa_AUD-Pipeline]]
+
 ## **BD's**
-
-**NombreSpreadSheet**: HistoricoMovimientosTaxgov_Caixabank-0089718
-**SpreadSheet ID**: 1T9-UEFyODMd5g_6jpbdiB7lBmAbMS-GV9PHm2hXMgHM
-**UbicaciónDrive**: https://drive.google.com/drive/folders/1ATvOvDKtPqfptE4LaIoxCrSEcLtPdqTz
-
-[[Taxgov_Caixabank_€-Pipeline]]
 
 ### **BDB**
 **Nombre**: 'BD_Banco'
