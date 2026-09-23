@@ -1,8 +1,13 @@
 ## Introducción.
+Fork de [[Plantilla-A1_ImportarMovimientos]]. No utilizable para [[Norgenic_BBVA_€-A1_ImportarMovimientos]] ya que està incompleto, faltan columnas por añadir y esto puede hacer fallar el map para aquellos con mas columnas que Caixabank. 
+
+Para ser funcional en todas los bancos se debe añadir lasColumn de los importados,  como integer manual. Nunca de la bd ya que puede estar expandida como en el caso de CaixabankNorgenic€.
+
 Cada banco aporta los siguiente datos distintos entre si.: 
     - spreadsheet= id del documento donde queremos hacer el upsert.
     - idCarpetaDrive= id de la carpeta donde se añaden los datos a importar
     - filaInicioDatosImportados = fila en la que empiezan los datos, tras el header, a comprobar para importar.
+    - columnaInicioDatosImportados = columna en la que empiezan los datos a comprobar para importar.
     - bdsheet = gid (id de la hoja donde queremos hacer el upsert) casi siempre sera git = 0
 
 filaInicioDatosImportados tendra los siguientes valores en función del banco:
@@ -11,14 +16,14 @@ filaInicioDatosImportados tendra los siguientes valores en función del banco:
   - Sabadell = 10
   - Revolut = 2
 
-
 ## InputsVariables (ejemplo)
 ```js
-let spreadsheet = SpreadsheetApp.openById("1us-02j4RbkchrZa4e7JTicsavz5ZeEE35zc3S9R5CrU");
-let idCarpetaDrive = "1pthVS8-nZHBeZwlvrMPXmwfHlaK2M6Ep"
-let filaInicioDatosImportados = 4
+let spreadsheet = SpreadsheetApp.openById("1wpnUpQF14bW9AA35ib62qhJNb4ZiQKtmupPaim3V6Uo");
+let idCarpetaDrive = "1T2yOXfjK7dbOB0Ig78yHquGb_82SPLK3"
+let filaInicioDatosImportados = 17
+let columnaInicioDatosImportados = 3
 let bdsheet = spreadsheet.getSheetById(0);
-let bdSheetRange = bdsheet.getRange(2,1,bdsheet.getLastRow()-1,bdsheet.getLastColumn()).getValues();
+let bdSheetRange = bdsheet.getRange(1,1,bdsheet.getLastRow(),bdsheet.getLastColumn()).getValues();
 ```
 
 
@@ -43,7 +48,7 @@ function getMovimientosBancarios(){
   var importadosLastRow = fileSheet.getLastRow();
   var importadosLastCol = fileSheet.getLastColumn();
 
-  var fileContent = fileSheet.getRange(filaInicioDatosImportados,1,importadosLastRow,importadosLastCol).getValues();
+  var fileContent = fileSheet.getRange(filaInicioDatosImportados,columnaInicioDatosImportados,importadosLastRow,importadosLastCol).getValues();
   //Logger.log(fileContent);
 
   // Invertimos el orden de los datos.
@@ -108,4 +113,5 @@ function onOpen(){
     Logger.log('Error al crear el menú: ' + e.message);
   }
 }
+
 ```

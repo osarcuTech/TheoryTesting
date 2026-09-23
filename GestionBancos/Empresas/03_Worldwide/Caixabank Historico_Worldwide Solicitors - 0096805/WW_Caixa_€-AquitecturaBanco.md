@@ -1,13 +1,13 @@
 
 ## Introducción
 
-**NombreSpreadSheet**: Norgenic Caixabank AUD-0315656
-**UbicaciónDrive**: https://drive.google.com/drive/folders/1Pkw1zaLo6Mi1gSK0TXw5o84IaOTZsEem
+**NombreSpreadSheet**: Caixabank Historico_Worldwide Solicitors - 0096805
+**UbicaciónDrive**: https://drive.google.com/drive/folders/1sgglsOiTAu4yk6OFUzXKGrZNQPMh2N43
 
 ### **SS_ID**: 
-1us-02j4RbkchrZa4e7JTicsavz5ZeEE35zc3S9R5CrU
+1BYzMPwRmZyaBawt6KcSyO-yH8jMnmnb_A2FWpf_b-Ic
 
-[[N_Caixa_AUD-Pipeline]]
+[[WW_Caixa_€-Pipeline]]
 
 ## **BD's**
 

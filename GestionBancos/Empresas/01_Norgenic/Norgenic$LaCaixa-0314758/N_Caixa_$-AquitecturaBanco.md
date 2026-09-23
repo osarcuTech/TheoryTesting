@@ -1,10 +1,15 @@
-## **BD's**
+
+## Introducción
 
 **NombreSpreadSheet**: Norgenic$LaCaixa-0314758
-**SpreadSheet ID**: 1UJXBub3M1dkQCVcTWPwLsvuyPPZK_CiyGXdaJ5mRmRs
-**UbicaciónDrive**: https://drive.google.com/drive/folders/1Pkw1zaLo6Mi1gSK0TXw5o84IaOTZsEem
+**UbicaciónDrive**: https://drive.google.com/drive/folders/1geu4FEONN-vpnWkKFXCtAlUW5I6Vg4YU
 
-[[N_Caixa_€-Pipeline]]
+### **SS_ID**: 
+1UJXBub3M1dkQCVcTWPwLsvuyPPZK_CiyGXdaJ5mRmRs
+
+[[N_Caixa_$-Pipeline]]
+
+## **BD's**
 
 ### **BDB**
 **Nombre**: BD_Banco [[N_Caixa_$-BD_Banco]]

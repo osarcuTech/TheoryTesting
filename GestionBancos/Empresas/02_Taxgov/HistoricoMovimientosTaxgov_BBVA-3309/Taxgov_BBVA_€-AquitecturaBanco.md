@@ -1,8 +1,10 @@
-## **BD's**
+## Introducción
 
 **NombreSpreadSheet**: HistoricoMovimientosTaxgov_BBVA-3309
-**SpreadSheet ID**: 1EthhE9LlF-kg4ho_JGJTzuu3y3gx1i4-fFrwVwQfTig
 **UbicaciónDrive**: https://drive.google.com/drive/folders/1ATvOvDKtPqfptE4LaIoxCrSEcLtPdqTz
+
+### **SS_ID**: 
+1EthhE9LlF-kg4ho_JGJTzuu3y3gx1i4-fFrwVwQfTig
 
 [[Taxgov_BBVA_€-Pipeline]]
 

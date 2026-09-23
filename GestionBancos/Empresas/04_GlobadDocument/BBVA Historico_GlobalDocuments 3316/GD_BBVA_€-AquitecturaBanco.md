@@ -1,8 +1,10 @@
-## **BD's**
+## Introducción
 
-**NombreSpreadSheet**: Norgenic€BBVA-ES1201828182440203071334
-**SpreadSheet ID**: 1wpnUpQF14bW9AA35ib62qhJNb4ZiQKtmupPaim3V6Uo
-**UbicaciónDrive**: https://drive.google.com/drive/folders/1WjVwCPA8dAVBzRLwhBBmWNWPy2r97h2l
+**NombreSpreadSheet**: BBVA Historico_GlobalDocuments 3316
+**UbicaciónDrive**: https://drive.google.com/drive/folders/1JSVrIftfzDu6cjXS73H2NNPI_vLL7d0Z
+
+### **SS_ID**: 
+12rVtsGCoki4YhALt-ogFuYOxLWvHfxqLJHL0gv7PMIo
 
 [[GD_BBVA_€-Pipeline]]
 

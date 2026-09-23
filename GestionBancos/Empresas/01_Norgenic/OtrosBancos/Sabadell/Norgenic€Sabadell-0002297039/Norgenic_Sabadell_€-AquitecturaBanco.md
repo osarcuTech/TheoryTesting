@@ -1,10 +1,15 @@
-## **BD's**
+
+## Introducción
 
 **NombreSpreadSheet**: Norgenic€Sabadell-0002297039
-**SpreadSheet ID**: 1-3qlwX6rnA6-vtgHzKBVNIChPu1Ee-4-l6amNT7OjXY
 **UbicaciónDrive**: https://drive.google.com/drive/folders/1GUtYW4xYDq9d8nBlTq6x_3LTdBUu5HGh
 
+### **SS_ID**: 
+1-3qlwX6rnA6-vtgHzKBVNIChPu1Ee-4-l6amNT7OjXY
+
 [[Norgenic_Sabadell_€-Pipeline]]
+
+## **BD's**
 
 ### **BDB**
 **Nombre**: 'BD_Banco'

@@ -1,11 +1,11 @@
 
 ## Introducción
 
-**NombreSpreadSheet**: Norgenic Caixabank AUD-0315656
+**NombreSpreadSheet**: Norgenic Caixabank NZD-0315430
 **UbicaciónDrive**: https://drive.google.com/drive/folders/1Pkw1zaLo6Mi1gSK0TXw5o84IaOTZsEem
 
 ### **SS_ID**: 
-1us-02j4RbkchrZa4e7JTicsavz5ZeEE35zc3S9R5CrU
+1JnLMnSgzV_gcAqSD0NjWRF-77-Mq55iuJDIHDhbO4iQ
 
 [[N_Caixa_AUD-Pipeline]]
 
