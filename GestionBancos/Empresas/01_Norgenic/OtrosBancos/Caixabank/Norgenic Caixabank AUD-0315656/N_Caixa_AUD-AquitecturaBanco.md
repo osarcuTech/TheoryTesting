@@ -1,10 +1,16 @@
-## **BD's**
+
+## Introducción
 
 **NombreSpreadSheet**: Norgenic Caixabank GBP-0314871
-**SpreadSheet ID**: 1P1ULeZE04Eeu1Q4RvIKVgclEyjpSDooGVibiUukO9oU
 **UbicaciónDrive**: https://drive.google.com/drive/folders/1Pkw1zaLo6Mi1gSK0TXw5o84IaOTZsEem
 
+### **SS_ID**: 
+1P1ULeZE04Eeu1Q4RvIKVgclEyjpSDooGVibiUukO9oU
+
+
 [[N_Caixa_AUD-Pipeline]]
+
+## **BD's**
 
 ### **BDB**
 **Nombre**: 'BD_Banco'
