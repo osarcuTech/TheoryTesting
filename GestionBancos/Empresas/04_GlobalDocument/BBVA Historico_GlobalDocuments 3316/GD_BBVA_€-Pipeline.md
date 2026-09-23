@@ -21,7 +21,7 @@ Condición: Obligatorio para todos los bancos.
 ### A1: 
 **TLDR**: Update de los historicos de Extractos bancarios
 **Objetivo**: Hacer un Upsert de los movimientos bancarios.
-**Processo**: Ejecutamos el wf/scrip encargado de hacer un processo ETL de los datos añadios a la carpeta a [[00_AquitecturaBancos#BDB]]. 
+**Processo**: Ejecutamos el workflow/scrip encargado de hacer un processo ETL de los datos añadios a la carpeta a [[00_AquitecturaBancos#BDB]]. 
 
 
 ### A2

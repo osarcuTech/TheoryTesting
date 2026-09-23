@@ -12,7 +12,7 @@
 **Nombre**: 'BD_Banco'
 **Objetivo**: (DataLake?) Bases de datos que almacenan los movimientos bancarios y (opcionalmente) su relación con facturas.
 **Relaciones Pipeline**: 
-**Fuentes**: [[A1_ImportarMovimientos_GS]] y opcionalmente **ArchivadoDeMovimientos**
+**Fuentes**: [[GD_BBVA_€-A1_ImportarMovimientos]] y opcionalmente **ArchivadoDeMovimientos**
 **Gid**: ![[GD_BBVA_€-BD_Banco#Gid]]
 
 ### **BD_Movimientos**

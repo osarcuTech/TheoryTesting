@@ -1,0 +1,1262 @@
+{
+  "name": "HistoricoMov.Banc.Taxgov",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": []
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1680,
+        280
+      ],
+      "id": "ac0fb44e-e18c-4f87-93f2-12a57f1fb625",
+      "name": "Edit FieldsImportados"
+    },
+    {
+      "parameters": {
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "UID",
+              "field2": "UID"
+            }
+          ]
+        },
+        "resolve": "preferInput1",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.compareDatasets",
+      "typeVersion": 2.3,
+      "position": [
+        1420,
+        240
+      ],
+      "id": "3e8396da-7206-44f2-9bc4-b224ff5e62d6",
+      "name": "Compare Datasets"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "zzvYSx0zfhl1rHWA",
+          "mode": "id"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        2120,
+        380
+      ],
+      "id": "4a6a28ea-cc2f-4444-95ad-e1794d91e319",
+      "name": "Execute Workflow PuntearFacturas",
+      "retryOnFail": true,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "nQyAge8xl3tEL2Mg",
+          "mode": "id"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        2120,
+        200
+      ],
+      "id": "e69729ae-b914-475d-b40e-9ff208644af2",
+      "name": "Execute Workflow AsignaciónDeGastos",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1EthhE9LlF-kg4ho_JGJTzuu3y3gx1i4-fFrwVwQfTig",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "UID": "={{ $json.UID }}",
+            "FechaOPERACIÓN": "={{ $('Campos Importado').item.json.Fecha }}",
+            "FechaVALOR": "={{ $('Campos Importado').item.json.FechaVALOR }}",
+            "CÓDIGO": "={{ $('Campos Importado').item.json['CÓDIGO'] }}",
+            "CONCEPTO": "={{ $('Campos Importado').item.json.CONCEPTO }}",
+            "OBSERVACIONES": "={{ $('Campos Importado').item.json.OBSERVACIONES }}",
+            "IMPORTE": "={{ $('Campos Importado').item.json.IMPORTE }}",
+            "SALDO": "={{ $('Campos Importado').item.json.SALDO }}",
+            "DIVISA": "={{ $('Campos Importado').item.json.DIVISA }}",
+            "OFICINA": "={{ $('Campos Importado').item.json.OFICINA }}",
+            "REMESA": "={{ $('Campos Importado').item.json.REMESA }}",
+            "BENEFICIARIO/ORDENANTE": "={{ $('Campos Importado').item.json['BENEFICIARIO/ORDENANTE'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "UID",
+              "displayName": "UID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "FechaOPERACIÓN",
+              "displayName": "FechaOPERACIÓN",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "FechaVALOR",
+              "displayName": "FechaVALOR",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CÓDIGO",
+              "displayName": "CÓDIGO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CONCEPTO",
+              "displayName": "CONCEPTO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "BENEFICIARIO/ORDENANTE",
+              "displayName": "BENEFICIARIO/ORDENANTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "OBSERVACIONES",
+              "displayName": "OBSERVACIONES",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "IMPORTE",
+              "displayName": "IMPORTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "SALDO",
+              "displayName": "SALDO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DIVISA",
+              "displayName": "DIVISA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "OFICINA",
+              "displayName": "OFICINA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "REMESA",
+              "displayName": "REMESA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Factura",
+              "displayName": "Factura",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1900,
+        280
+      ],
+      "id": "7b0acbcf-1ab5-43b3-a358-8f77e3757049",
+      "name": "Google Sheets Append Historico",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hZcBoGBnLwH882Qs",
+          "name": "Google Sheets account Oscar"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "https://drive.google.com/drive/folders/1WEzwTnLXE0rCC9o644YhwJXpx5dyMONJ",
+          "mode": "url"
+        },
+        "event": "fileCreated",
+        "options": {
+          "fileType": "application/vnd.google-apps.spreadsheet"
+        }
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        -140,
+        180
+      ],
+      "id": "c989e9d0-88fe-4141-86b6-18854f1ba624",
+      "name": "Google Drive Trigger1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        80,
+        180
+      ],
+      "id": "667bc86e-979b-422a-bff1-22a994409701",
+      "name": "Google Drive2",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1EthhE9LlF-kg4ho_JGJTzuu3y3gx1i4-fFrwVwQfTig",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        360,
+        180
+      ],
+      "id": "b469028f-0b40-4a87-b5ab-64f43df94b0f",
+      "name": "Google Sheets Historico4",
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hZcBoGBnLwH882Qs",
+          "name": "Google Sheets account Oscar"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// El input 'items' contiene las filas del Google Sheet\nconst reversedItems = items.reverse();\nreturn reversedItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        560,
+        420
+      ],
+      "id": "638441a8-a19e-4bd1-97ec-68d8b2b879ab",
+      "name": "Code2"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Google Drive2').item.json.id }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Historico",
+          "mode": "name"
+        },
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "specifyRange",
+              "headerRow": 16,
+              "firstDataRow": 17
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        360,
+        420
+      ],
+      "id": "26f5a6a1-9e89-4886-b553-bdfcb0bf95a8",
+      "name": "Google Sheets Importado1",
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hZcBoGBnLwH882Qs",
+          "name": "Google Sheets account Oscar"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "deleteFile",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        360,
+        600
+      ],
+      "id": "260bf6d5-da9d-4456-8266-ed02e51a9ba2",
+      "name": "Google Drive3",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "209cae15-912b-4da1-81e9-34fbebaedfc7",
+              "name": "UID",
+              "value": "={{ $json.UID.trim() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        780,
+        180
+      ],
+      "id": "23d504fe-aa08-44a9-818e-0e1d4dbad0d2",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "55210d33-54dc-4d05-b185-80365c64bfed",
+              "name": "UID",
+              "value": "={{ ($json.FechaVALOR.trim()+\";\"+$json.CÓDIGO.trim()+\";\"+$json.CONCEPTO.trim().replaceAll(\" \",\"_\")+\";\"+$json.OBSERVACIONES.trim()+\";\"+$json.IMPORTE.toString().trim()+\";\"+$json.SALDO.toString().trim()+\";\"+$json.DIVISA.trim()+\";\"+$json.OFICINA.trim()) }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        960,
+        420
+      ],
+      "id": "f1bc061b-a11b-498c-8cd4-3e5ae98423e4",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4d6f3a71-cfeb-426a-bf34-1cf2ec143597",
+              "name": "UID",
+              "value": "={{ $json.UID.replaceAll(\" \",\"_\").replaceAll(\"*\",\"\").trim() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1180,
+        420
+      ],
+      "id": "4ed87ac6-0096-4433-bf2b-f0d7ffda0575",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "209cae15-912b-4da1-81e9-34fbebaedfc7",
+              "name": "UID",
+              "value": "={{ $json.UID.trim() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        960,
+        180
+      ],
+      "id": "c5c12b30-4ed4-4eb3-845e-e878184f65ac",
+      "name": "Edit Fields4"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        120,
+        -420
+      ],
+      "id": "b00fa30b-2264-4903-8391-9d55926a726d",
+      "name": "Google Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// El input 'items' contiene las filas del Google Sheet\nconst reversedItems = items.reverse();\nreturn reversedItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        740,
+        -420
+      ],
+      "id": "d78b002e-658e-48c1-be4e-07472eb7d6cc",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Google Drive').item.json.id }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Historico",
+          "mode": "name"
+        },
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "specifyRange",
+              "headerRow": 16,
+              "firstDataRow": 17
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        540,
+        -420
+      ],
+      "id": "6e5cded3-1c38-48b0-a3e1-7839cdd831cb",
+      "name": "Google Sheets Importado",
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hZcBoGBnLwH882Qs",
+          "name": "Google Sheets account Oscar"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c8e5d263-bb94-48ee-9b22-ceff140acb5f",
+              "name": "=Fecha",
+              "value": "={{ $ifEmpty($json['F. OPERACIÓN'],$json['F. CONTABLE']).trim().replaceAll(\" \",\"_\") }}",
+              "type": "string"
+            },
+            {
+              "id": "4cc18608-f7d8-4f1e-bab7-4c974a6fdcc8",
+              "name": "=FechaVALOR",
+              "value": "={{ $json['F. VALOR'].trim().replaceAll(\" \",\"_\") }}",
+              "type": "string"
+            },
+            {
+              "id": "4ce4b1d2-e485-46de-8472-5666ec745e3f",
+              "name": "CÓDIGO",
+              "value": "={{ $json['CÓDIGO'].trim().replaceAll(\" \",\"_\").toNumber().toString() }}",
+              "type": "string"
+            },
+            {
+              "id": "e90bd367-0fb2-4046-a7cc-6e25ad90ab11",
+              "name": "CONCEPTO",
+              "value": "={{ $json.CONCEPTO.trim().replaceAll(\" \",\"_\") }}",
+              "type": "string"
+            },
+            {
+              "id": "a3bbc57f-62bd-494f-b4a9-44e1f602af6f",
+              "name": "BENEFICIARIO/ORDENANTE",
+              "value": "={{ $json['BENEFICIARIO/ORDENANTE'].trim().replaceAll(\" \",\"_\") }}",
+              "type": "string"
+            },
+            {
+              "id": "e547f7d8-ad9d-4b76-a727-a46fe13127b8",
+              "name": "OBSERVACIONES",
+              "value": "={{ $json.OBSERVACIONES.trim().replaceAll(\" \",\"_\") }}",
+              "type": "string"
+            },
+            {
+              "id": "13addcf0-3685-4456-b8a8-06086311003a",
+              "name": "IMPORTE",
+              "value": "={{ $json.IMPORTE.toString().trim().replaceAll(\" \",\"_\").replaceAll('.',',') }}",
+              "type": "number"
+            },
+            {
+              "id": "f3201fdc-fe75-4abd-b334-0a01f5ed0054",
+              "name": "SALDO",
+              "value": "={{ $json.SALDO.format('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: false }).trim().replaceAll(\" \",\"_\").replaceAll('.',',') }}\n",
+              "type": "number"
+            },
+            {
+              "id": "109bff50-31a7-48ac-8c61-bd13a820f323",
+              "name": "DIVISA",
+              "value": "={{ $json.DIVISA.trim().replaceAll(\" \",\"_\") }}",
+              "type": "string"
+            },
+            {
+              "id": "63a21bd0-932c-4988-8623-6e57a0dac278",
+              "name": "OFICINA",
+              "value": "={{ $json.OFICINA.toString().trim().replaceAll(\" \",\"_\") }}",
+              "type": "string"
+            },
+            {
+              "id": "7424671f-a79e-48b0-bc4d-29080cf77595",
+              "name": "REMESA",
+              "value": "={{ $json.REMESA.trim().replaceAll(\" \",\"_\") }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {
+          "ignoreConversionErrors": true
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        960,
+        -420
+      ],
+      "id": "f06ab9a6-045f-4e02-82f3-f1a109e80ad3",
+      "name": "Campos Importado4"
+    },
+    {
+      "parameters": {
+        "operation": "deleteFile",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        360,
+        -200
+      ],
+      "id": "5842ab56-dfe6-4a2b-8131-abc920eac923",
+      "name": "Google Drive4",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "55210d33-54dc-4d05-b185-80365c64bfed",
+              "name": "UID",
+              "value": "={{ ($json.FechaVALOR.trim()+\";\"+$json.CÓDIGO.trim()+\";\"+$json.CONCEPTO.trim().replaceAll(\" \",\"_\")+\";\"+$json.OBSERVACIONES.trim()+\";\"+$json.IMPORTE.toString().trim()+\";\"+$json.SALDO.toString().trim()+\";\"+$json.DIVISA.trim()+\";\"+$json.OFICINA.trim()) }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1140,
+        -420
+      ],
+      "id": "8f34ba76-5c8d-4214-be0c-5a9c29465d13",
+      "name": "Edit Fields6"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4d6f3a71-cfeb-426a-bf34-1cf2ec143597",
+              "name": "UID_Importados",
+              "value": "={{ $json.UID.replaceAll(\" \",\"_\").replaceAll(\"*\",\"\").trim() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1360,
+        -420
+      ],
+      "id": "0b756f84-f978-4e91-8471-44e814b7d5e2",
+      "name": "Edit Fields7"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1EthhE9LlF-kg4ho_JGJTzuu3y3gx1i4-fFrwVwQfTig",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "39640831",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "UID_Importados": "={{ $json.UID_Importados }}"
+          },
+          "matchingColumns": [
+            "UID_Importados"
+          ],
+          "schema": [
+            {
+              "id": "UID_Importados",
+              "displayName": "UID_Importados",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1580,
+        -420
+      ],
+      "id": "6a3abbfb-7e17-498b-a914-b5b876325bf2",
+      "name": "Google Sheets Append Historico1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hZcBoGBnLwH882Qs",
+          "name": "Google Sheets account Oscar"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "https://drive.google.com/drive/folders/1WEzwTnLXE0rCC9o644YhwJXpx5dyMONJ",
+          "mode": "url"
+        },
+        "event": "fileCreated",
+        "options": {
+          "fileType": "application/vnd.google-apps.spreadsheet"
+        }
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        -100,
+        -420
+      ],
+      "id": "b7fb267b-ebc8-4d9f-a918-bb7e076439d1",
+      "name": "Google Drive Trigger PruebaDiferencia de datos",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "644e7ca5-6c68-4b6f-91cd-d4f0d298fee4",
+              "name": "row_number",
+              "value": "={{ $json.row_number }}",
+              "type": "number"
+            },
+            {
+              "id": "5167ed2d-ada3-4aa0-89ea-fb4181d3feb1",
+              "name": "UID",
+              "value": "={{ $json.UID }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        560,
+        180
+      ],
+      "id": "9cdb07ed-4b17-409f-b2ce-036b60aa8bfd",
+      "name": "UID's_Historicos"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c8e5d263-bb94-48ee-9b22-ceff140acb5f",
+              "name": "=Fecha",
+              "value": "={{ $ifEmpty($json['F. OPERACIÓN'],$json['F. CONTABLE']).trim().replaceAll(\" \",\"_\") }}",
+              "type": "string"
+            },
+            {
+              "id": "4cc18608-f7d8-4f1e-bab7-4c974a6fdcc8",
+              "name": "=FechaVALOR",
+              "value": "={{ $json['F. VALOR'].trim().replaceAll(\" \",\"_\") }}",
+              "type": "string"
+            },
+            {
+              "id": "4ce4b1d2-e485-46de-8472-5666ec745e3f",
+              "name": "CÓDIGO",
+              "value": "={{ $json['CÓDIGO'].trim().replaceAll(\" \",\"_\").toNumber().toString() }}",
+              "type": "string"
+            },
+            {
+              "id": "e90bd367-0fb2-4046-a7cc-6e25ad90ab11",
+              "name": "CONCEPTO",
+              "value": "={{ $json.CONCEPTO.trim().replaceAll(\" \",\"_\") }}",
+              "type": "string"
+            },
+            {
+              "id": "a3bbc57f-62bd-494f-b4a9-44e1f602af6f",
+              "name": "BENEFICIARIO/ORDENANTE",
+              "value": "={{ $json['BENEFICIARIO/ORDENANTE'].trim().replaceAll(\" \",\"_\") }}",
+              "type": "string"
+            },
+            {
+              "id": "e547f7d8-ad9d-4b76-a727-a46fe13127b8",
+              "name": "OBSERVACIONES",
+              "value": "={{ $json.OBSERVACIONES.trim().replaceAll(\" \",\"_\") }}",
+              "type": "string"
+            },
+            {
+              "id": "13addcf0-3685-4456-b8a8-06086311003a",
+              "name": "IMPORTE",
+              "value": "={{ $json.IMPORTE.toString().trim().replaceAll(\" \",\"_\").replaceAll('.',',') }}",
+              "type": "number"
+            },
+            {
+              "id": "f3201fdc-fe75-4abd-b334-0a01f5ed0054",
+              "name": "SALDO",
+              "value": "={{ $json.SALDO.format('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: false }).trim().replaceAll(\" \",\"_\").replaceAll('.',',') }}",
+              "type": "number"
+            },
+            {
+              "id": "109bff50-31a7-48ac-8c61-bd13a820f323",
+              "name": "DIVISA",
+              "value": "={{ $json.DIVISA.trim().replaceAll(\" \",\"_\") }}",
+              "type": "string"
+            },
+            {
+              "id": "63a21bd0-932c-4988-8623-6e57a0dac278",
+              "name": "OFICINA",
+              "value": "={{ $json.OFICINA.toString().trim().replaceAll(\" \",\"_\") }}",
+              "type": "string"
+            },
+            {
+              "id": "7424671f-a79e-48b0-bc4d-29080cf77595",
+              "name": "REMESA",
+              "value": "={{ $json.REMESA.trim().replaceAll(\" \",\"_\") }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {
+          "ignoreConversionErrors": true
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        780,
+        420
+      ],
+      "id": "20fd942c-f828-4e49-91c5-0d611d7148f4",
+      "name": "Campos Importado"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Edit FieldsImportados": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets Append Historico",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compare Datasets": {
+      "main": [
+        [],
+        [],
+        [],
+        [
+          {
+            "node": "Edit FieldsImportados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Append Historico": {
+      "main": [
+        [
+          {
+            "node": "Execute Workflow PuntearFacturas",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Execute Workflow AsignaciónDeGastos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Google Drive2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive2": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets Historico4",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Google Sheets Importado1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Google Drive3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Historico4": {
+      "main": [
+        [
+          {
+            "node": "UID's_Historicos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code2": {
+      "main": [
+        [
+          {
+            "node": "Campos Importado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Importado1": {
+      "main": [
+        [
+          {
+            "node": "Code2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Compare Datasets",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Edit Fields4": {
+      "main": [
+        [
+          {
+            "node": "Compare Datasets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Google Drive4",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Google Sheets Importado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Campos Importado4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Importado": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Campos Importado4": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields6": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields7": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets Append Historico1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Trigger PruebaDiferencia de datos": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "UID's_Historicos": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Campos Importado": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 60
+  },
+  "versionId": "d84dfe55-8518-4468-826c-31fb92d2da29",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "921b42ac40713cf8e80903373553a75b6a7dc1f7ad27fcbec19d4a8582a592ca"
+  },
+  "id": "DTUO0T3lEuQOl3MD",
+  "tags": [
+    {
+      "createdAt": "2025-03-28T08:09:12.598Z",
+      "updatedAt": "2025-03-28T08:09:12.598Z",
+      "id": "4KqrBzlhcE2xFL6c",
+      "name": "Conciliación Bancaria"
+    },
+    {
+      "createdAt": "2025-05-14T11:53:08.676Z",
+      "updatedAt": "2025-05-14T11:53:08.676Z",
+      "id": "FesrZDpbzWIr5vfd",
+      "name": "Taxgov"
+    }
+  ]
+}
