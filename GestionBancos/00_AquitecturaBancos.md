@@ -1,28 +1,48 @@
-# **Arquitectura Bancos Norgenic**
-Esta es una hoja que recoge la estructura común de todos los bancos de Norgenic así como su lista actual de bancos.
+# **Arquitectura Bancos**
+Esta es una hoja que recoge la estructura común de todos los bancos de del grupo de empresas y su lista actual de cuentas.
 Bancos:
 
 ## **ListaBancos**
+
+### Norgenic
 - **Caixabank**:
-    - **EUR**: [[N_Caixa_€-Aquitectura]]
-    - **USD**: [[N_Caixa_$-Aquitectura]]
-    - **AUD**: [[N_Caixa_AUD-Aquitectura]]
-    - **CAD**: [[N_Caixa_CAD-Aquitectura]]
-    - **CHF**: [[N_Caixa_CHF-Aquitectura]]
-    - **DKK**: [[N_Caixa_DKK-Aquitectura]]
-    - **GBP**: [[N_Caixa_£-Aquitectura]]
-    - **NOK**: [[N_Caixa_NOK-Aquitectura]]
-    - **NZD**: [[N_Caixa_NZD-Aquitectura]]
-    - **PLN**: [[N_Caixa_PLN-Aquitectura]]
-    - **SEK**: [[N_Caixa_SEK-Aquitectura]]
+    - **EUR**: [[N_Caixa_€-AquitecturaBanco]]
+    - **USD**: [[N_Caixa_$-AquitecturaBanco]]
+    - **AUD**: [[N_Caixa_AUD-AquitecturaBanco]]
+    - **CAD**: [[N_Caixa_CAD-AquitecturaBanco]]
+    - **CHF**: [[N_Caixa_CHF-AquitecturaBanco]]
+    - **DKK**: [[N_Caixa_DKK-AquitecturaBanco]]
+    - **GBP**: [[N_Caixa_£-AquitecturaBanco]]
+    - **NOK**: [[N_Caixa_NOK-AquitecturaBanco]]
+    - **NZD**: [[N_Caixa_NZD-AquitecturaBanco]]
+    - **PLN**: [[N_Caixa_PLN-AquitecturaBanco]]
+    - **SEK**: [[N_Caixa_SEK-AquitecturaBanco]]
 - **BBVA**:
-    - **EUR**: [[N_BBVA_€-Aquitectura]]
+    - **EUR**: [[N_BBVA_€-AquitecturaBanco]]
 - **Sabadell**:
-    - **EUR**: [[N_Sabadell_€-Aquitectura]]
+    - **EUR**: [[N_Sabadell_€-AquitecturaBanco]]
 - **Revolut**:
-    - **EUR**: [[N_Revolut-Aquitectura]]
-    - **USD**: [[N_Revolut-Aquitectura]]
-    - **AUD**: [[N_Revolut-Aquitectura]]
+    - **EUR**: [[N_Revolut-AquitecturaBanco]]
+    - **USD**: [[N_Revolut-AquitecturaBanco]]
+    - **AUD**: [[N_Revolut-AquitecturaBanco]]
+
+### Taxgov
+- **Caixabank**:
+    - **EUR**: [[T_Caixa_€-AquitecturaBanco]]
+- **BBVA**:
+    - **EUR**: [[T_BBVA_€-AquitecturaBanco]]
+
+### Worldwide
+- **Caixabank**:
+    - **EUR**: [[WW_Caixa_€-AquitecturaBanco]]
+- **BBVA**:
+    - **EUR**: [[WW_BBVA_€-AquitecturaBanco]]
+
+### Global Document
+- **Caixabank**:
+    - **EUR**: [[GD_Caixa_€-AquitecturaBanco]]
+- **BBVA**:
+    - **EUR**: [[GD_BBVA_€-AquitecturaBanco]]
 
 
 ## **Arquitectura de Bancos**
@@ -32,13 +52,13 @@ Bancos:
 #### **BDB**
 **Objetivo**: (DataLake?) Bases de datos que almacenan los movimientos bancarios y (opcionalmente) su relación con facturas.
 **Relaciones Pipeline**: 
-**Fuentes**: [[A1_ImportarMovimientos_GS]] y opcionalmente **ArchivadoDeMovimientos**
+**Fuentes**: [[Plantilla-A1_ImportarMovimientos]] y opcionalmente **ArchivadoDeMovimientos**
 **Gid**:
 
 #### **BD_Movimientos**
 **Objetivo**: (DataMart?) Funciona como GUI para [[H0_ControlHumano]] para la conciliación entre Movimientos y Facturas. Tambien funcióna como fuente de datos temporal para el Cashflow.
 **Relaciones Pipeline**: [[H0_ControlHumano]], [[N_Caixa_€-Pipeline#A1]], [[N_Caixa_€-Pipeline#A2]], [[N_Caixa_€-Pipeline#C0]] (Opcional)
-**Fuentes**: [[A1_ImportarMovimientos_GS]], y opcionalmente **ArchivadoDeMovimientos**
+**Fuentes**: [[Plantilla-A1_ImportarMovimientos]], y opcionalmente **ArchivadoDeMovimientos**
 **Gid**:
 
 #### **BD_PatronesMovimientos**
