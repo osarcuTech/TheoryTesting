@@ -1,7 +1,13 @@
-## Introducción
+## GestiónBancaria
 
-**NombreSpreadSheet**: BBVA Historico_GlobalDocuments 3316
-**UbicaciónDrive**: https://drive.google.com/drive/folders/1JSVrIftfzDu6cjXS73H2NNPI_vLL7d0Z
+### **NombreSpreadSheet**: 
+BBVA Historico_GlobalDocuments 3316
+
+### **CarpetaHistorico**:
+ ![[GD_BBVA_€-AquitecturaArchivos#A2_Intput]]
+
+### **CarpetaImportados**:
+ ![[GD_BBVA_€-AquitecturaArchivos#A1_Intput]]
 
 ### **SS_ID**: 
 12rVtsGCoki4YhALt-ogFuYOxLWvHfxqLJHL0gv7PMIo

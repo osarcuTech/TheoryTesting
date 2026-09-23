@@ -2,7 +2,6 @@
 # Plantilla Pipeline.
 **Objetivo**: Mostrar el flujo tipico de datos de la gestión de todo banco de este grupo de empresas. 
 **Aviso**: Cada empresa y banco variara ligeramente su arquitectura y su pipeline por lo que, tras aberiguar la empresa y banco que estamos gestionando, consultaremos su versión particular para adaptar el proceso a sus herramientas. [[00_Empresas&Bancos]] [[00_AquitecturaBancos]].
-    - Ejemplo: Si es **Norgenic** **Caixabank** **EUR** usaremos la arquitectura de [[GD_BBVA_€-Aquitectura]] con sus **Scripts** y **Workflows** correspondientes.
 **Herramientas prioritarias**: La prioridad de ejcución es **AppScripts**-->**n8n**-->**Python**-->**Manual** (Si no hay uno saltamos al siguiente).
 
 
@@ -14,21 +13,21 @@ Condición: Obligatorio para todos los bancos.
 **Objetivo**: Poner el documento a disposición de A1.
 **Processo**:
 - El encargado nos envia por iniciativa propia o petición nuestra un xlsx/csv de un extracto bancario.
-- Detectamos la empresa a la que corresponde. [[00_Empresas&Bancos]]
-- Detectamos el banco que corresponde.
-- Subimos el archivo a la carpeta correspondiente.
+- Detectamos la empresa a la que corresponde. [[00_Empresas&Bancos]].
+- Detectamos el banco que corresponde. Todos los archivos contienen en su nombre o en su interior los últimos 4 digitos de la targeta. Se usa esto y/o el contenido (si el nombre del arxivo es incorrecto) para detectar el match del "Importado" con el [[GD_BBVA_€-AquitecturaBanco#NombreSpreadSheet|Historico]]
+- Subimos el archivo a la carpeta correspondiente [[GD_BBVA_€-AquitecturaBanco#CarpetaImportados]].
 
 ### A1: 
 **TLDR**: Update de los historicos de Extractos bancarios
 **Objetivo**: Hacer un Upsert de los movimientos bancarios.
-**Processo**: Ejecutamos el workflow/scrip encargado de hacer un processo ETL de los datos añadios a la carpeta a [[00_AquitecturaBancos#BDB]]. 
+**Processo**: Ejecutamos el workflow/scrip encargado de hacer un processo ETL de los datos añadios a la carpeta a [[GD_BBVA_€-AquitecturaBanco#CarpetaImportados]]. 
 
 
 ### A2
 **TLDR**: Enriquecimiento de Movimientos 
-**Objetivo**: 
-**Processo**: Classificación de los movimientos por su relación con el cashflow y, opcionalmente, con otra información relacinada da la facturación.
-- 
+**Objetivo**: Classificación de los movimientos por su relación con el cashflow y, opcionalmente, con otra información relacinada da la facturación.
+**Processo**: 
+    - Formulas: [[GD_BBVA_€-BD_Movimientos]], [[GD_BBVA_€-BD_AsigCostes]]
 
 ## B
 Condición: "Opcional" = Solo obligatorio para los bancos con facturas de proveedores.
@@ -36,12 +35,17 @@ Condición: "Opcional" = Solo obligatorio para los bancos con facturas de provee
 ### B0
 **TLDR**:  Recepción de Facturas
 **Objetivo**: Poner las facturas a disposición de B1 o B2.
-**Processo**: Captura de las facturas no obtenidas automaticametne por B1 (ej: Llegan por GoogleChat; falla el trigger de B1; se han de volver a processar por algún error en B1/B2) para ponerlas en la carpeta utilizada por B1 (si hay varias empresas) o (B2) para la empresa correspondiente (Si estamos seguros de que no hay mezclas). La carpeta en questión es https://drive.google.com/drive/folders/17WR7hfIet-hcpFrjHW0agwHsC8KnM1Sn "Facturación".
+**Processo**: 
+    - Captura manual de las facturas no obtenidas automaticametne por B1 (ej: Llegan por GoogleChat; falla el trigger de B1; se han de volver a processar por algún error en B1/B2) para ponerlas en la carpeta utilizada por B1 (si hay varias empresas) o (B2) para la empresa correspondiente (Si estamos seguros de que no hay mezclas). 
+    - Carpeta input B1: https://drive.google.com/drive/folders/17WR7hfIet-hcpFrjHW0agwHsC8KnM1Sn "Facturación".
+    - Carpeta input B2: Manual "Facturación".
 
 ### B1
 **TLDR**:  Clasificación por empresa
 **Objetivo**: Classificar las facturas del grupo por empresa y enviarlas a la carpeta correspondiente para B2.
-**Processo**: [[wf_B1_GmailMetralleta_Context]]
+**Processo**: 
+    - Workflow: [[wf_B1_GmailMetralleta_Context]]
+    - Carpeta Output: [[wf_B1_GmailMetralleta_Context]]
 
 
 ### B2
