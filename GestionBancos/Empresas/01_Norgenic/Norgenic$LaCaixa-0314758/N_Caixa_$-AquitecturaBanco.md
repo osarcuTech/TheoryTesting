@@ -1,8 +1,13 @@
+## GestiónBancaria
 
-## Introducción
+### **NombreSpreadSheet**: 
+BBVA Historico_GlobalDocuments 3316
 
-**NombreSpreadSheet**: Norgenic$LaCaixa-0314758
-**UbicaciónDrive**: https://drive.google.com/drive/folders/1geu4FEONN-vpnWkKFXCtAlUW5I6Vg4YU
+### **CarpetaHistorico**:
+ ![[N_Caixa_-AquitecturaArchivos#A2_Intput]]
+
+### **CarpetaImportados**:
+ ![[N_Caixa_-AquitecturaArchivos#A1_Intput]]
 
 ### **SS_ID**: 
 1UJXBub3M1dkQCVcTWPwLsvuyPPZK_CiyGXdaJ5mRmRs

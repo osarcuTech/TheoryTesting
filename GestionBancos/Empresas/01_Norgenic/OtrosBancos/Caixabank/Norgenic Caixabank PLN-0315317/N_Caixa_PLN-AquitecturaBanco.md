@@ -1,8 +1,13 @@
+## GestiónBancaria
 
-## Introducción
+### **NombreSpreadSheet**: 
+BBVA Historico_GlobalDocuments 3316
 
-**NombreSpreadSheet**: Norgenic Caixabank PLN-0315317
-**UbicaciónDrive**: https://drive.google.com/drive/folders/1Pkw1zaLo6Mi1gSK0TXw5o84IaOTZsEem
+### **CarpetaHistorico**:
+ ![[N_Caixa_PLN-AquitecturaArchivos#A2_Intput]]
+
+### **CarpetaImportados**:
+ ![[N_Caixa_PLN-AquitecturaArchivos#A1_Intput]]
 
 ### **SS_ID**: 
 1VZCd6dUUpvCo4IVEqxmrc0oSBeAnim-7JwpTb3QlYYs

@@ -1,7 +1,13 @@
-## Introducción
+## GestiónBancaria
 
-**NombreSpreadSheet**: Norgenic€BBVA-ES1201828182440203071334
-**UbicaciónDrive**: https://drive.google.com/drive/folders/1WjVwCPA8dAVBzRLwhBBmWNWPy2r97h2l
+### **NombreSpreadSheet**: 
+BBVA Historico_GlobalDocuments 3316
+
+### **CarpetaHistorico**:
+ ![[Norgenic_BBVA_€-AquitecturaArchivos#A2_Intput]]
+
+### **CarpetaImportados**:
+ ![[Norgenic_BBVA_€-AquitecturaArchivos#A1_Intput]]
 
 ### **SS_ID**: 
 1wpnUpQF14bW9AA35ib62qhJNb4ZiQKtmupPaim3V6Uo

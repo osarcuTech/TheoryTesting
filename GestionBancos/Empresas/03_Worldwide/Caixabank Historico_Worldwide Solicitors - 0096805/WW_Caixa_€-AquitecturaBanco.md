@@ -1,8 +1,13 @@
+## GestiónBancaria
 
-## Introducción
+### **NombreSpreadSheet**: 
+BBVA Historico_GlobalDocuments 3316
 
-**NombreSpreadSheet**: Caixabank Historico_Worldwide Solicitors - 0096805
-**UbicaciónDrive**: https://drive.google.com/drive/folders/1sgglsOiTAu4yk6OFUzXKGrZNQPMh2N43
+### **CarpetaHistorico**:
+ ![[WW_Caixa_€-AquitecturaArchivos#A2_Intput]]
+
+### **CarpetaImportados**:
+ ![[WW_Caixa_€-AquitecturaArchivos#A1_Intput]]
 
 ### **SS_ID**: 
 1BYzMPwRmZyaBawt6KcSyO-yH8jMnmnb_A2FWpf_b-Ic

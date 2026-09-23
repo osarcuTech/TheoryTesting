@@ -1,13 +1,18 @@
+## GestiónBancaria
 
-## Introducción
+### **NombreSpreadSheet**: 
+BBVA Historico_GlobalDocuments 3316
 
-**NombreSpreadSheet**: Norgenic Caixabank NZD-0315430
-**UbicaciónDrive**: https://drive.google.com/drive/folders/1Pkw1zaLo6Mi1gSK0TXw5o84IaOTZsEem
+### **CarpetaHistorico**:
+ ![[N_Caixa_NZD-AquitecturaArchivos#A2_Intput]]
+
+### **CarpetaImportados**:
+ ![[N_Caixa_NZD-AquitecturaArchivos#A1_Intput]]
 
 ### **SS_ID**: 
 1JnLMnSgzV_gcAqSD0NjWRF-77-Mq55iuJDIHDhbO4iQ
 
-[[N_Caixa_AUD-Pipeline]]
+[[N_Caixa_NZD-Pipeline]]
 
 ## **BD's**
 

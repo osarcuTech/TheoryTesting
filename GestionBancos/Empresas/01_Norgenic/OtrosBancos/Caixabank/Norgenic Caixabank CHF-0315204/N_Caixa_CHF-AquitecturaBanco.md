@@ -1,7 +1,13 @@
-## Introducción
+## GestiónBancaria
 
-**NombreSpreadSheet**: Norgenic Caixabank CHF-0315204
-**UbicaciónDrive**: https://drive.google.com/drive/folders/1Pkw1zaLo6Mi1gSK0TXw5o84IaOTZsEem
+### **NombreSpreadSheet**: 
+BBVA Historico_GlobalDocuments 3316
+
+### **CarpetaHistorico**:
+ ![[N_Caixa_CHF-AquitecturaArchivos#A2_Intput]]
+
+### **CarpetaImportados**:
+ ![[N_Caixa_CHF-AquitecturaArchivos#A1_Intput]]
 
 ### **SS_ID**: 
 1pkiRHypIem0m07j7laZOSSipUQC7MRmHg6O4Cbeeq10

@@ -1,13 +1,18 @@
+## GestiónBancaria
 
-## Introducción
+### **NombreSpreadSheet**: 
+BBVA Historico_GlobalDocuments 3316
 
-**NombreSpreadSheet**: HistoricoMovimientosTaxgov_Caixabank-0089718
-**UbicaciónDrive**: https://drive.google.com/drive/folders/1ATvOvDKtPqfptE4LaIoxCrSEcLtPdqTz
+### **CarpetaHistorico**:
+ ![[Taxgov_Caixabank_€-AquitecturaArchivos#A2_Intput]]
+
+### **CarpetaImportados**:
+ ![[Taxgov_Caixabank_€-AquitecturaArchivos#A1_Intput]]
 
 ### **SS_ID**: 
 1T9-UEFyODMd5g_6jpbdiB7lBmAbMS-GV9PHm2hXMgHM
 
-[[N_Caixa_AUD-Pipeline]]
+[[Taxgov_Caixabank_€-Pipeline]]
 
 ## **BD's**
 

@@ -1,7 +1,13 @@
-## Introducción
+## GestiónBancaria
 
-**NombreSpreadSheet**: Norgenic Caixabank CAD-0315543
-**UbicaciónDrive**: https://drive.google.com/drive/folders/1Pkw1zaLo6Mi1gSK0TXw5o84IaOTZsEem
+### **NombreSpreadSheet**: 
+BBVA Historico_GlobalDocuments 3316
+
+### **CarpetaHistorico**:
+ ![[N_Caixa_CAD-AquitecturaArchivos#A2_Intput]]
+
+### **CarpetaImportados**:
+ ![[N_Caixa_CAD-AquitecturaArchivos#A1_Intput]]
 
 ### **SS_ID**: 
 1SdzMwKaGxpyywSKgUb4MSHulzMHWriRQaQUcll2yZ-I

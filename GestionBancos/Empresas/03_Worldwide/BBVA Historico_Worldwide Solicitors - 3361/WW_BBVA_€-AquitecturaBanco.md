@@ -1,7 +1,13 @@
-## Introducción
+## GestiónBancaria
 
-**NombreSpreadSheet**: BBVA Historico_Worldwide Solicitors - 3361
-**UbicaciónDrive**: https://drive.google.com/drive/folders/1sgglsOiTAu4yk6OFUzXKGrZNQPMh2N43
+### **NombreSpreadSheet**: 
+BBVA Historico_GlobalDocuments 3316
+
+### **CarpetaHistorico**:
+ ![[WW_BBVA_€-AquitecturaArchivos#A2_Intput]]
+
+### **CarpetaImportados**:
+ ![[WW_BBVA_€-AquitecturaArchivos#A1_Intput]]
 
 ### **SS_ID**: 
 1S2cZ0VdkvD88FvxFEjTjf6wtmw14_p7uFhrjOJ5A4wc

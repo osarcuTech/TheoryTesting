@@ -1,7 +1,13 @@
-## Introducción
+## GestiónBancaria
 
-**NombreSpreadSheet**: HistoricoMovimientosTaxgov_BBVA-3309
-**UbicaciónDrive**: https://drive.google.com/drive/folders/1ATvOvDKtPqfptE4LaIoxCrSEcLtPdqTz
+### **NombreSpreadSheet**: 
+BBVA Historico_GlobalDocuments 3316
+
+### **CarpetaHistorico**:
+ ![[Taxgov_BBVA_€-AquitecturaArchivos#A2_Intput]]
+
+### **CarpetaImportados**:
+ ![[Taxgov_BBVA_€-AquitecturaArchivos#A1_Intput]]
 
 ### **SS_ID**: 
 1EthhE9LlF-kg4ho_JGJTzuu3y3gx1i4-fFrwVwQfTig

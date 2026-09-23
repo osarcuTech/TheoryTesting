@@ -1,7 +1,13 @@
-## Introducción
+## GestiónBancaria
 
-**NombreSpreadSheet**: NorgenicRevolut
-**UbicaciónDrive**: https://drive.google.com/drive/folders/1A14_27QxTht3Al2jKXx4EIciafTJb8AO
+### **NombreSpreadSheet**: 
+BBVA Historico_GlobalDocuments 3316
+
+### **CarpetaHistorico**:
+ ![[Norgenic_Revolut-AquitecturaArchivos#A2_Intput]]
+
+### **CarpetaImportados**:
+ ![[Norgenic_Revolut-AquitecturaArchivos#A1_Intput]]
 
 ### **SS_ID**: 
 1EesFEFgBtNfL-ODI50CKTk0le7rVaKCRCZvxUVeiYUA

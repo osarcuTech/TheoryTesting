@@ -1,10 +1,20 @@
-## **BD's**
+## GestiónBancaria
 
-**NombreSpreadSheet**: Norgenic€LaCaixa-0087231
-**SpreadSheet ID**: 1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw
-**UbicaciónDrive**: https://drive.google.com/drive/folders/1geu4FEONN-vpnWkKFXCtAlUW5I6Vg4YU
+### **NombreSpreadSheet**: 
+BBVA Historico_GlobalDocuments 3316
+
+### **CarpetaHistorico**:
+ ![[N_Caixa_€-AquitecturaArchivos#A2_Intput]]
+
+### **CarpetaImportados**:
+ ![[N_Caixa_€-AquitecturaArchivos#A1_Intput]]
+
+### **SS_ID**: 
+1P1ULeZE04Eeu1Q4RvIKVgclEyjpSDooGVibiUukO9oU
 
 [[N_Caixa_€-Pipeline]]
+
+## **BD's**
 
 ### **BDB**
 **Nombre**: 'BD_Banco'

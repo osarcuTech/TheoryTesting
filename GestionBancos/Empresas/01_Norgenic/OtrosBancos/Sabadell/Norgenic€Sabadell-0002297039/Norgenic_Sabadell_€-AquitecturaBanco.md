@@ -1,8 +1,13 @@
+## GestiónBancaria
 
-## Introducción
+### **NombreSpreadSheet**: 
+BBVA Historico_GlobalDocuments 3316
 
-**NombreSpreadSheet**: Norgenic€Sabadell-0002297039
-**UbicaciónDrive**: https://drive.google.com/drive/folders/1GUtYW4xYDq9d8nBlTq6x_3LTdBUu5HGh
+### **CarpetaHistorico**:
+ ![[Norgenic_Sabadell_€-AquitecturaArchivos#A2_Intput]]
+
+### **CarpetaImportados**:
+ ![[Norgenic_Sabadell_€-AquitecturaArchivos#A1_Intput]]
 
 ### **SS_ID**: 
 1-3qlwX6rnA6-vtgHzKBVNIChPu1Ee-4-l6amNT7OjXY
