@@ -23,49 +23,49 @@ x.
   - **Contenido**:  UID formado mediante la concatenación de las distintas columnas del movimiento.
   - **Formula/s**: NULL
   - **Referencias**: 
-  - **Fuentes**: [[N_Caixa_€-Pipeline#A1]].
+  - **Fuentes**: [[N_Caixa_€-Pipeline#A1]], [[N_Caixa_€-01_ImportarMovimientosGS|A1]].
   
 ### **B**
   - **Nombre**: 'Fecha'.
   - **Contenido**: 
   - **Formula/s**: NULL
   - **Referencias**:  
-  - **Fuentes**: [[N_Caixa_€-Pipeline#A1]].
+  - **Fuentes**: [[N_Caixa_€-Pipeline#A1]], [[N_Caixa_€-01_ImportarMovimientosGS|A1]].
   
 ### **C**
   - **Nombre**: 'Fecha valor'.
   - **Contenido**: 
   - **Formula/s**: NULL
   - **Referencias**: 
-  - **Fuentes**: [[N_Caixa_€-Pipeline#A1]].
+  - **Fuentes**: [[N_Caixa_€-Pipeline#A1]], [[N_Caixa_€-01_ImportarMovimientosGS|A1]].
   
 ### **D**
   - **Nombre**: 'Movimiento'.
   - **Contenido**: 
   - **Formula/s**: 
   - **Referencias**: 
-  - **Fuentes**: [[N_Caixa_€-Pipeline#A1]].
+  - **Fuentes**: [[N_Caixa_€-Pipeline#A1]], [[N_Caixa_€-01_ImportarMovimientosGS|A1]].
   
 ### **E**
   - **Nombre** : 'Más datos'.
   - **Contenido**: 
   - **Formula/s**: 
   - **Referencias**: 
-  - **Fuentes**: [[N_Caixa_€-Pipeline#A1]].
+  - **Fuentes**: [[N_Caixa_€-Pipeline#A1]], [[N_Caixa_€-01_ImportarMovimientosGS|A1]].
   
 ### **F**
   - **Nombre**: 'Importe'.
   - **Contenido**: 
   - **Formula/s**: 
   - **Referencias**: 
-  - **Fuentes**: [[N_Caixa_€-Pipeline#A1]].
+  - **Fuentes**: [[N_Caixa_€-Pipeline#A1]], [[N_Caixa_€-01_ImportarMovimientosGS|A1]].
   
 ### **G**
   - **Nombre**: 'Saldo'.
   - **Contenido**: 
   - **Formula/s**: 
   - **Referencias**: 
-  - **Fuentes**: [[N_Caixa_€-Pipeline#A1]].
+  - **Fuentes**: [[N_Caixa_€-Pipeline#A1]], [[N_Caixa_€-01_ImportarMovimientosGS|A1]].
   
 ### **H**
   - **Nombre**: 'NombreFactura'.

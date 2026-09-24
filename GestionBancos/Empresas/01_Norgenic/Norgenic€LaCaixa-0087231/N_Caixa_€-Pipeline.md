@@ -15,22 +15,28 @@ Condición: Obligatorio para todos los bancos.
 - El encargado nos envia por iniciativa propia o **petición nuestra** un xlsx/csv de un extracto bancario.
 - Detectamos la empresa a la que corresponde. [[00_Empresas&Bancos]].
 - Detectamos el banco que corresponde. Todos los archivos contienen en su nombre o en su interior los últimos 4 digitos de la targeta. Se usa esto y/o el contenido (si el nombre del arxivo es incorrecto) para detectar el match del "Importado" con el [[N_Caixa_€-AquitecturaBanco#NombreSpreadSheet|Historico]]
-- Subimos el archivo a la carpeta correspondiente [[N_Caixa_€-AquitecturaArchivos#A1_Input]].
+- Subimos el archivo a la carpeta correspondiente [[N_Caixa_€-AquitecturaArchivos#A1_Input|Importados]].
 
 ### A1: 
 **TLDR**: Update de los historicos de Extractos bancarios
 **Objetivo**: Hacer un Upsert de los movimientos bancarios.
 **Processo**: 
-    - Ejecutamos el [[N_Caixa_€-Wf_A1_ImportarMovimientos|workflow]]/script encargado de hacer un processo ETL de los datos añadios a la carpeta a [[N_Caixa_€-AquitecturaArchivos#A1_Input]]. 
-    - El [[N_Caixa_€-Wf_A1_ImportarMovimientos|workflow]]/script los manda a la carpeta [[N_Caixa_€-AquitecturaArchivos#A1_Output]] en caso de no estar preparado lo hacemos manualmente para minimizar fuentes con datos duplicados.
-    - Los datos se añaden en [[N_Caixa_€-BD_Banco]].
+    - Ejecutamos el workflow/[[N_Caixa_€-01_ImportarMovimientosGS|Script_A1]] encargado de hacer un processo ETL de los datos añadios a la carpeta a [[N_Caixa_€-AquitecturaArchivos#A1_Input|Importados]]. 
+    - El workflow/[[N_Caixa_€-01_ImportarMovimientosGS|Script_A1]] los manda a la carpeta [[N_Caixa_€-AquitecturaArchivos#A1_Output|Procesados]] en caso de no estar preparado lo hacemos manualmente para minimizar fuentes con datos duplicados.
+    - Los datos se añaden en [[N_Caixa_€-BD_Banco]] y a [[N_Caixa_€-BD_Movimientos]].
 
 
 ### A2
-**TLDR**: Enriquecimiento de Movimientos 
+**TLDR**: Enriquecimiento de BD_Movimientos.
 **Objetivo**: Classificación de los movimientos por su relación con el cashflow y, opcionalmente, con otra información relacinada da la facturación.
 **Processo**: 
-    - Formulas: [[N_Caixa_€-BD_Movimientos]], [[N_Caixa_€-BD_AsigCostes]]:
+    - Formulas: [[N_Caixa_€-BD_Movimientos]], [[N_Caixa_€-BD_Form_AsigCostes]], [[N_Caixa_€-BD_AsigCostes]]:
+
+### A99
+**TLDR**: Enriquecimiento de BD_Bancos.
+**Objetivo**: Enriquecimiento de [[N_Caixa_€-BD_Banco]] con los datos enriquecidos, y aprobados como definitivos, de [[N_Caixa_€-Movimientos_cuenta_0087231]] mediante el script [[N_Caixa_€-99_ArchivarMovimientosGS|Archivado]].
+**Processo**: 
+    - Formulas: [[N_Caixa_€-BD_Movimientos]], [[N_Caixa_€-BD_Form_AsigCostes]], [[N_Caixa_€-BD_AsigCostes]]:
 
 ## B
 Condición: "Opcional" = Solo obligatorio para los bancos con facturas de proveedores.
@@ -52,22 +58,18 @@ Condición: "Opcional" = Solo obligatorio para los bancos con facturas de provee
 **Objetivo**: Classificar las facturas del grupo por empresa y enviarlas a la carpeta correspondiente para B2.
 **Processo**: 
     - Workflow: [[wf_B1_GmailMetralleta_Context]]
-    - Carpeta Intput: [[N_Caixa_€-AquitecturaArchivos#B1_Input|B1]]
-    - Carpeta Output Exito: [[N_Caixa_€-AquitecturaArchivos#B1_Output|B1]]
-    - Carpeta Output Fallo 1: No detecta la empresa [[N_Caixa_€-AquitecturaArchivos#B1_Fail_1|B1]]
-    - Carpeta Output Fallo 2: No detecta el proveedor [[N_Caixa_€-AquitecturaArchivos#B1_Fail_2|B1]]
-
+    - Carpeta Intput: [[N_Caixa_€-AquitecturaArchivos#B1_Input|Facturacion_Generica]]
+    - Carpeta Output Exito: [[N_Caixa_€-AquitecturaArchivos#B1_Output|00_Facturación]]
+    - Carpeta Output Fallo 1: No detecta la empresa [[N_Caixa_€-AquitecturaArchivos#B1_Fail_1|Unkwnown]]
 
 ### B2
 **TLDR**:  Renombrado de pdf y Registro en BD_Facturas
 **Objetivo**: Sacar la información de la factura relevante (Fecha_Proveedor_Importe_Divisa_idFactura_EmpresaDelGrupo) para C0 y depositado en una carpeta temporal para la comprobación por [[H0_ControlHumano]]
 **Processo**: 
     - Workflow: [[wf_B2_Cebollon_Context|workflow]]/[[H0_ControlHumano|manual]]
-    - Carpeta Intput: [[N_Caixa_€-AquitecturaArchivos#B1_Output|B1]]
-    - Carpeta Output Exito: [[N_Caixa_€-AquitecturaArchivos#B2_Output|B1]]
-    - Carpeta Output Fallo 1: No detecta la empresa [[N_Caixa_€-AquitecturaArchivos#B1_Fail_1|B1]]
-    - Carpeta Output Fallo 2: [[N_Caixa_€-AquitecturaArchivos#B1_Fail_1|B1]]
-
+    - Carpeta Intput: [[N_Caixa_€-AquitecturaArchivos#B1_Output|00_Facturación]]
+    - Carpeta Output Exito: [[N_Caixa_€-AquitecturaArchivos#B2_Output|Cuadrar]]
+    - Carpeta Output Fallo: [[N_Caixa_€-AquitecturaArchivos#B2_Fail_1|00_InformaciónFaltante]]
 
 
 ## C
@@ -79,8 +81,8 @@ Condición: "Opcional" = Solo obligatorio para los bancos con facturas de provee
 **Processo**: 
     - Alternativas:
         - Formulas en Google Sheets: [[N_Caixa_€-BD_Movimientos#H]] 
-        - n8n: Actualmente deprecado [[wf_C0_PuntearFacturas_context]]
         - Manualmente: [[H0_ControlHumano]]. 
+        - n8n: Actualmente deprecado [[wf_C0_PuntearFacturas_context]]
 
 
 ### C1
@@ -90,9 +92,9 @@ Condición: "Opcional" = Solo obligatorio para los bancos con facturas de provee
     - Alternativas:
         - n8n: [[wf_C1_ReenvioFras_context]]. 
             - Se debe configurar la carpeta de input y las de output cada mes.
-                - Input: Mes actual nuestro.
-                - OutputEmpresa: "Enviadas ViaTribut".
-                - Output: Mes actual Via Tribut.
+                - Input: Mes actual nuestro. [[N_Caixa_€-AquitecturaArchivos#C1_Input|2_Facturas]]
+                - OutputEmpresa: "Enviadas ViaTribut". 
+                - Output: Mes actual Via Tribut. [[N_Caixa_€-AquitecturaArchivos#C1_Output|RecividasVT]]
             - El workflow registra automaticamente la id de la factura en [[N_Caixa_€-BD_MovimientosT]]
         - manual: [[H0_ControlHumano]].
 
@@ -104,9 +106,9 @@ Condición: "Opcional" = Solo obligatorio para los bancos con facturas de provee
     - Alternativas:
         - n8n: [[wf_C2_ComprobFras_Context]]. 
             - Se debe configurar la carpeta de input y las de output cada mes.
-                - Input 1 : Mes buscado (nuestro) -->"Enviadas ViaTribut".
-                - Input 2: Mes buscado Via Tribut ("Enviados").
-                - Input 3: Mes buscado Via Tribut ("Contabilizados").
+                - Input 1 : Mes buscado (nuestro) -->"Enviadas ViaTribut". [[N_Caixa_€-AquitecturaArchivos#C1_Input|2_Facturas]]
+                - Input 2: Mes buscado Via Tribut ("Enviados"). [[N_Caixa_€-AquitecturaArchivos#C1_Output|RecividasVT]]
+                - Input 3: Mes buscado Via Tribut ("Contabilizados"). [[N_Caixa_€-AquitecturaArchivos#C1_Output2|Contab.VT]]
             - El workflow registra automaticamente la id de la factura en [[N_Caixa_€-BD_MovimientosT]]
         - manual: [[H0_ControlHumano]].
 
@@ -126,7 +128,8 @@ Condición: Obligatorio para todos los bancos.
 **Objetivo**: Mantener actualizado el saldo de proveedores con facturas inusuales para comprobar su correcció y/o comprobar la correcta recepción de los pagos de las distintas plataformas utilizadas para la orquestación de pagos (ej: Checkout).
 **Processo**: manual [[H0_ControlHumano]] assistido por formulas en Google Sheets. Lista:
     - Control Plataformas: [[N_Caixa_€-ControlPlataformas]].
-    - Proveedor1: 
+    - Google: [[N_Caixa_€-Google]].
+    - Nexmo: [[N_Caixa_€-Nexmo]].
 
 
 

@@ -51,6 +51,10 @@ Norgenic€LaCaixa-0087231
     - NombreCarpeta: "Facturas recibida Via Tribut"
     - UrlCarpeta: https://drive.google.com/drive/u/0/folders/1Qv87-wZz9sigBOCN6VIANKXO06s0Uf89
 
+### **C1_Output2**:
+    - NombreCarpeta: "Contabilizadas Via Tribut"
+    - UrlCarpeta: https://drive.google.com/drive/u/0/folders/1GpSMeyONIrB6ca-U4kfFDFo_VPQrHBnf
+
 ## E1
 
 ### **E1_Input**:
