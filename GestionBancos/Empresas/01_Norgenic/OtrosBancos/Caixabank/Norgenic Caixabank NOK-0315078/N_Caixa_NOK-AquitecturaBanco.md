@@ -37,20 +37,6 @@ BBVA Historico_GlobalDocuments 3316
 **Fuentes**:
 **Gid**: ![[N_Caixa_NOK-BD_AsigCostes#Gid]]
 
-### **BD_Facturas** (Opcional)
-**Nombre**: 'BD_Facturas'
-**Objetivo**: (DataLake?) Bases de datos que almacenan las facturas existentes.
-**Relaciones Pipeline**: [[N_Caixa_NOK-Pipeline#B2]]  (Opcional)
-**Fuentes**:
-**Gid**: ![[N_Caixa_NOK-BD_Facturas#Gid]]
-
-### **BD_HistorialFacturas** (Opcional)
-**Nombre**: 'BD_HistorialFacturas'
-**Objetivo**: (DataMart?) Hoja de control del estado de las facturas.
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: ![[N_Caixa_NOK-BD_HistorialFacturas#Gid]]
-
 ### **PreCashflow**
 **Nombre**: 'PreCashflow2'
 **Objetivo**: (DataMart?) Hoja que agrupa la información relevante para el Cashflow.
@@ -69,86 +55,4 @@ BBVA Historico_GlobalDocuments 3316
 
 ## **Helpers**  (Opcionales)
 **Objetivo**: Hojas de soporte a las hojas principales.
-
-### **Generales**
-
-#### **Rangos**
-**Nombre**: 'Rangos'
-**Objetivo**: Almacena el valor de last row de todas la hojas para que puedan extraerlo sin necesidad de tantos calculos.
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: ![[N_Caixa_NOK-Rangos#Gid]]
-
-#### **ContextoHoja**
-**Nombre**: 'ContextoHoja'
-**Objetivo**: Base de datos con las formulas y/o ejemplos de datos de las 5 primeras filas (la primera es el header) de todas las hojas del SpreadSheet. Funciona a modo de repositorio de formulas para un LLM o para el usuario.
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: ![[N_Caixa_NOK-ContextoHoja#Gid]]
-
-### **A2**
-
-#### **Form_AsigCostes **
-**Nombre**: 'Form_AsigCostes'
-**Objetivo**: Soporte en el append a la "BD_PatronesMovimientos".
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: ![[N_Caixa_NOK-Form_AsigCostes#Gid]]
-
-### **C0**
-#### **PProveedores **
-**Nombre**: 'PProveedores'
-**Objetivo**: Simplificación de "BD_PatronesMovimientos" con solo aquello que puede contener facturas. (Potencialmente eliminable modificando C0)
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: ![[N_Caixa_NOK-PProveedores#Gid]]
-
-### **H0**
-
-#### **FacturasFaltantes **
-**Nombre**: 'FacturasFaltantes'
-**Objetivo**: Soporte visual para detectar las facturas pendientes de recibir/puntear.
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: ![[N_Caixa_NOK-FacturasFaltantes#Gid]]
-
-#### **Compr.Fras.Manual **
-**Nombre**: 'Compr.Fras.Manual'
-**Objetivo**: Funcionaba para comprobar que todas las facturas hubiesen sido correctamente enviadas a ViaTribut antes de tener **C1** que lo realiza indicando donde se encuentra cada una.
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: ![[N_Caixa_NOK-Compr.Fras.Manual#Gid]]
-
-### **D0**
-
-#### **PreOdoo**
-**Nombre**: 
-**Objetivo**: Modifica la información relacionada a los movimientos para hacerlos exportables a **Odoo** mediante .
-**Relaciones Pipeline**: [[N_Caixa_NOK-Pipeline#D0]]
-**Fuentes**:
-**Gid**: NULL
-
-
-
-### **D1**
-
-#### **ResumenPlataformas **
-**Nombre**: 'ResumenPlataformas'
-**Objetivo**: Control de los ingresos declarado por las distintas plataformas de pago.
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: ![[N_Caixa_NOK-ResumenPlataformas#Gid]]
-
-#### **Google **
-**Nombre**: 'Google'
-**Objetivo**: Control de las diferencias entre pagos y facturas de Google.
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: ![[N_Caixa_NOK-Google#Gid]]
-
-#### **Nexmo **
-**Nombre**: 'Nexmo'
-**Objetivo**: Control de las diferencias entre pagos y facturas de Nexmo.
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: ![[N_Caixa_NOK-Nexmo#Gid]]
+NULL

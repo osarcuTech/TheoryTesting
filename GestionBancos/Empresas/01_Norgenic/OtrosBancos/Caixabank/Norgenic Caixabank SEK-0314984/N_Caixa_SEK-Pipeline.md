@@ -48,68 +48,10 @@ Condición: "Opcional" = Solo obligatorio para los bancos con facturas de provee
     - Carpeta input B2: Manual "Facturación".
 
 ### B1
-**TLDR**:  Clasificación por empresa
-**Objetivo**: Classificar las facturas del grupo por empresa y enviarlas a la carpeta correspondiente para B2.
-**Processo**: 
-    - Workflow: [[wf_B1_GmailMetralleta_Context]]
-    - Carpeta Intput: [[N_Caixa_SEK-AquitecturaArchivos#B1_Input|B1]]
-    - Carpeta Output Exito: [[N_Caixa_SEK-AquitecturaArchivos#B1_Output|B1]]
-    - Carpeta Output Fallo 1: No detecta la empresa [[N_Caixa_SEK-AquitecturaArchivos#B1_Fail_1|B1]]
-    - Carpeta Output Fallo 2: No detecta el proveedor [[N_Caixa_SEK-AquitecturaArchivos#B1_Fail_2|B1]]
-
-
-### B2
-**TLDR**:  Renombrado de pdf y Registro en BD_Facturas
-**Objetivo**: Sacar la información de la factura relevante (Fecha_Proveedor_Importe_Divisa_idFactura_EmpresaDelGrupo) para C0 y depositado en una carpeta temporal para la comprobación por [[H0_ControlHumano]]
-**Processo**: 
-    - Workflow: [[wf_B2_Cebollon_Context|workflow]]/[[H0_ControlHumano|manual]]
-    - Carpeta Intput: [[N_Caixa_SEK-AquitecturaArchivos#B1_Output|B1]]
-    - Carpeta Output Exito: [[N_Caixa_SEK-AquitecturaArchivos#B2_Output|B1]]
-    - Carpeta Output Fallo 1: No detecta la empresa [[N_Caixa_SEK-AquitecturaArchivos#B1_Fail_1|B1]]
-    - Carpeta Output Fallo 2: [[N_Caixa_SEK-AquitecturaArchivos#B1_Fail_1|B1]]
-
-
+NULL
 
 ## C
-Condición: "Opcional" = Solo obligatorio para los bancos con facturas de proveedores.
-
-### C0
-**TLDR**:  Asociación de Movimientos y Facturas
-**Objetivo**: Que cada factura este asociada a los movimientos bancarios que le correspondan.
-**Processo**: 
-    - Alternativas:
-        - Formulas en Google Sheets: [[N_Caixa_SEK-BD_Movimientos#H]] 
-        - n8n: Actualmente deprecado [[wf_C0_PuntearFacturas_context]]
-        - Manualmente: [[H0_ControlHumano]]. 
-
-
-### C1
-**TLDR**:  Envio de Facturas a ViaTribut
-**Objetivo**: Enviar una copia de las facturas a la empresa que nos lleba la contabilidad y poner la nuestra en otra carpeta como señal que ya ha sido enviada.
-**Processo**: 
-    - Alternativas:
-        - n8n: [[wf_C1_ReenvioFras_context]]. 
-            - Se debe configurar la carpeta de input y las de output cada mes.
-                - Input: Mes actual nuestro.
-                - OutputEmpresa: "Enviadas ViaTribut".
-                - Output: Mes actual Via Tribut.
-            - El workflow registra automaticamente la id de la factura en [[N_Caixa_SEK-BD_MovimientosT]]
-        - manual: [[H0_ControlHumano]].
-
-
-### C2
-**TLDR**:  Comprobación de la corrección en el envio.
-**Objetivo**: Comprobación de que todas nuestras facturas se encuentran el las carpeta que ViaTributt tiene para las pendientes de contabilizar o en la de ya contabilizadas.
-**Processo**:
-    - Alternativas:
-        - n8n: [[wf_C2_ComprobFras_Context]]. 
-            - Se debe configurar la carpeta de input y las de output cada mes.
-                - Input 1 : Mes buscado (nuestro) -->"Enviadas ViaTribut".
-                - Input 2: Mes buscado Via Tribut ("Enviados").
-                - Input 3: Mes buscado Via Tribut ("Contabilizados").
-            - El workflow registra automaticamente la id de la factura en [[N_Caixa_SEK-BD_MovimientosT]]
-        - manual: [[H0_ControlHumano]].
-
+NULL
 
 
 ## D
@@ -122,13 +64,7 @@ Condición: Obligatorio para todos los bancos.
 
 
 ### D2
-**TLDR**:  Control Plataformas/Proveedores inusuales
-**Objetivo**: Mantener actualizado el saldo de proveedores con facturas inusuales para comprobar su correcció y/o comprobar la correcta recepción de los pagos de las distintas plataformas utilizadas para la orquestación de pagos (ej: Checkout).
-**Processo**: manual [[H0_ControlHumano]] assistido por formulas en Google Sheets. Lista:
-    - Control Plataformas: [[N_Caixa_SEK-ControlPlataformas]].
-    - Proveedor1: 
-
-
+NULL
 
 ## E
 Condición: Obligatorio para todos los bancos.

@@ -1,7 +1,7 @@
 ## GestiónBancaria
 
 ### **NombreSpreadSheet**: 
-BBVA Historico_GlobalDocuments 3316
+HistoricoMovimientosTaxgov_BBVA-3309
 
 ### **CarpetaHistorico**:
  ![[Taxgov_BBVA_€-AquitecturaArchivos#A2_Intput]]
@@ -35,20 +35,6 @@ BBVA Historico_GlobalDocuments 3316
 **Fuentes**:
 **Gid**: ![[Taxgov_BBVA_€-BD_AsigCostes#Gid]]
 
-### **BD_Facturas** (Opcional)
-**Nombre**: 'BD_Facturas'
-**Objetivo**: (DataLake?) Bases de datos que almacenan las facturas existentes.
-**Relaciones Pipeline**: [[Taxgov_BBVA_€-Pipeline#B2]]  (Opcional)
-**Fuentes**:
-**Gid**: ![[Taxgov_BBVA_€-BD_Facturas#Gid]]
-
-### **BD_HistorialFacturas** (Opcional)
-**Nombre**: 'BD_HistorialFacturas'
-**Objetivo**: (DataMart?) Hoja de control del estado de las facturas.
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: ![[Taxgov_BBVA_€-BD_HistorialFacturas#Gid]]
-
 ### **PreCashflow**
 **Nombre**: 'PreCashflow2'
 **Objetivo**: (DataMart?) Hoja que agrupa la información relevante para el Cashflow.
@@ -68,55 +54,6 @@ BBVA Historico_GlobalDocuments 3316
 ## **Helpers**  (Opcionales)
 **Objetivo**: Hojas de soporte a las hojas principales.
 
-### **Generales**
-
-#### **Rangos**
-**Nombre**: 'Rangos'
-**Objetivo**: Almacena el valor de last row de todas la hojas para que puedan extraerlo sin necesidad de tantos calculos.
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: ![[Taxgov_BBVA_€-Rangos#Gid]]
-
-#### **ContextoHoja**
-**Nombre**: 'ContextoHoja'
-**Objetivo**: Base de datos con las formulas y/o ejemplos de datos de las 5 primeras filas (la primera es el header) de todas las hojas del SpreadSheet. Funciona a modo de repositorio de formulas para un LLM o para el usuario.
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: ![[Taxgov_BBVA_€-ContextoHoja#Gid]]
-
-### **A2**
-
-#### **Form_AsigCostes **
-**Nombre**: 'Form_AsigCostes'
-**Objetivo**: Soporte en el append a la "BD_PatronesMovimientos".
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: ![[Taxgov_BBVA_€-Form_AsigCostes#Gid]]
-
-### **C0**
-#### **PProveedores **
-**Nombre**: 'PProveedores'
-**Objetivo**: Simplificación de "BD_PatronesMovimientos" con solo aquello que puede contener facturas. (Potencialmente eliminable modificando C0)
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: ![[Taxgov_BBVA_€-PProveedores#Gid]]
-
-### **H0**
-
-#### **FacturasFaltantes **
-**Nombre**: 'FacturasFaltantes'
-**Objetivo**: Soporte visual para detectar las facturas pendientes de recibir/puntear.
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: ![[Taxgov_BBVA_€-FacturasFaltantes#Gid]]
-
-#### **Compr.Fras.Manual **
-**Nombre**: 'Compr.Fras.Manual'
-**Objetivo**: Funcionaba para comprobar que todas las facturas hubiesen sido correctamente enviadas a ViaTribut antes de tener **C1** que lo realiza indicando donde se encuentra cada una.
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: ![[Taxgov_BBVA_€-Compr.Fras.Manual#Gid]]
-
 ### **D0**
 
 #### **PreOdoo**
@@ -126,16 +63,8 @@ BBVA Historico_GlobalDocuments 3316
 **Fuentes**:
 **Gid**: NULL
 
-
-
 ### **D1**
 
-#### **ResumenPlataformas **
-**Nombre**: 'ResumenPlataformas'
-**Objetivo**: Control de los ingresos declarado por las distintas plataformas de pago.
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: ![[Taxgov_BBVA_€-ResumenPlataformas#Gid]]
 
 #### **Google **
 **Nombre**: 'Google'
@@ -144,9 +73,9 @@ BBVA Historico_GlobalDocuments 3316
 **Fuentes**:
 **Gid**: ![[Taxgov_BBVA_€-Google#Gid]]
 
-#### **Nexmo **
-**Nombre**: 'Nexmo'
-**Objetivo**: Control de las diferencias entre pagos y facturas de Nexmo.
+#### **Bing **
+**Nombre**: 'Bing'
+**Objetivo**: Control de las diferencias entre pagos y facturas de Bing.
 **Relaciones Pipeline**: 
 **Fuentes**:
-**Gid**: ![[Taxgov_BBVA_€-Nexmo#Gid]]
+**Gid**: ![[Taxgov_BBVA_€-Bing#Gid]]

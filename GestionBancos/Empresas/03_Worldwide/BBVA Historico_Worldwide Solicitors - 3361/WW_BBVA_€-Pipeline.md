@@ -21,8 +21,8 @@ Condición: Obligatorio para todos los bancos.
 **TLDR**: Update de los historicos de Extractos bancarios
 **Objetivo**: Hacer un Upsert de los movimientos bancarios.
 **Processo**: 
-    - Ejecutamos el [[WW_BBVA_€-Wf_A1_ImportarMovimientos|workflow]]/script encargado de hacer un processo ETL de los datos añadios a la carpeta a [[WW_BBVA_€-AquitecturaArchivos#A1_Input]]. 
-    - El [[WW_BBVA_€-Wf_A1_ImportarMovimientos|workflow]]/script los manda a la carpeta [[WW_BBVA_€-AquitecturaArchivos#A1_Output]] en caso de no estar preparado lo hacemos manualmente para minimizar fuentes con datos duplicados.
+    - Ejecutamos el [[WW_BBVA_€-A1_ImportarMovimientos|workflow]]/script encargado de hacer un processo ETL de los datos añadios a la carpeta a [[WW_BBVA_€-AquitecturaArchivos#A1_Input]]. 
+    - El [[WW_BBVA_€-A1_ImportarMovimientos|workflow]]/script los manda a la carpeta [[WW_BBVA_€-AquitecturaArchivos#A1_Output]] en caso de no estar preparado lo hacemos manualmente para minimizar fuentes con datos duplicados.
     - Los datos se añaden en [[WW_BBVA_€-BD_Banco]].
 
 
@@ -44,29 +44,25 @@ Condición: "Opcional" = Solo obligatorio para los bancos con facturas de provee
     - Decisión de carpeta:
         - [[WW_BBVA_€-AquitecturaArchivos#B1_Input|B1]]: Si hay varias empresas.
         - [[WW_BBVA_€-AquitecturaArchivos#B1_Output|B2]]: Para la empresa correspondiente (Si estamos seguros de que no hay mezclas). 
-    - Carpeta input B1: https://drive.google.com/drive/folders/17WR7hfIet-hcpFrjHW0agwHsC8KnM1Sn "Facturación".
-    - Carpeta input B2: Manual "Facturación".
 
 ### B1
 **TLDR**:  Clasificación por empresa
 **Objetivo**: Classificar las facturas del grupo por empresa y enviarlas a la carpeta correspondiente para B2.
 **Processo**: 
     - Workflow: [[wf_B1_GmailMetralleta_Context]]
-    - Carpeta Intput: [[WW_BBVA_€-AquitecturaArchivos#B1_Input|B1]]
-    - Carpeta Output Exito: [[WW_BBVA_€-AquitecturaArchivos#B1_Output|B1]]
-    - Carpeta Output Fallo 1: No detecta la empresa [[WW_BBVA_€-AquitecturaArchivos#B1_Fail_1|B1]]
-    - Carpeta Output Fallo 2: No detecta el proveedor [[WW_BBVA_€-AquitecturaArchivos#B1_Fail_2|B1]]
+    - Carpeta Intput: [[WW_BBVA_€-AquitecturaArchivos#B1_Input|Facturacion_Generica]]
+    - Carpeta Output Exito: [[WW_BBVA_€-AquitecturaArchivos#B1_Output|Cuadrar]]
+    - Carpeta Output Fallo 1: No detecta la empresa [[WW_BBVA_€-AquitecturaArchivos#B1_Fail_1|Unwnown]]
+    - Carpeta Output Fallo 2: No detecta el proveedor [[WW_BBVA_€-AquitecturaArchivos#B1_Fail_2|InformaciónFaltante]]
 
 
 ### B2
 **TLDR**:  Renombrado de pdf y Registro en BD_Facturas
 **Objetivo**: Sacar la información de la factura relevante (Fecha_Proveedor_Importe_Divisa_idFactura_EmpresaDelGrupo) para C0 y depositado en una carpeta temporal para la comprobación por [[H0_ControlHumano]]
 **Processo**: 
-    - Workflow: [[wf_B2_Cebollon_Context|workflow]]/[[H0_ControlHumano|manual]]
-    - Carpeta Intput: [[WW_BBVA_€-AquitecturaArchivos#B1_Output|B1]]
-    - Carpeta Output Exito: [[WW_BBVA_€-AquitecturaArchivos#B2_Output|B1]]
-    - Carpeta Output Fallo 1: No detecta la empresa [[WW_BBVA_€-AquitecturaArchivos#B1_Fail_1|B1]]
-    - Carpeta Output Fallo 2: [[WW_BBVA_€-AquitecturaArchivos#B1_Fail_1|B1]]
+    - Workflow: [[H0_ControlHumano|manual]]
+    - Carpeta Intput: [[WW_BBVA_€-AquitecturaArchivos#B1_Output|Cuadrar]]
+    - Carpeta Output Exito: [[WW_BBVA_€-AquitecturaArchivos#C1_Input|CarpetaFacturas]]
 
 
 
@@ -76,39 +72,19 @@ Condición: "Opcional" = Solo obligatorio para los bancos con facturas de provee
 ### C0
 **TLDR**:  Asociación de Movimientos y Facturas
 **Objetivo**: Que cada factura este asociada a los movimientos bancarios que le correspondan.
-**Processo**: 
-    - Alternativas:
-        - Formulas en Google Sheets: [[WW_BBVA_€-BD_Movimientos#H]] 
-        - n8n: Actualmente deprecado [[wf_C0_PuntearFacturas_context]]
-        - Manualmente: [[H0_ControlHumano]]. 
+**Processo**: Manualmente: [[H0_ControlHumano]]. 
 
 
 ### C1
 **TLDR**:  Envio de Facturas a ViaTribut
 **Objetivo**: Enviar una copia de las facturas a la empresa que nos lleba la contabilidad y poner la nuestra en otra carpeta como señal que ya ha sido enviada.
-**Processo**: 
-    - Alternativas:
-        - n8n: [[wf_C1_ReenvioFras_context]]. 
-            - Se debe configurar la carpeta de input y las de output cada mes.
-                - Input: Mes actual nuestro.
-                - OutputEmpresa: "Enviadas ViaTribut".
-                - Output: Mes actual Via Tribut.
-            - El workflow registra automaticamente la id de la factura en [[WW_BBVA_€-BD_MovimientosT]]
-        - manual: [[H0_ControlHumano]].
+**Processo**: manual: [[H0_ControlHumano]].
 
 
 ### C2
 **TLDR**:  Comprobación de la corrección en el envio.
 **Objetivo**: Comprobación de que todas nuestras facturas se encuentran el las carpeta que ViaTributt tiene para las pendientes de contabilizar o en la de ya contabilizadas.
-**Processo**:
-    - Alternativas:
-        - n8n: [[wf_C2_ComprobFras_Context]]. 
-            - Se debe configurar la carpeta de input y las de output cada mes.
-                - Input 1 : Mes buscado (nuestro) -->"Enviadas ViaTribut".
-                - Input 2: Mes buscado Via Tribut ("Enviados").
-                - Input 3: Mes buscado Via Tribut ("Contabilizados").
-            - El workflow registra automaticamente la id de la factura en [[WW_BBVA_€-BD_MovimientosT]]
-        - manual: [[H0_ControlHumano]].
+**Processo**: manual: [[H0_ControlHumano]].
 
 
 
@@ -125,8 +101,7 @@ Condición: Obligatorio para todos los bancos.
 **TLDR**:  Control Plataformas/Proveedores inusuales
 **Objetivo**: Mantener actualizado el saldo de proveedores con facturas inusuales para comprobar su correcció y/o comprobar la correcta recepción de los pagos de las distintas plataformas utilizadas para la orquestación de pagos (ej: Checkout).
 **Processo**: manual [[H0_ControlHumano]] assistido por formulas en Google Sheets. Lista:
-    - Control Plataformas: [[WW_BBVA_€-ControlPlataformas]].
-    - Proveedor1: 
+    - Google:  [[WW_BBVA_€-Google]]
 
 
 

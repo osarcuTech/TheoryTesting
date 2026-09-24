@@ -37,20 +37,6 @@ BBVA Historico_GlobalDocuments 3316
 **Fuentes**:
 **Gid**: ![[N_Caixa_$-BD_AsigCostes#Gid]]
 
-### **BD_Facturas** (Opcional)
-**Nombre**: 
-**Objetivo**: (DataLake?) Bases de datos que almacenan las facturas existentes.
-**Relaciones Pipeline**: [[B2_Cebollón]]  (Opcional)
-**Fuentes**:
-**Gid**: NULL
-
-### **BD_HistorialFacturas** (Opcional)
-**Nombre**: 
-**Objetivo**: (DataMart?) Hoja de control del estado de las facturas.
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: NULL
-
 ### **PreCashflow**
 **Nombre**: PreCashflow
 **Objetivo**: (DataMart?) Hoja que agrupa la información relevante para el Cashflow.
@@ -69,66 +55,6 @@ BBVA Historico_GlobalDocuments 3316
 
 ## **Helpers**  (Opcionales)
 **Objetivo**: Hojas de soporte a las hojas principales.
-
-### **Generales**
-
-#### **Rangos**
-**Nombre**: 
-**Objetivo**: Almacena el valor de last row de todas la hojas para que puedan extraerlo sin necesidad de tantos calculos.
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: NULL
-
-#### **ContextoHoja**
-**Nombre**: 
-**Objetivo**: Base de datos con las formulas y/o ejemplos de datos de las 5 primeras filas (la primera es el header) de todas las hojas del SpreadSheet. Funciona a modo de repositorio de formulas para un LLM o para el usuario.
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: NULL
-
-### **A2**
-
-#### **Form_AsigCostes **
-**Nombre**: 
-**Objetivo**: Soporte en el append a la "BD_PatronesMovimientos".
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: NULL
-
-### **C0**
-#### **PProveedores **
-**Nombre**: 
-**Objetivo**: Simplificación de "BD_PatronesMovimientos" con solo aquello que puede contener facturas. (Potencialmente eliminable modificando C0)
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: NULL
-
-### **H0**
-
-#### **FacturasFaltantes **
-**Nombre**: 
-**Objetivo**: Soporte visual para detectar las facturas pendientes de recibir/puntear.
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: NULL
-
-#### **Compr.Fras.Manual **
-**Nombre**: 
-**Objetivo**: Funcionaba para comprobar que todas las facturas hubiesen sido correctamente enviadas a ViaTribut antes de tener **C1** que lo realiza indicando donde se encuentra cada una.
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: NULL
-
-### **D0**
-
-#### **PreOdoo**
-**Nombre**: 
-**Objetivo**: Modifica la información relacionada a los movimientos para hacerlos exportables a **Odoo** mediante .
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: NULL
-
-
 
 ### **D1**
 
@@ -152,17 +78,3 @@ BBVA Historico_GlobalDocuments 3316
 **Relaciones Pipeline**: 
 **Fuentes**:
 **Gid**: ![[N_Caixa_$-ResumenPlataformas#Gid]]
-
-#### **Google **
-**Nombre**: 
-**Objetivo**: Control de las diferencias entre pagos y facturas de Google.
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: NULL
-
-#### **Nexmo **
-**Nombre**: 
-**Objetivo**: Control de las diferencias entre pagos y facturas de Nexmo.
-**Relaciones Pipeline**: 
-**Fuentes**:
-**Gid**: NULL

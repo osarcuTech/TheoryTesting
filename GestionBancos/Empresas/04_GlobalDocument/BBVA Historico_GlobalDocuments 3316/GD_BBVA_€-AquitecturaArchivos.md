@@ -31,36 +31,14 @@
     - NombreCarpeta:"Importados GD_BBVA_€-InformaciónFaltante"
     - UrlCarpeta: https://drive.google.com/drive/folders/1wjSR4Bkk1OV22TW0_cGXj2NI84vGHAMN
 
-## B2
-### **B2_Input**:
-    - NombreCarpeta: "N_Caixa_€-Facturación"
-    - UrlCarpeta: NULL
-
-### **B2_Output**:
-    - NombreCarpeta: "N_Caixa_€-Cuadrar"
-    - UrlCarpeta: NULL
-
-### **B2_Fail_1**:
-    - NombreCarpeta:"N_Caixa_€-InformaciónFaltante"
-    - UrlCarpeta: NULL
-
 ## C1
 ### **A1_Input**:
     - NombreCarpeta:
     - UrlCarpeta:
 
 ### **A1_Output**:
-    - NombreCarpeta:
-    - UrlCarpeta:
-
-## C2
-### **A1_Input**:
-    - NombreCarpeta:
-    - UrlCarpeta:
-
-### **A1_Output**:
-    - NombreCarpeta:
-    - UrlCarpeta:
+    - NombreCarpeta: "Enviadas Via Tribut"
+    - UrlCarpeta: https://drive.google.com/drive/u/0/folders/1RCyiv5d_cXyH_6xVTvZSDfw1zPFULezW
 
 ## E1
 
