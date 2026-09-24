@@ -1,17 +1,19 @@
+## Banco
+Norgenic Caixabank SEK-0314984
 
 ## A1
 ### **A1_Input**:
-    - NombreCarpeta: "Movimientos Importados GD_BBVA_€"
-    - UrlCarpeta: https://drive.google.com/drive/folders/17vqNYL-GilY14ZJx2y91cOZR300nji1Y
+    - NombreCarpeta: "Importados"
+    - UrlCarpeta: https://drive.google.com/drive/folders/1NQhIPTyfmAb_PiziUh2LL6j7aPNeCo1p
 
 ### **A1_Output**:
     - NombreCarpeta: "Procesados"
-    - UrlCarpeta: https://drive.google.com/drive/folders/10zVM4g1a7V1ZxCLJWrI3h-pOwQxyXCPm
+    - UrlCarpeta: https://drive.google.com/drive/folders/1wojvYTEF6ORzt5jZmu6BH23kbbXPCYQe
 
 ## A2
 ### **A2_Intput**:
     - NombreCarpeta: "Historicos"
-    - UrlCarpeta: https://drive.google.com/drive/folders/1JSVrIftfzDu6cjXS73H2NNPI_vLL7d0Z
+    - UrlCarpeta: https://drive.google.com/drive/folders/1Pkw1zaLo6Mi1gSK0TXw5o84IaOTZsEem
 
 ## E1
 

@@ -1,17 +1,19 @@
+## Banco
+Norgenic€LaCaixa-0087231
 
 ## A1
 ### **A1_Input**:
-    - NombreCarpeta: "Movimientos Importados GD_BBVA_€"
-    - UrlCarpeta: https://drive.google.com/drive/folders/17vqNYL-GilY14ZJx2y91cOZR300nji1Y
+    - NombreCarpeta: "Importados"
+    - UrlCarpeta: https://drive.google.com/drive/folders/1QL47EotyHLz4xhEssWw_MWIAvqDKcsg1
 
 ### **A1_Output**:
     - NombreCarpeta: "Procesados"
-    - UrlCarpeta: https://drive.google.com/drive/folders/10zVM4g1a7V1ZxCLJWrI3h-pOwQxyXCPm
+    - UrlCarpeta: https://drive.google.com/drive/folders/1cRbWmTcyRwk9hDW4kk0steRgvz94h63F
 
 ## A2
 ### **A2_Intput**:
     - NombreCarpeta: "Historicos"
-    - UrlCarpeta: https://drive.google.com/drive/folders/1JSVrIftfzDu6cjXS73H2NNPI_vLL7d0Z
+    - UrlCarpeta: https://drive.google.com/drive/folders/1geu4FEONN-vpnWkKFXCtAlUW5I6Vg4YU
 
 
 ## B1
@@ -20,47 +22,34 @@
     - UrlCarpeta: https://drive.google.com/drive/folders/17WR7hfIet-hcpFrjHW0agwHsC8KnM1Sn
 
 ### **B1_Output**:
-    - NombreCarpeta:"Cuadrar"
-    - UrlCarpeta: https://drive.google.com/drive/folders/17WR7hfIet-hcpFrjHW0agwHsC8KnM1Sn
+    - NombreCarpeta: "00_Facturación"
+    - UrlCarpeta: https://drive.google.com/drive/folders/1TWAWtb7FC52wXBHsJdB5YHOw4w70rZmu
 
 ### **B1_Fail_1**:
-    - NombreCarpeta:"Unknown_InformaciónFaltante"
-    - UrlCarpeta: https://drive.google.com/drive/folders/1wjSR4Bkk1OV22TW0_cGXj2NI84vGHAMN
-
-### **B1_Fail_2**:
-    - NombreCarpeta:"Importados GD_BBVA_€-InformaciónFaltante"
-    - UrlCarpeta: https://drive.google.com/drive/folders/1wjSR4Bkk1OV22TW0_cGXj2NI84vGHAMN
+    - NombreCarpeta: "Unknown_InformaciónFaltante"
+    - UrlCarpeta: https://drive.google.com/drive/folders/1bTGnOXd4LBDPF3sBWIA6BnG6Rw64MFS6
 
 ## B2
 ### **B2_Input**:
-    - NombreCarpeta: "N_Caixa_€-Facturación"
-    - UrlCarpeta: NULL
+    - NombreCarpeta: "00_Facturación"
+    - UrlCarpeta: https://drive.google.com/drive/folders/1TWAWtb7FC52wXBHsJdB5YHOw4w70rZmu
 
 ### **B2_Output**:
-    - NombreCarpeta: "N_Caixa_€-Cuadrar"
-    - UrlCarpeta: NULL
+    - NombreCarpeta: "Cuadrar"
+    - UrlCarpeta: https://drive.google.com/drive/folders/1XQ-zoNbAz910MdC_zrb5hjUc-zl8UtuX
 
 ### **B2_Fail_1**:
-    - NombreCarpeta:"N_Caixa_€-InformaciónFaltante"
-    - UrlCarpeta: NULL
+    - NombreCarpeta:"00_InformaciónFaltante"
+    - UrlCarpeta: https://drive.google.com/drive/folders/1nzTB7wdzOGMQp9y29Xla9ov2di8WvLBm
 
 ## C1
-### **A1_Input**:
-    - NombreCarpeta:
-    - UrlCarpeta:
+### **C1_Input**:
+    - NombreCarpeta: "02_Facturas"
+    - UrlCarpeta: https://drive.google.com/drive/folders/1AGrGOYxmdsbhB93qakXi9_FGHRaxk0FZ
 
-### **A1_Output**:
-    - NombreCarpeta:
-    - UrlCarpeta:
-
-## C2
-### **A1_Input**:
-    - NombreCarpeta:
-    - UrlCarpeta:
-
-### **A1_Output**:
-    - NombreCarpeta:
-    - UrlCarpeta:
+### **C1_Output**:
+    - NombreCarpeta: "Facturas recibida Via Tribut"
+    - UrlCarpeta: https://drive.google.com/drive/u/0/folders/1Qv87-wZz9sigBOCN6VIANKXO06s0Uf89
 
 ## E1
 

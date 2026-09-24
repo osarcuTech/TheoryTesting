@@ -1,12 +1,14 @@
+## Banco
+HistoricoMovimientosTaxgov_BBVA-3309
 
 ## A1
 ### **A1_Input**:
-    - NombreCarpeta: "Movimientos Importados GD_BBVA_€"
-    - UrlCarpeta: https://drive.google.com/drive/folders/17vqNYL-GilY14ZJx2y91cOZR300nji1Y
+    - NombreCarpeta: "Importados"
+    - UrlCarpeta: https://drive.google.com/drive/folders/1WEzwTnLXE0rCC9o644YhwJXpx5dyMONJ
 
 ### **A1_Output**:
     - NombreCarpeta: "Procesados"
-    - UrlCarpeta: https://drive.google.com/drive/folders/10zVM4g1a7V1ZxCLJWrI3h-pOwQxyXCPm
+    - UrlCarpeta: https://drive.google.com/drive/folders/1TG5KLc24CJTv-rzkSr9NbaSde17oprqy
 
 ## A2
 ### **A2_Intput**:
@@ -21,46 +23,24 @@
 
 ### **B1_Output**:
     - NombreCarpeta:"Cuadrar"
-    - UrlCarpeta: https://drive.google.com/drive/folders/17WR7hfIet-hcpFrjHW0agwHsC8KnM1Sn
+    - UrlCarpeta: https://drive.google.com/drive/folders/1XV7GEcgZ7hvQUKySPVEalwdFSPFuEI4D
 
 ### **B1_Fail_1**:
     - NombreCarpeta:"Unknown_InformaciónFaltante"
-    - UrlCarpeta: https://drive.google.com/drive/folders/1wjSR4Bkk1OV22TW0_cGXj2NI84vGHAMN
+    - UrlCarpeta: https://drive.google.com/drive/folders/1bTGnOXd4LBDPF3sBWIA6BnG6Rw64MFS6
 
 ### **B1_Fail_2**:
-    - NombreCarpeta:"Importados GD_BBVA_€-InformaciónFaltante"
-    - UrlCarpeta: https://drive.google.com/drive/folders/1wjSR4Bkk1OV22TW0_cGXj2NI84vGHAMN
-
-## B2
-### **B2_Input**:
-    - NombreCarpeta: "N_Caixa_€-Facturación"
-    - UrlCarpeta: NULL
-
-### **B2_Output**:
-    - NombreCarpeta: "N_Caixa_€-Cuadrar"
-    - UrlCarpeta: NULL
-
-### **B2_Fail_1**:
-    - NombreCarpeta:"N_Caixa_€-InformaciónFaltante"
-    - UrlCarpeta: NULL
+    - NombreCarpeta:"Importados T_BBVA_€-InformaciónFaltante"
+    - UrlCarpeta: https://drive.google.com/drive/folders/1QiokouvHtBmH-TtZ5ftQ7-meRTvy1upa
 
 ## C1
-### **A1_Input**:
-    - NombreCarpeta:
-    - UrlCarpeta:
+### **C1_Input**:
+    - NombreCarpeta: "BD_Facturas"
+    - UrlCarpeta: https://drive.google.com/drive/folders/1Lriax7B4cQ4GssdESjOngprW__jCzOgG
 
-### **A1_Output**:
-    - NombreCarpeta:
-    - UrlCarpeta:
-
-## C2
-### **A1_Input**:
-    - NombreCarpeta:
-    - UrlCarpeta:
-
-### **A1_Output**:
-    - NombreCarpeta:
-    - UrlCarpeta:
+### **C1_Output**:
+    - NombreCarpeta: "Facturas recibida Via Tribut"
+    - UrlCarpeta: https://drive.google.com/drive/u/0/folders/1iO5RdxgWSm8dv6Ovee6SCrs4Bj5bQqAy
 
 ## E1
 

@@ -1,17 +1,19 @@
+## Banco
+Norgenic€Sabadell-0002297039
 
 ## A1
 ### **A1_Input**:
-    - NombreCarpeta: "Movimientos Importados GD_BBVA_€"
-    - UrlCarpeta: https://drive.google.com/drive/folders/17vqNYL-GilY14ZJx2y91cOZR300nji1Y
+    - NombreCarpeta: "Importados"
+    - UrlCarpeta: https://drive.google.com/drive/folders/1xOcsh1HW31HHI5LW9tcGIxlQ5sCgC3Uz
 
 ### **A1_Output**:
     - NombreCarpeta: "Procesados"
-    - UrlCarpeta: https://drive.google.com/drive/folders/10zVM4g1a7V1ZxCLJWrI3h-pOwQxyXCPm
+    - UrlCarpeta: https://drive.google.com/drive/folders/1jJig0_Ued7-rKUoAC8HGmavgRtOAFZFf
 
 ## A2
 ### **A2_Intput**:
     - NombreCarpeta: "Historicos"
-    - UrlCarpeta: https://drive.google.com/drive/folders/1JSVrIftfzDu6cjXS73H2NNPI_vLL7d0Z
+    - UrlCarpeta: https://drive.google.com/drive/folders/1GUtYW4xYDq9d8nBlTq6x_3LTdBUu5HGh
 
 ## E1
 

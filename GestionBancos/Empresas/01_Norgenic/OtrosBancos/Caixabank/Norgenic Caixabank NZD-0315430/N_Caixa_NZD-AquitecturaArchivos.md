@@ -1,17 +1,19 @@
+## Banco
+Norgenic Caixabank NZD-0315430
 
 ## A1
 ### **A1_Input**:
-    - NombreCarpeta: "Movimientos Importados GD_BBVA_€"
-    - UrlCarpeta: https://drive.google.com/drive/folders/17vqNYL-GilY14ZJx2y91cOZR300nji1Y
+    - NombreCarpeta: "Importados"
+    - UrlCarpeta: https://drive.google.com/drive/folders/1J3pRjxYkcW-R0cBagsyWugWIgOPxMYDH
 
 ### **A1_Output**:
     - NombreCarpeta: "Procesados"
-    - UrlCarpeta: https://drive.google.com/drive/folders/10zVM4g1a7V1ZxCLJWrI3h-pOwQxyXCPm
+    - UrlCarpeta: https://drive.google.com/drive/folders/1k9gSphHW4vnAtY9-id0wjF0ePfFxo8o7
 
 ## A2
 ### **A2_Intput**:
     - NombreCarpeta: "Historicos"
-    - UrlCarpeta: https://drive.google.com/drive/folders/1JSVrIftfzDu6cjXS73H2NNPI_vLL7d0Z
+    - UrlCarpeta: https://drive.google.com/drive/folders/1Pkw1zaLo6Mi1gSK0TXw5o84IaOTZsEem
 
 ## E1
 
