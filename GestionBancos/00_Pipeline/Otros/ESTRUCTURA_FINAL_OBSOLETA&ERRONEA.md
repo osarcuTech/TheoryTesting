@@ -258,9 +258,6 @@ TheoryTesting/
 
 ### Mejoras Futuras al Vault
 
-1. **Crear notas de KPIs individuales**
-   - Metricas_Importacion.md, Metricas_Asignacion.md, etc.
-   - Referenciadas desde KPIs_Sistema
 
 2. **Agregar diagramas Excalidraw**
    - Flowcharts dibujados para cada componente

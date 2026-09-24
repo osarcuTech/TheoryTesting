@@ -9,7 +9,7 @@ related: [[01_Arquitectura_General]], [[H0_ControlHumano]], [[H2_ComprobacionCie
 
 ## 🎯 Objetivo
 
-Ejecutar el archivado de movimientos validados por [[H0_ControlHumano|H0]] hacia su ubicación final en [[N€Caixa-BD_Banco]].
+Ejecutar el [[N_Caixa_€-99_ArchivarMovimientosGS|script]] de archivado de movimientos validados por [[H0_ControlHumano|H0]] hacia su ubicación final en [[N_Caixa_€-BD_Banco]].
 
 Es el punto de **no retorno** del pipeline: una vez archivada, la factura está cerrada en el ciclo.
 
