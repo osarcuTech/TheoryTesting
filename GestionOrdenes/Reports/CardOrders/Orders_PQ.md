@@ -1,0 +1,22 @@
+Este link muestra el contenido de todas las columnas:
+https://docs.solidgate.com/finance/financial-reports/financial-entries/#view-report-data
+ 
+Para este documento necesitarás saber de power query.
+Cabe recalcar que no se ha encontrado nada de valor en este Reporte.
+ 
+Para poder tener el documento en un formato utilizable tenemos que hacer los 3 primeros pasos de esto:
+let
+    Origen = Csv.Document(File.Contents("C:\Users\Oscar Ardevol\Downloads\card_orders_120526_125700_tfn_e_docshub_org.csv"),[Delimiter=";", Columns=57, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+    #"Encabezados promovidos" = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
+    #"Valor reemplazado" = Table.ReplaceValue(#"Encabezados promovidos",".",",",Replacer.ReplaceText,{"order_amount", "processing_amount", "transaction_amount"}),
+    #"Tipo cambiado" = Table.TransformColumnTypes(#"Encabezados promovidos",{{"order_id", type text}, {"order_status", type text}, {"order_type", type text}, {"order_amount", Int64.Type}, {"order_currency", type text}, {"order_description", type text}, {"order_customer_account_id", type text}, {"order_customer_email", type text}, {"order_customer_first_name", type text}, {"order_customer_last_name", type text}, {"order_geo_country", type text}, {"order_ip_address", type text}, {"order_error_code", Int64.Type}, {"order_platform", type text}, {"order_fraudulent", type text}, {"order_is_secured", type logical}, {"order_created_at", type datetime}, {"order_updated_at", type datetime}, {"mid", type text}, {"traffic_source", type text}, {"processing_amount", Int64.Type}, {"processing_currency", type text}, {"psp_order_id", type text}, {"provider_payment_id", type text}, {"order_metadata", type text}, {"payment_type", type text}, {"transaction_id", type text}, {"transaction_operation", type text}, {"transaction_status", type text}, {"transaction_descriptor", type text}, {"transaction_amount", Int64.Type}, {"transaction_currency", type text}, {"transaction_refund_reason", type text}, {"transaction_refund_reason_code", Int64.Type}, {"transaction_created_at", type datetime}, {"transaction_updated_at", type datetime}, {"transaction_authorization_type", type text}, {"transaction_card_holder", type text}, {"transaction_billing_details.address", type text}, {"transaction_billing_details.zip", Int64.Type}, {"transaction_billing_details.city", type text}, {"transaction_billing_details.state", type text}, {"transaction_billing_details.country", type text}, {"transaction.card.bank", type text}, {"transaction.card.bin", Int64.Type}, {"transaction.card.brand", type text}, {"transaction.card.country", type text}, {"transaction.card.number", type text}, {"transaction.card.card_exp_month", Int64.Type}, {"transaction.card.card_exp_year", Int64.Type}, {"transaction.card.card_type", type text}, {"transaction.card.card_id", type text}, {"routing.mid", type text}, {"routing.mid_descriptor", type text}, {"routing.route_id", type text}, {"routing.cascade_number", Int64.Type}, {"routing.segment_id", type text}})
+in
+    #"Tipo cambiado"
+ 
+Versión resumida:
+let
+    Origen = BD,
+    #"Filas filtradas" = Table.SelectRows(Origen, each ([order_status] <> "auth_failed") and ([transaction_authorization_type] = "")),
+    #"Columnas quitadas" = Table.RemoveColumns(#"Filas filtradas",{"order_type", "order_description", "order_customer_account_id", "order_customer_email", "order_customer_first_name", "order_customer_last_name", "order_geo_country", "order_ip_address", "order_error_code", "order_platform", "order_fraudulent", "order_is_secured", "traffic_source", "order_metadata", "payment_type", "transaction_id", "transaction_status", "processing_amount", "processing_currency", "transaction_amount", "transaction_currency", "transaction_card_holder", "transaction_billing_details.address", "transaction_billing_details.zip", "transaction_billing_details.city", "transaction_billing_details.state", "transaction_billing_details.country", "transaction.card.bank", "transaction.card.bin", "transaction.card.brand", "transaction.card.country", "transaction.card.number", "transaction.card.card_exp_month", "transaction.card.card_exp_year", "transaction.card.card_type", "transaction.card.card_id", "routing.mid", "transaction_refund_reason", "transaction_refund_reason_code", "transaction_authorization_type", "transaction_descriptor", "routing.cascade_number", "routing.segment_id", "routing.route_id"})
+in
+    #"Columnas quitadas"
