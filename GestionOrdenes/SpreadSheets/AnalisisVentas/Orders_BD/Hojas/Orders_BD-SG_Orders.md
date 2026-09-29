@@ -22,91 +22,91 @@ https://hub.solidgate.com/payments/order?updated_at_from=2026-09-21&order_id=&cu
 
 ### **A**
 - **Nombre**: 'Order_id'
-- **Contenido**: 
+- **Contenido**: Id de la orden de Solidgate.
 - **Formula/s**: NULL
 - **Referencias**: 
 - **Fuente**: [[SolidgateOrdersUpsert]]
 
 ### **B**
 - **Nombre**: 'created_at'
-- **Contenido**: 
+- **Contenido**: Momento del registro de la orden.
 - **Formula/s**: NULL
 - **Referencias**: 
 - **Fuente**: [[SolidgateOrdersUpsert]]
 
 ### **C**
 - **Nombre**: 'updated_at'
-- **Contenido**: 
+- **Contenido**: Momento del registro de un cambio en la orden.
 - **Formula/s**: NULL
 - **Referencias**: 
 - **Fuente**: [[SolidgateOrdersUpsert]]
 
 ### **D**
 - **Nombre**: 'Amount'
-- **Contenido**: 
+- **Contenido**: Precio en la moneda de origen.
 - **Formula/s**: NULL
 - **Referencias**: 
 - **Fuente**: [[SolidgateOrdersUpsert]]
 
 ### **E**
 - **Nombre** : 'Currency'
-- **Contenido**: 
+- **Contenido**: Moneda en la que se hace la transacción.
 - **Formula/s**: NULL
 - **Referencias**: 
 - **Fuente**: [[SolidgateOrdersUpsert]]
 
 ### **F**
 - **Nombre**: 'Status'
-- **Contenido**: 
+- **Contenido**: settled/refunded indica si es un venta o un reembolso.
 - **Formula/s**: NULL
 - **Referencias**: 
 - **Fuente**: [[SolidgateOrdersUpsert]]
 
 ### **G**
 - **Nombre**: 'Descriptor'
-- **Contenido**: 
+- **Contenido**: Ayuda a diferenciar las plataformas de pago.
 - **Formula/s**: NULL
 - **Referencias**: 
 - **Fuente**: [[SolidgateOrdersUpsert]]
 
 ### **H**
 - **Nombre**: 'Channel'
-- **Contenido**: .
+- **Contenido**: Ayuda a detectar por donde llega.
 - **Formula/s**: NULL
 - **Referencias**: 
 - **Fuente**: [[SolidgateOrdersUpsert]]
 
 ### **I**
 - **Nombre**: 'Card number'.
-- **Contenido**: 
+- **Contenido**: Tarjeta del cliente.
 - **Formula/s**: NULL
 - **Referencias**: 
 - **Fuente**: [[SolidgateOrdersUpsert]]
 
 ### **J**
 - **Nombre**: 'Email'.
-- **Contenido**: 
+- **Contenido**: Correo del cliente.
 - **Formula/s**: NULL
 - **Referencias**: 
 - **Fuente**: [[SolidgateOrdersUpsert]]
 
 ### **K**
 - **Nombre**: 'Connector'
-- **Contenido**: 
+- **Contenido**: Plataforma de pago.
 - **Formula/s**: [[Orders_BD-SG_Orders_Formulas#F1]]
 - **Referencias**: 
 - **Fuente**: 
 
 ### **L**
 - **Nombre**: 'Product'
-- **Contenido**: Clasificación de los tipos de gasto.
+- **Contenido**: Tipo de producto.
 - **Formula/s**:  [[Orders_BD-SG_Orders_Formulas#F2]]
 - **Referencias**: 
 - **Fuente**: 
 
 ### **M**
 - **Nombre**: 'Amount'
-- **Contenido**: .
+- **Contenido**: Importe en moneda de pago.
 - **Formula/s**: [[Orders_BD-SG_Orders_Formulas#F3]]
 - **Referencias**:  
 - **Fuente**: 
@@ -127,14 +127,14 @@ https://hub.solidgate.com/payments/order?updated_at_from=2026-09-21&order_id=&cu
 
 ### **P**
 - **Nombre**: 'F_created_at'
-- **Contenido**: .
+- **Contenido**: [[Orders_BD-SG_Orders#B]] en formato utilizable para las query's de los data marts.
 - **Formula/s**: [[Orders_BD-SG_Orders_Formulas#F4]]
 - **Referencias**: 
 - **Fuente**: 
 
 ### **Q**
 - **Nombre**: 'F_updated_at'
-- **Contenido**: .
+- **Contenido**: [[Orders_BD-SG_Orders#C]] en formato utilizable para las query's de los data marts.
 - **Formula/s**: [[Orders_BD-SG_Orders_Formulas#F5]]
 - **Referencias**: 
 - **Fuente**: 
