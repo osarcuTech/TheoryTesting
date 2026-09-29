@@ -199,28 +199,7 @@ Explicitly mark assumptions as UNKNOWN or INFERRED.
                     Documentation.md
 
 
- ## Una mejora que haría desde el principio
 
- En vez de limitarlo rígidamente a *"las dos primeras filas con fórmula"*, implementaría:
-
- > *2 ejemplos de fórmula por columna + detección de cambios de patrón.*
-
- Porque puede ocurrir:
-
-
-E2 = A2 + B2
-E3 = A3 + B3
-...
-E500 = IF(A500="", "", A500+B500)
-
-
- Las primeras dos fórmulas no necesariamente representan todo el comportamiento de la columna.
-
- Podemos detectar que *E2:E499 tienen un patrón y E500 otro*, y avisar al LLM.
-
- Eso haría el extractor bastante más robusto.
-
----
 
  ### Mi recomendación concreta
 
