@@ -8,7 +8,7 @@ Sí. El problema clave es que *para documentar un Google Sheet no basta con extr
 
  Para cada pestaña del Spreadsheet, generaríamos una representación intermedia con:
 
- - Nombre de la pestaña.
+- Nombre de la pestaña.
 - Rango usado.
 - *Headers* de cada columna.
 - Tipo de dato aproximado de cada columna.
@@ -21,7 +21,7 @@ Sí. El problema clave es que *para documentar un Google Sheet no basta con extr
 
  Mi primera opción sería usar la *Google Sheets API* para obtener simultáneamente:
 
- - FORMULA
+- FORMULA
 - FORMATTED_VALUE / UNFORMATTED_VALUE
 
  La API permite pedir las fórmulas directamente (valueRenderOption=FORMULA), evitando tener que intentar reconstruirlas a partir del XLSX.
@@ -178,7 +178,7 @@ Explicitly mark assumptions as UNKNOWN or INFERRED.
              └───────────────┼───────────────┘
                              ▼
                   ┌─────────────────────┐
-                  │ Formula Analyzer     │
+                  │ Formula Analyzer    │
                   │                     │
                   │ • normalize         │
                   │ • dependencies      │
@@ -187,7 +187,7 @@ Explicitly mark assumptions as UNKNOWN or INFERRED.
                              │
                              ▼
                   ┌─────────────────────┐
-                  │ LLM Context (.md)  │
+                  │ LLM Context (.md)   │
                   └──────────┬──────────┘
                              │
                              ▼
