@@ -143,3 +143,33 @@ function appendBD(){
   Logger.log("[appendBD] Finalizado");
 }
 ```
+## Rendimiento
+
+### Análisis general de las pruebas
+
+Los registros de varias ejecuciones muestran el mismo patrón general, aunque la duración total cambia entre ejecuciones (aproximadamente **4–7 minutos**):
+
+- **La mayor parte del tiempo, aproximadamente el 80–90 %, se consume en operaciones con las hojas de destino**: inicializar/obtener hojas, calcular la última fila y leer las UID. Son esperas del orden de **decenas de segundos hasta alrededor de 1–2 minutos por operación** en las pruebas observadas.
+- **La preparación del archivo fuente y el procesamiento local son muy rápidos** comparados con el total: normalmente del orden de **segundos o menos del 1 %** de la ejecución para unos 100 movimientos.
+- **La deduplicación local y las escrituras en bloque no aparecen como los cuellos de botella dominantes** en los logs disponibles. En particular, el registro temporal redondeado a segundos no permite medir con precisión las escrituras cuando los mensajes anterior y posterior aparecen en el mismo segundo.
+- **Alrededor del 10–20 % puede quedar entre el último mensaje y el aviso de fin**. Ese tramo no está asociado a una llamada concreta instrumentada, por lo que no se puede atribuir todavía a una causa determinada.
+
+Estos porcentajes y rangos son orientativos, no garantías: el registro de Apps Script muestra marcas temporales con precisión limitada y las duraciones varían entre ejecuciones. La conclusión más consistente es que optimizar el trabajo local de JavaScript tendría poco impacto mientras las llamadas de lectura e inicialización de Sheets sigan dominando.
+
+### `getLastRow()` en `BD_Banco`
+
+La última fila general de `BD_Banco` puede ser mayor que la última UID de la columna A porque `getLastRow()` considera datos de cualquier columna. Una causa potencial es la casilla booleana de la columna H usada por `N_Caixa_€-99_ArchivarMovimientosGS.md`; si tiene valores en filas posteriores, puede extender la última fila detectada. Es una explicación probable que debe confirmarse inspeccionando la hoja.
+
+Por ello, el destino de las nuevas filas se determina con la primera celda vacía de la columna A, que es la columna índice continua, y no con `getLastRow() + 1`. La lectura de UID existente se reutiliza también para la deduplicación, evitando una lectura adicional.
+
+### Qué medir a continuación
+
+Los logs antes y después de cada llamada permiten identificar si en una nueva prueba persisten las esperas en `getSheetBDB()`, `getLastRow()` o `getValues()`. Conviene comparar varias ejecuciones con un volumen similar y anotar filas leídas; si esas lecturas continúan concentrando la mayor parte del tiempo, la optimización debería enfocarse en el acceso a las hojas y en el tamaño de los rangos, sin excluir filas que contengan datos válidos.
+
+### Hipótesis: efecto del archivado y de las fórmulas
+
+El proceso `N_Caixa_€-99_ArchivarMovimientosGS.md` no reduce necesariamente el volumen total de movimientos gestionados: desplaza movimientos desde `Movimientos` a `BD_Banco`, aunque algunas columnas no se trasladan. Por tanto, el número histórico total puede mantenerse o crecer, mientras disminuye el conjunto de movimientos activos en `Movimientos`.
+
+La mejora de rendimiento que se espera notar más es la reducción de celdas con fórmulas al retirar filas archivadas de `Movimientos`. Menos fórmulas podrían reducir el recálculo que acompaña a las operaciones en la hoja. Es una hipótesis razonable, pero los logs actuales no miden el recálculo ni el número de fórmulas; todavía no prueban que esa sea la causa de las demoras.
+
+Para evaluar esta hipótesis a lo largo del tiempo, conviene registrar por ejecución los movimientos nuevos importados y archivados, las filas activas de `Movimientos`, las filas históricas de `BD_Banco` y los tiempos de cada etapa. Si el tiempo baja después de archivar mientras disminuyen las filas activas/fórmulas, pese a que `BD_Banco` conserva o aumenta sus registros, eso apoyaría la hipótesis de que la carga de fórmulas activas influye en el rendimiento.
