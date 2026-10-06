@@ -3,19 +3,39 @@ Contiene las variables globales de "N_Caixa_€" como resumen de su "arquitectur
 
 ```JS
 
+
 // ── Constantes: nombres de hojas ────────────────────────────
 
 const ss_id = "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw"
-Logger.log(`[G0] Antes de openById: ${new Date().toISOString()}`);
-const ss = SpreadsheetApp.openById(ss_id);
-Logger.log(`[G1] Después de openById: ${new Date().toISOString()}`);
-
 const gid_Mov = 1963712436
 const gid_BDB = 1089991841
-const sheetBDB = ss.getSheetById(gid_BDB);
+
+// ── Getters con lazy loading ────────────────────────────────────
+let _ss        = null;
+let _sheetBDB  = null;
+let _sheet_Mov = null;
+
+function getSpreadsheet() {
+  if (!_ss) _ss = SpreadsheetApp.openById(ss_id); // solo si está vacío
+  return _ss;
+}
+
+function getSheetBDB() {
+  if (!_sheetBDB) _sheetBDB = getSpreadsheet().getSheetById(gid_BDB);
+  return _sheetBDB;
+}
+
+function getSheetMov() {
+  if (!_sheet_Mov) _sheet_Mov = getSpreadsheet().getSheetById(gid_Mov);
+  return _sheet_Mov;
+}
+
+
+
+// const sheetBDB = SpreadsheetApp.openById(ss_id).getSheetById(gid_BDB);
 //Logger.log(`[G2] Después de getSheetById(BDB): ${new Date().toISOString()}`);
 
-const sheet_Mov = ss.getSheetById(gid_Mov);
+// const sheet_Mov = SpreadsheetApp.openById(ss_id).getSheetById(gid_Mov);
 //Logger.log(`[G3] Después de getSheetById(Mov): ${new Date().toISOString()}`);
 
 
@@ -56,7 +76,7 @@ const BDB_PCONABLE   = 16;  // P  ← Movimientos_cuenta!R
 const BDB_UBICACION  = 17;  // Q  ← Movimientos_cuenta!S
 const BDB_ID_ENVIADA = 18;  // R  ← Movimientos_cuenta!T
 const BDB_CARPETA    = 19;  // S  ← Movimientos_cuenta!U
-const totalColsBDB  = sheetBDB.getLastColumn()
+// const totalColsBDB  = getSheetBDB().getLastColumn()
 //Logger.log(`[G4] Después de getLastColumn: ${new Date().toISOString()}`);
 
 

@@ -7,15 +7,13 @@ Consulta las variables globales de [[N_Caixa_€-ConstantesGlobalesScriptsGS|Var
 //Formulario de variables a rellenar que varian entre documentos. Contiene: 
 let idCarpetaDrive = "1QL47EotyHLz4xhEssWw_MWIAvqDKcsg1" //id de la carpeta donde se sacara la información a importar (idCarpetaDrive)
 let filaInicioDatosImportados = 4 //fila en la que empieza a haber datos que nos interesen (filaInicioDatosImportados) ya que variara entre bancos
-
+let lastColumn = 7  // numCols: UID+Fecha+FechaValor+Movimiento+MasDatos+Importe+Saldo   → getRange(1, 1, lr, lastColumn)
 //Plantilla del flujo para Importar MovimientosBancarios al Historico.
 
-let sheetBDB_Range = sheetBDB.getRange(1,1,sheetBDB.getLastRow(),sheetBDB.getLastColumn()).getValues(); //No hay riesgo de que LastColumn sobreeescriba datos ya que solo deja pasar los no existentes y que, por lo tanto aún no pueden tener mas datos que los aportados por el banco.
-let sheetBDB_RangeUIDs = sheetBDB.getRange(1,1,sheetBDB.getLastRow(),1).getValues();
-let folderMovimientosBancarios = DriveApp.getFolderById(idCarpetaDrive);
+
 
 function getMovimientosBancarios(){
-  
+  let folderMovimientosBancarios = DriveApp.getFolderById(idCarpetaDrive);
   Logger.log(folderMovimientosBancarios.getFiles())
   var listMovim = folderMovimientosBancarios.getFilesByType("application/vnd.google-apps.spreadsheet");
   
@@ -68,22 +66,28 @@ function getMovimientosBancarios(){
 function appendBD(){
   let arrayImportadosUID = getMovimientosBancarios();
   //Logger.log(arrayImportadosUID);
-  //sheetBDB_Range es el rango en el que se encuentran los datos de la base de datos historica. La definimos al principio de todo el codigo.  
- 
-  let sheetBDB_RangeUid = sheetBDB_Range.map((row, index) => [sheetBDB_RangeUIDs[index][0], ...row]); //Extraemos los valores de UID del Historico para compararlos con la UID de arrayImportadosUID
 
-  //let historicoUIDs = sheetBDB_RangeUid.map(row => row[0]); //Extraemos las uids del historico para filtrar los importados que no coincidan.
-  let historicoUIDs = new Set(sheetBDB_RangeUid.map(row => row[0]));
+  const sheetBDB   = getSheetBDB();   // ← una sola vez
+  const sheetMov   = getSheetMov();   // ← una sola vez
+  const bdb_lr     = sheetBDB.getLastRow();  // ← evita llamarlo 3 veces
+  //sheetBDB_Range es el rango en el que se encuentran los datos de la base de datos historica. La definimos al principio de todo el codigo.  
+  let sheetBDB_Range = sheetBDB.getRange(1, 1, bdb_lr, lastColumn).getValues(); 
+  
+  let historicoUIDs = new Set(sheetBDB_Range.map(row => row[0]));
   //let noCoincidencia = arrayImportadosUID.filter(row => !historicoUIDs.includes(row[0]));
   let noCoincidencia = arrayImportadosUID.filter(row => !historicoUIDs.has(row[0])); //Filtramos las no coincidentes para importarlas.
   //Logger.log(noCoincidencia.length);
   let noCoincidenciaImportar = noCoincidencia.map(row => row.slice(0)); //Sacamos el array a importar quitando la columna de UID's
   //Logger.log(noCoincidenciaImportar);
 
-  let importarEnHistorico = sheetBDB.getRange(sheetBDB.getLastRow()+1,1,noCoincidenciaImportar.length,noCoincidenciaImportar[0].length).setValues(noCoincidenciaImportar)
+  let importarEnHistorico = sheetBDB.getRange(bdb_lr+1,1,noCoincidenciaImportar.length,noCoincidenciaImportar[0].length).setValues(noCoincidenciaImportar)
 //Esta linea puede presentar error si se añade información (ej: celda de validación) en otras filas y/o si la hoja no tiene mas filas para rellenar.
 
+// → leemos col A hasta getLastRow() como techo y buscamos el primer vacío
+const sheet_Mov_lr = sheetMov.getRange(1, Mov_UID, sheetMov.getLastRow(), 1).getValues().findIndex(row => row[0] === '') + 1; 
+// +1: findIndex devuelve el índice 0-based del primer vacío, que coincide con el nº de fila 1-based del último dato
+
 // Nuevas variables para el apend en Movimientos que sustituye a la query.
-  let importarEnMovimientos = sheet_Mov.getRange(sheet_Mov.getLastRow()+1,1,noCoincidenciaImportar.length,noCoincidenciaImportar[0].length).setValues(noCoincidenciaImportar)
+  let importarEnMovimientos = sheetMov.getRange(sheet_Mov_lr,1,noCoincidenciaImportar.length,noCoincidenciaImportar[0].length).setValues(noCoincidenciaImportar)
 }
 ```
