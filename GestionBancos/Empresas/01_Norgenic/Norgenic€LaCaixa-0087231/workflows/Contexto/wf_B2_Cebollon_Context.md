@@ -1,59 +1,113 @@
-# Contexto del Workflow: Autom.Fact.Norgenic (Loop Over Invoice List) Cebollón
+# Contexto del workflow: Cebollón (wf_B2_Cebollon)
 
-## Descripción General
-Este workflow de n8n (Cebollon.json), conocido como "Cebollón", detecta la adición de facturas (PDF) en una carpeta específica de Google Drive (https://drive.google.com/drive/folders/1TWAWtb7FC52wXBHsJdB5YHOw4w70rZmu). Extrae el texto del PDF, usa regex y condiciones para clasificar por empresa proveedora (e.g., Ahrefs, ViaTribut, Movistar, GoogleAds) y extraer información clave como nºFactura, Empresa Vendedora, Fecha Factura, ImporteTotal, Empresa Compradora. Formatea la fecha y renombra el PDF (e.g., fecha_empresa_Importe_Moneda_NumeroFactura_Norgenic.pdf). Verifica si los campos requeridos están completos; si sí, envía a carpeta "Cuadrar" (para punteo via fórmulas o workflow "Puntear" futuro) y actualiza el Sheet histórico bancario (ID: inferido de previos, Sheet: HistóricoFacturas) agregando el nombre si no existe (eliminando duplicados). Si no cumplen requisitos, envía a revisión manual con alerta por email.
+## Propósito y alcance
 
-En un contexto E2E/BPO, este workflow filtra y prepara facturas para reconciliación financiera, integrándose con workflows previos (e.g., Gmail_Metralleta para ingesta) y futuros (Puntear para matching con movimientos bancarios), optimizando procesos de facturación, compliance y auditoría.
+Workflow de n8n para recoger archivos de la carpeta de facturación de Norgenic, extraer datos de facturas/recibos, clasificarlos por proveedor, renombrarlos y moverlos a la carpeta de conciliación o a revisión. También registra archivos procesados en la hoja de Google Sheets **BD Facturas** y, para los elementos que pasan por esa rama, lanza el workflow **Fras.Odoo**.
 
-## Análisis Detallado del Flujo de Trabajo
-### Nodos Principales y Funciones
-- **Google Drive Trigger1**: Trigger que detecta creación de archivos en carpeta (polling cada minuto).
-- **Google Drive**: Lista las facturas detectadas en la carpeta.
-- **Loop Over Items1**: Es usado para procesar las facturas una a una, por separado.
-- **Google Drive2**: Descarga la factura individual para procesamiento adicional.
-- **Extract from File**: Extrae contenido PDF.
-- **Edit Fields Pre_If's**: Asigna 'text' del PDF para regex.
-- **Switch Empresa Vendedora** (y muchos switches como Switch, Switch1): Clasifica por proveedor usando contains en text (e.g., "Ahrefs", "VIA TRIBUT", "TELEFONICA", "Google Ads").
-- **Edit Fields [Proveedor]**: Asigna "Empresa Vendedora" (e.g., "Vitaly Health Services", "Canva", "Nexmo Ltd.").
-- **If TG not empty**: Verifica campos no vacíos (nºFactura, Empresa Vendedora, Fecha Factura, ImporteTotal, Empresa Compradora).
-- **Code**: JavaScript para extraer y formatear campos (fecha, empresa, nºFactura, importe, moneda) via regex.
-- **Edit Fields ImporteTotalFormatado**: Formatea ImporteTotal a number (reemplaza '.' y ',').
-- **Edit Fields Nombre Factura2**: Construye nombre PDF formateado.
-- **Google Drive5**: Mueve a "Cuadrar" (URL: https://drive.google.com/drive/folders/1XQ-zoNbAz910MdC_zrb5hjUc-zl8UtuX).
-- **Google Drive6**: Actualiza nombre en Drive.
-- **Google Drive4**: Mueve a revisión (URL: https://drive.google.com/drive/folders/1nzTB7wdzOGMQp9y29Xla9ov2di8WvLBm).
-- **Gmail4**: Envía alerta revisión.
-- **If5**: Chequea NombreFactura no vacío. !!!Incorrecto, repassar¡¡¡
-- **Google Sheets3**: Lee Sheet histórico facturas (ID: 1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw, Sheet: 1963712436).
-- **Edit Fields1**: Asigna NombreFactura.
-- **Remove Duplicates**: Compara para evitar duplicados.
-- **Filter**: Filtra vacíos.
-- **Edit Fields**: Prepara para append.(Inactivo)
-- **Google Sheets**: Appendea a histórico facturas.
-- **When Executed by Another Workflow**: Para llamada externa.
+El JSON contiene 111 nodos. La extracción está configurada para PDF; no se observa un nodo OCR. Por tanto, no debe darse por hecho que procesa correctamente PDF escaneados sin texto extraíble.
 
-El JSON está altamente truncado, con muchos Edit Fields para proveedores específicos (e.g., Everapi, Coremind, Laravel) y switches para subcasos (e.g., Telefonica/Movistar).
+## Entradas y arquitectura
 
-### Conexiones y Flujo Lógico
-Flujo lineal con ramificaciones por switches y loops:
+Hay dos entradas:
+
+- **Google Drive Trigger1**: vigila la carpeta de facturación, cada minuto, ante la creación de archivos. La configuración del trigger acepta todos los tipos de archivo, aunque el nodo de extracción posterior está configurado para PDF.
+- **When Executed by Another Workflow**: permite iniciar el flujo desde otro workflow.
+
+Ambas entradas —el trigger de Drive y **When Executed by Another Workflow**— pasan por **VariablesGlobales**. Este nodo centraliza los IDs de Sheets y las carpetas y alimenta tanto la búsqueda de archivos en Drive como la lectura de la hoja mediante **Google Sheets4**. Así, la ejecución iniciada por otro workflow usa la misma configuración y entra en el flujo de control de duplicados que la ejecución iniciada por el trigger.
+
+En la ruta automática, el nodo **Google Drive** consulta los archivos de la carpeta configurada; no se ve que filtre esa búsqueda por el ID del archivo recién notificado por el trigger. Conviene comprobar si se pretende recorrer todo el contenido de la carpeta en cada ejecución.
+
+La secuencia principal es:
+
+```text
+Google Drive Trigger1
+  → VariablesGlobales
+  → Google Drive (listar archivos de la carpeta)
+  → Google Sheets4 (leer BD Facturas)
+  → Loop Over Items1
+  → Google Drive2 (descargar archivo)
+  → Extract from File (extraer PDF)
+  → Edit Fields Pre_If's (conservar texto extraído)
+  → Switch Empresas Norgenic y rutas auxiliares
+  → asignación de datos por proveedor/formato
+  → validación de campos
+      ├─ válidos: formatear fecha e importe, construir nombre,
+      │           mover a Cuadrar y renombrar
+      └─ incompletos/no clasificados: carpeta de revisión y Gmail4
+  → al terminar el lote: deduplicación y comparación con BD Facturas
+      → añadir UID y ejecutar Fras.Odoo
+
+When Executed by Another Workflow
+  → VariablesGlobales
+  → mismas ramas de Google Drive y Google Sheets4
 ```
-[Triggers: Google Drive Trigger1 / When Executed by Another Workflow] → Google Drive → Loop Over Items1 (bucle sobre items) → Google Drive2 → Extract from File → Edit Fields Pre_If's → Switch Empresa Vendedora → [ramas por proveedor: Edit Fields [Proveedor] → If TG not empty → [True: Code → Edit Fields ImporteTotalFormatado → Edit Fields Nombre Factura2 → Google Drive5 → Google Drive6 → If5 → Google Sheets3 → Edit Fields1 → Remove Duplicates → Filter → Edit Fields → Google Sheets (append histórico)] | False: Google Drive4 → Gmail4 (revisión/alert)]
-```
-- Input: Metadatos de archivo nuevo (ID, name).
-- Outputs: PDFs renombrados/movidos; actualizaciones en Sheet histórico.
 
-### Mapeo de Datos
-- Campos extraídos via regex en Code: Fecha Factura (DD/MM/YYYY → YYYY-MM-DD), Empresa Vendedora, nºFactura ([w d -]+), ImporteTotal ([d.,]+ €), Moneda (w+ default EUR).
-- Asignados: Empresa Compradora ("Norgenic" inferido), ImporteTotal formateado (number).
-- NombreFactura: Concatenación (FechaFormateada_EmpresaVendedora_ImporteTotal_Moneda_nºFactura_EmpresaCompradora).
-- Histórico: Appendea NombreFactura; matching/duplicados via NombreFactura.
-- Posibles issues: Regex fallan si formatos varían; truncado oculta mappings completos.
+## Clasificación y extracción
 
-## Contexto para Informe E2E/BPO
-En un flujo E2E/BPO, este workflow procesa facturas post-ingesta (de Gmail_Metralleta), preparando para punteo:
-- **Eficiencia**: Regex automatiza extracción/clasificación; loop maneja batches; timeout 180s para PDFs grandes.
-- **Integraciones**: Google Drive (triggers/moves), Gmail (alertas), Sheets (histórico bancario linkeado a workflows como ImportarMovimientos).
-- **Gestión de Errores**: Fallback revisión con alerta; deduplicación previene entradas repetidas. Sugerencia: Agregar OCR si PDFs escaneados; validar regex con samples.
-- **Escalabilidad y Optimización**: Para BPO, extender switches para nuevos proveedores; integrar AI (e.g., OpenAI para extracción si regex falla). Monitoreo: % facturas auto-procesadas, tiempo por factura. Enlace a "Cuadrar"/"Puntear" facilita reconciliación con movimientos bancarios; histórico asegura traceability para auditorías.
-- **Seguridad**: Credenciales OAuth; carpetas segregadas por empresa.
-Este contexto ayuda a un LLM/MCP a evaluar integración en cadena facturación, optimizaciones o depuración para informes BPO.
+**Switch Empresas Norgenic** clasifica el texto extraído mediante reglas de coincidencia y tiene decenas de rutas específicas. Las ramas **If** y los switches secundarios distinguen variantes de formato, por ejemplo factura frente a recibo, y casos de Movistar. Los nodos **Edit Fields [proveedor]** asignan campos específicos; no existe un único extractor genérico que aplique la misma regex a todos los proveedores.
+
+Entre las rutas configuradas se encuentran Ahrefs, ViaTribut, GitHub, OpenRouter, Celonis/Make, Slack, Bright Data, LinkedIn, Movistar, Google Ads, OpenAI, Canva, Odoo, Anthropic, Paddle, Endesa, Cloudflare y otros proveedores. La lista exacta puede cambiar al editar el JSON.
+
+Los campos comprobados por las validaciones principales son:
+
+- `nºFactura`
+- `Empresa Vendedora`
+- `Fecha Factura`
+- `ImporteTotal`
+- `Empresa Compradora`
+
+Las tres validaciones `If TG not empty`, `If TG not empty1` y `If TG not empty2` exigen que esos cinco campos no estén vacíos. La rama OpenAI tiene rutas separadas para importes en dólares y euros; usa expresiones adaptadas a sus formatos de factura. También se ajustó la extracción de recibos para aceptar variantes de “Visa” y “ending in”.
+
+### Formatos y nombre generado
+
+- **Code** convierte fechas reconocidas a `DD/MM/YYYY` (no a `YYYY-MM-DD`). Contempla formatos en inglés y español y una fecha ISO de entrada.
+- **Edit Fields ImporteTotalFormatado** cambia ciertos importes con formato decimal estadounidense, como `1,234.56` o `1234.56`, a texto con coma decimal, como `1234,56`. No garantiza que el resultado sea un valor numérico ni convierte todos los formatos.
+- **Edit Fields Nombre Factura2** construye `NombreFactura` concatenando, con guiones bajos: fecha formateada, proveedor, importe, moneda, número de factura y comprador.
+- **Google Drive5** mueve el archivo válido a **Cuadrar** y **Google Drive6** actualiza su nombre.
+
+## Revisión de incidencias
+
+Las ramas de validación general que no cumplen los campos requeridos llevan a **Google Drive4** y después a **Gmail4** para revisión. El switch principal y algunos switches secundarios también tienen una ruta hacia esa carpeta cuando no clasifican el documento.
+
+Hay una excepción relevante: la salida falsa de **If TG not empty2** (la validación añadida para OpenAI) no está conectada. Si una factura de esas rutas no cumple los requisitos, el JSON no la envía por esa salida a revisión.
+
+## Registro y deduplicación
+
+**VariablesGlobales** contiene la configuración actual:
+
+- Carpeta de entrada: [Facturación](https://drive.google.com/drive/folders/1TWAWtb7FC52wXBHsJdB5YHOw4w70rZmu)
+- Carpeta de salida: [Cuadrar](https://drive.google.com/drive/folders/1XQ-zoNbAz910MdC_zrb5hjUc-zl8UtuX)
+- Carpeta de incidencias: [Información faltante](https://drive.google.com/drive/folders/1nzTB7wdzOGMQp9y29Xla9ov2di8WvLBm)
+- Documento de Google Sheets: `1e32wr8Lx5e-P6uGApQDnXFxnIQyijgGX6QAITRPZLKI`
+- Pestaña (GID): `707381639`
+
+El control de registro usa **BD Facturas**, no una hoja llamada `HistóricoFacturas`:
+
+1. **Google Sheets4** lee la columna `A:A` de la pestaña configurada.
+2. **Remove Duplicates** compara por `id`; **Filter** conserva items con `name`.
+3. **Compare Datasets** compara `UID` de Sheets con `name` de Google Drive.
+4. **Edit Fields1** conserva `name` e `id`; **Google Sheets** añade `name` como `UID` a la hoja.
+5. Desde **Edit Fields1** también se inicia **Execute Workflow FrasOdoo**, configurado con `waitForSubWorkflow: false` (la ejecución no espera a que termine).
+
+Así, el identificador que se registra es el nombre del archivo —no `NombreFactura`— y la deduplicación no se basa en la concatenación usada para renombrarlo. La rama conectada de **Compare Datasets** debe seguir verificándose si cambia la configuración de sus salidas.
+
+## Comprobaciones pendientes al mantener el JSON
+
+- **If5** no comprueba que `NombreFactura` exista: evalúa si `name` no contiene `Receipt` **o** no contiene `Ahrefs`. Solo su salida verdadera está conectada al retorno del loop. Conviene confirmar que esta condición y el combinador `or` son intencionados.
+- La validación falsa de **If TG not empty2** no tiene ruta conectada, a diferencia de las ramas generales que notifican incidencias.
+- No se aprecia una configuración explícita de timeout de 180 segundos en el JSON; no asumir ese límite en documentación operativa.
+- La carpeta **Cuadrar** y **Fras.Odoo** forman parte del flujo actual. El JSON no muestra un workflow de “Puntear” ni una conciliación directa con movimientos bancarios.
+
+## Documentación relacionada
+
+- [[N_Caixa_€-Aquitectura]] — arquitectura general del banco y sus bases de datos.
+- [[N_Caixa_€-AquitecturaArchivos#B2_Input|CarpetasB2]] — carpetas de entrada, salida y revisión que usa el workflow.
+- [[N_Caixa_€-Pipeline#B1|PipelineB1]] — workflow upstream que clasifica facturas del grupo.
+- [[N_Caixa_€-Pipeline#B2|PipelineB2]] — función de Cebollón en el proceso de facturas.
+- [[N_Caixa_€-BD_Facturas_B2]] — hoja auxiliar rápida donde Cebollón registra los UID.
+- [[N_Caixa_€-BD_Facturas]] — base principal de facturas, que importa los UID desde la hoja auxiliar.
+- [[N_Caixa_€-HistorialFacturas]] — hoja que desglosa y expone los datos de factura para su uso posterior.
+- [[wf_B1_GmailMetralleta_Context]] — contexto del workflow de clasificación previo a B2.
+- [[H0_ControlHumano]] — proceso manual relacionado con la revisión y conciliación de facturas.
+- [[FrasOdoo.json]] — workflow llamado por Cebollón después de comparar los archivos con la BD de facturas.
+- [[wf_C0_PuntearFacturas_context]] — contexto de asociación de facturas y movimientos; el pipeline lo marca como deprecado.

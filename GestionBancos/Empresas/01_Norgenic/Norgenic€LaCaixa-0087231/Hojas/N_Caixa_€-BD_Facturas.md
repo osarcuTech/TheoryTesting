@@ -16,14 +16,14 @@ Base de datos de las Facturas.
 1422409426
 
 ## 📋 Descripción de las columnas
-
+Se cambio el input por rendimiento de lectura y escritura de este Spreadsheet debido al gran volumen de datos/formulas.
 
 ### **A**
   - **Nombre**: UID
   - **Contenido**: Heredado de [[N_Caixa_€-Pipeline#B2]]. UID de las facturas.
-  - **Formula/s**: NULL
+  - **Formula/s**: =IMPORTRANGE("https://docs.google.com/spreadsheets/d/1e32wr8Lx5e-P6uGApQDnXFxnIQyijgGX6QAITRPZLKI/edit?gid=707381639#gid=707381639"; "BD_Facturas!A:A")
   - **Referencias**: ; [[N_Caixa_€-Rangos#A]]
-  - **Fuentes:**: [[wf_B2_Cebollon_Context]]
+  - **Fuentes:**: [[N_Caixa_€-BD_Facturas_B2]]
   
 ### **B**
   - **Nombre**: 'Def_UID'

@@ -2855,7 +2855,7 @@
             {
               "id": "9d8217eb-ae6d-4c33-9da8-c0f7a7c03d4f",
               "name": "ImporteTotal",
-              "value": "={{ $if($json.text.includes(\"Payment Receipt\"), $json.text.match(/\\nPayment \\(visa 3513\\): .\\$(\\d+.\\d+)/)[1], $('Edit Fields Pre_If\\'s').item.json.text.match(/\\nTotal due \\$(.+)\\n/)[1]) }}",
+              "value": "={{ \n  $if(\n    $json.text.includes(\"Payment Receipt\"),\n    $json.text.match(/\\nPayment \\((?:v|V)isa (?:ending in )?3513\\): .\\$(\\d+.\\d+)/)[1],\n    $('Edit Fields Pre_If\\'s').item.json.text.match(/\\nTotal due \\$(.+)\\n/)[1]\n  ) }}",
               "type": "string"
             },
             {
@@ -3578,59 +3578,6 @@
       ],
       "id": "e5c9c77a-1bf9-4bc2-b804-4666f8b96e67",
       "name": "Edit Fields Marcil"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "a54606ad-f81c-4ead-83c1-75fc10999fdf",
-              "name": "nºFactura",
-              "value": "={{$json.text.match(/\\nInvoice number (.+).+(\\d{4})\\n/).slice(1).join(\"-\")\n}}",
-              "type": "string"
-            },
-            {
-              "id": "c5920399-30b1-430c-b6b9-e6e0a5aa07a2",
-              "name": "Empresa Vendedora",
-              "value": "=OpenAI",
-              "type": "string"
-            },
-            {
-              "id": "67e4a818-834d-417a-b601-15da60adebf1",
-              "name": "Fecha Factura",
-              "value": "={{ $('Edit Fields Pre_If\\'s').item.json.text.match(/\\nDate of issue (.*?)\\n/)[1] }}",
-              "type": "string"
-            },
-            {
-              "id": "9d8217eb-ae6d-4c33-9da8-c0f7a7c03d4f",
-              "name": "ImporteTotal",
-              "value": "={{ $('Edit Fields Pre_If\\'s').item.json.text.match(/\\nAmount due \\$(.+) USD/)[1] }}",
-              "type": "string"
-            },
-            {
-              "id": "342f65eb-6e90-4890-8e6f-0d466fdcc056",
-              "name": "Empresa Compradora",
-              "value": "=Norgenic-{{ $json.text.match(/(.+)@norgenic.com/)[1]}}",
-              "type": "string"
-            },
-            {
-              "id": "861ee31a-1fd8-4312-a667-1aeebeba378e",
-              "name": "Moneda",
-              "value": "$",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        1920,
-        4900
-      ],
-      "id": "b92a4ae7-2bc4-4e56-80e6-b363cab312bb",
-      "name": "Edit Fields OpenAI"
     },
     {
       "parameters": {
@@ -5021,12 +4968,12 @@
         "operation": "append",
         "documentId": {
           "__rl": true,
-          "value": "=1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
+          "value": "={{ $('VariablesGlobales').item.json.ID_GoogleSheets }}",
           "mode": "id"
         },
         "sheetName": {
           "__rl": true,
-          "value": "1422409426",
+          "value": "={{ $('VariablesGlobales').item.json.GID_GoogleSheets_BD_Facturas }}",
           "mode": "id"
         },
         "columns": {
@@ -5047,50 +4994,18 @@
               "type": "string",
               "canBeUsedToMatch": true,
               "removed": false
-            },
-            {
-              "id": "Def_UID",
-              "displayName": "Def_UID",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "TipoInput",
-              "displayName": "TipoInput",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Definitivo",
-              "displayName": "Definitivo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
             }
           ],
           "attemptToConvertTypes": false,
           "convertFieldsToString": false
         },
-        "options": {
-          "useAppend": true
-        }
+        "options": {}
       },
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
       "position": [
         -1900,
-        4820
+        4780
       ],
       "id": "cceac0ba-69ba-4d2f-81ce-c08891434732",
       "name": "Google Sheets",
@@ -5104,6 +5019,8 @@
     },
     {
       "parameters": {
+        "compare": "selectedFields",
+        "fieldsToCompare": "id",
         "options": {}
       },
       "type": "n8n-nodes-base.removeDuplicates",
@@ -5232,7 +5149,7 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "position": [
         -3540,
-        5100
+        4940
       ]
     },
     {
@@ -6201,7 +6118,7 @@
             {
               "id": "9d8217eb-ae6d-4c33-9da8-c0f7a7c03d4f",
               "name": "=ImporteTotal",
-              "value": "={{ $('Edit Fields Pre_If\\'s').item.json.text.match(/\\nTOTAL \\€ ((?:\\d,)?\\d+(.\\d*)?)\\n/)[1] }}",
+              "value": "={{ $('Edit Fields Pre_If\\'s').item.json.text.match(/\\nTOTAL (?:\\€|\\$) ((?:\\d,)?\\d+(.\\d*)?)\\n/)[1] }}",
               "type": "string"
             },
             {
@@ -6537,7 +6454,7 @@
         },
         "sheetName": {
           "__rl": true,
-          "value": "={{ $json.GID_GoogleSheets_B_Facturas }}",
+          "value": "={{ $json.GID_GoogleSheets_BD_Facturas }}",
           "mode": "id"
         },
         "options": {
@@ -6581,7 +6498,7 @@
       "typeVersion": 2.3,
       "position": [
         -2300,
-        4660
+        4620
       ],
       "id": "3961bba6-ffe8-4a0f-b3c7-e3bfc146afbe",
       "name": "Compare Datasets"
@@ -6610,7 +6527,7 @@
       "typeVersion": 3.4,
       "position": [
         -2080,
-        4720
+        4680
       ],
       "id": "031e51f0-3b77-444c-9be1-d67eca3eec74",
       "name": "Edit Fields1"
@@ -6639,7 +6556,7 @@
       "typeVersion": 1.2,
       "position": [
         -1900,
-        4640
+        4600
       ],
       "id": "844031f9-2cf4-40db-8fe2-1b9187019b12",
       "name": "Execute Workflow FrasOdoo"
@@ -6685,13 +6602,13 @@
             {
               "id": "5205e717-9391-4f94-808b-a47333b865f8",
               "name": "ID_GoogleSheets",
-              "value": "1sZeGfiuG7Ab9jx14_-oaQZTtrhIohlx5dhYoSgZCOuw",
+              "value": "1e32wr8Lx5e-P6uGApQDnXFxnIQyijgGX6QAITRPZLKI",
               "type": "string"
             },
             {
               "id": "8a9db986-9cec-4e96-80a3-6e32b976f27e",
-              "name": "GID_GoogleSheets_B_Facturas",
-              "value": "1422409426",
+              "name": "GID_GoogleSheets_BD_Facturas",
+              "value": "707381639",
               "type": "string"
             },
             {
@@ -6724,6 +6641,186 @@
       ],
       "id": "0bd877cf-e8af-4a42-8940-38067e9ca5d4",
       "name": "VariablesGlobales"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "44b6501c-2097-4f9b-936c-efbded3c4dfe",
+              "leftValue": "={{ $json['nºFactura'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "2e908f16-0470-400b-9dd1-ff168d02da56",
+              "leftValue": "={{ $json['Empresa Vendedora'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "aff9a6f5-7ae7-4179-a5b8-bfd6df90611c",
+              "leftValue": "={{ $json['Fecha Factura'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "31a01e5b-cb71-48cc-a055-d23f395edb41",
+              "leftValue": "={{ $json.ImporteTotal }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "02393d2c-3dec-49af-b89f-d61736132e0a",
+              "leftValue": "={{ $json['Empresa Compradora'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2220,
+        4920
+      ],
+      "id": "21e50d4b-957a-4a5f-b456-47c031165100",
+      "name": "If TG not empty2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a54606ad-f81c-4ead-83c1-75fc10999fdf",
+              "name": "nºFactura",
+              "value": "={{$json.text.match(/\\nInvoice number (.+).+(\\d{4})\\n/).slice(1).join(\"-\")\n}}",
+              "type": "string"
+            },
+            {
+              "id": "c5920399-30b1-430c-b6b9-e6e0a5aa07a2",
+              "name": "Empresa Vendedora",
+              "value": "=OpenAI",
+              "type": "string"
+            },
+            {
+              "id": "67e4a818-834d-417a-b601-15da60adebf1",
+              "name": "Fecha Factura",
+              "value": "={{ $('Edit Fields Pre_If\\'s').item.json.text.match(/\\nDate of issue (.*?)\\n/)[1] }}",
+              "type": "string"
+            },
+            {
+              "id": "9d8217eb-ae6d-4c33-9da8-c0f7a7c03d4f",
+              "name": "ImporteTotal",
+              "value": "={{ $('Edit Fields Pre_If\\'s').item.json.text.match(/\\nAmount due \\$(.+) USD/)[1] }}",
+              "type": "string"
+            },
+            {
+              "id": "342f65eb-6e90-4890-8e6f-0d466fdcc056",
+              "name": "Empresa Compradora",
+              "value": "=Norgenic-{{ $json.text.match(/(.+)@norgenic.com/)[1]}}",
+              "type": "string"
+            },
+            {
+              "id": "861ee31a-1fd8-4312-a667-1aeebeba378e",
+              "name": "Moneda",
+              "value": "$",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1700,
+        4820
+      ],
+      "id": "b92a4ae7-2bc4-4e56-80e6-b363cab312bb",
+      "name": "Edit Fields OpenAI$"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a54606ad-f81c-4ead-83c1-75fc10999fdf",
+              "name": "nºFactura",
+              "value": "={{$json.text.match(/\\nInvoice number (INV)\\D+(.+)\\D+(\\d{1,6})\\n/).slice(1).join(\"-\").trim()\n}}",
+              "type": "string"
+            },
+            {
+              "id": "c5920399-30b1-430c-b6b9-e6e0a5aa07a2",
+              "name": "Empresa Vendedora",
+              "value": "=OpenAI",
+              "type": "string"
+            },
+            {
+              "id": "67e4a818-834d-417a-b601-15da60adebf1",
+              "name": "Fecha Factura",
+              "value": "={{ $('Edit Fields Pre_If\\'s').item.json.text.match(/\\nInvoice date (.*?)\\n/)[1] }}",
+              "type": "string"
+            },
+            {
+              "id": "9d8217eb-ae6d-4c33-9da8-c0f7a7c03d4f",
+              "name": "ImporteTotal",
+              "value": "={{ $('Edit Fields Pre_If\\'s').item.json.text.match(/\\nAmount due €(.+)/)[1] }}",
+              "type": "string"
+            },
+            {
+              "id": "342f65eb-6e90-4890-8e6f-0d466fdcc056",
+              "name": "Empresa Compradora",
+              "value": "=Norgenic-{{ $json.text.match(/(.+)@norgenic.com/)[1]}}",
+              "type": "string"
+            },
+            {
+              "id": "861ee31a-1fd8-4312-a667-1aeebeba378e",
+              "name": "Moneda",
+              "value": "€",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1700,
+        4980
+      ],
+      "id": "59a4367b-0177-4d0b-84f8-b32017fdd154",
+      "name": "Edit Fields OpenAI€"
     }
   ],
   "connections": {
@@ -7028,7 +7125,12 @@
         ],
         [
           {
-            "node": "Edit Fields OpenAI",
+            "node": "Edit Fields OpenAI$",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit Fields OpenAI€",
             "type": "main",
             "index": 0
           }
@@ -7713,17 +7815,6 @@
         ]
       ]
     },
-    "Edit Fields OpenAI": {
-      "main": [
-        [
-          {
-            "node": "If TG not empty",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Edit Fields Nestlé": {
       "main": [
         [
@@ -8099,7 +8190,7 @@
       "main": [
         [
           {
-            "node": "Google Drive",
+            "node": "VariablesGlobales",
             "type": "main",
             "index": 0
           }
@@ -8180,6 +8271,13 @@
             "type": "main",
             "index": 0
           }
+        ],
+        [
+          {
+            "node": "Google Drive4",
+            "type": "main",
+            "index": 0
+          }
         ]
       ]
     },
@@ -8199,7 +8297,13 @@
             "index": 0
           }
         ],
-        []
+        [
+          {
+            "node": "Google Drive4",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Edit Fields Movistar1": {
@@ -8258,6 +8362,13 @@
         [
           {
             "node": "Edit Fields Movistar3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Drive4",
             "type": "main",
             "index": 0
           }
@@ -8454,6 +8565,40 @@
           },
           {
             "node": "Google Sheets4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If TG not empty2": {
+      "main": [
+        [
+          {
+            "node": "If TG not empty",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Edit Fields OpenAI$": {
+      "main": [
+        [
+          {
+            "node": "If TG not empty2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields OpenAI€": {
+      "main": [
+        [
+          {
+            "node": "If TG not empty2",
             "type": "main",
             "index": 0
           }
