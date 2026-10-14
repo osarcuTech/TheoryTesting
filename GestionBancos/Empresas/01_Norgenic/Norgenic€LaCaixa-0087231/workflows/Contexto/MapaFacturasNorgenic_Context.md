@@ -7,6 +7,7 @@ tags:
 component: workflow
 related:
   - "[[N_Caixa_€-BD_Facturas_B2]]"
+  - "[[wf_C1_ReenvioFras_context]]"
   - "[[wf_C2_ComprobFras_Context]]"
 ---
 
@@ -16,7 +17,7 @@ related:
 
 Mantiene en [[N_Caixa_€-BD_Facturas_B2]] las referencias de Drive que permiten localizar cada factura: su archivo y carpeta en el árbol de facturas enviadas de Norgenic, y su archivo y ubicación en ViaTribut (VT), incluyendo si está en **Enviadas** o **Contabilizadas**.
 
-El workflow cumple una función de registro y localización, relacionada con el seguimiento de [[wf_C2_ComprobFras_Context]], pero no reproduce sus alertas ni sus comparaciones de discrepancias. Trabaja sobre una hoja de menor tamaño para reducir el tiempo de lectura y escritura frente a la base de facturas completa.
+El workflow está pensado para ejecutarse después del envío de facturas de [[wf_C1_ReenvioFras_context]]. Su función de registro y localización puede servir como alternativa y potencial reemplazo de [[wf_C2_ComprobFras_Context]], aunque no reproduce sus alertas ni sus comparaciones de discrepancias. Trabaja sobre una hoja de menor tamaño para reducir el tiempo de lectura y escritura frente a la base de facturas completa.
 
 ## Fuentes y destino
 
@@ -73,6 +74,7 @@ El workflow actualiza los datos de Norgenic y VT por separado. Los campos no inc
 
 - Definición exportada de n8n: [[MapaFacturasNorgenic]].
 - Hoja de destino y descripción de su tamaño/rendimiento: [[N_Caixa_€-BD_Facturas_B2]].
+- Workflow de envío de facturas tras el que está previsto ejecutarlo: [[wf_C1_ReenvioFras_context]].
 - Workflow previo de seguimiento/comprobación: [[wf_C2_ComprobFras_Context]].
 
 ---

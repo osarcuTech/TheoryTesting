@@ -106,7 +106,7 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.1,
       "position": [
-        1680,
+        1720,
         -240
       ],
       "id": "674d2fc5-3154-454d-85f1-1c2f6a6675ec",
@@ -172,7 +172,7 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        1120,
+        1140,
         -180
       ],
       "id": "7d7e42a6-3c20-4045-863b-6f7c5b9fae93",
@@ -189,7 +189,7 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.1,
       "position": [
-        1500,
+        1540,
         -80
       ],
       "id": "b48fef5b-e74a-4ed1-9311-1a2162d76d1e",
@@ -278,7 +278,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1320,
+        1360,
         -180
       ],
       "id": "ade1c23e-752b-4f63-85f0-a397d02ec4a6",
@@ -331,7 +331,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1320,
+        1360,
         0
       ],
       "id": "119f0016-e293-4577-9061-e04fe487c471",
@@ -389,7 +389,7 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.1,
       "position": [
-        1680,
+        1720,
         -500
       ],
       "id": "20d9eb22-f0d4-4582-9978-a5239aa99ae8",
@@ -436,7 +436,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        920,
+        1140,
         -340
       ],
       "id": "c2ac05d8-95b0-40f2-bdd3-ac79ec1f6f0a",
@@ -477,7 +477,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1320,
+        1360,
         -520
       ],
       "id": "ba27cf3d-1f0b-46cf-b84a-4105677f84f7",
@@ -579,7 +579,7 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        1120,
+        1140,
         -520
       ],
       "id": "351c4efb-c4c5-4066-9bb7-170649269b20",
@@ -615,7 +615,7 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        1120,
+        1140,
         0
       ],
       "id": "86406579-ece7-4873-a3b2-7f4a9acfe91b",
@@ -880,7 +880,7 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.6,
       "position": [
-        1860,
+        1900,
         -500
       ],
       "id": "82ce62a0-b594-422d-a0a9-7fdf7f7a7f5d",
@@ -1040,7 +1040,7 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.6,
       "position": [
-        1860,
+        1900,
         -240
       ],
       "id": "00390eab-8323-43fa-95fc-825fdcd16a8e",
@@ -1407,7 +1407,7 @@
       "type": "n8n-nodes-base.compareDatasets",
       "typeVersion": 2.3,
       "position": [
-        1680,
+        1720,
         -680
       ],
       "id": "3a71b34f-5f01-4955-aa44-ff25e01cde15",
@@ -1431,7 +1431,7 @@
       "type": "n8n-nodes-base.compareDatasets",
       "typeVersion": 2.3,
       "position": [
-        1680,
+        1720,
         -80
       ],
       "id": "8a9a926c-671a-4f90-86af-59a35fde6d76",
@@ -1439,37 +1439,16 @@
     },
     {
       "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "06bef2d9-09a4-4cee-b390-1b514dd493da",
-              "leftValue": "={{ $json.Id_Carpeta_Norgenic }}",
-              "rightValue": "",
-              "operator": {
-                "type": "string",
-                "operation": "empty",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
+        "inputSource": "passthrough"
       },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
+      "id": "5a59ebf8-ef6d-41ce-b077-36caef3c1b24",
+      "typeVersion": 1.1,
+      "name": "When Executed by Another Workflow",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
       "position": [
-        1120,
-        -360
-      ],
-      "id": "c421f30c-b402-4b5d-b9f7-6246eae2771a",
-      "name": "If"
+        -980,
+        -180
+      ]
     },
     {
       "parameters": {
@@ -1507,24 +1486,11 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1320,
-        -320
+        1360,
+        -340
       ],
       "id": "816f9fb8-f69d-4bd3-ba19-124872054a22",
-      "name": "If1"
-    },
-    {
-      "parameters": {
-        "inputSource": "passthrough"
-      },
-      "id": "5a59ebf8-ef6d-41ce-b077-36caef3c1b24",
-      "typeVersion": 1.1,
-      "name": "When Executed by Another Workflow",
-      "type": "n8n-nodes-base.executeWorkflowTrigger",
-      "position": [
-        -980,
-        -180
-      ]
+      "name": "If Not ContabilizadasOrPerdidas"
     }
   ],
   "connections": {
@@ -1686,7 +1652,7 @@
       "main": [
         [
           {
-            "node": "If",
+            "node": "If Not ContabilizadasOrPerdidas",
             "type": "main",
             "index": 0
           }
@@ -1891,32 +1857,30 @@
         []
       ]
     },
-    "If": {
+    "When Executed by Another Workflow": {
       "main": [
         [
           {
-            "node": "Compare Datasets",
-            "type": "main",
-            "index": 1
-          },
-          {
-            "node": "Merge2",
-            "type": "main",
-            "index": 1
-          }
-        ],
-        [
-          {
-            "node": "If1",
+            "node": "Edit Fields",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "If1": {
+    "If Not ContabilizadasOrPerdidas": {
       "main": [
         [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 1
+          },
+          {
+            "node": "Compare Datasets",
+            "type": "main",
+            "index": 1
+          },
           {
             "node": "Merge",
             "type": "main",
@@ -1929,17 +1893,6 @@
           }
         ],
         []
-      ]
-    },
-    "When Executed by Another Workflow": {
-      "main": [
-        [
-          {
-            "node": "Edit Fields",
-            "type": "main",
-            "index": 0
-          }
-        ]
       ]
     }
   },
