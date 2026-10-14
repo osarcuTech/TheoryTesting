@@ -1,0 +1,1951 @@
+{
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -980,
+        -340
+      ],
+      "id": "3e48e273-0128-4e50-b662-f6af815f4be0",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a6bb4693-9ba6-40a6-a939-c95a033d0b8e",
+              "name": "SpreadSheet_BD's_Id",
+              "value": "1e32wr8Lx5e-P6uGApQDnXFxnIQyijgGX6QAITRPZLKI",
+              "type": "string"
+            },
+            {
+              "id": "d8ead912-6332-48a5-bf89-d6a0d7195b64",
+              "name": "Sheet_BD_Facturas_GID",
+              "value": "707381639",
+              "type": "string"
+            },
+            {
+              "id": "792cc8c5-9215-488b-b657-dd56fbdd4407",
+              "name": "CarpetaVT_Id_Contabilizadas",
+              "value": "1GpSMeyONIrB6ca-U4kfFDFo_VPQrHBnf",
+              "type": "string"
+            },
+            {
+              "id": "9acad7cc-7d9e-4e99-815e-60da4f5628fb",
+              "name": "CarpetaVT_Id_Enviadas",
+              "value": "1Qv87-wZz9sigBOCN6VIANKXO06s0Uf89",
+              "type": "string"
+            },
+            {
+              "id": "5624b8b6-b665-4b06-9730-0c497f180638",
+              "name": "CarpetaFrasNorgenic",
+              "value": "1K1rmbFgagin3hXJMM0kQsdgh-OXc_Gp5",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -800,
+        -340
+      ],
+      "id": "f67bfb5b-21f9-4d8f-99f4-298b908d1dbc",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Edit Fields').item.json['SpreadSheet_BD\\'s_Id'] }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $('Edit Fields').item.json.Sheet_BD_Facturas_GID }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        -560,
+        -340
+      ],
+      "id": "6193a03a-d016-4e74-b43d-8bc16b39cb91",
+      "name": "Google Sheets1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hZcBoGBnLwH882Qs",
+          "name": "Google Sheets account Oscar"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "advanced": true,
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "name_Fra",
+              "field2": "name_Fra"
+            }
+          ]
+        },
+        "options": {
+          "fuzzyCompare": true
+        }
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.1,
+      "position": [
+        1680,
+        -240
+      ],
+      "id": "674d2fc5-3154-454d-85f1-1c2f6a6675ec",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "=",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $json.id }}",
+            "mode": "id"
+          },
+          "whatToSearch": "folders",
+          "includeTrashed": true
+        },
+        "options": {
+          "fields": [
+            "name",
+            "id"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        200,
+        -180
+      ],
+      "id": "d0de9005-f75d-44c5-aa79-9133d9c5633e",
+      "name": "Google Drive Carpetas Meses1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "=",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $json.id }}",
+            "mode": "id"
+          },
+          "whatToSearch": "files",
+          "includeTrashed": true
+        },
+        "options": {
+          "fields": [
+            "name",
+            "id"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1120,
+        -180
+      ],
+      "id": "7d7e42a6-3c20-4045-863b-6f7c5b9fae93",
+      "name": "Google Drive Facturas1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.1,
+      "position": [
+        1500,
+        -80
+      ],
+      "id": "b48fef5b-e74a-4ed1-9311-1a2162d76d1e",
+      "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "=",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $json.CarpetaVT_Id_Enviadas }}",
+            "mode": "id"
+          },
+          "whatToSearch": "folders",
+          "includeTrashed": true
+        },
+        "options": {
+          "fields": [
+            "name",
+            "id"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -560,
+        -100
+      ],
+      "id": "302af702-4a09-4276-85b6-1dd6312ea715",
+      "name": "Google Drive Carpetas Enviadas",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "bf91403c-ade3-4fdd-b3eb-356f1b72bcc2",
+              "name": "id_Fra",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "72029c6f-9d26-4630-95fc-055a142fce54",
+              "name": "name_Fra",
+              "value": "={{ $json.name.replaceAll('Copia de ','') }}",
+              "type": "string"
+            },
+            {
+              "id": "486feb2e-de58-4320-992e-d513c9de4c13",
+              "name": "id_Carpeta",
+              "value": "={{ $('Google Drive Carpetas Meses1').item.json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "dd6c9ca1-18e2-46e2-941b-963afd9acd24",
+              "name": "Nombre_Carpeta",
+              "value": "={{ $('Google Drive Carpetas Meses1').item.json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "cf7cc82c-efa5-4f79-838c-d3c02ca6202f",
+              "name": "Año_Carpeta",
+              "value": "={{ $('Google Drive Carpetas Enviadas').item.json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "6ff1ece0-2092-43e6-845c-d8a722624ca3",
+              "name": "Estado",
+              "value": "Enviadas",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1320,
+        -180
+      ],
+      "id": "ade1c23e-752b-4f63-85f0-a397d02ec4a6",
+      "name": "Edit Fields Enviadas"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "bf91403c-ade3-4fdd-b3eb-356f1b72bcc2",
+              "name": "id_Fra",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "72029c6f-9d26-4630-95fc-055a142fce54",
+              "name": "name_Fra",
+              "value": "={{ $json.name.replaceAll('Copia de ','') }}",
+              "type": "string"
+            },
+            {
+              "id": "486feb2e-de58-4320-992e-d513c9de4c13",
+              "name": "id_Carpeta",
+              "value": "={{ $('Google Drive Carpetas Meses2').item.json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "dd6c9ca1-18e2-46e2-941b-963afd9acd24",
+              "name": "Nombre_Carpeta",
+              "value": "={{ $('Google Drive Carpetas Meses2').item.json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "cf7cc82c-efa5-4f79-838c-d3c02ca6202f",
+              "name": "Año_Carpeta",
+              "value": "={{ $('Google Drive Carpetas ContabilizadoAños').item.json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "0b55ca06-3253-47f3-a738-6c1992cb917e",
+              "name": "Estado",
+              "value": "Contabilizadas",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1320,
+        0
+      ],
+      "id": "119f0016-e293-4577-9061-e04fe487c471",
+      "name": "Edit Fields Contabilizadas"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9f1e7c88-ef5c-4628-bec1-54d52e6c47a6",
+              "leftValue": "={{ $json.name }}",
+              "rightValue": "CONTABILIZADO",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -360,
+        -100
+      ],
+      "id": "96999d50-7ef6-4303-88cb-c458db93f3f9",
+      "name": "If NoContab"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "advanced": true,
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "name_Fra",
+              "field2": "name_Fra"
+            }
+          ]
+        },
+        "options": {
+          "fuzzyCompare": true
+        }
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.1,
+      "position": [
+        1680,
+        -500
+      ],
+      "id": "20d9eb22-f0d4-4582-9978-a5239aa99ae8",
+      "name": "Merge2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fac8d135-346c-42d2-acca-13966259974a",
+              "name": "row_number",
+              "value": "={{ $json.row_number }}",
+              "type": "number"
+            },
+            {
+              "id": "2c723d1a-7850-401d-b133-55fc5805834a",
+              "name": "name_Fra",
+              "value": "={{ $json.UID }}",
+              "type": "string"
+            },
+            {
+              "id": "e8cf9d86-c3f2-4191-81fd-ae93d18d3c78",
+              "name": "Id_Norgenic",
+              "value": "={{ $json.Id_Fra_Norgenic }}",
+              "type": "string"
+            },
+            {
+              "id": "f69c89bd-7a1e-4f78-8618-c7b939eb02ed",
+              "name": "Id_Carpeta_Norgenic",
+              "value": "={{ $json.Id_Carpeta_Norgenic }}",
+              "type": "string"
+            },
+            {
+              "id": "80809738-f503-4e82-a777-eb26dc5494aa",
+              "name": "Estado_Carpeta",
+              "value": "={{ $json.Estado_Carpeta }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        920,
+        -340
+      ],
+      "id": "c2ac05d8-95b0-40f2-bdd3-ac79ec1f6f0a",
+      "name": "Edit Fields BD_Fras"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "bf91403c-ade3-4fdd-b3eb-356f1b72bcc2",
+              "name": "id_Fra",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "72029c6f-9d26-4630-95fc-055a142fce54",
+              "name": "name_Fra",
+              "value": "={{ $json.name.replaceAll('Copia de ','') }}",
+              "type": "string"
+            },
+            {
+              "id": "486feb2e-de58-4320-992e-d513c9de4c13",
+              "name": "id_Carpeta",
+              "value": "={{ $('Google Drive Carpetas EnviadasVT').item.json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "cf7cc82c-efa5-4f79-838c-d3c02ca6202f",
+              "name": "Nombre_Carpeta",
+              "value": "={{ $('Google Drive Carpetas NorgenicAños').item.json.name }}/{{ $('Google Drive Carpetas Meses').item.json.name }}/{{ $('Google Drive Carpetas EnviadasVT').item.json.name }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1320,
+        -520
+      ],
+      "id": "ba27cf3d-1f0b-46cf-b84a-4105677f84f7",
+      "name": "Edit Fields Enviadas1"
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "=",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $json.CarpetaFrasNorgenic }}",
+            "mode": "id"
+          },
+          "whatToSearch": "folders",
+          "includeTrashed": true
+        },
+        "options": {
+          "fields": [
+            "name",
+            "id"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -560,
+        -520
+      ],
+      "id": "da7ed2b8-3bfe-4132-a0cd-6568f86ad353",
+      "name": "Google Drive Carpetas NorgenicAños",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "=",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $json.id }}",
+            "mode": "id"
+          },
+          "whatToSearch": "folders",
+          "includeTrashed": true
+        },
+        "options": {
+          "fields": [
+            "name",
+            "id"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        920,
+        -520
+      ],
+      "id": "39ea6d57-7617-4778-88a5-9d5be1aed23c",
+      "name": "Google Drive Carpetas EnviadasVT",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "=",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $json.id }}",
+            "mode": "id"
+          },
+          "whatToSearch": "files",
+          "includeTrashed": true
+        },
+        "options": {
+          "fields": [
+            "name",
+            "id"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1120,
+        -520
+      ],
+      "id": "351c4efb-c4c5-4066-9bb7-170649269b20",
+      "name": "Google Drive Facturas",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "=",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $json.id }}",
+            "mode": "id"
+          },
+          "whatToSearch": "files",
+          "includeTrashed": true
+        },
+        "options": {
+          "fields": [
+            "name",
+            "id"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1120,
+        0
+      ],
+      "id": "86406579-ece7-4873-a3b2-7f4a9acfe91b",
+      "name": "Google Drive Facturas2",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "=",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $json.id }}",
+            "mode": "id"
+          },
+          "whatToSearch": "folders",
+          "includeTrashed": true
+        },
+        "options": {
+          "fields": [
+            "name",
+            "id"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -200,
+        0
+      ],
+      "id": "e1eef310-1594-4c67-b450-094a66c9ca26",
+      "name": "Google Drive Carpetas ContabilizadoAños",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "=",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $json.id }}",
+            "mode": "id"
+          },
+          "whatToSearch": "folders",
+          "includeTrashed": true
+        },
+        "options": {
+          "fields": [
+            "name",
+            "id"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        200,
+        0
+      ],
+      "id": "31e10999-98dd-44dd-85c4-b27c9eeca0b1",
+      "name": "Google Drive Carpetas Meses2",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "=",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $json.id }}",
+            "mode": "id"
+          },
+          "whatToSearch": "folders",
+          "includeTrashed": true
+        },
+        "options": {
+          "fields": [
+            "name",
+            "id"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        200,
+        -520
+      ],
+      "id": "f2765f89-5641-4bbe-9bb2-b921252dd01a",
+      "name": "Google Drive Carpetas Meses",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "feXVSRveVKgVrnmP",
+          "name": "Google Drive account (Oscar)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Edit Fields').item.json['SpreadSheet_BD\\'s_Id'] }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $('Edit Fields').item.json.Sheet_BD_Facturas_GID }}",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $json.row_number }}",
+            "Id_Fra_Norgenic": "={{ $json.id_Fra }}",
+            "Nombre_Carpeta_Norgenic": "={{ $json.Nombre_Carpeta }}",
+            "Id_Carpeta_Norgenic": "={{ $json.id_Carpeta }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "UID",
+              "displayName": "UID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Id_Fra_Norgenic",
+              "displayName": "Id_Fra_Norgenic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Id_Carpeta_Norgenic",
+              "displayName": "Id_Carpeta_Norgenic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Nombre_Carpeta_Norgenic",
+              "displayName": "Nombre_Carpeta_Norgenic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Id_Fra_VT",
+              "displayName": "Id_Fra_VT",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Id_Carpeta_VT",
+              "displayName": "Id_Carpeta_VT",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Nombre_Carpeta",
+              "displayName": "Nombre_Carpeta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Año_Carpeta",
+              "displayName": "Año_Carpeta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Estado_Carpeta",
+              "displayName": "Estado_Carpeta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "n8n",
+              "displayName": "n8n",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        1860,
+        -500
+      ],
+      "id": "82ce62a0-b594-422d-a0a9-7fdf7f7a7f5d",
+      "name": "Google Sheets Norgenic",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hZcBoGBnLwH882Qs",
+          "name": "Google Sheets account Oscar"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Edit Fields').item.json['SpreadSheet_BD\\'s_Id'] }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $('Edit Fields').item.json.Sheet_BD_Facturas_GID }}",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $json.row_number }}",
+            "Id_Fra_VT": "={{ $json.id_Fra }}",
+            "Id_Carpeta_VT": "={{ $json.id_Carpeta }}",
+            "Año_Carpeta": "={{ $json['Año_Carpeta'] }}",
+            "Nombre_Carpeta": "={{ $json.Nombre_Carpeta }}",
+            "Estado_Carpeta": "={{ $json.Estado }}",
+            "n8n": "TRUE"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "UID",
+              "displayName": "UID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Id_Fra_Norgenic",
+              "displayName": "Id_Fra_Norgenic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Id_Carpeta_Norgenic",
+              "displayName": "Id_Carpeta_Norgenic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Nombre_Carpeta_Norgenic",
+              "displayName": "Nombre_Carpeta_Norgenic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Id_Fra_VT",
+              "displayName": "Id_Fra_VT",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Id_Carpeta_VT",
+              "displayName": "Id_Carpeta_VT",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Nombre_Carpeta",
+              "displayName": "Nombre_Carpeta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Año_Carpeta",
+              "displayName": "Año_Carpeta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Estado_Carpeta",
+              "displayName": "Estado_Carpeta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "n8n",
+              "displayName": "n8n",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        1860,
+        -240
+      ],
+      "id": "00390eab-8323-43fa-95fc-825fdcd16a8e",
+      "name": "Google Sheets VT",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hZcBoGBnLwH882Qs",
+          "name": "Google Sheets account Oscar"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9f1e7c88-ef5c-4628-bec1-54d52e6c47a6",
+              "leftValue": "={{ $json.name.match(/(\\d{1,2})/)[1].toNumber()}}",
+              "rightValue": "={{ $today.month-3 }}",
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        700,
+        0
+      ],
+      "id": "ca4f323a-d936-4e83-afc6-c59670975e34",
+      "name": "If Last3Months 2",
+      "notes": "Cuando estemos entre enero y marzo comprobara todas las carpetas, luego solo las de los últimos 3 meses."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9f1e7c88-ef5c-4628-bec1-54d52e6c47a6",
+              "leftValue": "={{ $json.name.match(/(\\d{1,2})/)[1].toNumber()}}",
+              "rightValue": "={{$if(\n//Si mes actual>3 mira los 3 últimos meses, sino comprueba todos.\n($today.month>=4), \n$today.month-3,\n$today.month-$today.month\n)}}",
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            },
+            {
+              "id": "15f3fb94-98ea-452a-a619-3b7ee79d84a5",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        700,
+        -180
+      ],
+      "id": "c9ab22d7-7935-4470-9212-0c3f77e977bf",
+      "name": "If Last3Months 1",
+      "notes": "Cuando estemos entre enero y marzo comprobara todas las carpetas, luego solo las de los últimos 3 meses."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9ab61d5f-335c-4f34-a551-3d6e90399aa2",
+              "leftValue": "={{ $('If NoContab').item.json.name.toNumber() }}",
+              "rightValue": "={{ $today.year }}",
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "1d44fcf8-284a-411f-b897-b0d8a06cc9bf",
+              "leftValue": "={{ $json.name.match(/(\\d{1,2})/)[1].toNumber() }}",
+              "rightValue": 10,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        420,
+        -180
+      ],
+      "id": "69fd7f3e-50f8-4c57-ad76-850959b9b60f",
+      "name": "Filter FinalAño-1 & AñoActual_1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9ab61d5f-335c-4f34-a551-3d6e90399aa2",
+              "leftValue": "={{ $('If WantedYears 2').item.json.name.toNumber() }}",
+              "rightValue": "={{ $today.year }}",
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "1d44fcf8-284a-411f-b897-b0d8a06cc9bf",
+              "leftValue": "={{ $json.name.match(/(\\d{1,2})/)[1].toNumber() }}",
+              "rightValue": 10,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        420,
+        0
+      ],
+      "id": "58728172-2b0b-4374-aa18-5180e982aa29",
+      "name": "Filter FinalAño-1 & AñoActual_2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9f1e7c88-ef5c-4628-bec1-54d52e6c47a6",
+              "leftValue": "={{ $json.name.match(/(\\d{1,2})/)[1].toNumber()}}",
+              "rightValue": "={{$if(\n//Si mes actual>3 mira los 3 últimos meses, sino comprueba todos.\n($today.month>=4), \n$today.month-3,\n$today.month-$today.month\n)}}",
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        700,
+        -520
+      ],
+      "id": "bb04aa2d-1db4-4fc2-8b18-5e8c14ebb056",
+      "name": "If Last3Months ",
+      "notes": "Cuando estemos entre enero y marzo comprobara todas las carpetas, luego solo las de los últimos 3 meses."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9ab61d5f-335c-4f34-a551-3d6e90399aa2",
+              "leftValue": "={{ $('If WantedYears').item.json.name.toNumber() }}",
+              "rightValue": "={{ $today.year }}",
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "1d44fcf8-284a-411f-b897-b0d8a06cc9bf",
+              "leftValue": "={{ $json.name.match(/(\\d{1,2})/)[1].toNumber() }}",
+              "rightValue": 10,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        420,
+        -520
+      ],
+      "id": "67d6b164-146b-4963-8c7b-46aac047103e",
+      "name": "Filter FinalAño-1 & AñoActual"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9f1e7c88-ef5c-4628-bec1-54d52e6c47a6",
+              "leftValue": "={{ $json.name.toNumber() }}",
+              "rightValue": "={{$if(\n//Si mes actual>3 mira los 3 últimos meses, sino los mira todos\n($today.month>3), \n$today.year,\n$today.year-1\n)}}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -20,
+        -520
+      ],
+      "id": "ae813c9b-67c5-4543-8bd9-9662addb4366",
+      "name": "If WantedYears"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9f1e7c88-ef5c-4628-bec1-54d52e6c47a6",
+              "leftValue": "={{ $json.name.toNumber() }}",
+              "rightValue": "={{$if(\n//Si mes actual>3 mira los 3 últimos meses, sino los mira todos\n($today.month>3), \n$today.year,\n$today.year-1\n)}}",
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -20,
+        -180
+      ],
+      "id": "a68deeea-5638-4b3a-8e0f-a0226559d7b7",
+      "name": "If WantedYears 1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9f1e7c88-ef5c-4628-bec1-54d52e6c47a6",
+              "leftValue": "={{ $json.name.toNumber() }}",
+              "rightValue": "={{$if(\n//Si mes actual>3 mira los 3 últimos meses, sino los mira todos\n($today.month>3), \n$today.year,\n$today.year-1\n)}}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -20,
+        0
+      ],
+      "id": "0fd9f12c-858b-491c-b47b-251eb9fa463f",
+      "name": "If WantedYears 2"
+    },
+    {
+      "parameters": {
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "name_Fra",
+              "field2": "name_Fra"
+            }
+          ]
+        },
+        "fuzzyCompare": true,
+        "options": {
+          "skipFields": "id_Fra, id_Carpeta, Nombre_Carpeta, row_number, Id_Norgenic, Estado_Carpeta"
+        }
+      },
+      "type": "n8n-nodes-base.compareDatasets",
+      "typeVersion": 2.3,
+      "position": [
+        1680,
+        -680
+      ],
+      "id": "3a71b34f-5f01-4955-aa44-ff25e01cde15",
+      "name": "Compare Datasets"
+    },
+    {
+      "parameters": {
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "name_Fra",
+              "field2": "name_Fra"
+            }
+          ]
+        },
+        "fuzzyCompare": true,
+        "options": {
+          "skipFields": "id_Fra, id_Carpeta, Nombre_Carpeta, row_number, Id_Norgenic, Estado_Carpeta"
+        }
+      },
+      "type": "n8n-nodes-base.compareDatasets",
+      "typeVersion": 2.3,
+      "position": [
+        1680,
+        -80
+      ],
+      "id": "8a9a926c-671a-4f90-86af-59a35fde6d76",
+      "name": "Compare Datasets1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "06bef2d9-09a4-4cee-b390-1b514dd493da",
+              "leftValue": "={{ $json.Id_Carpeta_Norgenic }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1120,
+        -360
+      ],
+      "id": "c421f30c-b402-4b5d-b9f7-6246eae2771a",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "06bef2d9-09a4-4cee-b390-1b514dd493da",
+              "leftValue": "={{ $json.Estado_Carpeta }}",
+              "rightValue": "Contabilizadas",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "7ddb7263-a50a-439d-a2dc-435bfbbbab37",
+              "leftValue": "={{ $json.Estado_Carpeta }}",
+              "rightValue": "N/A",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1320,
+        -320
+      ],
+      "id": "816f9fb8-f69d-4bd3-ba19-124872054a22",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "5a59ebf8-ef6d-41ce-b077-36caef3c1b24",
+      "typeVersion": 1.1,
+      "name": "When Executed by Another Workflow",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        -980,
+        -180
+      ]
+    }
+  ],
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Google Drive Carpetas Enviadas",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Google Drive Carpetas NorgenicAños",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields BD_Fras",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets VT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Carpetas Meses1": {
+      "main": [
+        [
+          {
+            "node": "Filter FinalAño-1 & AñoActual_1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Facturas1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields Enviadas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          },
+          {
+            "node": "Compare Datasets1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Google Drive Carpetas Enviadas": {
+      "main": [
+        [
+          {
+            "node": "If NoContab",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields Enviadas": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields Contabilizadas": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "If NoContab": {
+      "main": [
+        [
+          {
+            "node": "If WantedYears 1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Drive Carpetas ContabilizadoAños",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge2": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets Norgenic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields BD_Fras": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields Enviadas1": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Compare Datasets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Carpetas NorgenicAños": {
+      "main": [
+        [
+          {
+            "node": "If WantedYears",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Carpetas EnviadasVT": {
+      "main": [
+        [
+          {
+            "node": "Google Drive Facturas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Facturas": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields Enviadas1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Facturas2": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields Contabilizadas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Carpetas ContabilizadoAños": {
+      "main": [
+        [
+          {
+            "node": "If WantedYears 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Carpetas Meses2": {
+      "main": [
+        [
+          {
+            "node": "Filter FinalAño-1 & AñoActual_2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Carpetas Meses": {
+      "main": [
+        [
+          {
+            "node": "Filter FinalAño-1 & AñoActual",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Last3Months 2": {
+      "main": [
+        [
+          {
+            "node": "Google Drive Facturas2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Last3Months 1": {
+      "main": [
+        [
+          {
+            "node": "Google Drive Facturas1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter FinalAño-1 & AñoActual_1": {
+      "main": [
+        [
+          {
+            "node": "If Last3Months 1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter FinalAño-1 & AñoActual_2": {
+      "main": [
+        [
+          {
+            "node": "If Last3Months 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Last3Months ": {
+      "main": [
+        [
+          {
+            "node": "Google Drive Carpetas EnviadasVT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter FinalAño-1 & AñoActual": {
+      "main": [
+        [
+          {
+            "node": "If Last3Months ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If WantedYears": {
+      "main": [
+        [
+          {
+            "node": "Google Drive Carpetas Meses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If WantedYears 1": {
+      "main": [
+        [
+          {
+            "node": "Google Drive Carpetas Meses1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If WantedYears 2": {
+      "main": [
+        [
+          {
+            "node": "Google Drive Carpetas Meses2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compare Datasets": {
+      "main": [
+        [],
+        []
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Compare Datasets",
+            "type": "main",
+            "index": 1
+          },
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 1
+          }
+        ],
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Compare Datasets1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "921b42ac40713cf8e80903373553a75b6a7dc1f7ad27fcbec19d4a8582a592ca"
+  }
+}
